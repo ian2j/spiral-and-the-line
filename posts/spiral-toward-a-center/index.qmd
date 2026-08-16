@@ -38,7 +38,7 @@ That's exactly a spiral — $\Sigma(N) = I_\Re(N) + iI_\Im(N)$ traces a curve ce
 
 $\Sigma(N)$ is an approximation to the partial sum, not the partial sum itself, so define the difference $\mu_1^N(s) = \zeta_1^N(s) - \Sigma(N)$ and its limit $\mu(s) = \lim_{N\to\infty}\mu_1^N(s)$. This $\mu(s)$ — not the origin — is the *actual* center the true partial sums spiral around; $\Sigma(N)$ only nails the shape and radius of the spiral, not quite where it's centered. Getting a good, finite, computable estimate of $\mu(s)$ turns out to matter a great deal later — it's the seed of the pre-tail construction in [Chapter 4](../pre-tail-and-tail/index.qmd).
 
-But the qualitative picture is already the whole point of this chapter: $M = \lfloor t/\pi \rfloor$, close to where the phase function's stationary point sits, is a natural place to stop and read off where that center is, which is exactly why the truncation
+But the qualitative picture is already the whole point of this chapter: $M = \lfloor t/\pi \rfloor$ is a natural place to stop and read off where that center is — [Chapter 4](../pre-tail-and-tail/index.qmd) works out precisely why that cutoff, not some other one — which is exactly why the truncation
 
 $$
 f(s) = \sum_{n=1}^{M} n^{-s} + \tfrac12 (M+1)^{-s}
