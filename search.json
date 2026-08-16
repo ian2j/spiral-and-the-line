@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "posts/spiral-toward-a-center/index.html",
+    "href": "posts/spiral-toward-a-center/index.html",
+    "title": "Spiral Toward a Center",
+    "section": "",
+    "text": "This is the flagship figure for Chapter 2, “Finding the Spiral” — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this."
+  },
+  {
+    "objectID": "posts/spiral-toward-a-center/index.html#the-picture",
+    "href": "posts/spiral-toward-a-center/index.html#the-picture",
+    "title": "Spiral Toward a Center",
+    "section": "The picture",
+    "text": "The picture\nFix a height t on the critical strip and a real part \\sigma. The partial sums\n\nS_k(s) = \\sum_{n=1}^{k} n^{-s}, \\qquad k = 1, 2, 3, \\dots\n\ndon’t converge as k \\to \\infty — but plotted in the complex plane, they don’t wander randomly either. They spiral: each new term rotates the running total by a bit more than the last (the phase of n^{-s} is -t \\log n, so consecutive terms rotate relative to each other by a shrinking angle), and the whole path winds in toward a fixed center.\nM = \\lfloor t/\\pi \\rfloor turns out to be a natural place to stop — it’s close to the stationary point of that phase function — which is why the truncation\n\nf(s) = \\sum_{n=1}^{M} n^{-s} + \\tfrac12 (M+1)^{-s}\n\nthat recurs throughout this project uses exactly that cutoff.\nThe interesting question is where the center sits. At a real, known zero of \\zeta — one of the actual heights t where \\zeta(\\tfrac12 + it) = 0 — and exactly on the critical line, the center is the origin. Nudge \\sigma away from \\tfrac12, height held fixed, and the same spiral winds toward some other point entirely, not zero."
+  },
+  {
+    "objectID": "posts/spiral-toward-a-center/index.html#try-it",
+    "href": "posts/spiral-toward-a-center/index.html#try-it",
+    "title": "Spiral Toward a Center",
+    "section": "Try it",
+    "text": "Try it\nPick a known zero from the list, then drag the \\sigma-offset fader off the critical line and watch the final point (the colored dot) leave the origin.\n\nEach point along the path is a running total of n^{-s}; the color goes from muted to full as n runs from 1 to the displayed cutoff. The path is drawn a few multiples past M purely so the winding is legible to the eye — the small diamond marks where f(s) is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of \\zeta, so “locked” at \\sigma = 0.5 isn’t a simulation — it’s the real function, doing the real thing."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "The Spiral and the Line",
+    "section": "",
+    "text": "Why the Critical-Line-Path Identity Isn’t a Coincidence\n\n\n\ntechnical note\n\nfunctional equation\n\n\n\nA numerical match with cosine similarity 0.9999999773 looked like it needed an explanation. It turns out to be an exact algebraic consequence of three ingredients — two of them trivial.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSpiral Toward a Center\n\n\n\ninteractive\n\nspiral geometry\n\n\n\nAn interactive figure for Chapter 2: watch a truncated zeta sum wind toward a fixed point — and watch it miss, the moment you leave the critical line.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About & Roadmap",
+    "section": "",
+    "text": "Three years of independent research into the Riemann zeta function, written up honestly. Not a proof of the Riemann Hypothesis — the odds of any independent effort resolving a 150-year-old open problem are close to zero, and this site says so plainly rather than around the edges.\nWhat it is instead: a documented account of repeatedly attacking the same obstruction from six different angles, in close collaboration with large language models, with real — if partial — technical results along the way. Some of those results stand on their own regardless of whether the central question ever closes: a geometric picture of how truncated zeta sums behave, an empirical regularity checked against 100,000 real zeros, an identity that looked like numerical coincidence until it turned out to be exact.\nThe throughline is process over product. There’s no shortage of “I think I proved the Riemann Hypothesis” content online. There’s a real shortage of careful, transparent accounts of what multi-year independent mathematical research — especially AI-assisted research — actually looks like, dead ends included."
+  },
+  {
+    "objectID": "about.html#what-this-is",
+    "href": "about.html#what-this-is",
+    "title": "About & Roadmap",
+    "section": "",
+    "text": "Three years of independent research into the Riemann zeta function, written up honestly. Not a proof of the Riemann Hypothesis — the odds of any independent effort resolving a 150-year-old open problem are close to zero, and this site says so plainly rather than around the edges.\nWhat it is instead: a documented account of repeatedly attacking the same obstruction from six different angles, in close collaboration with large language models, with real — if partial — technical results along the way. Some of those results stand on their own regardless of whether the central question ever closes: a geometric picture of how truncated zeta sums behave, an empirical regularity checked against 100,000 real zeros, an identity that looked like numerical coincidence until it turned out to be exact.\nThe throughline is process over product. There’s no shortage of “I think I proved the Riemann Hypothesis” content online. There’s a real shortage of careful, transparent accounts of what multi-year independent mathematical research — especially AI-assisted research — actually looks like, dead ends included."
+  },
+  {
+    "objectID": "about.html#who-its-for",
+    "href": "about.html#who-its-for",
+    "title": "About & Roadmap",
+    "section": "Who it’s for",
+    "text": "Who it’s for\nReaders comfortable with complex analysis and Dirichlet series. Specialist knowledge of zeta-function machinery isn’t assumed — it gets built up the way the research itself built it up, piece by piece, over three years."
+  },
+  {
+    "objectID": "about.html#roadmap",
+    "href": "about.html#roadmap",
+    "title": "About & Roadmap",
+    "section": "Roadmap",
+    "text": "Roadmap\nThe series follows the actual chronology of the research rather than a tidied-up logical order. Each entry below will link to its post as it’s written.\n0 · Prologue — why this, why alone, why with an LLM planned\nWhat the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice.\n1 · The Moon (late 2023) planned\nThe origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier.\n2 · Finding the Spiral (Dec 2024) posted\nWhere the project’s visual language is born — truncated zeta sums spiral toward a fixed center, and M = ⌊t/π⌋ is the natural place to stop. See the interactive figure.\n3 · The Only Special Value (2025 H1) planned\nA stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series.\n4 · Pre-tail and Tail (Sept–Oct 2025) planned\nThe cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros.\n5 · Rigidity and Its Discontents (Dec 2025) planned\nA deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma.\n6 · Only σ = 1/2, Take Four (Feb 2026) planned\nThe tightest self-derived argument in the corpus, via the approximate functional equation — and a precise account of exactly which step is assumption rather than theorem.\n7 · A Season of Reinvention (Mar–May 2026) planned\nA stochastic functional equation, a Jensen-gap tipping point, and a pivot to classifying oscillatory arithmetic sums more generally — RH as one instance of a broader phenomenon.\n8 · The Critical Line Path (Jun 2026 – present) posted\nA numerical match too good to be coincidence — and it wasn’t. See the writeup.\n9 · Where This Leaves Us planned\nAn honest accounting of what’s proved, what’s conjectural, and an open, specific invitation to readers who know their way around Euler–Maclaurin and Riemann–Siegel theory."
+  },
+  {
+    "objectID": "about.html#standalone-notes",
+    "href": "about.html#standalone-notes",
+    "title": "About & Roadmap",
+    "section": "Standalone notes",
+    "text": "Standalone notes\nA few pieces of this project stand on their own without the RH framing — a numerical regularity, a technique, a derivation. These get published independently of the chapter sequence as they’re finished."
+  },
+  {
+    "objectID": "posts/critical-line-path-identity/index.html",
+    "href": "posts/critical-line-path-identity/index.html",
+    "title": "Why the Critical-Line-Path Identity Isn’t a Coincidence",
+    "section": "",
+    "text": "This note is the technical spine of Chapter 8, “The Critical Line Path.” It works out something the original notebook found but didn’t explain: a near-perfect numerical match that turns out to be exact, modulo one classical, boundable error term."
+  },
+  {
+    "objectID": "posts/critical-line-path-identity/index.html#the-object-and-the-observed-phenomenon",
+    "href": "posts/critical-line-path-identity/index.html#the-object-and-the-observed-phenomenon",
+    "title": "Why the Critical-Line-Path Identity Isn’t a Coincidence",
+    "section": "The object and the observed phenomenon",
+    "text": "The object and the observed phenomenon\nFix t, let M = \\lfloor t/\\pi \\rfloor, and define the truncated sum\n\nf(s) = \\sum_{n=1}^{M} n^{-s} + \\tfrac{1}{2} (M+1)^{-s}.\n\nFor u \\in (0, \\tfrac12) set s_\\mp = \\tfrac12 \\mp u + it and\n\ng(u, t) = f(s_-) \\cdot f(s_+).\n\nThe original notebook computes the exact derivative g'(u,t) — via the exact partial derivative f_\\sigma of f in \\sigma — and compares g'/g against a proposed closed form\n\n\\theta(u,t) := -\\frac{\\chi'(s_-)}{\\chi(s_-)} + 2\\,\\mathrm{Re}\\!\\left[\\frac{f_\\sigma(s_+)}{f(s_+)}\\right],\n\nwhere \\chi(s) = \\pi^{s-1/2}\\,\\Gamma\\!\\left(\\frac{1-s}{2}\\right)/\\Gamma\\!\\left(\\frac{s}{2}\\right) is the usual functional-equation factor for \\zeta. The match is excellent, and gets better as t grows — cosine similarity between g'/g and \\theta of 0.999359 at t=20, 0.9999969 at t=100, 0.99999998 at t=500. The notebook doesn’t explain why. The fact that agreement improves with t is a clue worth chasing rather than just admiring."
+  },
+  {
+    "objectID": "posts/critical-line-path-identity/index.html#the-derivation",
+    "href": "posts/critical-line-path-identity/index.html#the-derivation",
+    "title": "Why the Critical-Line-Path Identity Isn’t a Coincidence",
+    "section": "The derivation",
+    "text": "The derivation\nStep 1 — the chain rule is exact. Since ds_-/du = -1 and ds_+/du = +1,\n\ng'/g = \\frac{f_\\sigma(s_+)}{f(s_+)} - \\frac{f_\\sigma(s_-)}{f(s_-)} =: A - B.\n\nNothing here depends on any property of \\zeta or f beyond differentiability.\nStep 2 — conjugate symmetry is exact, because f is a finite sum of n^{-s} with real \\log n. For any complex s,\n\nn^{-\\bar s} = e^{-\\bar s \\log n} = \\overline{e^{-s \\log n}} = \\overline{n^{-s}}\n\nsince \\log n is real. Summing, f(\\bar s) = \\overline{f(s)}, and the identical argument applied term-by-term to f_\\sigma(s) = \\sum (-\\log n)\\, n^{-s} + \\cdots gives f_\\sigma(\\bar s) = \\overline{f_\\sigma(s)}. Both hold for every complex s — this costs nothing.\nNow note 1 - s_- = \\tfrac12 + u - it = \\overline{s_+}. So\n\n\\frac{f_\\sigma(1-s_-)}{f(1-s_-)} = \\frac{f_\\sigma(\\bar s_+)}{f(\\bar s_+)} = \\overline{\\left(\\frac{f_\\sigma(s_+)}{f(s_+)}\\right)} = \\bar A.\n\nStep 3 — the one non-trivial ingredient: the approximate functional equation. If f satisfied f(s) = \\chi(s)\\, f(1-s) exactly, differentiating in \\sigma (with t fixed) gives\n\nf_\\sigma(s) = \\chi'(s)\\, f(1-s) - \\chi(s)\\, f_\\sigma(1-s).\n\nDividing by f(s) = \\chi(s)\\, f(1-s):\n\n\\frac{f_\\sigma(s)}{f(s)} = \\frac{\\chi'(s)}{\\chi(s)} - \\frac{f_\\sigma(1-s)}{f(1-s)}.\n\nApply this at s = s_- and substitute Step 2’s identity for the second term:\n\nB = \\frac{\\chi'(s_-)}{\\chi(s_-)} - \\bar A.\n\nStep 4 — combine.\n\ng'/g = A - B = A - \\frac{\\chi'(s_-)}{\\chi(s_-)} + \\bar A = 2\\,\\mathrm{Re}(A) - \\frac{\\chi'(s_-)}{\\chi(s_-)} = \\theta(u,t).\n\nThis is exactly the notebook’s closed form. The near-perfect numerical match isn’t a separate empirical discovery — it’s an exact algebraic consequence of three ingredients, only one of which (Step 3) isn’t already known to be exact."
+  },
+  {
+    "objectID": "posts/critical-line-path-identity/index.html#locating-the-remaining-gap-and-confirming-its-the-right-one",
+    "href": "posts/critical-line-path-identity/index.html#locating-the-remaining-gap-and-confirming-its-the-right-one",
+    "title": "Why the Critical-Line-Path Identity Isn’t a Coincidence",
+    "section": "Locating the remaining gap, and confirming it’s the right one",
+    "text": "Locating the remaining gap, and confirming it’s the right one\nf(s) = \\chi(s)\\, f(1-s) is not an exact identity for a finite truncation — it’s the classical “approximate functional equation” phenomenon (Euler–Maclaurin / Riemann–Siegel theory), true only up to a controllable error that shrinks as the truncation length grows relative to t. So \\theta(u,t) should approximate g'/g with an error that tracks the error in that functional equation — not an independent, unexplained residual.\nI checked this directly: computed B from f and f_\\sigma with no functional-equation assumption, compared it against the Step 3 prediction \\chi'(s_-)/\\chi(s_-) - \\bar A, and separately measured the actual relative error of f(s_-) \\approx \\chi(s_-)\\, f(1-s_-). The two error curves track each other closely and both shrink as t grows:\n\n\n\n\n\n\n\n\nt\nrel. error in B vs. prediction\nrel. error in f(s) = \\chi(s) f(1-s)\n\n\n\n\n20\n2.1–2.5 \\times 10^{-2}\n4.9–5.1 \\times 10^{-2}\n\n\n100\n6.9–7.1 \\times 10^{-4}\n7.2–7.3 \\times 10^{-4}\n\n\n500\n0.9–2.1 \\times 10^{-4}\n4.1–4.3 \\times 10^{-4}\n\n\n\n(ranges are over u \\in \\{0.05, 0.1, 0.3\\} at each t, computed from f and f_\\sigma directly, independent of the original notebook.) This is exactly the expected signature: the two error columns sit at the same order of magnitude at every t and both fall as t grows — confirming the diagnosis in Step 3 rather than leaving it as a plausible-sounding story."
+  },
+  {
+    "objectID": "posts/critical-line-path-identity/index.html#whats-left-and-why-its-a-different-kind-of-open-problem",
+    "href": "posts/critical-line-path-identity/index.html#whats-left-and-why-its-a-different-kind-of-open-problem",
+    "title": "Why the Critical-Line-Path Identity Isn’t a Coincidence",
+    "section": "What’s left, and why it’s a different kind of open problem",
+    "text": "What’s left, and why it’s a different kind of open problem\nWhat remains is a single, classical-flavored estimate: a rigorous bound on\n\nf(s) - \\chi(s)\\, f(1-s), \\qquad M = \\lfloor t/\\pi \\rfloor.\n\nThis is the same species of estimate that underlies the Riemann–Siegel formula and Euler–Maclaurin-based approximate functional equations for \\zeta, which are rigorously established in the literature for various truncation schemes — though the specific scheme used throughout this project (M \\sim t/\\pi, long compared to the classical “balanced” choice N \\sim \\sqrt{t/2\\pi}) doesn’t appear to be a standard textbook case, so the bound would need deriving for this scheme specifically. That’s real work, but of a fundamentally different character than the gap in Chapter 6: it’s a quantitative asymptotic estimate about an explicit finite sum, not a claim that would resolve the Riemann Hypothesis if true. It’s worth doing carefully, both because it completes this identity rigorously and because the same estimate is very likely the missing ingredient in several other chapters’ hand-waved “the error term is small” steps.\nNext step: derive the Euler–Maclaurin expansion of f(s) - \\chi(s) f(1-s) for M = \\lfloor t/\\pi \\rfloor directly — Poisson summation on the finite sum is the standard route — and extract an explicit power of t for the error. That single derivation would upgrade this chapter’s headline result from “verified numerically, explained structurally” to “proved, with an explicit error bound.”"
+  }
+]

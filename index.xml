@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>The Spiral and the Line</title>
+<link>https://your-domain-goes-here.example.com/</link>
+<atom:link href="https://your-domain-goes-here.example.com/index.xml" rel="self" type="application/rss+xml"/>
+<description>A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included.</description>
+<generator>quarto-1.10.18</generator>
+<lastBuildDate>Sat, 15 Aug 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Why the Critical-Line-Path Identity Isn’t a Coincidence</title>
+  <link>https://your-domain-goes-here.example.com/posts/critical-line-path-identity/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p><em>This note is the technical spine of Chapter 8, “The Critical Line Path.” It works out something the original notebook found but didn’t explain: a near-perfect numerical match that turns out to be exact, modulo one classical, boundable error term.</em></p>
+<section id="the-object-and-the-observed-phenomenon" class="level2">
+<h2 class="anchored" data-anchor-id="the-object-and-the-observed-phenomenon">The object and the observed phenomenon</h2>
+<p>Fix <img src="https://latex.codecogs.com/png.latex?t">, let <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor">, and define the truncated sum</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20=%20%5Csum_%7Bn=1%7D%5E%7BM%7D%20n%5E%7B-s%7D%20+%20%5Ctfrac%7B1%7D%7B2%7D%20(M+1)%5E%7B-s%7D.%0A"></p>
+<p>For <img src="https://latex.codecogs.com/png.latex?u%20%5Cin%20(0,%20%5Ctfrac12)"> set <img src="https://latex.codecogs.com/png.latex?s_%5Cmp%20=%20%5Ctfrac12%20%5Cmp%20u%20+%20it"> and</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ag(u,%20t)%20=%20f(s_-)%20%5Ccdot%20f(s_+).%0A"></p>
+<p>The original notebook computes the <em>exact</em> derivative <img src="https://latex.codecogs.com/png.latex?g'(u,t)"> — via the exact partial derivative <img src="https://latex.codecogs.com/png.latex?f_%5Csigma"> of <img src="https://latex.codecogs.com/png.latex?f"> in <img src="https://latex.codecogs.com/png.latex?%5Csigma"> — and compares <img src="https://latex.codecogs.com/png.latex?g'/g"> against a proposed closed form</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta(u,t)%20:=%20-%5Cfrac%7B%5Cchi'(s_-)%7D%7B%5Cchi(s_-)%7D%20+%202%5C,%5Cmathrm%7BRe%7D%5C!%5Cleft%5B%5Cfrac%7Bf_%5Csigma(s_+)%7D%7Bf(s_+)%7D%5Cright%5D,%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cchi(s)%20=%20%5Cpi%5E%7Bs-1/2%7D%5C,%5CGamma%5C!%5Cleft(%5Cfrac%7B1-s%7D%7B2%7D%5Cright)/%5CGamma%5C!%5Cleft(%5Cfrac%7Bs%7D%7B2%7D%5Cright)"> is the usual functional-equation factor for <img src="https://latex.codecogs.com/png.latex?%5Czeta">. The match is excellent, and gets <em>better</em> as <img src="https://latex.codecogs.com/png.latex?t"> grows — cosine similarity between <img src="https://latex.codecogs.com/png.latex?g'/g"> and <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> of 0.999359 at <img src="https://latex.codecogs.com/png.latex?t=20">, 0.9999969 at <img src="https://latex.codecogs.com/png.latex?t=100">, 0.99999998 at <img src="https://latex.codecogs.com/png.latex?t=500">. The notebook doesn’t explain why. The fact that agreement improves with <img src="https://latex.codecogs.com/png.latex?t"> is a clue worth chasing rather than just admiring.</p>
+</section>
+<section id="the-derivation" class="level2">
+<h2 class="anchored" data-anchor-id="the-derivation">The derivation</h2>
+<p><strong>Step 1 — the chain rule is exact.</strong> Since <img src="https://latex.codecogs.com/png.latex?ds_-/du%20=%20-1"> and <img src="https://latex.codecogs.com/png.latex?ds_+/du%20=%20+1">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ag'/g%20=%20%5Cfrac%7Bf_%5Csigma(s_+)%7D%7Bf(s_+)%7D%20-%20%5Cfrac%7Bf_%5Csigma(s_-)%7D%7Bf(s_-)%7D%20=:%20A%20-%20B.%0A"></p>
+<p>Nothing here depends on any property of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> or <img src="https://latex.codecogs.com/png.latex?f"> beyond differentiability.</p>
+<p><strong>Step 2 — conjugate symmetry is exact</strong>, because <img src="https://latex.codecogs.com/png.latex?f"> is a finite sum of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D"> with real <img src="https://latex.codecogs.com/png.latex?%5Clog%20n">. For any complex <img src="https://latex.codecogs.com/png.latex?s">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0An%5E%7B-%5Cbar%20s%7D%20=%20e%5E%7B-%5Cbar%20s%20%5Clog%20n%7D%20=%20%5Coverline%7Be%5E%7B-s%20%5Clog%20n%7D%7D%20=%20%5Coverline%7Bn%5E%7B-s%7D%7D%0A"></p>
+<p>since <img src="https://latex.codecogs.com/png.latex?%5Clog%20n"> is real. Summing, <img src="https://latex.codecogs.com/png.latex?f(%5Cbar%20s)%20=%20%5Coverline%7Bf(s)%7D">, and the identical argument applied term-by-term to <img src="https://latex.codecogs.com/png.latex?f_%5Csigma(s)%20=%20%5Csum%20(-%5Clog%20n)%5C,%20n%5E%7B-s%7D%20+%20%5Ccdots"> gives <img src="https://latex.codecogs.com/png.latex?f_%5Csigma(%5Cbar%20s)%20=%20%5Coverline%7Bf_%5Csigma(s)%7D">. Both hold for <em>every</em> complex <img src="https://latex.codecogs.com/png.latex?s"> — this costs nothing.</p>
+<p>Now note <img src="https://latex.codecogs.com/png.latex?1%20-%20s_-%20=%20%5Ctfrac12%20+%20u%20-%20it%20=%20%5Coverline%7Bs_+%7D">. So</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7Bf_%5Csigma(1-s_-)%7D%7Bf(1-s_-)%7D%20=%20%5Cfrac%7Bf_%5Csigma(%5Cbar%20s_+)%7D%7Bf(%5Cbar%20s_+)%7D%20=%20%5Coverline%7B%5Cleft(%5Cfrac%7Bf_%5Csigma(s_+)%7D%7Bf(s_+)%7D%5Cright)%7D%20=%20%5Cbar%20A.%0A"></p>
+<p><strong>Step 3 — the one non-trivial ingredient: the approximate functional equation.</strong> <em>If</em> <img src="https://latex.codecogs.com/png.latex?f"> satisfied <img src="https://latex.codecogs.com/png.latex?f(s)%20=%20%5Cchi(s)%5C,%20f(1-s)"> exactly, differentiating in <img src="https://latex.codecogs.com/png.latex?%5Csigma"> (with <img src="https://latex.codecogs.com/png.latex?t"> fixed) gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af_%5Csigma(s)%20=%20%5Cchi'(s)%5C,%20f(1-s)%20-%20%5Cchi(s)%5C,%20f_%5Csigma(1-s).%0A"></p>
+<p>Dividing by <img src="https://latex.codecogs.com/png.latex?f(s)%20=%20%5Cchi(s)%5C,%20f(1-s)">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7Bf_%5Csigma(s)%7D%7Bf(s)%7D%20=%20%5Cfrac%7B%5Cchi'(s)%7D%7B%5Cchi(s)%7D%20-%20%5Cfrac%7Bf_%5Csigma(1-s)%7D%7Bf(1-s)%7D.%0A"></p>
+<p>Apply this at <img src="https://latex.codecogs.com/png.latex?s%20=%20s_-"> and substitute Step 2’s identity for the second term:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AB%20=%20%5Cfrac%7B%5Cchi'(s_-)%7D%7B%5Cchi(s_-)%7D%20-%20%5Cbar%20A.%0A"></p>
+<p><strong>Step 4 — combine.</strong></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ag'/g%20=%20A%20-%20B%20=%20A%20-%20%5Cfrac%7B%5Cchi'(s_-)%7D%7B%5Cchi(s_-)%7D%20+%20%5Cbar%20A%20=%202%5C,%5Cmathrm%7BRe%7D(A)%20-%20%5Cfrac%7B%5Cchi'(s_-)%7D%7B%5Cchi(s_-)%7D%20=%20%5Ctheta(u,t).%0A"></p>
+<p>This is exactly the notebook’s closed form. <strong>The near-perfect numerical match isn’t a separate empirical discovery — it’s an exact algebraic consequence of three ingredients, only one of which (Step 3) isn’t already known to be exact.</strong></p>
+</section>
+<section id="locating-the-remaining-gap-and-confirming-its-the-right-one" class="level2">
+<h2 class="anchored" data-anchor-id="locating-the-remaining-gap-and-confirming-its-the-right-one">Locating the remaining gap, and confirming it’s the right one</h2>
+<p><img src="https://latex.codecogs.com/png.latex?f(s)%20=%20%5Cchi(s)%5C,%20f(1-s)"> is <em>not</em> an exact identity for a finite truncation — it’s the classical “approximate functional equation” phenomenon (Euler–Maclaurin / Riemann–Siegel theory), true only up to a controllable error that shrinks as the truncation length grows relative to <img src="https://latex.codecogs.com/png.latex?t">. So <img src="https://latex.codecogs.com/png.latex?%5Ctheta(u,t)"> should approximate <img src="https://latex.codecogs.com/png.latex?g'/g"> with an error that tracks the error in that functional equation — not an independent, unexplained residual.</p>
+<p>I checked this directly: computed <img src="https://latex.codecogs.com/png.latex?B"> from <img src="https://latex.codecogs.com/png.latex?f"> and <img src="https://latex.codecogs.com/png.latex?f_%5Csigma"> with no functional-equation assumption, compared it against the Step 3 prediction <img src="https://latex.codecogs.com/png.latex?%5Cchi'(s_-)/%5Cchi(s_-)%20-%20%5Cbar%20A">, and separately measured the actual relative error of <img src="https://latex.codecogs.com/png.latex?f(s_-)%20%5Capprox%20%5Cchi(s_-)%5C,%20f(1-s_-)">. The two error curves track each other closely and both shrink as <img src="https://latex.codecogs.com/png.latex?t"> grows:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><img src="https://latex.codecogs.com/png.latex?t"></th>
+<th>rel. error in <img src="https://latex.codecogs.com/png.latex?B"> vs.&nbsp;prediction</th>
+<th>rel. error in <img src="https://latex.codecogs.com/png.latex?f(s)%20=%20%5Cchi(s)%20f(1-s)"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>20</td>
+<td><img src="https://latex.codecogs.com/png.latex?2.1">–<img src="https://latex.codecogs.com/png.latex?2.5%20%5Ctimes%2010%5E%7B-2%7D"></td>
+<td><img src="https://latex.codecogs.com/png.latex?4.9">–<img src="https://latex.codecogs.com/png.latex?5.1%20%5Ctimes%2010%5E%7B-2%7D"></td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td><img src="https://latex.codecogs.com/png.latex?6.9">–<img src="https://latex.codecogs.com/png.latex?7.1%20%5Ctimes%2010%5E%7B-4%7D"></td>
+<td><img src="https://latex.codecogs.com/png.latex?7.2">–<img src="https://latex.codecogs.com/png.latex?7.3%20%5Ctimes%2010%5E%7B-4%7D"></td>
+</tr>
+<tr class="odd">
+<td>500</td>
+<td><img src="https://latex.codecogs.com/png.latex?0.9">–<img src="https://latex.codecogs.com/png.latex?2.1%20%5Ctimes%2010%5E%7B-4%7D"></td>
+<td><img src="https://latex.codecogs.com/png.latex?4.1">–<img src="https://latex.codecogs.com/png.latex?4.3%20%5Ctimes%2010%5E%7B-4%7D"></td>
+</tr>
+</tbody>
+</table>
+<p>(ranges are over <img src="https://latex.codecogs.com/png.latex?u%20%5Cin%20%5C%7B0.05,%200.1,%200.3%5C%7D"> at each <img src="https://latex.codecogs.com/png.latex?t">, computed from <img src="https://latex.codecogs.com/png.latex?f"> and <img src="https://latex.codecogs.com/png.latex?f_%5Csigma"> directly, independent of the original notebook.) This is exactly the expected signature: the two error columns sit at the same order of magnitude at every <img src="https://latex.codecogs.com/png.latex?t"> and both fall as <img src="https://latex.codecogs.com/png.latex?t"> grows — confirming the diagnosis in Step 3 rather than leaving it as a plausible-sounding story.</p>
+</section>
+<section id="whats-left-and-why-its-a-different-kind-of-open-problem" class="level2">
+<h2 class="anchored" data-anchor-id="whats-left-and-why-its-a-different-kind-of-open-problem">What’s left, and why it’s a different kind of open problem</h2>
+<p>What remains is a single, classical-flavored estimate: a rigorous bound on</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20-%20%5Cchi(s)%5C,%20f(1-s),%20%5Cqquad%20M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor.%0A"></p>
+<p>This is the same species of estimate that underlies the Riemann–Siegel formula and Euler–Maclaurin-based approximate functional equations for <img src="https://latex.codecogs.com/png.latex?%5Czeta">, which <em>are</em> rigorously established in the literature for various truncation schemes — though the specific scheme used throughout this project (<img src="https://latex.codecogs.com/png.latex?M%20%5Csim%20t/%5Cpi">, long compared to the classical “balanced” choice <img src="https://latex.codecogs.com/png.latex?N%20%5Csim%20%5Csqrt%7Bt/2%5Cpi%7D">) doesn’t appear to be a standard textbook case, so the bound would need deriving for this scheme specifically. That’s real work, but of a fundamentally different character than the gap in Chapter 6: it’s a quantitative asymptotic estimate about an explicit finite sum, not a claim that would resolve the Riemann Hypothesis if true. It’s worth doing carefully, both because it completes this identity rigorously and because the same estimate is very likely the missing ingredient in several other chapters’ hand-waved “the error term is small” steps.</p>
+<p><strong>Next step:</strong> derive the Euler–Maclaurin expansion of <img src="https://latex.codecogs.com/png.latex?f(s)%20-%20%5Cchi(s)%20f(1-s)"> for <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor"> directly — Poisson summation on the finite sum is the standard route — and extract an explicit power of <img src="https://latex.codecogs.com/png.latex?t"> for the error. That single derivation would upgrade this chapter’s headline result from “verified numerically, explained structurally” to “proved, with an explicit error bound.”</p>
+
+
+</section>
+
+ ]]></description>
+  <category>technical note</category>
+  <category>functional equation</category>
+  <guid>https://your-domain-goes-here.example.com/posts/critical-line-path-identity/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Spiral Toward a Center</title>
+  <link>https://your-domain-goes-here.example.com/posts/spiral-toward-a-center/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p><em>This is the flagship figure for Chapter 2, “Finding the Spiral” — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this.</em></p>
+<section id="the-picture" class="level2">
+<h2 class="anchored" data-anchor-id="the-picture">The picture</h2>
+<p>Fix a height <img src="https://latex.codecogs.com/png.latex?t"> on the critical strip and a real part <img src="https://latex.codecogs.com/png.latex?%5Csigma">. The partial sums</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS_k(s)%20=%20%5Csum_%7Bn=1%7D%5E%7Bk%7D%20n%5E%7B-s%7D,%20%5Cqquad%20k%20=%201,%202,%203,%20%5Cdots%0A"></p>
+<p>don’t converge as <img src="https://latex.codecogs.com/png.latex?k%20%5Cto%20%5Cinfty"> — but plotted in the complex plane, they don’t wander randomly either. They spiral: each new term rotates the running total by a bit more than the last (the phase of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D"> is <img src="https://latex.codecogs.com/png.latex?-t%20%5Clog%20n">, so consecutive terms rotate relative to each other by a shrinking angle), and the whole path winds in toward a fixed center.</p>
+<p><img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor"> turns out to be a natural place to stop — it’s close to the stationary point of that phase function — which is why the truncation</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20=%20%5Csum_%7Bn=1%7D%5E%7BM%7D%20n%5E%7B-s%7D%20+%20%5Ctfrac12%20(M+1)%5E%7B-s%7D%0A"></p>
+<p>that recurs throughout this project uses exactly that cutoff.</p>
+<p>The interesting question is <em>where</em> the center sits. At a real, known zero of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> — one of the actual heights <img src="https://latex.codecogs.com/png.latex?t"> where <img src="https://latex.codecogs.com/png.latex?%5Czeta(%5Ctfrac12%20+%20it)%20=%200"> — and exactly on the critical line, the center is the origin. Nudge <img src="https://latex.codecogs.com/png.latex?%5Csigma"> away from <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12">, height held fixed, and the same spiral winds toward some other point entirely, not zero.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Pick a known zero from the list, then drag the <img src="https://latex.codecogs.com/png.latex?%5Csigma">-offset fader off the critical line and watch the final point (the colored dot) leave the origin.</p>
+<iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<p>Each point along the path is a running total of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D">; the color goes from muted to full as <img src="https://latex.codecogs.com/png.latex?n"> runs from <img src="https://latex.codecogs.com/png.latex?1"> to the displayed cutoff. The path is drawn a few multiples past <img src="https://latex.codecogs.com/png.latex?M"> purely so the winding is legible to the eye — the small diamond marks where <img src="https://latex.codecogs.com/png.latex?f(s)"> is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, so “locked” at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%200.5"> isn’t a simulation — it’s the real function, doing the real thing.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>interactive</category>
+  <category>spiral geometry</category>
+  <guid>https://your-domain-goes-here.example.com/posts/spiral-toward-a-center/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
