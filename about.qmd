@@ -6,7 +6,7 @@ title-block-banner: false
 
 ## What this is
 
-Three years of independent research into the Riemann zeta function, written up honestly. Not a proof of the Riemann Hypothesis — the odds of any independent effort resolving a 150-year-old open problem are close to zero, and this site says so plainly rather than around the edges.
+Six years of independent research into the Riemann zeta function, written up honestly. Not a proof of the Riemann Hypothesis — the odds of any independent effort resolving a 150-year-old open problem are close to zero, and this site says so plainly rather than around the edges.
 
 What it is instead: a documented account of repeatedly attacking the same obstruction from six different angles, in close collaboration with large language models, with real — if partial — technical results along the way. Some of those results stand on their own regardless of whether the central question ever closes: a geometric picture of how truncated zeta sums behave, an empirical regularity checked against 100,000 real zeros, an identity that looked like numerical coincidence until it turned out to be exact.
 
@@ -14,7 +14,7 @@ The throughline is process over product. There's no shortage of "I think I prove
 
 ## Who it's for
 
-Readers comfortable with complex analysis and Dirichlet series. Specialist knowledge of zeta-function machinery isn't assumed — it gets built up the way the research itself built it up, piece by piece, over three years.
+Readers comfortable with complex analysis and Dirichlet series. Specialist knowledge of zeta-function machinery isn't assumed — it gets built up the way the research itself built it up, piece by piece, over six years.
 
 ## Roadmap
 
@@ -22,9 +22,9 @@ The series follows the actual chronology of the research rather than a tidied-up
 
 **0 · Prologue — why this, why alone, why with an LLM** <span class="status-badge done">posted</span>
 
-What the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice. [Read it](posts/prologue/index.qmd).
+What the Riemann Hypothesis is, why this project started in 2020, and what three years of human/LLM collaboration on top of that has actually looked like in practice. [Read it](posts/prologue/index.qmd).
 
-**1 · The Moon (late 2023)** <span class="status-badge done">posted</span>
+**1 · The Moon (late 2023, three years in)** <span class="status-badge done">posted</span>
 
 The origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier. [Read it](posts/the-moon/index.qmd).
 

@@ -7,6 +7,10 @@ categories: [chapter, jensen, 2023]
 
 *A note on notation before we start: the earliest files in this project use $t$ for the offset from the critical line and $y$ for the height — the reverse of the convention I've used ever since and will use for the rest of this series. I've translated the original 2023 notes into the later convention below: $t$ is the height, $u$ is the offset, $s = \tfrac12 + u + it$.*
 
+## Three years of groundwork first
+
+This wasn't the first thing I tried. By late 2023 I'd already spent three years on this problem — most of it building up the machinery to even state a solution attempt cleanly, in a document I called, only half-jokingly, *Primal Pilgrimage*: number sets, basic geometry and trigonometry, Cauchy products, Cesàro summation, all rebuilt from scratch as scaffolding, ending in a "My Solution" section I could never quite finish writing. One early skeleton of that solution gets as far as *"establish the doubling ratio... establish the order... conclude that $t=1/2$ is the only value that permits $\zeta(s)=0$"* — three section headers in a row with nothing underneath them. I want that on the record too, because it's true to how this actually went: long stretches of building tools before the first technique that actually produced a real inequality. The Moon, below, is that first technique.
+
 ## The question
 
 Take a partial sum of the alternating zeta series, $f_N(s) = \sum_{n=1}^N (-1)^{n+1} n^{-s}$, and look at its squared modulus, $|f_N(s)|^2$. Multiply the sum out against itself — every term against every other term — and you get a double sum, a *Cauchy product*, with one entry for every pair of indices. Group those entries by which term of the original series they came from, and you get something with a very specific structure: a **grid**, indexed by $(l, n)$ with $1 \le l \le n$, where each cell corresponds to the product $l \cdot (n-l+1)$.

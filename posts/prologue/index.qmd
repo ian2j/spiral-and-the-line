@@ -1,6 +1,6 @@
 ---
 title: "Prologue: Why This, Why Alone, Why With an LLM"
-description: "Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what three years of trying to make a dent in it with an LLM at my side has actually looked like."
+description: "Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what six years of trying to make a dent in it, the last three alongside an LLM, has actually looked like."
 date: 2026-08-16
 categories: [chapter, prologue]
 ---
@@ -13,19 +13,23 @@ It was a nice argument. It was also wrong in one specific place, and I caught it
 
 The LLM had the mechanism right and one exponent wrong. Fixing it didn't weaken the argument — it strengthened it, by closing off an edge case where the "generic" and "enhanced" decay rates could have coincided somewhere in the middle of the interval instead of only at an endpoint. We rebuilt the proof from there.
 
-I'm telling you this story first because it's the most honest way I know to describe what this project actually is: not "I asked an AI to solve the Riemann Hypothesis," and not "I proved it myself and used a chatbot as a calculator," but three years of a genuine back-and-forth, where the LLM does things I can't — hold enormous amounts of mathematical machinery in working memory, draft a rigorous-looking proof in seconds, try ten reformulations in an afternoon — and I do things it doesn't reliably do on its own, chiefly: notice when a specific claim is wrong, insist on numerical verification, and refuse to let "this looks right" stand in for "this is proven."
+I'm telling you this story first because it's the most honest way I know to describe what this project actually is: not "I asked an AI to solve the Riemann Hypothesis," and not "I proved it myself and used a chatbot as a calculator," but three years of a genuine back-and-forth — the most recent three of six I've now spent on this problem — where the LLM does things I can't — hold enormous amounts of mathematical machinery in working memory, draft a rigorous-looking proof in seconds, try ten reformulations in an afternoon — and I do things it doesn't reliably do on its own, chiefly: notice when a specific claim is wrong, insist on numerical verification, and refuse to let "this looks right" stand in for "this is proven."
 
 ## What the Riemann Hypothesis actually says
 
 Take the Riemann zeta function, $\zeta(s) = \sum_{n=1}^{\infty} n^{-s}$, extended (via analytic continuation) to all complex $s$ except $s=1$. It has infinitely many "trivial" zeros at the negative even integers, and infinitely many more "nontrivial" zeros scattered through the strip $0 < \mathrm{Re}(s) < 1$. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line $\mathrm{Re}(s) = \tfrac12$, the *critical line*. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions. It's been open since 1859. It's one of the seven Clay Millennium Problems, and the only one from Hilbert's original 1900 list that's still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.
 
-I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is three years of genuinely trying, from six different angles, with a documented trail of what worked, what didn't, and — a few times — something that stood on its own regardless of whether the big question ever closes.
+I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is six years of genuinely trying — the last three of them documented closely enough to write this series from — across roughly six different angles, with a trail of what worked, what didn't, and — a few times — something that stood on its own regardless of whether the big question ever closes.
 
 ## Why this, specifically
 
-<!-- IAN: this is the one section I can't honestly write for you — the actual pull toward this problem, what got you started in 2023, what keeps you coming back. Everything above and below is grounded in what's actually in three years of notes; this paragraph should be replaced with the real answer. -->
+I majored in Mathematics as an undergraduate in the mid-2000s, and it was a professor who first told me about the Millennium Problems — seven problems judged important enough, at the dawn of the 21st century, to carry a million-dollar bounty each. I was captivated and immediately out of my depth. I could barely parse most of the problem statements, let alone see a way in. If the hardest exam question I'd faced was a steep but climbable mountain, each Millennium Problem read like something from another planet — famous, immense, and not somewhere I had any business going. I filed them away as a piece of math history and moved on.
 
-*[A paragraph on what drew me to this problem specifically, and what kept me at it for three years, belongs here.]*
+Years later, with a Ph.D. in Mathematics and some years working as a data scientist behind me, I was riding out the COVID-19 pandemic in a small studio apartment in New York City, with not much to do and a lot of time to do it in. That confinement turned out to be the catalyst: I went back and actually read all seven problem statements, and picked one. The one that pulled at me was the Riemann Hypothesis, because of its connection to prime numbers — the atoms of arithmetic, the thing that everything else in number theory is ultimately built from. I wanted, and still want, to find something simple in there. Not because I think the real answer will turn out to be simple — it almost certainly won't — but because chasing simplicity is how I've always liked to work, and because it felt like a way to hand my younger self, the one who looked at those problem statements and saw only a wall, some kind of proof that the wall has footholds, even if I'm the one who never quite makes it over.
+
+I'm writing this now from Tokyo, where I live these days — for what it's worth, a city with its own centuries-old tradition of amateur mathematicians publicly working out geometry problems on wooden tablets (*sangaku*) and hanging them at shrines and temples, which feels like fitting company for a project like this one.
+
+Six years in, I still don't know how this ends. What follows is the record so far.
 
 ## Why with an LLM
 
@@ -35,4 +39,4 @@ Neither of us gets there alone. That's not a hedge — it's the actual finding o
 
 ---
 
-*Next: [Chapter 1 — The Moon](../the-moon/index.qmd), where this all started in late 2023.*
+*Next: [Chapter 1 — The Moon](../the-moon/index.qmd) — not where this started, but the first technique that left a real trail, three years into a project that actually began in 2020.*
