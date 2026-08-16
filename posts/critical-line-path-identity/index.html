@@ -375,7 +375,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-object-and-the-observed-phenomenon" id="toc-the-object-and-the-observed-phenomenon" class="nav-link active" data-scroll-target="#the-object-and-the-observed-phenomenon">The object and the observed phenomenon</a></li>
+  <li><a href="#the-object-and-the-observed-phenomenon" id="toc-the-object-and-the-observed-phenomenon" class="nav-link active" data-scroll-target="#the-object-and-the-observed-phenomenon">The object and the observed phenomenon</a>
+  <ul class="collapse">
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it">Try it</a></li>
+  </ul></li>
   <li><a href="#the-derivation" id="toc-the-derivation" class="nav-link" data-scroll-target="#the-derivation">The derivation</a></li>
   <li><a href="#locating-the-remaining-gap-and-confirming-its-the-right-one" id="toc-locating-the-remaining-gap-and-confirming-its-the-right-one" class="nav-link" data-scroll-target="#locating-the-remaining-gap-and-confirming-its-the-right-one">Locating the remaining gap, and confirming it’s the right one</a></li>
   <li><a href="#whats-left-and-why-its-a-different-kind-of-open-problem" id="toc-whats-left-and-why-its-a-different-kind-of-open-problem" class="nav-link" data-scroll-target="#whats-left-and-why-its-a-different-kind-of-open-problem">What’s left, and why it’s a different kind of open problem</a></li>
@@ -406,6 +409,11 @@ g(u, t) = f(s_-) \cdot f(s_+).
 \theta(u,t) := -\frac{\chi'(s_-)}{\chi(s_-)} + 2\,\mathrm{Re}\!\left[\frac{f_\sigma(s_+)}{f(s_+)}\right],
 </span></p>
 <p>where <span class="math inline">\chi(s) = \pi^{s-1/2}\,\Gamma\!\left(\frac{1-s}{2}\right)/\Gamma\!\left(\frac{s}{2}\right)</span> is the usual functional-equation factor for <span class="math inline">\zeta</span>. The match is excellent, and gets <em>better</em> as <span class="math inline">t</span> grows — cosine similarity between <span class="math inline">g'/g</span> and <span class="math inline">\theta</span> of 0.999359 at <span class="math inline">t=20</span>, 0.9999969 at <span class="math inline">t=100</span>, 0.99999998 at <span class="math inline">t=500</span>. The notebook doesn’t explain why. The fact that agreement improves with <span class="math inline">t</span> is a clue worth chasing rather than just admiring.</p>
+<section id="try-it" class="level3">
+<h3 class="anchored" data-anchor-id="try-it">Try it</h3>
+<p>Both quantities below are computed exactly — no shortcuts, real digamma function and all. Drag <span class="math inline">t</span> from small to large and watch the two arrows converge.</p>
+<iframe src="critical_line_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+</section>
 </section>
 <section id="the-derivation" class="level2">
 <h2 class="anchored" data-anchor-id="the-derivation">The derivation</h2>

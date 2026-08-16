@@ -12,6 +12,165 @@
 <generator>quarto-1.10.18</generator>
 <lastBuildDate>Sat, 15 Aug 2026 15:00:00 GMT</lastBuildDate>
 <item>
+  <title>Chapter 0: Prologue</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/prologue/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>In April of 2025 I was deep in a conversation with an LLM, working through what looked like a real argument. The setup: a certain quantity <img src="https://latex.codecogs.com/png.latex?f_N(t)"> decays like <img src="https://latex.codecogs.com/png.latex?N%5E%7B2t-2%7D"> almost everywhere, but at two special points it decays much faster — <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-2%7D)"> instead. If <img src="https://latex.codecogs.com/png.latex?f_N"> is monotonic between those two points for large <img src="https://latex.codecogs.com/png.latex?N">, a squeeze argument forces the <em>entire interval</em> between them down to that same fast decay rate. And since the generic behavior only matches that rate at an isolated point, the interval has no choice but to collapse — the two special points have to coincide.</p>
+<p>It was a nice argument. It was also wrong in one specific place, and I caught it:</p>
+<blockquote class="blockquote">
+<p><em>“I think your logic and reasoning mostly makes sense but I do notice one thing that is clearly wrong that you keep saying — you note that the generic decay rate of <img src="https://latex.codecogs.com/png.latex?N%5E%7B2t-2%7D"> is not <img src="https://latex.codecogs.com/png.latex?-2"> except when <img src="https://latex.codecogs.com/png.latex?t=.5">. This is demonstrably false because the generic decay rate when <img src="https://latex.codecogs.com/png.latex?t=.5"> is <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1%7D">. In fact… if we were to allow <img src="https://latex.codecogs.com/png.latex?t=0"> then we would have that the generic decay rate for <img src="https://latex.codecogs.com/png.latex?t=0"> is <img src="https://latex.codecogs.com/png.latex?N%5E%7B-2%7D">.”</em></p>
+</blockquote>
+<p>The LLM had the mechanism right and one exponent wrong. Fixing it didn’t weaken the argument — it strengthened it, by closing off an edge case where the “generic” and “enhanced” decay rates could have coincided somewhere in the middle of the interval instead of only at an endpoint. We rebuilt the proof from there.</p>
+<p>I’m telling you this story first because it’s the most honest way I know to describe what this project actually is: not “I asked an AI to solve the Riemann Hypothesis,” and not “I proved it myself and used a chatbot as a calculator,” but three years of a genuine back-and-forth — the most recent three of six I’ve now spent on this problem — where the LLM does things I can’t — hold enormous amounts of mathematical machinery in working memory, draft a rigorous-looking proof in seconds, try ten reformulations in an afternoon — and I do things it doesn’t reliably do on its own, chiefly: notice when a specific claim is wrong, insist on numerical verification, and refuse to let “this looks right” stand in for “this is proven.”</p>
+<section id="what-the-riemann-hypothesis-actually-says" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-riemann-hypothesis-actually-says">What the Riemann Hypothesis actually says</h2>
+<p>Take the Riemann zeta function, <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)%20=%20%5Csum_%7Bn=1%7D%5E%7B%5Cinfty%7D%20n%5E%7B-s%7D">, extended (via analytic continuation) to all complex <img src="https://latex.codecogs.com/png.latex?s"> except <img src="https://latex.codecogs.com/png.latex?s=1">. It has infinitely many “trivial” zeros at the negative even integers, and infinitely many more “nontrivial” zeros scattered through the strip <img src="https://latex.codecogs.com/png.latex?0%20%3C%20%5Cmathrm%7BRe%7D(s)%20%3C%201">. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line <img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BRe%7D(s)%20=%20%5Ctfrac12">, the <em>critical line</em>. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions. It’s been open since 1859. It’s one of the seven Clay Millennium Problems, and the only one from Hilbert’s original 1900 list that’s still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.</p>
+<p>Here’s what that actually looks like, computed directly rather than taken on faith. Pick a known zero and watch <img src="https://latex.codecogs.com/png.latex?%7C%5Ceta(%5Csigma+it)%7C"> dive toward zero exactly at <img src="https://latex.codecogs.com/png.latex?%5Csigma=%5Ctfrac12">; pick a height with nothing special about it and watch that dip simply not happen.</p>
+<iframe src="zero_finder.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<p>I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is six years of genuinely trying — the last three of them documented closely enough to write this series from — across roughly six different angles, with a trail of what worked, what didn’t, and — a few times — something that stood on its own regardless of whether the big question ever closes.</p>
+</section>
+<section id="why-this-specifically" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-specifically">Why this, specifically</h2>
+<p>I majored in Mathematics as an undergraduate in the mid-2000s, and it was a professor who first told me about the Millennium Problems — seven problems judged important enough, at the dawn of the 21st century, to carry a million-dollar bounty each. I was captivated and immediately out of my depth. I could barely parse most of the problem statements, let alone see a way in. If the hardest exam question I’d faced was a steep but climbable mountain, each Millennium Problem read like something from another planet — famous, immense, and not somewhere I had any business going. I filed them away as a piece of math history and moved on.</p>
+<p>Years later, with a Ph.D.&nbsp;in Mathematics and some years working as a data scientist behind me, I was riding out the COVID-19 pandemic in a small studio apartment in New York City, with not much to do and a lot of time to do it in. That confinement turned out to be the catalyst: I went back and actually read all seven problem statements, and picked one. The one that pulled at me was the Riemann Hypothesis, because of its connection to prime numbers — the atoms of arithmetic, the thing that everything else in number theory is ultimately built from. I wanted, and still want, to find something simple in there. Not because I think the real answer will turn out to be simple — it almost certainly won’t — but because chasing simplicity is how I’ve always liked to work, and because it felt like a way to hand my younger self, the one who looked at those problem statements and saw only a wall, some kind of proof that the wall has footholds, even if I’m the one who never quite makes it over.</p>
+<p>I’m writing this now from Tokyo, where I live these days — for what it’s worth, a city with its own centuries-old tradition of amateur mathematicians publicly working out geometry problems on wooden tablets (<em>sangaku</em>) and hanging them at shrines and temples, which feels like fitting company for a project like this one.</p>
+<p>Six years in, I still don’t know how this ends. What follows is the record so far.</p>
+</section>
+<section id="why-with-an-llm" class="level2">
+<h2 class="anchored" data-anchor-id="why-with-an-llm">Why with an LLM</h2>
+<p>What I can describe precisely, because it’s all on the record: the shape of the collaboration changed as the tools did, but the division of labor has stayed remarkably consistent since the beginning. I bring the numerical intuition — decades of looking at these functions means I usually have a rough sense of <em>where</em> something interesting should be happening before I can say <em>why</em>. I insist on checking claims against real numbers: against the first 100,000 known nontrivial zeros, in one case. I catch the specific error, the way I did in April 2025, and a handful of other times across the notes this series draws from. The LLM brings breadth I don’t have — it can reach for a stationary-phase argument, a Poisson summation identity, or a result from a subfield I’ve never worked in, and draft it out fully formed in the time it takes me to describe the problem.</p>
+<p>Neither of us gets there alone. That’s not a hedge — it’s the actual finding of three years of trying. The chapters that follow are the record of it: six reformulations of the same underlying obstruction, most of them dead ends, a couple of them real.</p>
+<hr>
+<p><em>Next: <a href="../../posts/the-moon/index.html">Chapter 1 — The Moon</a> — not where this started, but the first technique that left a real trail, three years into a project that actually began in 2020.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>prologue</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/prologue/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Chapter 1: The Moon</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/the-moon/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p><em>A note on notation before we start: the earliest files in this project use <img src="https://latex.codecogs.com/png.latex?t"> for the offset from the critical line and <img src="https://latex.codecogs.com/png.latex?y"> for the height — the reverse of the convention I’ve used ever since and will use for the rest of this series. I’ve translated the original 2023 notes into the later convention below: <img src="https://latex.codecogs.com/png.latex?t"> is the height, <img src="https://latex.codecogs.com/png.latex?u"> is the offset, <img src="https://latex.codecogs.com/png.latex?s%20=%20%5Ctfrac12%20+%20u%20+%20it">.</em></p>
+<section id="three-years-of-groundwork-first" class="level2">
+<h2 class="anchored" data-anchor-id="three-years-of-groundwork-first">Three years of groundwork first</h2>
+<p>This wasn’t the first thing I tried. By late 2023 I’d already spent three years on this problem — most of it building up the machinery to even state a solution attempt cleanly, in a document I called, only half-jokingly, <em>Primal Pilgrimage</em>: number sets, basic geometry and trigonometry, Cauchy products, Cesàro summation, all rebuilt from scratch as scaffolding, ending in a “My Solution” section I could never quite finish writing. One early skeleton of that solution gets as far as <em>“establish the doubling ratio… establish the order… conclude that <img src="https://latex.codecogs.com/png.latex?t=1/2"> is the only value that permits <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)=0">”</em> — three section headers in a row with nothing underneath them. I want that on the record too, because it’s true to how this actually went: long stretches of building tools before the first technique that actually produced a real inequality. The Moon, below, is that first technique.</p>
+</section>
+<section id="the-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-question">The question</h2>
+<p>Take a partial sum of the alternating zeta series, <img src="https://latex.codecogs.com/png.latex?f_N(s)%20=%20%5Csum_%7Bn=1%7D%5EN%20(-1)%5E%7Bn+1%7D%20n%5E%7B-s%7D">, and look at its squared modulus, <img src="https://latex.codecogs.com/png.latex?%7Cf_N(s)%7C%5E2">. Multiply the sum out against itself — every term against every other term — and you get a double sum, a <em>Cauchy product</em>, with one entry for every pair of indices. Group those entries by which term of the original series they came from, and you get something with a very specific structure: a <strong>grid</strong>, indexed by <img src="https://latex.codecogs.com/png.latex?(l,%20n)"> with <img src="https://latex.codecogs.com/png.latex?1%20%5Cle%20l%20%5Cle%20n">, where each cell corresponds to the product <img src="https://latex.codecogs.com/png.latex?l%20%5Ccdot%20(n-l+1)">.</p>
+<p>The question I was chasing in late 2023 was simple to state and hard to answer: can this grid tell you, on its own — before you know anything about actual zeros — that <img src="https://latex.codecogs.com/png.latex?%7Cf_N(s)%7C%5E2"> is always at least as large as it would be with <img src="https://latex.codecogs.com/png.latex?u=0">, i.e.&nbsp;right at the critical line? If that’s true for every <img src="https://latex.codecogs.com/png.latex?N">, in the limit, you’ve got real leverage on where zeros can live.</p>
+</section>
+<section id="rays-in-a-grid" class="level2">
+<h2 class="anchored" data-anchor-id="rays-in-a-grid">Rays in a grid</h2>
+<p>Here’s the structural fact that makes the grid tractable. Every pair <img src="https://latex.codecogs.com/png.latex?(l,%20n-l+1)"> has a greatest common divisor — call it <img src="https://latex.codecogs.com/png.latex?m"> — and once you divide it out, <img src="https://latex.codecogs.com/png.latex?l%20=%20m%20f_1"> and <img src="https://latex.codecogs.com/png.latex?n%20-%20l%20+%201%20=%20m%20f_2"> for some coprime pair <img src="https://latex.codecogs.com/png.latex?(f_1,%20f_2)">. So instead of thinking of the grid as <img src="https://latex.codecogs.com/png.latex?N%5E2/2"> independent cells, think of it as a bundle of <strong>rays</strong>: one ray for every coprime pair <img src="https://latex.codecogs.com/png.latex?(f_1,%20f_2)">, and along each ray, <img src="https://latex.codecogs.com/png.latex?m%20=%201,%202,%203,%20%5Cdots"> walks outward.</p>
+<p>The reason this matters: the oscillatory phase attached to cell <img src="https://latex.codecogs.com/png.latex?(l,%20n-l+1)"> is <img src="https://latex.codecogs.com/png.latex?%5Ctheta%20=%20-%5Ctfrac%7Bt%7D%7B2%7D%5Clog%5C!%5Cbig(l/(n-l+1)%5Cbig)%20=%20-%5Ctfrac%7Bt%7D%7B2%7D%5Clog(f_1/f_2)"> — and that depends only on the <em>direction</em> of the ray, <img src="https://latex.codecogs.com/png.latex?f_1/f_2">, not on how far out along it you are. Walk from <img src="https://latex.codecogs.com/png.latex?m"> to <img src="https://latex.codecogs.com/png.latex?m+1"> along a fixed ray and the phase doesn’t move at all. Only the magnitude changes, growing like <img src="https://latex.codecogs.com/png.latex?(m%5E2%20f_1%20f_2)%5E%7B-(%5Ctext%7Bsomething%7D)%7D">.</p>
+</section>
+<section id="a-parity-coincidence" class="level2">
+<h2 class="anchored" data-anchor-id="a-parity-coincidence">A parity coincidence</h2>
+<p>The original series carries a sign, <img src="https://latex.codecogs.com/png.latex?(-1)%5E%7Bn+1%7D">, and that sign has to land somewhere once everything gets folded into cosines and sines. It turns out to land on parity: whether <img src="https://latex.codecogs.com/png.latex?m"> is odd or even at a given point on a ray determines — cleanly, mechanically, via whether <img src="https://latex.codecogs.com/png.latex?f_1,%20f_2"> are themselves odd or even — whether that cell’s contribution comes in as a <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> term or a <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> term. Walk one more step along the ray, from <img src="https://latex.codecogs.com/png.latex?m"> to <img src="https://latex.codecogs.com/png.latex?m+1">, and the label <em>flips</em>.</p>
+<p>So a ray doesn’t alternate between two different phases — it alternates between two different <strong>labels on the same fixed phase</strong>, one step at a time: <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> at <img src="https://latex.codecogs.com/png.latex?m">, <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> at <img src="https://latex.codecogs.com/png.latex?m+1">, <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> at <img src="https://latex.codecogs.com/png.latex?m+2">, and so on.</p>
+</section>
+<section id="the-convexity-payoff" class="level2">
+<h2 class="anchored" data-anchor-id="the-convexity-payoff">The convexity payoff</h2>
+<p>This is where it turns into an actual argument rather than bookkeeping. Since <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta%20+%20%5Csin%5E2%5Ctheta%20=%201">, a consecutive pair of points on a ray — one labeled <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta">, the other <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> — is <em>literally</em> a convex combination of two values of the function</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)%20=%20%5Ctfrac12%5Cleft(x%5E%7B-(1/2-u)%7D%20+%20x%5E%7B-(1/2+u)%7D%5Cright),%0A"></p>
+<p>evaluated at <img src="https://latex.codecogs.com/png.latex?x%20=%20m%5E2%20f_1%20f_2"> and <img src="https://latex.codecogs.com/png.latex?x%20=%20(m+1)%5E2%20f_1%20f_2">. And <img src="https://latex.codecogs.com/png.latex?f"> is convex on <img src="https://latex.codecogs.com/png.latex?(0,%5Cinfty)"> for any real <img src="https://latex.codecogs.com/png.latex?u"> — three lines of calculus confirm <img src="https://latex.codecogs.com/png.latex?f''(x)%20%3E%200">. Jensen’s inequality then says the weighted combination you actually have is bounded below by <img src="https://latex.codecogs.com/png.latex?f"> evaluated at the weighted average of the two <img src="https://latex.codecogs.com/png.latex?x">-values. Do this for both the <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta">-first and <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta">-first pairings on the same pair of points, average the two resulting bounds, and apply Jensen a second time: everything collapses to a clean lower bound of the form <img src="https://latex.codecogs.com/png.latex?%5Cbig(%5Ctext%7Ba%20weighted%20average%20of%20%7D%20m%5E2%20%5Ctext%7B%20and%20%7D%20(m+1)%5E2%5Cbig)%5E%7B-1/2%7D"> — exactly the value you’d get by setting <img src="https://latex.codecogs.com/png.latex?u%20=%200"> from the start.</p>
+<section id="try-it" class="level3">
+<h3 class="anchored" data-anchor-id="try-it">Try it</h3>
+<p>Drag the mixing weight and watch the amber dot (the weighted average you actually have) stay level with or above the teal dot (the curve at the weighted-average position) — for every weight, every curve shape.</p>
+<iframe src="jensen_gauge.html" style="width:100%; aspect-ratio: 16/12; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+</section>
+</section>
+<section id="why-the-moon" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-moon">Why “the moon”</h2>
+<p>I called this the <em>moon</em> scenario, because of the shape of what’s pairing up: two complementary crescents — the <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> share of one point, the <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> share of the next — that only complete each other, into a full convex combination, when you look at both halves together. Neither half alone is the whole picture; you need the linked pair.</p>
+</section>
+<section id="where-it-actually-leads" class="level2">
+<h2 class="anchored" data-anchor-id="where-it-actually-leads">Where it actually leads</h2>
+<p>Chained all the way through the grid, this gives a real, general fact: certain sums built from <img src="https://latex.codecogs.com/png.latex?%7Cf_N(s)%7C%5E2"> are bounded below by the value they’d take at <img src="https://latex.codecogs.com/png.latex?u=0">, via nothing but Jensen’s inequality applied ray by ray. That’s a genuine result, not a numerical observation — and it was the first real technique of this project, eight months before the spiral picture in <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a> gave the same underlying question a very different geometric face.</p>
+<p>What it isn’t is a proof that the bound is ever <em>strict</em> — that the inequality can’t secretly be an equality at some <img src="https://latex.codecogs.com/png.latex?u%20%5Cne%200">. My own notes from that week end without answering that, mid-equation, on an unfinished attempt to compare <img src="https://latex.codecogs.com/png.latex?C(t,y,N)"> against <img src="https://latex.codecogs.com/png.latex?M(t,y,N)"> term by term. I’m leaving that exactly as honest as it actually was: a real piece of leverage, and an open door I didn’t walk through before moving on to the next idea.</p>
+<hr>
+<p><em>Next: <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2 — Finding the Spiral</a>, December 2024.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>jensen</category>
+  <category>2023</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/the-moon/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Chapter 2: Finding the Spiral</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/spiral-toward-a-center/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p><em>Previous: <a href="../../posts/the-moon/index.html">Chapter 1 — The Moon</a>.</em></p>
+<section id="the-picture" class="level2">
+<h2 class="anchored" data-anchor-id="the-picture">The picture</h2>
+<p>Fix a height <img src="https://latex.codecogs.com/png.latex?t"> on the critical strip and a real part <img src="https://latex.codecogs.com/png.latex?%5Csigma">. The partial sums</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS_k(s)%20=%20%5Csum_%7Bn=1%7D%5E%7Bk%7D%20n%5E%7B-s%7D,%20%5Cqquad%20k%20=%201,%202,%203,%20%5Cdots%0A"></p>
+<p>don’t converge as <img src="https://latex.codecogs.com/png.latex?k%20%5Cto%20%5Cinfty"> — but plotted in the complex plane, they don’t wander randomly either. They spiral: each new term rotates the running total by a bit more than the last (the phase of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D"> is <img src="https://latex.codecogs.com/png.latex?-t%20%5Clog%20n">, so consecutive terms rotate relative to each other by a shrinking angle), and the whole path winds in toward a fixed center. By December 2024 I had a name for this — the spiral picture — and enough of a feel for it to know it was worth pinning down exactly, not just admiring.</p>
+</section>
+<section id="pinning-it-down" class="level2">
+<h2 class="anchored" data-anchor-id="pinning-it-down">Pinning it down</h2>
+<p>Treat the real and imaginary parts of the partial sum as right-rule Riemann sum approximations to integrals, <img src="https://latex.codecogs.com/png.latex?I_%5CRe(N)%20=%20%5Cint_0%5EN%20x%5E%7B-%5Csigma%7D%5Ccos(-t%5Clog%20x)%5C,dx"> and <img src="https://latex.codecogs.com/png.latex?I_%5CIm(N)"> likewise with <img src="https://latex.codecogs.com/png.latex?%5Csin">. Integration by parts on both, then a little algebra with</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Calpha%20=%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bt%5E2+(1-%5Csigma)%5E2%7D%7D,%20%5Cqquad%20%5Comega%20=%20%5Ccos%5E%7B-1%7D%5C!%5Cleft(%5Cfrac%7B1-%5Csigma%7D%7B%5Csqrt%7Bt%5E2+(1-%5Csigma)%5E2%7D%7D%5Cright),%0A"></p>
+<p>collapses them to a closed form:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AI_%5CRe(N)%20=%20%5Calpha%20N%5E%7B1-%5Csigma%7D%5Ccos(-t%5Clog%20N%20+%20%5Comega),%20%5Cqquad%20I_%5CIm(N)%20=%20%5Calpha%20N%5E%7B1-%5Csigma%7D%5Csin(-t%5Clog%20N%20+%20%5Comega).%0A"></p>
+<p>That’s exactly a spiral — <img src="https://latex.codecogs.com/png.latex?%5CSigma(N)%20=%20I_%5CRe(N)%20+%20iI_%5CIm(N)"> traces a curve centered at the origin with radius <img src="https://latex.codecogs.com/png.latex?%5Calpha%20N%5E%7B1-%5Csigma%7D">, shrinking as <img src="https://latex.codecogs.com/png.latex?N"> grows for any <img src="https://latex.codecogs.com/png.latex?%5Csigma%20%3E%201"> and just barely failing to shrink at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%201">, which is the boundary where <img src="https://latex.codecogs.com/png.latex?%5Czeta">’s defining series itself stops converging. The picture isn’t a metaphor; it’s a literal consequence of integrating an oscillating power function.</p>
+</section>
+<section id="where-the-real-center-is" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-real-center-is">Where the real center is</h2>
+<p><img src="https://latex.codecogs.com/png.latex?%5CSigma(N)"> is an approximation to the partial sum, not the partial sum itself, so define the difference <img src="https://latex.codecogs.com/png.latex?%5Cmu_1%5EN(s)%20=%20%5Czeta_1%5EN(s)%20-%20%5CSigma(N)"> and its limit <img src="https://latex.codecogs.com/png.latex?%5Cmu(s)%20=%20%5Clim_%7BN%5Cto%5Cinfty%7D%5Cmu_1%5EN(s)">. This <img src="https://latex.codecogs.com/png.latex?%5Cmu(s)"> — not the origin — is the <em>actual</em> center the true partial sums spiral around; <img src="https://latex.codecogs.com/png.latex?%5CSigma(N)"> only nails the shape and radius of the spiral, not quite where it’s centered. Getting a good, finite, computable estimate of <img src="https://latex.codecogs.com/png.latex?%5Cmu(s)"> turns out to matter a great deal later — it’s the seed of the pre-tail construction in <a href="../../posts/pre-tail-and-tail/index.html">Chapter 4</a> — but the qualitative picture is already the whole point of this chapter: <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor">, close to where the phase function’s stationary point sits, is a natural place to stop and read off where that center is, which is exactly why the truncation</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20=%20%5Csum_%7Bn=1%7D%5E%7BM%7D%20n%5E%7B-s%7D%20+%20%5Ctfrac12%20(M+1)%5E%7B-s%7D%0A"></p>
+<p>that recurs throughout the rest of this project uses that specific cutoff.</p>
+<p>The question that makes this more than a curiosity: <em>where</em> does the center sit? At a real, known zero of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> — one of the actual heights <img src="https://latex.codecogs.com/png.latex?t"> where <img src="https://latex.codecogs.com/png.latex?%5Czeta(%5Ctfrac12+it)=0"> — and exactly on the critical line, the center is the origin. Nudge <img src="https://latex.codecogs.com/png.latex?%5Csigma"> away from <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12">, height held fixed, and the same spiral winds toward some other point entirely, not zero.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Pick a known zero from the list below, then drag the <img src="https://latex.codecogs.com/png.latex?%5Csigma">-offset fader off the critical line and watch the final point (the colored dot) leave the origin.</p>
+<iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<p>Each point along the path is a running total of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D">; the color goes from muted to full as <img src="https://latex.codecogs.com/png.latex?n"> runs from <img src="https://latex.codecogs.com/png.latex?1"> to the displayed cutoff. The path is drawn a few multiples past <img src="https://latex.codecogs.com/png.latex?M"> purely so the winding is legible to the eye — the small diamond marks where <img src="https://latex.codecogs.com/png.latex?f(s)"> is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, so “locked” at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%200.5"> isn’t a simulation — it’s the real function, doing the real thing.</p>
+<hr>
+<p><em>Next: <a href="../../posts/the-only-special-value/index.html">Chapter 3 — The Only Special Value</a>, spring 2025.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>spiral geometry</category>
+  <category>2024</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/spiral-toward-a-center/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Chapter 3: The Only Special Value</title>
   <link>https://ian2j.github.io/spiral-and-the-line/posts/the-only-special-value/</link>
   <description><![CDATA[ 
@@ -42,6 +201,11 @@
 <h2 class="anchored" data-anchor-id="the-comparison-that-matters">The comparison that matters</h2>
 <p>So there are two independent asymptotic contributions in play: an <strong>endpoint term</strong>, decaying like <img src="https://latex.codecogs.com/png.latex?N%5E%7Bt-1%7D">, and a <strong>stationary-phase term</strong>, decaying like <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D">, smuggled in by the deformation argument above. Whichever one decays slower dominates, and a smaller term can only cancel against something of its own size — you can’t cancel an <img src="https://latex.codecogs.com/png.latex?O(N%5E%7Bt-1%7D)"> piece against an <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-1/2%7D)"> piece if one is genuinely larger, not without a coefficient that blows up with <img src="https://latex.codecogs.com/png.latex?N">, which doesn’t happen here.</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0At%20-%201%20=%20-%5Ctfrac12%20%5Ciff%20t%20=%20%5Ctfrac12.%0A"></p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Drag <img src="https://latex.codecogs.com/png.latex?%5Csigma"> and watch the two slopes on a log–log plot. They’re only ever parallel — the same order — at one place.</p>
+<iframe src="decay_race.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>Only at <img src="https://latex.codecogs.com/png.latex?t=%5Ctfrac12"> do the two mechanisms land at exactly the same order, <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D">, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there’s nothing of the right size for it to cancel against.</p>
 </section>
 <section id="what-this-does-and-doesnt-show" class="level2">
@@ -60,6 +224,62 @@
   <category>stationary-phase</category>
   <category>2025</category>
   <guid>https://ian2j.github.io/spiral-and-the-line/posts/the-only-special-value/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Chapter 4: Pre-tail and Tail</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/pre-tail-and-tail/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>By the fall of 2025, two pieces from earlier chapters were sitting next to each other without quite touching: the spiral picture from <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a>, where partial sums of <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)"> wind toward a fixed center, and the endpoint-vs-saddle deformation trick from <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>, which manufactures a genuine stationary point out of a boundary-only integral by adding a quadratic term to the phase and analytically continuing it away again. This chapter is where those two pieces actually fused — and where <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor">, the truncation length used everywhere from here on, stopped being a number I’d noticed worked well and became a number I could explain.</p>
+<section id="why-lfloor-tpi-rfloor-precisely" class="level2">
+<h2 class="anchored" data-anchor-id="why-lfloor-tpi-rfloor-precisely">Why <img src="https://latex.codecogs.com/png.latex?%5Clfloor%20t/%5Cpi%20%5Crfloor">, precisely</h2>
+<p>Look at a single term of the alternating series at height <img src="https://latex.codecogs.com/png.latex?t">: <img src="https://latex.codecogs.com/png.latex?(-1)%5E%7Bn+1%7D%20n%5E%7B-%5Csigma-it%7D">. Its phase, as a function of <img src="https://latex.codecogs.com/png.latex?n">, is <img src="https://latex.codecogs.com/png.latex?%5Cphi(n)%20=%20t%5Clog%20n%20-%20%5Cpi%20n"> (the <img src="https://latex.codecogs.com/png.latex?%5Cpi%20n"> comes from folding the alternating sign into the exponential, the same move <a href="../../posts/the-moon/index.html">Chapter 1</a> made with cosines and sines). This phase has a genuine stationary point — no deformation required this time — exactly where <img src="https://latex.codecogs.com/png.latex?%5Cphi'(n)%20=%20t/n%20-%20%5Cpi%20=%200">, which is <img src="https://latex.codecogs.com/png.latex?n%20=%20t/%5Cpi">. There’s no trick here, no <img src="https://latex.codecogs.com/png.latex?%5Calpha%20%5Cto%200"> limit: this stationary point is really there, sitting inside the sum, for every height <img src="https://latex.codecogs.com/png.latex?t">. If you’re going to split a partial sum into “the part before something interesting happens” and “the part after,” this is the honest place to make the cut.</p>
+</section>
+<section id="the-split" class="level2">
+<h2 class="anchored" data-anchor-id="the-split">The split</h2>
+<p>Define the finite <strong>pre-tail</strong> — a partial sum of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, run out just past that stationary point, with a half-weighted final term for good measure:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(s)%20=%20%5Czeta_M(s)%20+%20%5Ctfrac12%20(M+1)%5E%7B-s%7D,%20%5Cqquad%20M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor.%0A"></p>
+<p>(This is the same object that reappears, unchanged, as <img src="https://latex.codecogs.com/png.latex?f(s)"> in <a href="../../posts/critical-line-path-identity/index.html">Chapter 8</a> — I hadn’t settled on final notation yet in 2025, but the definition never moved again after this.) Partial sums of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> spiral toward a fixed center as more terms are added, and <img src="https://latex.codecogs.com/png.latex?P(s)"> turns out to be a genuinely good approximation to that center — because <img src="https://latex.codecogs.com/png.latex?n%20=%20t/%5Cpi"> is close to where consecutive terms’ magnitudes are comparable and their phases point in nearly opposite directions, which is exactly the point where a spiral’s trajectory is closest to having already settled.</p>
+<p>The <strong>tail</strong> is everything after <img src="https://latex.codecogs.com/png.latex?M">: <img src="https://latex.codecogs.com/png.latex?T(s)%20=%20%5Ceta_N(s)%20-%20%5Ceta_M(s)">, for the alternating series this time, and it’s where <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>’s machinery earns its keep. Treated as a Fresnel-type integral around that same stationary point, the tail collapses to a closed form:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AT(s)%20%5C;%5Capprox%5C;%202%5E%7B-1/2%7D%5Cleft(%5Cfrac%7Bt%7D%7B%5Cpi%7D%5Cright)%5E%7B%5Cfrac12%20-%20%5Csigma%7D%20%5Cexp%5C!%5Cleft(i%5Cleft%5B%5Cfrac%7B5%5Cpi%7D%7B4%7D%20-%20t%5Clog%5Cfrac%7Bt%7D%7B%5Cpi%7D%20+%20t%5Cright%5D%5Cright).%0A"></p>
+<p>Notice what happens to the magnitude at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%20%5Ctfrac12"> specifically: the exponent <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12%20-%20%5Csigma"> vanishes, and <img src="https://latex.codecogs.com/png.latex?%5Cleft(t/%5Cpi%5Cright)%5E0%20=%201"> for every height <img src="https://latex.codecogs.com/png.latex?t">. The tail’s magnitude collapses to exactly <img src="https://latex.codecogs.com/png.latex?2%5E%7B-1/2%7D"> — a single universal constant, independent of where on the critical line you are. Off the critical line, that magnitude drifts with <img src="https://latex.codecogs.com/png.latex?t">; on it, it doesn’t.</p>
+</section>
+<section id="what-this-predicts-at-a-zero" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-predicts-at-a-zero">What this predicts at a zero</h2>
+<p>The eta and zeta functions are related by <img src="https://latex.codecogs.com/png.latex?%5Ceta(s)%20=%20(1-2%5E%7B1-s%7D)%5Czeta(s)">, and the same relation holds, approximately, between their pre-tail approximations. Combine that with the split above:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_M(s)%20=%20%5Ceta_N(s)%20-%20T(s)%20=%20(1-2%5E%7B1-s%7D)P(s)%20-%20T(s).%0A"></p>
+<p>If <img src="https://latex.codecogs.com/png.latex?s"> is a genuine zero — so that both the true spiral center and its finite approximation <img src="https://latex.codecogs.com/png.latex?P(s)"> vanish — this collapses to a clean prediction:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_M(s)%20%5C;%5Capprox%5C;%20-T(s).%0A"></p>
+<p>The pre-tail sum, at a real zero, should point in almost exactly the opposite direction from the tail’s closed form, with almost exactly the same magnitude, <img src="https://latex.codecogs.com/png.latex?2%5E%7B-1/2%7D">.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Pick a known zero and watch the two vectors, drawn tip to tail. Nudge <img src="https://latex.codecogs.com/png.latex?%5Csigma"> off the critical line and watch the cancellation break.</p>
+<iframe src="pretail_tail_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+</section>
+<section id="checking-it-against-100000-real-zeros" class="level2">
+<h2 class="anchored" data-anchor-id="checking-it-against-100000-real-zeros">Checking it against 100,000 real zeros</h2>
+<p>This is a concrete, falsifiable claim about actual known numbers, so I checked it against actual known numbers: the first 100,000 nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, all of them verified to sit on the critical line. In every case, the pre-tail sum <img src="https://latex.codecogs.com/png.latex?%5Ceta_M(s)"> and the tail estimate <img src="https://latex.codecogs.com/png.latex?T(s)"> come out pointing in nearly opposite directions, with modulus close to <img src="https://latex.codecogs.com/png.latex?1/%5Csqrt2">, exactly as predicted.</p>
+<p>I want to be as precise about this as I was at the time: <em>“I have no way of currently proving rigorously that this is always the case for all non-trivial zeros of the Riemann zeta function.”</em> This is a strong, clean, checkable numerical regularity — a hundred thousand data points is not nothing — but it is numerics, not a proof, and I want to keep those two things visibly separate rather than let the size of the check do the work a derivation should.</p>
+<p>Whatever happens to the rest of this project, I think this result stands on its own: a closed-form prediction about the geometry of truncated zeta and eta sums near real zeros, derived from first principles, checked at scale, and still — as far as I know — unexplained by anything deeper than “the numbers do this.”</p>
+<hr>
+<p><em>Next: <a href="../../posts/rigidity-and-its-discontents/index.html">Chapter 5 — Rigidity and Its Discontents</a>, December 2025.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>stationary-phase</category>
+  <category>spiral</category>
+  <category>2025</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/pre-tail-and-tail/</guid>
   <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
 </item>
 <item>
@@ -102,6 +322,11 @@
 </blockquote>
 <p>The width of the guaranteed zero-free strip, <img src="https://latex.codecogs.com/png.latex?1/%5Clog%20t">, isn’t an artifact of sloppy bookkeeping — it falls out naturally from balancing the quadratic term against the quartic remainder. The mechanism is entirely geometric (a curvature condition on an energy function), not arithmetic, and at no point does the argument assume anything about zeros existing or not existing off the line. It’s a real implication, cleanly stated, resting on exactly one unverified hypothesis.</p>
 </section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Dial the curvature ratio below 1 and the guaranteed zero-free region vanishes entirely — not shrinks, <em>vanishes</em>. That threshold is the whole hypothesis.</p>
+<iframe src="rigidity_gauge.html" style="width:100%; aspect-ratio: 4/3.4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+</section>
 <section id="what-it-does-and-doesnt-do" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-does-and-doesnt-do">What it does and doesn’t do</h2>
 <p>I want to be as direct as I was when I first wrote this down: <strong>this does not prove the Riemann Hypothesis.</strong> <img src="https://latex.codecogs.com/png.latex?k(t)%20%5Cge%20c_0%5Clog%5E2%20t"> is exactly as open a question as RH itself, restated in different clothing — I haven’t shown it holds, only shown what would follow if it did, and that the numerics (after smoothing) look consistent with it. But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> — is not nothing. It’s the sharpest form the “why can’t zeros drift off the line” question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.</p>
@@ -139,6 +364,11 @@
 <p>The original notebook computes the <em>exact</em> derivative <img src="https://latex.codecogs.com/png.latex?g'(u,t)"> — via the exact partial derivative <img src="https://latex.codecogs.com/png.latex?f_%5Csigma"> of <img src="https://latex.codecogs.com/png.latex?f"> in <img src="https://latex.codecogs.com/png.latex?%5Csigma"> — and compares <img src="https://latex.codecogs.com/png.latex?g'/g"> against a proposed closed form</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta(u,t)%20:=%20-%5Cfrac%7B%5Cchi'(s_-)%7D%7B%5Cchi(s_-)%7D%20+%202%5C,%5Cmathrm%7BRe%7D%5C!%5Cleft%5B%5Cfrac%7Bf_%5Csigma(s_+)%7D%7Bf(s_+)%7D%5Cright%5D,%0A"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5Cchi(s)%20=%20%5Cpi%5E%7Bs-1/2%7D%5C,%5CGamma%5C!%5Cleft(%5Cfrac%7B1-s%7D%7B2%7D%5Cright)/%5CGamma%5C!%5Cleft(%5Cfrac%7Bs%7D%7B2%7D%5Cright)"> is the usual functional-equation factor for <img src="https://latex.codecogs.com/png.latex?%5Czeta">. The match is excellent, and gets <em>better</em> as <img src="https://latex.codecogs.com/png.latex?t"> grows — cosine similarity between <img src="https://latex.codecogs.com/png.latex?g'/g"> and <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> of 0.999359 at <img src="https://latex.codecogs.com/png.latex?t=20">, 0.9999969 at <img src="https://latex.codecogs.com/png.latex?t=100">, 0.99999998 at <img src="https://latex.codecogs.com/png.latex?t=500">. The notebook doesn’t explain why. The fact that agreement improves with <img src="https://latex.codecogs.com/png.latex?t"> is a clue worth chasing rather than just admiring.</p>
+<section id="try-it" class="level3">
+<h3 class="anchored" data-anchor-id="try-it">Try it</h3>
+<p>Both quantities below are computed exactly — no shortcuts, real digamma function and all. Drag <img src="https://latex.codecogs.com/png.latex?t"> from small to large and watch the two arrows converge.</p>
+<iframe src="critical_line_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+</section>
 </section>
 <section id="the-derivation" class="level2">
 <h2 class="anchored" data-anchor-id="the-derivation">The derivation</h2>
@@ -211,197 +441,6 @@
   <category>technical note</category>
   <category>functional equation</category>
   <guid>https://ian2j.github.io/spiral-and-the-line/posts/critical-line-path-identity/</guid>
-  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Spiral Toward a Center</title>
-  <link>https://ian2j.github.io/spiral-and-the-line/posts/spiral-toward-a-center/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p><em>This is the flagship figure for Chapter 2, “Finding the Spiral” — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this. Previous: <a href="../../posts/the-moon/index.html">Chapter 1 — The Moon</a>.</em></p>
-<section id="the-picture" class="level2">
-<h2 class="anchored" data-anchor-id="the-picture">The picture</h2>
-<p>Fix a height <img src="https://latex.codecogs.com/png.latex?t"> on the critical strip and a real part <img src="https://latex.codecogs.com/png.latex?%5Csigma">. The partial sums</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AS_k(s)%20=%20%5Csum_%7Bn=1%7D%5E%7Bk%7D%20n%5E%7B-s%7D,%20%5Cqquad%20k%20=%201,%202,%203,%20%5Cdots%0A"></p>
-<p>don’t converge as <img src="https://latex.codecogs.com/png.latex?k%20%5Cto%20%5Cinfty"> — but plotted in the complex plane, they don’t wander randomly either. They spiral: each new term rotates the running total by a bit more than the last (the phase of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D"> is <img src="https://latex.codecogs.com/png.latex?-t%20%5Clog%20n">, so consecutive terms rotate relative to each other by a shrinking angle), and the whole path winds in toward a fixed center.</p>
-<p><img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor"> turns out to be a natural place to stop — it’s close to the stationary point of that phase function — which is why the truncation</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20=%20%5Csum_%7Bn=1%7D%5E%7BM%7D%20n%5E%7B-s%7D%20+%20%5Ctfrac12%20(M+1)%5E%7B-s%7D%0A"></p>
-<p>that recurs throughout this project uses exactly that cutoff.</p>
-<p>The interesting question is <em>where</em> the center sits. At a real, known zero of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> — one of the actual heights <img src="https://latex.codecogs.com/png.latex?t"> where <img src="https://latex.codecogs.com/png.latex?%5Czeta(%5Ctfrac12%20+%20it)%20=%200"> — and exactly on the critical line, the center is the origin. Nudge <img src="https://latex.codecogs.com/png.latex?%5Csigma"> away from <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12">, height held fixed, and the same spiral winds toward some other point entirely, not zero.</p>
-</section>
-<section id="try-it" class="level2">
-<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
-<p>Pick a known zero from the list, then drag the <img src="https://latex.codecogs.com/png.latex?%5Csigma">-offset fader off the critical line and watch the final point (the colored dot) leave the origin.</p>
-<iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
-<p>Each point along the path is a running total of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D">; the color goes from muted to full as <img src="https://latex.codecogs.com/png.latex?n"> runs from <img src="https://latex.codecogs.com/png.latex?1"> to the displayed cutoff. The path is drawn a few multiples past <img src="https://latex.codecogs.com/png.latex?M"> purely so the winding is legible to the eye — the small diamond marks where <img src="https://latex.codecogs.com/png.latex?f(s)"> is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, so “locked” at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%200.5"> isn’t a simulation — it’s the real function, doing the real thing.</p>
-<hr>
-<p><em>Next: <a href="../../posts/the-only-special-value/index.html">Chapter 3 — The Only Special Value</a>, spring 2025.</em></p>
-
-
-</section>
-
- ]]></description>
-  <category>interactive</category>
-  <category>spiral geometry</category>
-  <guid>https://ian2j.github.io/spiral-and-the-line/posts/spiral-toward-a-center/</guid>
-  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Chapter 1: The Moon</title>
-  <link>https://ian2j.github.io/spiral-and-the-line/posts/the-moon/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p><em>A note on notation before we start: the earliest files in this project use <img src="https://latex.codecogs.com/png.latex?t"> for the offset from the critical line and <img src="https://latex.codecogs.com/png.latex?y"> for the height — the reverse of the convention I’ve used ever since and will use for the rest of this series. I’ve translated the original 2023 notes into the later convention below: <img src="https://latex.codecogs.com/png.latex?t"> is the height, <img src="https://latex.codecogs.com/png.latex?u"> is the offset, <img src="https://latex.codecogs.com/png.latex?s%20=%20%5Ctfrac12%20+%20u%20+%20it">.</em></p>
-<section id="three-years-of-groundwork-first" class="level2">
-<h2 class="anchored" data-anchor-id="three-years-of-groundwork-first">Three years of groundwork first</h2>
-<p>This wasn’t the first thing I tried. By late 2023 I’d already spent three years on this problem — most of it building up the machinery to even state a solution attempt cleanly, in a document I called, only half-jokingly, <em>Primal Pilgrimage</em>: number sets, basic geometry and trigonometry, Cauchy products, Cesàro summation, all rebuilt from scratch as scaffolding, ending in a “My Solution” section I could never quite finish writing. One early skeleton of that solution gets as far as <em>“establish the doubling ratio… establish the order… conclude that <img src="https://latex.codecogs.com/png.latex?t=1/2"> is the only value that permits <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)=0">”</em> — three section headers in a row with nothing underneath them. I want that on the record too, because it’s true to how this actually went: long stretches of building tools before the first technique that actually produced a real inequality. The Moon, below, is that first technique.</p>
-</section>
-<section id="the-question" class="level2">
-<h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p>Take a partial sum of the alternating zeta series, <img src="https://latex.codecogs.com/png.latex?f_N(s)%20=%20%5Csum_%7Bn=1%7D%5EN%20(-1)%5E%7Bn+1%7D%20n%5E%7B-s%7D">, and look at its squared modulus, <img src="https://latex.codecogs.com/png.latex?%7Cf_N(s)%7C%5E2">. Multiply the sum out against itself — every term against every other term — and you get a double sum, a <em>Cauchy product</em>, with one entry for every pair of indices. Group those entries by which term of the original series they came from, and you get something with a very specific structure: a <strong>grid</strong>, indexed by <img src="https://latex.codecogs.com/png.latex?(l,%20n)"> with <img src="https://latex.codecogs.com/png.latex?1%20%5Cle%20l%20%5Cle%20n">, where each cell corresponds to the product <img src="https://latex.codecogs.com/png.latex?l%20%5Ccdot%20(n-l+1)">.</p>
-<p>The question I was chasing in late 2023 was simple to state and hard to answer: can this grid tell you, on its own — before you know anything about actual zeros — that <img src="https://latex.codecogs.com/png.latex?%7Cf_N(s)%7C%5E2"> is always at least as large as it would be with <img src="https://latex.codecogs.com/png.latex?u=0">, i.e.&nbsp;right at the critical line? If that’s true for every <img src="https://latex.codecogs.com/png.latex?N">, in the limit, you’ve got real leverage on where zeros can live.</p>
-</section>
-<section id="rays-in-a-grid" class="level2">
-<h2 class="anchored" data-anchor-id="rays-in-a-grid">Rays in a grid</h2>
-<p>Here’s the structural fact that makes the grid tractable. Every pair <img src="https://latex.codecogs.com/png.latex?(l,%20n-l+1)"> has a greatest common divisor — call it <img src="https://latex.codecogs.com/png.latex?m"> — and once you divide it out, <img src="https://latex.codecogs.com/png.latex?l%20=%20m%20f_1"> and <img src="https://latex.codecogs.com/png.latex?n%20-%20l%20+%201%20=%20m%20f_2"> for some coprime pair <img src="https://latex.codecogs.com/png.latex?(f_1,%20f_2)">. So instead of thinking of the grid as <img src="https://latex.codecogs.com/png.latex?N%5E2/2"> independent cells, think of it as a bundle of <strong>rays</strong>: one ray for every coprime pair <img src="https://latex.codecogs.com/png.latex?(f_1,%20f_2)">, and along each ray, <img src="https://latex.codecogs.com/png.latex?m%20=%201,%202,%203,%20%5Cdots"> walks outward.</p>
-<p>The reason this matters: the oscillatory phase attached to cell <img src="https://latex.codecogs.com/png.latex?(l,%20n-l+1)"> is <img src="https://latex.codecogs.com/png.latex?%5Ctheta%20=%20-%5Ctfrac%7Bt%7D%7B2%7D%5Clog%5C!%5Cbig(l/(n-l+1)%5Cbig)%20=%20-%5Ctfrac%7Bt%7D%7B2%7D%5Clog(f_1/f_2)"> — and that depends only on the <em>direction</em> of the ray, <img src="https://latex.codecogs.com/png.latex?f_1/f_2">, not on how far out along it you are. Walk from <img src="https://latex.codecogs.com/png.latex?m"> to <img src="https://latex.codecogs.com/png.latex?m+1"> along a fixed ray and the phase doesn’t move at all. Only the magnitude changes, growing like <img src="https://latex.codecogs.com/png.latex?(m%5E2%20f_1%20f_2)%5E%7B-(%5Ctext%7Bsomething%7D)%7D">.</p>
-</section>
-<section id="a-parity-coincidence" class="level2">
-<h2 class="anchored" data-anchor-id="a-parity-coincidence">A parity coincidence</h2>
-<p>The original series carries a sign, <img src="https://latex.codecogs.com/png.latex?(-1)%5E%7Bn+1%7D">, and that sign has to land somewhere once everything gets folded into cosines and sines. It turns out to land on parity: whether <img src="https://latex.codecogs.com/png.latex?m"> is odd or even at a given point on a ray determines — cleanly, mechanically, via whether <img src="https://latex.codecogs.com/png.latex?f_1,%20f_2"> are themselves odd or even — whether that cell’s contribution comes in as a <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> term or a <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> term. Walk one more step along the ray, from <img src="https://latex.codecogs.com/png.latex?m"> to <img src="https://latex.codecogs.com/png.latex?m+1">, and the label <em>flips</em>.</p>
-<p>So a ray doesn’t alternate between two different phases — it alternates between two different <strong>labels on the same fixed phase</strong>, one step at a time: <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> at <img src="https://latex.codecogs.com/png.latex?m">, <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> at <img src="https://latex.codecogs.com/png.latex?m+1">, <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> at <img src="https://latex.codecogs.com/png.latex?m+2">, and so on.</p>
-</section>
-<section id="the-convexity-payoff" class="level2">
-<h2 class="anchored" data-anchor-id="the-convexity-payoff">The convexity payoff</h2>
-<p>This is where it turns into an actual argument rather than bookkeeping. Since <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta%20+%20%5Csin%5E2%5Ctheta%20=%201">, a consecutive pair of points on a ray — one labeled <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta">, the other <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> — is <em>literally</em> a convex combination of two values of the function</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)%20=%20%5Ctfrac12%5Cleft(x%5E%7B-(1/2-u)%7D%20+%20x%5E%7B-(1/2+u)%7D%5Cright),%0A"></p>
-<p>evaluated at <img src="https://latex.codecogs.com/png.latex?x%20=%20m%5E2%20f_1%20f_2"> and <img src="https://latex.codecogs.com/png.latex?x%20=%20(m+1)%5E2%20f_1%20f_2">. And <img src="https://latex.codecogs.com/png.latex?f"> is convex on <img src="https://latex.codecogs.com/png.latex?(0,%5Cinfty)"> for any real <img src="https://latex.codecogs.com/png.latex?u"> — three lines of calculus confirm <img src="https://latex.codecogs.com/png.latex?f''(x)%20%3E%200">. Jensen’s inequality then says the weighted combination you actually have is bounded below by <img src="https://latex.codecogs.com/png.latex?f"> evaluated at the weighted average of the two <img src="https://latex.codecogs.com/png.latex?x">-values. Do this for both the <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta">-first and <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta">-first pairings on the same pair of points, average the two resulting bounds, and apply Jensen a second time: everything collapses to a clean lower bound of the form <img src="https://latex.codecogs.com/png.latex?%5Cbig(%5Ctext%7Ba%20weighted%20average%20of%20%7D%20m%5E2%20%5Ctext%7B%20and%20%7D%20(m+1)%5E2%5Cbig)%5E%7B-1/2%7D"> — exactly the value you’d get by setting <img src="https://latex.codecogs.com/png.latex?u%20=%200"> from the start.</p>
-</section>
-<section id="why-the-moon" class="level2">
-<h2 class="anchored" data-anchor-id="why-the-moon">Why “the moon”</h2>
-<p>I called this the <em>moon</em> scenario, because of the shape of what’s pairing up: two complementary crescents — the <img src="https://latex.codecogs.com/png.latex?%5Ccos%5E2%5Ctheta"> share of one point, the <img src="https://latex.codecogs.com/png.latex?%5Csin%5E2%5Ctheta"> share of the next — that only complete each other, into a full convex combination, when you look at both halves together. Neither half alone is the whole picture; you need the linked pair.</p>
-</section>
-<section id="where-it-actually-leads" class="level2">
-<h2 class="anchored" data-anchor-id="where-it-actually-leads">Where it actually leads</h2>
-<p>Chained all the way through the grid, this gives a real, general fact: certain sums built from <img src="https://latex.codecogs.com/png.latex?%7Cf_N(s)%7C%5E2"> are bounded below by the value they’d take at <img src="https://latex.codecogs.com/png.latex?u=0">, via nothing but Jensen’s inequality applied ray by ray. That’s a genuine result, not a numerical observation — and it was the first real technique of this project, eight months before the spiral picture in <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a> gave the same underlying question a very different geometric face.</p>
-<p>What it isn’t is a proof that the bound is ever <em>strict</em> — that the inequality can’t secretly be an equality at some <img src="https://latex.codecogs.com/png.latex?u%20%5Cne%200">. My own notes from that week end without answering that, mid-equation, on an unfinished attempt to compare <img src="https://latex.codecogs.com/png.latex?C(t,y,N)"> against <img src="https://latex.codecogs.com/png.latex?M(t,y,N)"> term by term. I’m leaving that exactly as honest as it actually was: a real piece of leverage, and an open door I didn’t walk through before moving on to the next idea.</p>
-<hr>
-<p><em>Next: <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2 — Finding the Spiral</a>, December 2024.</em></p>
-
-
-</section>
-
- ]]></description>
-  <category>chapter</category>
-  <category>jensen</category>
-  <category>2023</category>
-  <guid>https://ian2j.github.io/spiral-and-the-line/posts/the-moon/</guid>
-  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Prologue: Why This, Why Alone, Why With an LLM</title>
-  <link>https://ian2j.github.io/spiral-and-the-line/posts/prologue/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p>In April of 2025 I was deep in a conversation with an LLM, working through what looked like a real argument. The setup: a certain quantity <img src="https://latex.codecogs.com/png.latex?f_N(t)"> decays like <img src="https://latex.codecogs.com/png.latex?N%5E%7B2t-2%7D"> almost everywhere, but at two special points it decays much faster — <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-2%7D)"> instead. If <img src="https://latex.codecogs.com/png.latex?f_N"> is monotonic between those two points for large <img src="https://latex.codecogs.com/png.latex?N">, a squeeze argument forces the <em>entire interval</em> between them down to that same fast decay rate. And since the generic behavior only matches that rate at an isolated point, the interval has no choice but to collapse — the two special points have to coincide.</p>
-<p>It was a nice argument. It was also wrong in one specific place, and I caught it:</p>
-<blockquote class="blockquote">
-<p><em>“I think your logic and reasoning mostly makes sense but I do notice one thing that is clearly wrong that you keep saying — you note that the generic decay rate of <img src="https://latex.codecogs.com/png.latex?N%5E%7B2t-2%7D"> is not <img src="https://latex.codecogs.com/png.latex?-2"> except when <img src="https://latex.codecogs.com/png.latex?t=.5">. This is demonstrably false because the generic decay rate when <img src="https://latex.codecogs.com/png.latex?t=.5"> is <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1%7D">. In fact… if we were to allow <img src="https://latex.codecogs.com/png.latex?t=0"> then we would have that the generic decay rate for <img src="https://latex.codecogs.com/png.latex?t=0"> is <img src="https://latex.codecogs.com/png.latex?N%5E%7B-2%7D">.”</em></p>
-</blockquote>
-<p>The LLM had the mechanism right and one exponent wrong. Fixing it didn’t weaken the argument — it strengthened it, by closing off an edge case where the “generic” and “enhanced” decay rates could have coincided somewhere in the middle of the interval instead of only at an endpoint. We rebuilt the proof from there.</p>
-<p>I’m telling you this story first because it’s the most honest way I know to describe what this project actually is: not “I asked an AI to solve the Riemann Hypothesis,” and not “I proved it myself and used a chatbot as a calculator,” but three years of a genuine back-and-forth — the most recent three of six I’ve now spent on this problem — where the LLM does things I can’t — hold enormous amounts of mathematical machinery in working memory, draft a rigorous-looking proof in seconds, try ten reformulations in an afternoon — and I do things it doesn’t reliably do on its own, chiefly: notice when a specific claim is wrong, insist on numerical verification, and refuse to let “this looks right” stand in for “this is proven.”</p>
-<section id="what-the-riemann-hypothesis-actually-says" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-riemann-hypothesis-actually-says">What the Riemann Hypothesis actually says</h2>
-<p>Take the Riemann zeta function, <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)%20=%20%5Csum_%7Bn=1%7D%5E%7B%5Cinfty%7D%20n%5E%7B-s%7D">, extended (via analytic continuation) to all complex <img src="https://latex.codecogs.com/png.latex?s"> except <img src="https://latex.codecogs.com/png.latex?s=1">. It has infinitely many “trivial” zeros at the negative even integers, and infinitely many more “nontrivial” zeros scattered through the strip <img src="https://latex.codecogs.com/png.latex?0%20%3C%20%5Cmathrm%7BRe%7D(s)%20%3C%201">. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line <img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BRe%7D(s)%20=%20%5Ctfrac12">, the <em>critical line</em>. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions. It’s been open since 1859. It’s one of the seven Clay Millennium Problems, and the only one from Hilbert’s original 1900 list that’s still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.</p>
-<p>I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is six years of genuinely trying — the last three of them documented closely enough to write this series from — across roughly six different angles, with a trail of what worked, what didn’t, and — a few times — something that stood on its own regardless of whether the big question ever closes.</p>
-</section>
-<section id="why-this-specifically" class="level2">
-<h2 class="anchored" data-anchor-id="why-this-specifically">Why this, specifically</h2>
-<p>I majored in Mathematics as an undergraduate in the mid-2000s, and it was a professor who first told me about the Millennium Problems — seven problems judged important enough, at the dawn of the 21st century, to carry a million-dollar bounty each. I was captivated and immediately out of my depth. I could barely parse most of the problem statements, let alone see a way in. If the hardest exam question I’d faced was a steep but climbable mountain, each Millennium Problem read like something from another planet — famous, immense, and not somewhere I had any business going. I filed them away as a piece of math history and moved on.</p>
-<p>Years later, with a Ph.D.&nbsp;in Mathematics and some years working as a data scientist behind me, I was riding out the COVID-19 pandemic in a small studio apartment in New York City, with not much to do and a lot of time to do it in. That confinement turned out to be the catalyst: I went back and actually read all seven problem statements, and picked one. The one that pulled at me was the Riemann Hypothesis, because of its connection to prime numbers — the atoms of arithmetic, the thing that everything else in number theory is ultimately built from. I wanted, and still want, to find something simple in there. Not because I think the real answer will turn out to be simple — it almost certainly won’t — but because chasing simplicity is how I’ve always liked to work, and because it felt like a way to hand my younger self, the one who looked at those problem statements and saw only a wall, some kind of proof that the wall has footholds, even if I’m the one who never quite makes it over.</p>
-<p>I’m writing this now from Tokyo, where I live these days — for what it’s worth, a city with its own centuries-old tradition of amateur mathematicians publicly working out geometry problems on wooden tablets (<em>sangaku</em>) and hanging them at shrines and temples, which feels like fitting company for a project like this one.</p>
-<p>Six years in, I still don’t know how this ends. What follows is the record so far.</p>
-</section>
-<section id="why-with-an-llm" class="level2">
-<h2 class="anchored" data-anchor-id="why-with-an-llm">Why with an LLM</h2>
-<p>What I can describe precisely, because it’s all on the record: the shape of the collaboration changed as the tools did, but the division of labor has stayed remarkably consistent since the beginning. I bring the numerical intuition — decades of looking at these functions means I usually have a rough sense of <em>where</em> something interesting should be happening before I can say <em>why</em>. I insist on checking claims against real numbers: against the first 100,000 known nontrivial zeros, in one case. I catch the specific error, the way I did in April 2025, and a handful of other times across the notes this series draws from. The LLM brings breadth I don’t have — it can reach for a stationary-phase argument, a Poisson summation identity, or a result from a subfield I’ve never worked in, and draft it out fully formed in the time it takes me to describe the problem.</p>
-<p>Neither of us gets there alone. That’s not a hedge — it’s the actual finding of three years of trying. The chapters that follow are the record of it: six reformulations of the same underlying obstruction, most of them dead ends, a couple of them real.</p>
-<hr>
-<p><em>Next: <a href="../../posts/the-moon/index.html">Chapter 1 — The Moon</a> — not where this started, but the first technique that left a real trail, three years into a project that actually began in 2020.</em></p>
-
-
-</section>
-
- ]]></description>
-  <category>chapter</category>
-  <category>prologue</category>
-  <guid>https://ian2j.github.io/spiral-and-the-line/posts/prologue/</guid>
-  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Chapter 4: Pre-tail and Tail</title>
-  <link>https://ian2j.github.io/spiral-and-the-line/posts/pre-tail-and-tail/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p>By the fall of 2025, two pieces from earlier chapters were sitting next to each other without quite touching: the spiral picture from <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a>, where partial sums of <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)"> wind toward a fixed center, and the endpoint-vs-saddle deformation trick from <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>, which manufactures a genuine stationary point out of a boundary-only integral by adding a quadratic term to the phase and analytically continuing it away again. This chapter is where those two pieces actually fused — and where <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor">, the truncation length used everywhere from here on, stopped being a number I’d noticed worked well and became a number I could explain.</p>
-<section id="why-lfloor-tpi-rfloor-precisely" class="level2">
-<h2 class="anchored" data-anchor-id="why-lfloor-tpi-rfloor-precisely">Why <img src="https://latex.codecogs.com/png.latex?%5Clfloor%20t/%5Cpi%20%5Crfloor">, precisely</h2>
-<p>Look at a single term of the alternating series at height <img src="https://latex.codecogs.com/png.latex?t">: <img src="https://latex.codecogs.com/png.latex?(-1)%5E%7Bn+1%7D%20n%5E%7B-%5Csigma-it%7D">. Its phase, as a function of <img src="https://latex.codecogs.com/png.latex?n">, is <img src="https://latex.codecogs.com/png.latex?%5Cphi(n)%20=%20t%5Clog%20n%20-%20%5Cpi%20n"> (the <img src="https://latex.codecogs.com/png.latex?%5Cpi%20n"> comes from folding the alternating sign into the exponential, the same move <a href="../../posts/the-moon/index.html">Chapter 1</a> made with cosines and sines). This phase has a genuine stationary point — no deformation required this time — exactly where <img src="https://latex.codecogs.com/png.latex?%5Cphi'(n)%20=%20t/n%20-%20%5Cpi%20=%200">, which is <img src="https://latex.codecogs.com/png.latex?n%20=%20t/%5Cpi">. There’s no trick here, no <img src="https://latex.codecogs.com/png.latex?%5Calpha%20%5Cto%200"> limit: this stationary point is really there, sitting inside the sum, for every height <img src="https://latex.codecogs.com/png.latex?t">. If you’re going to split a partial sum into “the part before something interesting happens” and “the part after,” this is the honest place to make the cut.</p>
-</section>
-<section id="the-split" class="level2">
-<h2 class="anchored" data-anchor-id="the-split">The split</h2>
-<p>Define the finite <strong>pre-tail</strong> — a partial sum of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, run out just past that stationary point, with a half-weighted final term for good measure:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(s)%20=%20%5Czeta_M(s)%20+%20%5Ctfrac12%20(M+1)%5E%7B-s%7D,%20%5Cqquad%20M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor.%0A"></p>
-<p>(This is the same object that reappears, unchanged, as <img src="https://latex.codecogs.com/png.latex?f(s)"> in <a href="../../posts/critical-line-path-identity/index.html">Chapter 8</a> — I hadn’t settled on final notation yet in 2025, but the definition never moved again after this.) Partial sums of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> spiral toward a fixed center as more terms are added, and <img src="https://latex.codecogs.com/png.latex?P(s)"> turns out to be a genuinely good approximation to that center — because <img src="https://latex.codecogs.com/png.latex?n%20=%20t/%5Cpi"> is close to where consecutive terms’ magnitudes are comparable and their phases point in nearly opposite directions, which is exactly the point where a spiral’s trajectory is closest to having already settled.</p>
-<p>The <strong>tail</strong> is everything after <img src="https://latex.codecogs.com/png.latex?M">: <img src="https://latex.codecogs.com/png.latex?T(s)%20=%20%5Ceta_N(s)%20-%20%5Ceta_M(s)">, for the alternating series this time, and it’s where <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>’s machinery earns its keep. Treated as a Fresnel-type integral around that same stationary point, the tail collapses to a closed form:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AT(s)%20%5C;%5Capprox%5C;%202%5E%7B-1/2%7D%5Cleft(%5Cfrac%7Bt%7D%7B%5Cpi%7D%5Cright)%5E%7B%5Cfrac12%20-%20%5Csigma%7D%20%5Cexp%5C!%5Cleft(i%5Cleft%5B%5Cfrac%7B5%5Cpi%7D%7B4%7D%20-%20t%5Clog%5Cfrac%7Bt%7D%7B%5Cpi%7D%20+%20t%5Cright%5D%5Cright).%0A"></p>
-<p>Notice what happens to the magnitude at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%20%5Ctfrac12"> specifically: the exponent <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12%20-%20%5Csigma"> vanishes, and <img src="https://latex.codecogs.com/png.latex?%5Cleft(t/%5Cpi%5Cright)%5E0%20=%201"> for every height <img src="https://latex.codecogs.com/png.latex?t">. The tail’s magnitude collapses to exactly <img src="https://latex.codecogs.com/png.latex?2%5E%7B-1/2%7D"> — a single universal constant, independent of where on the critical line you are. Off the critical line, that magnitude drifts with <img src="https://latex.codecogs.com/png.latex?t">; on it, it doesn’t.</p>
-</section>
-<section id="what-this-predicts-at-a-zero" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-predicts-at-a-zero">What this predicts at a zero</h2>
-<p>The eta and zeta functions are related by <img src="https://latex.codecogs.com/png.latex?%5Ceta(s)%20=%20(1-2%5E%7B1-s%7D)%5Czeta(s)">, and the same relation holds, approximately, between their pre-tail approximations. Combine that with the split above:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_M(s)%20=%20%5Ceta_N(s)%20-%20T(s)%20=%20(1-2%5E%7B1-s%7D)P(s)%20-%20T(s).%0A"></p>
-<p>If <img src="https://latex.codecogs.com/png.latex?s"> is a genuine zero — so that both the true spiral center and its finite approximation <img src="https://latex.codecogs.com/png.latex?P(s)"> vanish — this collapses to a clean prediction:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_M(s)%20%5C;%5Capprox%5C;%20-T(s).%0A"></p>
-<p>The pre-tail sum, at a real zero, should point in almost exactly the opposite direction from the tail’s closed form, with almost exactly the same magnitude, <img src="https://latex.codecogs.com/png.latex?2%5E%7B-1/2%7D">.</p>
-</section>
-<section id="checking-it-against-100000-real-zeros" class="level2">
-<h2 class="anchored" data-anchor-id="checking-it-against-100000-real-zeros">Checking it against 100,000 real zeros</h2>
-<p>This is a concrete, falsifiable claim about actual known numbers, so I checked it against actual known numbers: the first 100,000 nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, all of them verified to sit on the critical line. In every case, the pre-tail sum <img src="https://latex.codecogs.com/png.latex?%5Ceta_M(s)"> and the tail estimate <img src="https://latex.codecogs.com/png.latex?T(s)"> come out pointing in nearly opposite directions, with modulus close to <img src="https://latex.codecogs.com/png.latex?1/%5Csqrt2">, exactly as predicted.</p>
-<p>I want to be as precise about this as I was at the time: <em>“I have no way of currently proving rigorously that this is always the case for all non-trivial zeros of the Riemann zeta function.”</em> This is a strong, clean, checkable numerical regularity — a hundred thousand data points is not nothing — but it is numerics, not a proof, and I want to keep those two things visibly separate rather than let the size of the check do the work a derivation should.</p>
-<p>Whatever happens to the rest of this project, I think this result stands on its own: a closed-form prediction about the geometry of truncated zeta and eta sums near real zeros, derived from first principles, checked at scale, and still — as far as I know — unexplained by anything deeper than “the numbers do this.”</p>
-<hr>
-<p><em>Next: <a href="../../posts/rigidity-and-its-discontents/index.html">Chapter 5 — Rigidity and Its Discontents</a>, December 2025.</em></p>
-
-
-</section>
-
- ]]></description>
-  <category>chapter</category>
-  <category>stationary-phase</category>
-  <category>spiral</category>
-  <category>2025</category>
-  <guid>https://ian2j.github.io/spiral-and-the-line/posts/pre-tail-and-tail/</guid>
   <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
 </item>
 </channel>

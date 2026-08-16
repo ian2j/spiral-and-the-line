@@ -380,6 +380,7 @@ window.Quarto = {
   <li><a href="#the-transverse-curvature" id="toc-the-transverse-curvature" class="nav-link" data-scroll-target="#the-transverse-curvature">The transverse curvature</a></li>
   <li><a href="#what-it-would-take-to-get-a-zero-free-strip" id="toc-what-it-would-take-to-get-a-zero-free-strip" class="nav-link" data-scroll-target="#what-it-would-take-to-get-a-zero-free-strip">What it would take to get a zero-free strip</a></li>
   <li><a href="#the-transverse-rigidity-theorem" id="toc-the-transverse-rigidity-theorem" class="nav-link" data-scroll-target="#the-transverse-rigidity-theorem">The Transverse Rigidity Theorem</a></li>
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it">Try it</a></li>
   <li><a href="#what-it-does-and-doesnt-do" id="toc-what-it-does-and-doesnt-do" class="nav-link" data-scroll-target="#what-it-does-and-doesnt-do">What it does and doesn’t do</a></li>
   </ul>
 </nav>
@@ -431,6 +432,11 @@ k(t) \;\ge\; c_0 \log^2 t
 <p><strong>Conditional.</strong> Fix a height <span class="math inline">t</span> strictly between two consecutive nontrivial zeros on the critical line, and suppose there exists <span class="math inline">c_0 &gt; 0</span> such that the transverse curvature satisfies <span class="math inline">k(t) \ge c_0\log^2 t</span> for all sufficiently large <span class="math inline">t</span> in that gap. Then there exists <span class="math inline">\delta &gt; 0</span> such that <span class="math inline">F(\sigma, t) \ne 0</span> for all <span class="math inline">|\sigma - \tfrac12| \le \delta/\log t</span>.</p>
 </blockquote>
 <p>The width of the guaranteed zero-free strip, <span class="math inline">1/\log t</span>, isn’t an artifact of sloppy bookkeeping — it falls out naturally from balancing the quadratic term against the quartic remainder. The mechanism is entirely geometric (a curvature condition on an energy function), not arithmetic, and at no point does the argument assume anything about zeros existing or not existing off the line. It’s a real implication, cleanly stated, resting on exactly one unverified hypothesis.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Dial the curvature ratio below 1 and the guaranteed zero-free region vanishes entirely — not shrinks, <em>vanishes</em>. That threshold is the whole hypothesis.</p>
+<iframe src="rigidity_gauge.html" style="width:100%; aspect-ratio: 4/3.4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 </section>
 <section id="what-it-does-and-doesnt-do" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-does-and-doesnt-do">What it does and doesn’t do</h2>
