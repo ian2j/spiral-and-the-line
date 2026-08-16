@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "The Spiral and the Line"
+  description: "A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included."
+  site-url: "https://your-domain-goes-here.example.com"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Posts
+      - href: about.qmd
+        text: About & Roadmap
+    right:
+      - icon: github
+        href: https://github.com/
+  page-footer:
+    left: "The Spiral and the Line"
+    right: "Built with Quarto."
+  twitter-card: true
+  open-graph: true
+
+format:
+  html:
+    theme:
+      light: [cosmo, custom.scss]
+      dark: [darkly, custom-dark.scss]
+    css: styles.css
+    html-math-method: katex
+    toc: true
+    grid:
+      body-width: 780px
+
+execute:
+  freeze: auto

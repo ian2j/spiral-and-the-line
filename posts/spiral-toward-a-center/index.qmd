@@ -1,0 +1,38 @@
+---
+title: "Spiral Toward a Center"
+description: "An interactive figure for Chapter 2: watch a truncated zeta sum wind toward a fixed point — and watch it miss, the moment you leave the critical line."
+date: 2026-08-16
+categories: [interactive, spiral geometry]
+---
+
+*This is the flagship figure for Chapter 2, "Finding the Spiral" — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this.*
+
+## The picture
+
+Fix a height $t$ on the critical strip and a real part $\sigma$. The partial sums
+
+$$
+S_k(s) = \sum_{n=1}^{k} n^{-s}, \qquad k = 1, 2, 3, \dots
+$$
+
+don't converge as $k \to \infty$ — but plotted in the complex plane, they don't wander randomly either. They spiral: each new term rotates the running total by a bit more than the last (the phase of $n^{-s}$ is $-t \log n$, so consecutive terms rotate relative to each other by a shrinking angle), and the whole path winds in toward a fixed center.
+
+$M = \lfloor t/\pi \rfloor$ turns out to be a natural place to stop — it's close to the stationary point of that phase function — which is why the truncation
+
+$$
+f(s) = \sum_{n=1}^{M} n^{-s} + \tfrac12 (M+1)^{-s}
+$$
+
+that recurs throughout this project uses exactly that cutoff.
+
+The interesting question is *where* the center sits. At a real, known zero of $\zeta$ — one of the actual heights $t$ where $\zeta(\tfrac12 + it) = 0$ — and exactly on the critical line, the center is the origin. Nudge $\sigma$ away from $\tfrac12$, height held fixed, and the same spiral winds toward some other point entirely, not zero.
+
+## Try it
+
+Pick a known zero from the list, then drag the $\sigma$-offset fader off the critical line and watch the final point (the colored dot) leave the origin.
+
+```{=html}
+<iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
+
+Each point along the path is a running total of $n^{-s}$; the color goes from muted to full as $n$ runs from $1$ to the displayed cutoff. The path is drawn a few multiples past $M$ purely so the winding is legible to the eye — the small diamond marks where $f(s)$ is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of $\zeta$, so "locked" at $\sigma = 0.5$ isn't a simulation — it's the real function, doing the real thing.

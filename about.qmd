@@ -1,0 +1,65 @@
+---
+title: "About & Roadmap"
+page-layout: article
+title-block-banner: false
+---
+
+## What this is
+
+Three years of independent research into the Riemann zeta function, written up honestly. Not a proof of the Riemann Hypothesis — the odds of any independent effort resolving a 150-year-old open problem are close to zero, and this site says so plainly rather than around the edges.
+
+What it is instead: a documented account of repeatedly attacking the same obstruction from six different angles, in close collaboration with large language models, with real — if partial — technical results along the way. Some of those results stand on their own regardless of whether the central question ever closes: a geometric picture of how truncated zeta sums behave, an empirical regularity checked against 100,000 real zeros, an identity that looked like numerical coincidence until it turned out to be exact.
+
+The throughline is process over product. There's no shortage of "I think I proved the Riemann Hypothesis" content online. There's a real shortage of careful, transparent accounts of what multi-year independent mathematical research — especially AI-assisted research — actually looks like, dead ends included.
+
+## Who it's for
+
+Readers comfortable with complex analysis and Dirichlet series. Specialist knowledge of zeta-function machinery isn't assumed — it gets built up the way the research itself built it up, piece by piece, over three years.
+
+## Roadmap
+
+The series follows the actual chronology of the research rather than a tidied-up logical order. Each entry below will link to its post as it's written.
+
+**0 · Prologue — why this, why alone, why with an LLM** <span class="status-badge">planned</span>
+
+What the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice.
+
+**1 · The Moon (late 2023)** <span class="status-badge">planned</span>
+
+The origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier.
+
+**2 · Finding the Spiral (Dec 2024)** <span class="status-badge done">posted</span>
+
+Where the project's visual language is born — truncated zeta sums spiral toward a fixed center, and `M = ⌊t/π⌋` is the natural place to stop. See the [interactive figure](posts/spiral-toward-a-center/index.qmd).
+
+**3 · The Only Special Value (2025 H1)** <span class="status-badge">planned</span>
+
+A stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series.
+
+**4 · Pre-tail and Tail (Sept–Oct 2025)** <span class="status-badge">planned</span>
+
+The cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros.
+
+**5 · Rigidity and Its Discontents (Dec 2025)** <span class="status-badge">planned</span>
+
+A deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma.
+
+**6 · Only σ = 1/2, Take Four (Feb 2026)** <span class="status-badge">planned</span>
+
+The tightest self-derived argument in the corpus, via the approximate functional equation — and a precise account of exactly which step is assumption rather than theorem.
+
+**7 · A Season of Reinvention (Mar–May 2026)** <span class="status-badge">planned</span>
+
+A stochastic functional equation, a Jensen-gap tipping point, and a pivot to classifying oscillatory arithmetic sums more generally — RH as one instance of a broader phenomenon.
+
+**8 · The Critical Line Path (Jun 2026 – present)** <span class="status-badge done">posted</span>
+
+A numerical match too good to be coincidence — and it wasn't. See [the writeup](posts/critical-line-path-identity/index.qmd).
+
+**9 · Where This Leaves Us** <span class="status-badge">planned</span>
+
+An honest accounting of what's proved, what's conjectural, and an open, specific invitation to readers who know their way around Euler–Maclaurin and Riemann–Siegel theory.
+
+## Standalone notes
+
+A few pieces of this project stand on their own without the RH framing — a numerical regularity, a technique, a derivation. These get published independently of the chapter sequence as they're finished.

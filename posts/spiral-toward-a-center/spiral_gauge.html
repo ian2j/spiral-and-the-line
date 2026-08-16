@@ -1,0 +1,722 @@
+<title>Spiral Gauge</title>
+<style>
+  :root {
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --surface-2: #f2f4f8;
+    --border: #d6dce3;
+    --text: #141b24;
+    --text-dim: #5c6779;
+    --text-faint: #8b93a1;
+    --accent-lock: #0e8f7c;
+    --accent-lock-soft: #0e8f7c22;
+    --accent-drift: #c15f28;
+    --accent-drift-soft: #c15f2822;
+    --grid-line: #e3e7ed;
+    --grid-line-strong: #cdd4dc;
+    --shadow: 0 1px 2px rgba(20, 27, 36, 0.06), 0 8px 24px rgba(20, 27, 36, 0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13;
+      --surface: #10151b;
+      --surface-2: #171e26;
+      --border: #2a3540;
+      --text: #e7ebf0;
+      --text-dim: #90a0b2;
+      --text-faint: #5c6a7a;
+      --accent-lock: #4fe0c6;
+      --accent-lock-soft: #4fe0c626;
+      --accent-drift: #eda36e;
+      --accent-drift-soft: #eda36e26;
+      --grid-line: #1c242c;
+      --grid-line-strong: #29333d;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0a0e13;
+    --surface: #10151b;
+    --surface-2: #171e26;
+    --border: #2a3540;
+    --text: #e7ebf0;
+    --text-dim: #90a0b2;
+    --text-faint: #5c6a7a;
+    --accent-lock: #4fe0c6;
+    --accent-lock-soft: #4fe0c626;
+    --accent-drift: #eda36e;
+    --accent-drift-soft: #eda36e26;
+    --grid-line: #1c242c;
+    --grid-line-strong: #29333d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display {
+    font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  }
+
+  .mono {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .app {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.25rem 1.5rem 3rem;
+  }
+
+  header.nameplate {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  header.nameplate .title-block h1 {
+    font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem);
+    margin: 0 0 0.2rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  header.nameplate .title-block p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    max-width: 46ch;
+  }
+
+  header.nameplate .instrument-id {
+    text-align: right;
+    color: var(--text-faint);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  .rig {
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+
+  @media (max-width: 760px) {
+    .rig { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  .rail {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .rail-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 0.55rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .zero-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .zero-list button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.4rem 0.55rem;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    text-align: left;
+  }
+
+  .zero-list button .idx {
+    color: var(--text-faint);
+    font-size: 0.72rem;
+    width: 2.4em;
+    flex: none;
+  }
+
+  .zero-list button .tval {
+    margin-left: auto;
+  }
+
+  .zero-list button:hover {
+    border-color: var(--border);
+    color: var(--text);
+  }
+
+  .zero-list button[aria-pressed="true"] {
+    background: var(--accent-lock-soft);
+    border-color: var(--accent-lock);
+    color: var(--text);
+  }
+
+  .zero-list button:focus-visible,
+  input[type="range"]:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent-lock);
+    outline-offset: 2px;
+  }
+
+  .fader-block {
+    padding-top: 0.15rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .fader-readout {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.4rem;
+  }
+
+  .fader-readout .sigma {
+    font-size: 1.05rem;
+  }
+
+  .fader-readout .sigma .num {
+    font-weight: 600;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 26px;
+    background: transparent;
+    margin: 0.2rem 0 0.1rem;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border));
+    border-radius: 2px;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent-lock);
+    cursor: pointer;
+  }
+
+  input[type="range"]::-moz-range-track {
+    height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border));
+    border-radius: 2px;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent-lock);
+    cursor: pointer;
+  }
+
+  .fader-ticks {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-faint);
+    font-size: 0.66rem;
+    padding: 0 2px;
+  }
+
+  .reset-btn {
+    margin-top: 0.7rem;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 4px;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+
+  .reset-btn:hover { color: var(--text); border-color: var(--accent-lock); }
+
+  .viewport-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .scope {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+
+  .scope canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .scope-caption {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.85rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .status-chip {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.85rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.22rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .status-chip .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .telemetry {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  @media (max-width: 560px) {
+    .telemetry { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .telemetry .cell {
+    background: var(--surface-2);
+    padding: 0.6rem 0.75rem;
+  }
+
+  .telemetry .cell .k {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.15rem;
+  }
+
+  .telemetry .cell .v {
+    font-size: 1rem;
+  }
+
+  .caption {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    max-width: 74ch;
+    margin: 0.4rem 0 0;
+  }
+
+  .caption strong { color: var(--text); font-weight: 600; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pulse {
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.9); opacity: 0; }
+  }
+</style>
+
+<div class="app">
+  <header class="nameplate">
+    <div class="title-block">
+      <h1 class="display">Spiral Gauge</h1>
+      <p>A truncated partial sum of &zeta;(s), traced term by term. Watch whether it finds zero.</p>
+    </div>
+    <div class="instrument-id mono">
+      f(s) = &Sigma;<sub>n=1</sub><sup>M</sup> n<sup>&minus;s</sup> + &frac12;(M+1)<sup>&minus;s</sup><br>
+      M = &lfloor;t/&pi;&rfloor;
+    </div>
+  </header>
+
+  <div class="rig">
+    <div class="panel rail">
+      <div>
+        <p class="rail-label"><span>Known zero</span><span id="zero-count" class="mono"></span></p>
+        <ul class="zero-list" id="zero-list" role="listbox" aria-label="Select a known nontrivial zero of zeta"></ul>
+      </div>
+
+      <div class="fader-block">
+        <p class="rail-label"><span>&sigma; offset</span><span id="u-readout" class="mono"></span></p>
+        <div class="fader-readout">
+          <span class="sigma display">&sigma; = <span class="num mono" id="sigma-readout"></span></span>
+        </div>
+        <input type="range" id="u-slider" min="-0.4" max="0.4" step="0.005" value="0" aria-label="Offset u from the critical line, sigma = 0.5 + u">
+        <div class="fader-ticks mono">
+          <span>0.10</span><span>critical line</span><span>0.90</span>
+        </div>
+        <button class="reset-btn" id="reset-btn">Return to critical line</button>
+      </div>
+    </div>
+
+    <div class="viewport-col">
+      <div class="scope">
+        <canvas id="plot" width="900" height="900"></canvas>
+        <div class="scope-caption mono" id="scope-caption"></div>
+        <div class="status-chip mono" id="status-chip"><span class="dot" id="status-dot"></span><span id="status-text"></span></div>
+      </div>
+
+      <div class="telemetry mono">
+        <div class="cell"><div class="k">height t</div><div class="v" id="tel-t"></div></div>
+        <div class="cell"><div class="k">terms M</div><div class="v" id="tel-m"></div></div>
+        <div class="cell"><div class="k">&sigma;</div><div class="v" id="tel-sigma"></div></div>
+        <div class="cell"><div class="k">|f(s)|</div><div class="v" id="tel-dist"></div></div>
+      </div>
+
+      <p class="caption">Each point is a running total of <span class="mono">n<sup>&minus;s</sup></span> for <span class="mono">n = 1&hellip;M</span>, connected in order &mdash; the path winds inward toward a fixed center as more terms are added. The selected heights are real, known zeros of the Riemann zeta function. At <strong>&sigma; = 0.5</strong> (the critical line), the spiral closes in near the origin: a zero. Drag the fader off &sigma; = 0.5 and the same spiral visibly misses. Path length is extended a few multiples past M purely to make the winding legible; the diamond marks where the truncation <span class="mono">f(s)</span> is actually evaluated.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ZEROS = [
+    14.134725, 21.022040, 25.010858, 30.424876, 32.935062,
+    37.586178, 40.918719, 43.327073, 48.005151, 49.773832,
+    52.970321, 56.446248, 59.347044, 60.831779, 65.112544
+  ];
+
+  var state = { zeroIdx: 0, u: 0 };
+
+  var zeroListEl = document.getElementById("zero-list");
+  var zeroCountEl = document.getElementById("zero-count");
+  var uSlider = document.getElementById("u-slider");
+  var uReadout = document.getElementById("u-readout");
+  var sigmaReadout = document.getElementById("sigma-readout");
+  var resetBtn = document.getElementById("reset-btn");
+  var canvas = document.getElementById("plot");
+  var ctx = canvas.getContext("2d");
+  var scopeCaption = document.getElementById("scope-caption");
+  var statusDot = document.getElementById("status-dot");
+  var statusText = document.getElementById("status-text");
+  var telT = document.getElementById("tel-t");
+  var telM = document.getElementById("tel-m");
+  var telSigma = document.getElementById("tel-sigma");
+  var telDist = document.getElementById("tel-dist");
+
+  zeroCountEl.textContent = ZEROS.length + " listed";
+
+  ZEROS.forEach(function (t, i) {
+    var li = document.createElement("li");
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.setAttribute("role", "option");
+    btn.setAttribute("aria-pressed", i === state.zeroIdx ? "true" : "false");
+    btn.innerHTML =
+      '<span class="idx mono">&rho;<sub>' + (i + 1) + "</sub></span>" +
+      '<span class="mono tval">t = ' + t.toFixed(3) + "</span>";
+    btn.addEventListener("click", function () {
+      state.zeroIdx = i;
+      Array.prototype.forEach.call(zeroListEl.children, function (node, j) {
+        node.firstChild.setAttribute("aria-pressed", j === i ? "true" : "false");
+      });
+      render();
+    });
+    li.appendChild(btn);
+    zeroListEl.appendChild(li);
+  });
+  zeroListEl.children[0].firstChild.setAttribute("aria-pressed", "true");
+
+  uSlider.addEventListener("input", function () {
+    state.u = parseFloat(uSlider.value);
+    render();
+  });
+
+  resetBtn.addEventListener("click", function () {
+    state.u = 0;
+    uSlider.value = "0";
+    render();
+  });
+
+  function complexPow(n, sigma, t) {
+    // n^{-s} for s = sigma + i t, n real positive
+    var lg = Math.log(n);
+    var mag = Math.pow(n, -sigma);
+    var ang = -t * lg;
+    return [mag * Math.cos(ang), mag * Math.sin(ang)];
+  }
+
+  function computeSpiral(t, sigma) {
+    var M = Math.max(1, Math.floor(t / Math.PI));
+    var Ndisplay = Math.min(Math.max(M * 8, 220), 700);
+
+    var pts = [[0, 0]];
+    var sx = 0, sy = 0;
+    var mPoint = null;
+    for (var n = 1; n <= Ndisplay; n++) {
+      var term = complexPow(n, sigma, t);
+      sx += term[0];
+      sy += term[1];
+      pts.push([sx, sy]);
+      if (n === M) mPoint = [sx, sy];
+    }
+
+    var corr = complexPow(M + 1, sigma, t);
+    // f(s) uses the sum only up to M, plus a half-weighted endpoint term
+    var sumM = pts[M];
+    var fs = [sumM[0] + 0.5 * corr[0], sumM[1] + 0.5 * corr[1]];
+
+    return { pts: pts, M: M, Ndisplay: Ndisplay, mPoint: mPoint, fs: fs };
+  }
+
+  function cssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function lerpColor(hexA, hexB, t) {
+    function parse(h) {
+      h = h.replace("#", "");
+      return [parseInt(h.substr(0, 2), 16), parseInt(h.substr(2, 2), 16), parseInt(h.substr(4, 2), 16)];
+    }
+    var a = parse(hexA), b = parse(hexB);
+    var r = Math.round(a[0] + (b[0] - a[0]) * t);
+    var g = Math.round(a[1] + (b[1] - a[1]) * t);
+    var bl = Math.round(a[2] + (b[2] - a[2]) * t);
+    return "rgb(" + r + "," + g + "," + bl + ")";
+  }
+
+  var lastLayout = null;
+
+  function render() {
+    var t = ZEROS[state.zeroIdx];
+    var sigma = 0.5 + state.u;
+    var data = computeSpiral(t, sigma);
+
+    uReadout.textContent = (state.u >= 0 ? "+" : "") + state.u.toFixed(3);
+    sigmaReadout.textContent = sigma.toFixed(3);
+    telT.textContent = t.toFixed(3);
+    telM.textContent = String(data.M);
+    telSigma.textContent = sigma.toFixed(3);
+
+    var dist = Math.sqrt(data.fs[0] * data.fs[0] + data.fs[1] * data.fs[1]);
+    telDist.textContent = dist.toFixed(4);
+
+    draw(data, dist);
+  }
+
+  function draw(data, dist) {
+    var w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    var bg = cssVar("--surface");
+    var gridLine = cssVar("--grid-line");
+    var gridStrong = cssVar("--grid-line-strong");
+    var textDim = cssVar("--text-dim");
+    var textFaint = cssVar("--text-faint");
+    var textMain = cssVar("--text");
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    // bounding box over all points
+    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    data.pts.forEach(function (p) {
+      if (p[0] < minX) minX = p[0];
+      if (p[0] > maxX) maxX = p[0];
+      if (p[1] < minY) minY = p[1];
+      if (p[1] > maxY) maxY = p[1];
+    });
+    minX = Math.min(minX, 0); maxX = Math.max(maxX, 0);
+    minY = Math.min(minY, 0); maxY = Math.max(maxY, 0);
+
+    var spanX = maxX - minX, spanY = maxY - minY;
+    var span = Math.max(spanX, spanY, 1e-6) * 1.18;
+    var cx0 = (minX + maxX) / 2, cy0 = (minY + maxY) / 2;
+
+    var pad = w * 0.06;
+    var scale = (w - 2 * pad) / span;
+
+    function toScreen(p) {
+      return [
+        w / 2 + (p[0] - cx0) * scale,
+        h / 2 - (p[1] - cy0) * scale
+      ];
+    }
+
+    // grid: concentric rings around origin + crosshair
+    var origin = toScreen([0, 0]);
+    ctx.strokeStyle = gridLine;
+    ctx.lineWidth = 1;
+    var ringSteps = 5;
+    var maxRing = span / 2;
+    for (var r = 1; r <= ringSteps; r++) {
+      var rr = (maxRing * r) / ringSteps * scale;
+      ctx.beginPath();
+      ctx.arc(origin[0], origin[1], rr, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath();
+    ctx.moveTo(0, origin[1]); ctx.lineTo(w, origin[1]);
+    ctx.moveTo(origin[0], 0); ctx.lineTo(origin[0], h);
+    ctx.stroke();
+
+    // path, gradient by progress
+    var n = data.pts.length;
+    for (var i = 1; i < n; i++) {
+      var a = toScreen(data.pts[i - 1]);
+      var b = toScreen(data.pts[i]);
+      var frac = i / n;
+      ctx.strokeStyle = lerpColor(textFaint, textMain, frac);
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+      ctx.stroke();
+    }
+
+    // M marker (diamond) — where the raw running sum sits at n = M
+    if (data.mPoint) {
+      var mScreen = toScreen(data.mPoint);
+      ctx.save();
+      ctx.translate(mScreen[0], mScreen[1]);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillStyle = bg;
+      ctx.strokeStyle = textMain;
+      ctx.lineWidth = 1.4;
+      ctx.fillRect(-4, -4, 8, 8);
+      ctx.strokeRect(-4, -4, 8, 8);
+      ctx.restore();
+    }
+
+    // origin reticle
+    ctx.strokeStyle = textFaint;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(origin[0], origin[1], 9, 0, Math.PI * 2);
+    ctx.moveTo(origin[0] - 13, origin[1]); ctx.lineTo(origin[0] + 13, origin[1]);
+    ctx.moveTo(origin[0], origin[1] - 13); ctx.lineTo(origin[0], origin[1] + 13);
+    ctx.stroke();
+
+    // final f(s) marker
+    var fScreen = toScreen(data.fs);
+    var scaleRef = Math.max(span * 0.02, 1e-6);
+    var locked = dist < scaleRef * 3.2;
+
+    ctx.fillStyle = locked ? lockColor : driftColor;
+    ctx.beginPath();
+    ctx.arc(fScreen[0], fScreen[1], 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = bg;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // status chip + caption
+    scopeCaption.textContent = "n = 1 → " + data.Ndisplay + "  ·  ◇ marks n = M";
+    statusDot.style.background = locked ? lockColor : driftColor;
+    statusText.textContent = locked ? "LOCKED" : "DRIFT";
+    statusText.style.color = locked ? lockColor : driftColor;
+    document.getElementById("status-chip").style.borderColor = locked ? lockColor : driftColor;
+
+    lastLayout = { toScreen: toScreen, fScreen: fScreen, locked: locked };
+    positionPulse(fScreen, locked ? lockColor : driftColor);
+  }
+
+  var pulseEl = null;
+  function positionPulse(screenPt, color) {
+    var rect = canvas.getBoundingClientRect();
+    var scopeRect = canvas.parentElement.getBoundingClientRect();
+    var scaleX = rect.width / canvas.width;
+    var scaleY = rect.height / canvas.height;
+
+    if (!pulseEl) {
+      pulseEl = document.createElement("div");
+      pulseEl.className = "pulse";
+      pulseEl.style.position = "absolute";
+      pulseEl.style.width = "12px";
+      pulseEl.style.height = "12px";
+      pulseEl.style.marginLeft = "-6px";
+      pulseEl.style.marginTop = "-6px";
+      pulseEl.style.borderRadius = "50%";
+      pulseEl.style.pointerEvents = "none";
+      canvas.parentElement.appendChild(pulseEl);
+    }
+    pulseEl.style.left = (screenPt[0] * scaleX) + "px";
+    pulseEl.style.top = (screenPt[1] * scaleY) + "px";
+    pulseEl.style.background = color;
+  }
+
+  window.addEventListener("resize", function () { render(); });
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { render(); });
+  }
+
+  render();
+})();
+</script>
