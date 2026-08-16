@@ -1,10 +1,38 @@
 [
   {
+    "objectID": "posts/prologue/index.html",
+    "href": "posts/prologue/index.html",
+    "title": "Prologue: Why This, Why Alone, Why With an LLM",
+    "section": "",
+    "text": "In April of 2025 I was deep in a conversation with an LLM, working through what looked like a real argument. The setup: a certain quantity f_N(t) decays like N^{2t-2} almost everywhere, but at two special points it decays much faster — O(N^{-2}) instead. If f_N is monotonic between those two points for large N, a squeeze argument forces the entire interval between them down to that same fast decay rate. And since the generic behavior only matches that rate at an isolated point, the interval has no choice but to collapse — the two special points have to coincide.\nIt was a nice argument. It was also wrong in one specific place, and I caught it:\nThe LLM had the mechanism right and one exponent wrong. Fixing it didn’t weaken the argument — it strengthened it, by closing off an edge case where the “generic” and “enhanced” decay rates could have coincided somewhere in the middle of the interval instead of only at an endpoint. We rebuilt the proof from there.\nI’m telling you this story first because it’s the most honest way I know to describe what this project actually is: not “I asked an AI to solve the Riemann Hypothesis,” and not “I proved it myself and used a chatbot as a calculator,” but three years of a genuine back-and-forth, where the LLM does things I can’t — hold enormous amounts of mathematical machinery in working memory, draft a rigorous-looking proof in seconds, try ten reformulations in an afternoon — and I do things it doesn’t reliably do on its own, chiefly: notice when a specific claim is wrong, insist on numerical verification, and refuse to let “this looks right” stand in for “this is proven.”"
+  },
+  {
+    "objectID": "posts/prologue/index.html#what-the-riemann-hypothesis-actually-says",
+    "href": "posts/prologue/index.html#what-the-riemann-hypothesis-actually-says",
+    "title": "Prologue: Why This, Why Alone, Why With an LLM",
+    "section": "What the Riemann Hypothesis actually says",
+    "text": "What the Riemann Hypothesis actually says\nTake the Riemann zeta function, \\zeta(s) = \\sum_{n=1}^{\\infty} n^{-s}, extended (via analytic continuation) to all complex s except s=1. It has infinitely many “trivial” zeros at the negative even integers, and infinitely many more “nontrivial” zeros scattered through the strip 0 &lt; \\mathrm{Re}(s) &lt; 1. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line \\mathrm{Re}(s) = \\tfrac12, the critical line. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions. It’s been open since 1859. It’s one of the seven Clay Millennium Problems, and the only one from Hilbert’s original 1900 list that’s still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.\nI am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is three years of genuinely trying, from six different angles, with a documented trail of what worked, what didn’t, and — a few times — something that stood on its own regardless of whether the big question ever closes."
+  },
+  {
+    "objectID": "posts/prologue/index.html#why-this-specifically",
+    "href": "posts/prologue/index.html#why-this-specifically",
+    "title": "Prologue: Why This, Why Alone, Why With an LLM",
+    "section": "Why this, specifically",
+    "text": "Why this, specifically\n\n[A paragraph on what drew me to this problem specifically, and what kept me at it for three years, belongs here.]"
+  },
+  {
+    "objectID": "posts/prologue/index.html#why-with-an-llm",
+    "href": "posts/prologue/index.html#why-with-an-llm",
+    "title": "Prologue: Why This, Why Alone, Why With an LLM",
+    "section": "Why with an LLM",
+    "text": "Why with an LLM\nWhat I can describe precisely, because it’s all on the record: the shape of the collaboration changed as the tools did, but the division of labor has stayed remarkably consistent since the beginning. I bring the numerical intuition — decades of looking at these functions means I usually have a rough sense of where something interesting should be happening before I can say why. I insist on checking claims against real numbers: against the first 100,000 known nontrivial zeros, in one case. I catch the specific error, the way I did in April 2025, and a handful of other times across the notes this series draws from. The LLM brings breadth I don’t have — it can reach for a stationary-phase argument, a Poisson summation identity, or a result from a subfield I’ve never worked in, and draft it out fully formed in the time it takes me to describe the problem.\nNeither of us gets there alone. That’s not a hedge — it’s the actual finding of three years of trying. The chapters that follow are the record of it: six reformulations of the same underlying obstruction, most of them dead ends, a couple of them real.\n\nNext: Chapter 1 — The Moon, where this all started in late 2023."
+  },
+  {
     "objectID": "posts/spiral-toward-a-center/index.html",
     "href": "posts/spiral-toward-a-center/index.html",
     "title": "Spiral Toward a Center",
     "section": "",
-    "text": "This is the flagship figure for Chapter 2, “Finding the Spiral” — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this."
+    "text": "This is the flagship figure for Chapter 2, “Finding the Spiral” — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this. Previous: Chapter 1 — The Moon."
   },
   {
     "objectID": "posts/spiral-toward-a-center/index.html#the-picture",
@@ -25,7 +53,7 @@
     "href": "index.html",
     "title": "The Spiral and the Line",
     "section": "",
-    "text": "Why the Critical-Line-Path Identity Isn’t a Coincidence\n\n\n\ntechnical note\n\nfunctional equation\n\n\n\nA numerical match with cosine similarity 0.9999999773 looked like it needed an explanation. It turns out to be an exact algebraic consequence of three ingredients — two of them trivial.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSpiral Toward a Center\n\n\n\ninteractive\n\nspiral geometry\n\n\n\nAn interactive figure for Chapter 2: watch a truncated zeta sum wind toward a fixed point — and watch it miss, the moment you leave the critical line.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\nNo matching items"
+    "text": "Why the Critical-Line-Path Identity Isn’t a Coincidence\n\n\n\ntechnical note\n\nfunctional equation\n\n\n\nA numerical match with cosine similarity 0.9999999773 looked like it needed an explanation. It turns out to be an exact algebraic consequence of three ingredients — two of them trivial.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSpiral Toward a Center\n\n\n\ninteractive\n\nspiral geometry\n\n\n\nAn interactive figure for Chapter 2: watch a truncated zeta sum wind toward a fixed point — and watch it miss, the moment you leave the critical line.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nChapter 1: The Moon\n\n\n\nchapter\n\njensen\n\n2023\n\n\n\nLate 2023. The first real technique of this project — a grid of rays, a parity trick, and a convexity argument that pushed toward the critical line without quite closing the case.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPrologue: Why This, Why Alone, Why With an LLM\n\n\n\nchapter\n\nprologue\n\n\n\nChapter 0. What the Riemann Hypothesis is, in one paragraph — and what three years of trying to make a dent in it with an LLM at my side has actually looked like.\n\n\n\n\n\nAug 16, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -53,7 +81,7 @@
     "href": "about.html#roadmap",
     "title": "About & Roadmap",
     "section": "Roadmap",
-    "text": "Roadmap\nThe series follows the actual chronology of the research rather than a tidied-up logical order. Each entry below will link to its post as it’s written.\n0 · Prologue — why this, why alone, why with an LLM planned\nWhat the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice.\n1 · The Moon (late 2023) planned\nThe origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier.\n2 · Finding the Spiral (Dec 2024) posted\nWhere the project’s visual language is born — truncated zeta sums spiral toward a fixed center, and M = ⌊t/π⌋ is the natural place to stop. See the interactive figure.\n3 · The Only Special Value (2025 H1) planned\nA stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series.\n4 · Pre-tail and Tail (Sept–Oct 2025) planned\nThe cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros.\n5 · Rigidity and Its Discontents (Dec 2025) planned\nA deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma.\n6 · Only σ = 1/2, Take Four (Feb 2026) planned\nThe tightest self-derived argument in the corpus, via the approximate functional equation — and a precise account of exactly which step is assumption rather than theorem.\n7 · A Season of Reinvention (Mar–May 2026) planned\nA stochastic functional equation, a Jensen-gap tipping point, and a pivot to classifying oscillatory arithmetic sums more generally — RH as one instance of a broader phenomenon.\n8 · The Critical Line Path (Jun 2026 – present) posted\nA numerical match too good to be coincidence — and it wasn’t. See the writeup.\n9 · Where This Leaves Us planned\nAn honest accounting of what’s proved, what’s conjectural, and an open, specific invitation to readers who know their way around Euler–Maclaurin and Riemann–Siegel theory."
+    "text": "Roadmap\nThe series follows the actual chronology of the research rather than a tidied-up logical order. Each entry below will link to its post as it’s written.\n0 · Prologue — why this, why alone, why with an LLM posted\nWhat the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice. Read it.\n1 · The Moon (late 2023) posted\nThe origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier. Read it.\n2 · Finding the Spiral (Dec 2024) posted\nWhere the project’s visual language is born — truncated zeta sums spiral toward a fixed center, and M = ⌊t/π⌋ is the natural place to stop. See the interactive figure.\n3 · The Only Special Value (2025 H1) planned\nA stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series.\n4 · Pre-tail and Tail (Sept–Oct 2025) planned\nThe cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros.\n5 · Rigidity and Its Discontents (Dec 2025) planned\nA deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma.\n6 · Only σ = 1/2, Take Four (Feb 2026) planned\nThe tightest self-derived argument in the corpus, via the approximate functional equation — and a precise account of exactly which step is assumption rather than theorem.\n7 · A Season of Reinvention (Mar–May 2026) planned\nA stochastic functional equation, a Jensen-gap tipping point, and a pivot to classifying oscillatory arithmetic sums more generally — RH as one instance of a broader phenomenon.\n8 · The Critical Line Path (Jun 2026 – present) posted\nA numerical match too good to be coincidence — and it wasn’t. See the writeup.\n9 · Where This Leaves Us planned\nAn honest accounting of what’s proved, what’s conjectural, and an open, specific invitation to readers who know their way around Euler–Maclaurin and Riemann–Siegel theory."
   },
   {
     "objectID": "about.html#standalone-notes",
@@ -96,5 +124,54 @@
     "title": "Why the Critical-Line-Path Identity Isn’t a Coincidence",
     "section": "What’s left, and why it’s a different kind of open problem",
     "text": "What’s left, and why it’s a different kind of open problem\nWhat remains is a single, classical-flavored estimate: a rigorous bound on\n\nf(s) - \\chi(s)\\, f(1-s), \\qquad M = \\lfloor t/\\pi \\rfloor.\n\nThis is the same species of estimate that underlies the Riemann–Siegel formula and Euler–Maclaurin-based approximate functional equations for \\zeta, which are rigorously established in the literature for various truncation schemes — though the specific scheme used throughout this project (M \\sim t/\\pi, long compared to the classical “balanced” choice N \\sim \\sqrt{t/2\\pi}) doesn’t appear to be a standard textbook case, so the bound would need deriving for this scheme specifically. That’s real work, but of a fundamentally different character than the gap in Chapter 6: it’s a quantitative asymptotic estimate about an explicit finite sum, not a claim that would resolve the Riemann Hypothesis if true. It’s worth doing carefully, both because it completes this identity rigorously and because the same estimate is very likely the missing ingredient in several other chapters’ hand-waved “the error term is small” steps.\nNext step: derive the Euler–Maclaurin expansion of f(s) - \\chi(s) f(1-s) for M = \\lfloor t/\\pi \\rfloor directly — Poisson summation on the finite sum is the standard route — and extract an explicit power of t for the error. That single derivation would upgrade this chapter’s headline result from “verified numerically, explained structurally” to “proved, with an explicit error bound.”"
+  },
+  {
+    "objectID": "posts/the-moon/index.html",
+    "href": "posts/the-moon/index.html",
+    "title": "Chapter 1: The Moon",
+    "section": "",
+    "text": "A note on notation before we start: the earliest files in this project use t for the offset from the critical line and y for the height — the reverse of the convention I’ve used ever since and will use for the rest of this series. I’ve translated the original 2023 notes into the later convention below: t is the height, u is the offset, s = \\tfrac12 + u + it."
+  },
+  {
+    "objectID": "posts/the-moon/index.html#the-question",
+    "href": "posts/the-moon/index.html#the-question",
+    "title": "Chapter 1: The Moon",
+    "section": "The question",
+    "text": "The question\nTake a partial sum of the alternating zeta series, f_N(s) = \\sum_{n=1}^N (-1)^{n+1} n^{-s}, and look at its squared modulus, |f_N(s)|^2. Multiply the sum out against itself — every term against every other term — and you get a double sum, a Cauchy product, with one entry for every pair of indices. Group those entries by which term of the original series they came from, and you get something with a very specific structure: a grid, indexed by (l, n) with 1 \\le l \\le n, where each cell corresponds to the product l \\cdot (n-l+1).\nThe question I was chasing in late 2023 was simple to state and hard to answer: can this grid tell you, on its own — before you know anything about actual zeros — that |f_N(s)|^2 is always at least as large as it would be with u=0, i.e. right at the critical line? If that’s true for every N, in the limit, you’ve got real leverage on where zeros can live."
+  },
+  {
+    "objectID": "posts/the-moon/index.html#rays-in-a-grid",
+    "href": "posts/the-moon/index.html#rays-in-a-grid",
+    "title": "Chapter 1: The Moon",
+    "section": "Rays in a grid",
+    "text": "Rays in a grid\nHere’s the structural fact that makes the grid tractable. Every pair (l, n-l+1) has a greatest common divisor — call it m — and once you divide it out, l = m f_1 and n - l + 1 = m f_2 for some coprime pair (f_1, f_2). So instead of thinking of the grid as N^2/2 independent cells, think of it as a bundle of rays: one ray for every coprime pair (f_1, f_2), and along each ray, m = 1, 2, 3, \\dots walks outward.\nThe reason this matters: the oscillatory phase attached to cell (l, n-l+1) is \\theta = -\\tfrac{t}{2}\\log\\!\\big(l/(n-l+1)\\big) = -\\tfrac{t}{2}\\log(f_1/f_2) — and that depends only on the direction of the ray, f_1/f_2, not on how far out along it you are. Walk from m to m+1 along a fixed ray and the phase doesn’t move at all. Only the magnitude changes, growing like (m^2 f_1 f_2)^{-(\\text{something})}."
+  },
+  {
+    "objectID": "posts/the-moon/index.html#a-parity-coincidence",
+    "href": "posts/the-moon/index.html#a-parity-coincidence",
+    "title": "Chapter 1: The Moon",
+    "section": "A parity coincidence",
+    "text": "A parity coincidence\nThe original series carries a sign, (-1)^{n+1}, and that sign has to land somewhere once everything gets folded into cosines and sines. It turns out to land on parity: whether m is odd or even at a given point on a ray determines — cleanly, mechanically, via whether f_1, f_2 are themselves odd or even — whether that cell’s contribution comes in as a \\cos^2\\theta term or a \\sin^2\\theta term. Walk one more step along the ray, from m to m+1, and the label flips.\nSo a ray doesn’t alternate between two different phases — it alternates between two different labels on the same fixed phase, one step at a time: \\cos^2\\theta at m, \\sin^2\\theta at m+1, \\cos^2\\theta at m+2, and so on."
+  },
+  {
+    "objectID": "posts/the-moon/index.html#the-convexity-payoff",
+    "href": "posts/the-moon/index.html#the-convexity-payoff",
+    "title": "Chapter 1: The Moon",
+    "section": "The convexity payoff",
+    "text": "The convexity payoff\nThis is where it turns into an actual argument rather than bookkeeping. Since \\cos^2\\theta + \\sin^2\\theta = 1, a consecutive pair of points on a ray — one labeled \\cos^2\\theta, the other \\sin^2\\theta — is literally a convex combination of two values of the function\n\nf(x) = \\tfrac12\\left(x^{-(1/2-u)} + x^{-(1/2+u)}\\right),\n\nevaluated at x = m^2 f_1 f_2 and x = (m+1)^2 f_1 f_2. And f is convex on (0,\\infty) for any real u — three lines of calculus confirm f''(x) &gt; 0. Jensen’s inequality then says the weighted combination you actually have is bounded below by f evaluated at the weighted average of the two x-values. Do this for both the \\cos^2\\theta-first and \\sin^2\\theta-first pairings on the same pair of points, average the two resulting bounds, and apply Jensen a second time: everything collapses to a clean lower bound of the form \\big(\\text{a weighted average of } m^2 \\text{ and } (m+1)^2\\big)^{-1/2} — exactly the value you’d get by setting u = 0 from the start."
+  },
+  {
+    "objectID": "posts/the-moon/index.html#why-the-moon",
+    "href": "posts/the-moon/index.html#why-the-moon",
+    "title": "Chapter 1: The Moon",
+    "section": "Why “the moon”",
+    "text": "Why “the moon”\nI called this the moon scenario, because of the shape of what’s pairing up: two complementary crescents — the \\cos^2\\theta share of one point, the \\sin^2\\theta share of the next — that only complete each other, into a full convex combination, when you look at both halves together. Neither half alone is the whole picture; you need the linked pair."
+  },
+  {
+    "objectID": "posts/the-moon/index.html#where-it-actually-leads",
+    "href": "posts/the-moon/index.html#where-it-actually-leads",
+    "title": "Chapter 1: The Moon",
+    "section": "Where it actually leads",
+    "text": "Where it actually leads\nChained all the way through the grid, this gives a real, general fact: certain sums built from |f_N(s)|^2 are bounded below by the value they’d take at u=0, via nothing but Jensen’s inequality applied ray by ray. That’s a genuine result, not a numerical observation — and it was the first real technique of this project, eight months before the spiral picture in Chapter 2 gave the same underlying question a very different geometric face.\nWhat it isn’t is a proof that the bound is ever strict — that the inequality can’t secretly be an equality at some u \\ne 0. My own notes from that week end without answering that, mid-equation, on an unfinished attempt to compare C(t,y,N) against M(t,y,N) term by term. I’m leaving that exactly as honest as it actually was: a real piece of leverage, and an open door I didn’t walk through before moving on to the next idea.\n\nNext: Chapter 2 — Finding the Spiral, December 2024."
   }
 ]

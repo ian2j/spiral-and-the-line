@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-08-16">
+<meta name="description" content="Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what three years of trying to make a dent in it with an LLM at my side has actually looked like.">
 
-<title>About &amp; Roadmap – The Spiral and the Line</title>
+<title>Prologue: Why This, Why Alone, Why With an LLM – The Spiral and the Line</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,27 +31,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b471638a93ca0bb9f949d767bf091def.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b471638a93ca0bb9f949d767bf091def.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,13 +80,56 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="About &amp; Roadmap – The Spiral and the Line">
-<meta property="og:description" content="A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Prologue: Why This, Why Alone, Why With an LLM – The Spiral and the Line">
+<meta property="og:description" content="Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what three years of trying to make a dent in it with an LLM at my side has actually looked like.">
 <meta property="og:site_name" content="The Spiral and the Line">
-<meta name="twitter:title" content="About &amp; Roadmap – The Spiral and the Line">
-<meta name="twitter:description" content="A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included.">
+<meta name="twitter:title" content="Prologue: Why This, Why Alone, Why With an LLM – The Spiral and the Line">
+<meta name="twitter:description" content="Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what three years of trying to make a dent in it with an LLM at my side has actually looked like.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -253,11 +298,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">The Spiral and the Line</span>
     </a>
   </div>
@@ -268,11 +313,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About &amp; Roadmap</span></a>
   </li>  
 </ul>
@@ -291,7 +336,38 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Prologue: Why This, Why Alone, Why With an LLM</h1>
+                  <div>
+        <div class="description">
+          Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what three years of trying to make a dent in it with an LLM at my side has actually looked like.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">chapter</div>
+                <div class="quarto-category">prologue</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 16, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -299,73 +375,43 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-this-is" id="toc-what-this-is" class="nav-link active" data-scroll-target="#what-this-is">What this is</a></li>
-  <li><a href="#who-its-for" id="toc-who-its-for" class="nav-link" data-scroll-target="#who-its-for">Who it’s for</a></li>
-  <li><a href="#roadmap" id="toc-roadmap" class="nav-link" data-scroll-target="#roadmap">Roadmap</a></li>
-  <li><a href="#standalone-notes" id="toc-standalone-notes" class="nav-link" data-scroll-target="#standalone-notes">Standalone notes</a></li>
+  <li><a href="#what-the-riemann-hypothesis-actually-says" id="toc-what-the-riemann-hypothesis-actually-says" class="nav-link active" data-scroll-target="#what-the-riemann-hypothesis-actually-says">What the Riemann Hypothesis actually says</a></li>
+  <li><a href="#why-this-specifically" id="toc-why-this-specifically" class="nav-link" data-scroll-target="#why-this-specifically">Why this, specifically</a></li>
+  <li><a href="#why-with-an-llm" id="toc-why-with-an-llm" class="nav-link" data-scroll-target="#why-with-an-llm">Why with an LLM</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About &amp; Roadmap</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
 
-
-<section id="what-this-is" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-is">What this is</h2>
-<p>Three years of independent research into the Riemann zeta function, written up honestly. Not a proof of the Riemann Hypothesis — the odds of any independent effort resolving a 150-year-old open problem are close to zero, and this site says so plainly rather than around the edges.</p>
-<p>What it is instead: a documented account of repeatedly attacking the same obstruction from six different angles, in close collaboration with large language models, with real — if partial — technical results along the way. Some of those results stand on their own regardless of whether the central question ever closes: a geometric picture of how truncated zeta sums behave, an empirical regularity checked against 100,000 real zeros, an identity that looked like numerical coincidence until it turned out to be exact.</p>
-<p>The throughline is process over product. There’s no shortage of “I think I proved the Riemann Hypothesis” content online. There’s a real shortage of careful, transparent accounts of what multi-year independent mathematical research — especially AI-assisted research — actually looks like, dead ends included.</p>
+<p>In April of 2025 I was deep in a conversation with an LLM, working through what looked like a real argument. The setup: a certain quantity <span class="math inline">f_N(t)</span> decays like <span class="math inline">N^{2t-2}</span> almost everywhere, but at two special points it decays much faster — <span class="math inline">O(N^{-2})</span> instead. If <span class="math inline">f_N</span> is monotonic between those two points for large <span class="math inline">N</span>, a squeeze argument forces the <em>entire interval</em> between them down to that same fast decay rate. And since the generic behavior only matches that rate at an isolated point, the interval has no choice but to collapse — the two special points have to coincide.</p>
+<p>It was a nice argument. It was also wrong in one specific place, and I caught it:</p>
+<blockquote class="blockquote">
+<p><em>“I think your logic and reasoning mostly makes sense but I do notice one thing that is clearly wrong that you keep saying — you note that the generic decay rate of <span class="math inline">N^{2t-2}</span> is not <span class="math inline">-2</span> except when <span class="math inline">t=.5</span>. This is demonstrably false because the generic decay rate when <span class="math inline">t=.5</span> is <span class="math inline">N^{-1}</span>. In fact… if we were to allow <span class="math inline">t=0</span> then we would have that the generic decay rate for <span class="math inline">t=0</span> is <span class="math inline">N^{-2}</span>.”</em></p>
+</blockquote>
+<p>The LLM had the mechanism right and one exponent wrong. Fixing it didn’t weaken the argument — it strengthened it, by closing off an edge case where the “generic” and “enhanced” decay rates could have coincided somewhere in the middle of the interval instead of only at an endpoint. We rebuilt the proof from there.</p>
+<p>I’m telling you this story first because it’s the most honest way I know to describe what this project actually is: not “I asked an AI to solve the Riemann Hypothesis,” and not “I proved it myself and used a chatbot as a calculator,” but three years of a genuine back-and-forth, where the LLM does things I can’t — hold enormous amounts of mathematical machinery in working memory, draft a rigorous-looking proof in seconds, try ten reformulations in an afternoon — and I do things it doesn’t reliably do on its own, chiefly: notice when a specific claim is wrong, insist on numerical verification, and refuse to let “this looks right” stand in for “this is proven.”</p>
+<section id="what-the-riemann-hypothesis-actually-says" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-riemann-hypothesis-actually-says">What the Riemann Hypothesis actually says</h2>
+<p>Take the Riemann zeta function, <span class="math inline">\zeta(s) = \sum_{n=1}^{\infty} n^{-s}</span>, extended (via analytic continuation) to all complex <span class="math inline">s</span> except <span class="math inline">s=1</span>. It has infinitely many “trivial” zeros at the negative even integers, and infinitely many more “nontrivial” zeros scattered through the strip <span class="math inline">0 &lt; \mathrm{Re}(s) &lt; 1</span>. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line <span class="math inline">\mathrm{Re}(s) = \tfrac12</span>, the <em>critical line</em>. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions. It’s been open since 1859. It’s one of the seven Clay Millennium Problems, and the only one from Hilbert’s original 1900 list that’s still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.</p>
+<p>I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is three years of genuinely trying, from six different angles, with a documented trail of what worked, what didn’t, and — a few times — something that stood on its own regardless of whether the big question ever closes.</p>
 </section>
-<section id="who-its-for" class="level2">
-<h2 class="anchored" data-anchor-id="who-its-for">Who it’s for</h2>
-<p>Readers comfortable with complex analysis and Dirichlet series. Specialist knowledge of zeta-function machinery isn’t assumed — it gets built up the way the research itself built it up, piece by piece, over three years.</p>
+<section id="why-this-specifically" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-specifically">Why this, specifically</h2>
+<!-- IAN: this is the one section I can't honestly write for you — the actual pull toward this problem, what got you started in 2023, what keeps you coming back. Everything above and below is grounded in what's actually in three years of notes; this paragraph should be replaced with the real answer. -->
+<p><em>[A paragraph on what drew me to this problem specifically, and what kept me at it for three years, belongs here.]</em></p>
 </section>
-<section id="roadmap" class="level2">
-<h2 class="anchored" data-anchor-id="roadmap">Roadmap</h2>
-<p>The series follows the actual chronology of the research rather than a tidied-up logical order. Each entry below will link to its post as it’s written.</p>
-<p><strong>0 · Prologue — why this, why alone, why with an LLM</strong> <span class="status-badge done">posted</span></p>
-<p>What the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice. <a href="./posts/prologue/index.html">Read it</a>.</p>
-<p><strong>1 · The Moon (late 2023)</strong> <span class="status-badge done">posted</span></p>
-<p>The origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier. <a href="./posts/the-moon/index.html">Read it</a>.</p>
-<p><strong>2 · Finding the Spiral (Dec 2024)</strong> <span class="status-badge done">posted</span></p>
-<p>Where the project’s visual language is born — truncated zeta sums spiral toward a fixed center, and <code>M = ⌊t/π⌋</code> is the natural place to stop. See the <a href="./posts/spiral-toward-a-center/index.html">interactive figure</a>.</p>
-<p><strong>3 · The Only Special Value (2025 H1)</strong> <span class="status-badge">planned</span></p>
-<p>A stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series.</p>
-<p><strong>4 · Pre-tail and Tail (Sept–Oct 2025)</strong> <span class="status-badge">planned</span></p>
-<p>The cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros.</p>
-<p><strong>5 · Rigidity and Its Discontents (Dec 2025)</strong> <span class="status-badge">planned</span></p>
-<p>A deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma.</p>
-<p><strong>6 · Only σ = 1/2, Take Four (Feb 2026)</strong> <span class="status-badge">planned</span></p>
-<p>The tightest self-derived argument in the corpus, via the approximate functional equation — and a precise account of exactly which step is assumption rather than theorem.</p>
-<p><strong>7 · A Season of Reinvention (Mar–May 2026)</strong> <span class="status-badge">planned</span></p>
-<p>A stochastic functional equation, a Jensen-gap tipping point, and a pivot to classifying oscillatory arithmetic sums more generally — RH as one instance of a broader phenomenon.</p>
-<p><strong>8 · The Critical Line Path (Jun 2026 – present)</strong> <span class="status-badge done">posted</span></p>
-<p>A numerical match too good to be coincidence — and it wasn’t. See <a href="./posts/critical-line-path-identity/index.html">the writeup</a>.</p>
-<p><strong>9 · Where This Leaves Us</strong> <span class="status-badge">planned</span></p>
-<p>An honest accounting of what’s proved, what’s conjectural, and an open, specific invitation to readers who know their way around Euler–Maclaurin and Riemann–Siegel theory.</p>
-</section>
-<section id="standalone-notes" class="level2">
-<h2 class="anchored" data-anchor-id="standalone-notes">Standalone notes</h2>
-<p>A few pieces of this project stand on their own without the RH framing — a numerical regularity, a technique, a derivation. These get published independently of the chapter sequence as they’re finished.</p>
+<section id="why-with-an-llm" class="level2">
+<h2 class="anchored" data-anchor-id="why-with-an-llm">Why with an LLM</h2>
+<p>What I can describe precisely, because it’s all on the record: the shape of the collaboration changed as the tools did, but the division of labor has stayed remarkably consistent since the beginning. I bring the numerical intuition — decades of looking at these functions means I usually have a rough sense of <em>where</em> something interesting should be happening before I can say <em>why</em>. I insist on checking claims against real numbers: against the first 100,000 known nontrivial zeros, in one case. I catch the specific error, the way I did in April 2025, and a handful of other times across the notes this series draws from. The LLM brings breadth I don’t have — it can reach for a stationary-phase argument, a Poisson summation identity, or a result from a subfield I’ve never worked in, and draft it out fully formed in the time it takes me to describe the problem.</p>
+<p>Neither of us gets there alone. That’s not a hedge — it’s the actual finding of three years of trying. The chapters that follow are the record of it: six reformulations of the same underlying obstruction, most of them dead ends, a couple of them real.</p>
+<hr>
+<p><em>Next: <a href="../../posts/the-moon/index.html">Chapter 1 — The Moon</a>, where this all started in late 2023.</em></p>
 
 
 </section>

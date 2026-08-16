@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ian2j.github.io/spiral-and-the-line/posts/prologue/index.html</loc>
+    <lastmod>2026-08-16T08:14:21.082Z</lastmod>
+  </url>
+  <url>
     <loc>https://ian2j.github.io/spiral-and-the-line/posts/spiral-toward-a-center/index.html</loc>
-    <lastmod>2026-08-16T07:00:20.986Z</lastmod>
+    <lastmod>2026-08-16T08:16:28.027Z</lastmod>
   </url>
   <url>
     <loc>https://ian2j.github.io/spiral-and-the-line/index.html</loc>
@@ -10,10 +14,14 @@
   </url>
   <url>
     <loc>https://ian2j.github.io/spiral-and-the-line/about.html</loc>
-    <lastmod>2026-08-16T06:59:25.857Z</lastmod>
+    <lastmod>2026-08-16T08:16:17.851Z</lastmod>
   </url>
   <url>
     <loc>https://ian2j.github.io/spiral-and-the-line/posts/critical-line-path-identity/index.html</loc>
     <lastmod>2026-08-16T07:00:04.142Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ian2j.github.io/spiral-and-the-line/posts/the-moon/index.html</loc>
+    <lastmod>2026-08-16T08:16:01.207Z</lastmod>
   </url>
 </urlset>

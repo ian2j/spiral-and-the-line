@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-08-16">
+<meta name="description" content="Late 2023. The first real technique of this project — a grid of rays, a parity trick, and a convexity argument that pushed toward the critical line without quite closing the case.">
 
-<title>About &amp; Roadmap – The Spiral and the Line</title>
+<title>Chapter 1: The Moon – The Spiral and the Line</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,27 +31,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b471638a93ca0bb9f949d767bf091def.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b471638a93ca0bb9f949d767bf091def.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,13 +80,56 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="About &amp; Roadmap – The Spiral and the Line">
-<meta property="og:description" content="A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Chapter 1: The Moon – The Spiral and the Line">
+<meta property="og:description" content="Late 2023. The first real technique of this project — a grid of rays, a parity trick, and a convexity argument that pushed toward the critical line without quite closing the case.">
 <meta property="og:site_name" content="The Spiral and the Line">
-<meta name="twitter:title" content="About &amp; Roadmap – The Spiral and the Line">
-<meta name="twitter:description" content="A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included.">
+<meta name="twitter:title" content="Chapter 1: The Moon – The Spiral and the Line">
+<meta name="twitter:description" content="Late 2023. The first real technique of this project — a grid of rays, a parity trick, and a convexity argument that pushed toward the critical line without quite closing the case.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -253,11 +298,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">The Spiral and the Line</span>
     </a>
   </div>
@@ -268,11 +313,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About &amp; Roadmap</span></a>
   </li>  
 </ul>
@@ -291,7 +336,39 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Chapter 1: The Moon</h1>
+                  <div>
+        <div class="description">
+          Late 2023. The first real technique of this project — a grid of rays, a parity trick, and a convexity argument that pushed toward the critical line without quite closing the case.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">chapter</div>
+                <div class="quarto-category">jensen</div>
+                <div class="quarto-category">2023</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 16, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -299,73 +376,57 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-this-is" id="toc-what-this-is" class="nav-link active" data-scroll-target="#what-this-is">What this is</a></li>
-  <li><a href="#who-its-for" id="toc-who-its-for" class="nav-link" data-scroll-target="#who-its-for">Who it’s for</a></li>
-  <li><a href="#roadmap" id="toc-roadmap" class="nav-link" data-scroll-target="#roadmap">Roadmap</a></li>
-  <li><a href="#standalone-notes" id="toc-standalone-notes" class="nav-link" data-scroll-target="#standalone-notes">Standalone notes</a></li>
+  <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">The question</a></li>
+  <li><a href="#rays-in-a-grid" id="toc-rays-in-a-grid" class="nav-link" data-scroll-target="#rays-in-a-grid">Rays in a grid</a></li>
+  <li><a href="#a-parity-coincidence" id="toc-a-parity-coincidence" class="nav-link" data-scroll-target="#a-parity-coincidence">A parity coincidence</a></li>
+  <li><a href="#the-convexity-payoff" id="toc-the-convexity-payoff" class="nav-link" data-scroll-target="#the-convexity-payoff">The convexity payoff</a></li>
+  <li><a href="#why-the-moon" id="toc-why-the-moon" class="nav-link" data-scroll-target="#why-the-moon">Why “the moon”</a></li>
+  <li><a href="#where-it-actually-leads" id="toc-where-it-actually-leads" class="nav-link" data-scroll-target="#where-it-actually-leads">Where it actually leads</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About &amp; Roadmap</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
 
-
-<section id="what-this-is" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-is">What this is</h2>
-<p>Three years of independent research into the Riemann zeta function, written up honestly. Not a proof of the Riemann Hypothesis — the odds of any independent effort resolving a 150-year-old open problem are close to zero, and this site says so plainly rather than around the edges.</p>
-<p>What it is instead: a documented account of repeatedly attacking the same obstruction from six different angles, in close collaboration with large language models, with real — if partial — technical results along the way. Some of those results stand on their own regardless of whether the central question ever closes: a geometric picture of how truncated zeta sums behave, an empirical regularity checked against 100,000 real zeros, an identity that looked like numerical coincidence until it turned out to be exact.</p>
-<p>The throughline is process over product. There’s no shortage of “I think I proved the Riemann Hypothesis” content online. There’s a real shortage of careful, transparent accounts of what multi-year independent mathematical research — especially AI-assisted research — actually looks like, dead ends included.</p>
+<p><em>A note on notation before we start: the earliest files in this project use <span class="math inline">t</span> for the offset from the critical line and <span class="math inline">y</span> for the height — the reverse of the convention I’ve used ever since and will use for the rest of this series. I’ve translated the original 2023 notes into the later convention below: <span class="math inline">t</span> is the height, <span class="math inline">u</span> is the offset, <span class="math inline">s = \tfrac12 + u + it</span>.</em></p>
+<section id="the-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-question">The question</h2>
+<p>Take a partial sum of the alternating zeta series, <span class="math inline">f_N(s) = \sum_{n=1}^N (-1)^{n+1} n^{-s}</span>, and look at its squared modulus, <span class="math inline">|f_N(s)|^2</span>. Multiply the sum out against itself — every term against every other term — and you get a double sum, a <em>Cauchy product</em>, with one entry for every pair of indices. Group those entries by which term of the original series they came from, and you get something with a very specific structure: a <strong>grid</strong>, indexed by <span class="math inline">(l, n)</span> with <span class="math inline">1 \le l \le n</span>, where each cell corresponds to the product <span class="math inline">l \cdot (n-l+1)</span>.</p>
+<p>The question I was chasing in late 2023 was simple to state and hard to answer: can this grid tell you, on its own — before you know anything about actual zeros — that <span class="math inline">|f_N(s)|^2</span> is always at least as large as it would be with <span class="math inline">u=0</span>, i.e.&nbsp;right at the critical line? If that’s true for every <span class="math inline">N</span>, in the limit, you’ve got real leverage on where zeros can live.</p>
 </section>
-<section id="who-its-for" class="level2">
-<h2 class="anchored" data-anchor-id="who-its-for">Who it’s for</h2>
-<p>Readers comfortable with complex analysis and Dirichlet series. Specialist knowledge of zeta-function machinery isn’t assumed — it gets built up the way the research itself built it up, piece by piece, over three years.</p>
+<section id="rays-in-a-grid" class="level2">
+<h2 class="anchored" data-anchor-id="rays-in-a-grid">Rays in a grid</h2>
+<p>Here’s the structural fact that makes the grid tractable. Every pair <span class="math inline">(l, n-l+1)</span> has a greatest common divisor — call it <span class="math inline">m</span> — and once you divide it out, <span class="math inline">l = m f_1</span> and <span class="math inline">n - l + 1 = m f_2</span> for some coprime pair <span class="math inline">(f_1, f_2)</span>. So instead of thinking of the grid as <span class="math inline">N^2/2</span> independent cells, think of it as a bundle of <strong>rays</strong>: one ray for every coprime pair <span class="math inline">(f_1, f_2)</span>, and along each ray, <span class="math inline">m = 1, 2, 3, \dots</span> walks outward.</p>
+<p>The reason this matters: the oscillatory phase attached to cell <span class="math inline">(l, n-l+1)</span> is <span class="math inline">\theta = -\tfrac{t}{2}\log\!\big(l/(n-l+1)\big) = -\tfrac{t}{2}\log(f_1/f_2)</span> — and that depends only on the <em>direction</em> of the ray, <span class="math inline">f_1/f_2</span>, not on how far out along it you are. Walk from <span class="math inline">m</span> to <span class="math inline">m+1</span> along a fixed ray and the phase doesn’t move at all. Only the magnitude changes, growing like <span class="math inline">(m^2 f_1 f_2)^{-(\text{something})}</span>.</p>
 </section>
-<section id="roadmap" class="level2">
-<h2 class="anchored" data-anchor-id="roadmap">Roadmap</h2>
-<p>The series follows the actual chronology of the research rather than a tidied-up logical order. Each entry below will link to its post as it’s written.</p>
-<p><strong>0 · Prologue — why this, why alone, why with an LLM</strong> <span class="status-badge done">posted</span></p>
-<p>What the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice. <a href="./posts/prologue/index.html">Read it</a>.</p>
-<p><strong>1 · The Moon (late 2023)</strong> <span class="status-badge done">posted</span></p>
-<p>The origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier. <a href="./posts/the-moon/index.html">Read it</a>.</p>
-<p><strong>2 · Finding the Spiral (Dec 2024)</strong> <span class="status-badge done">posted</span></p>
-<p>Where the project’s visual language is born — truncated zeta sums spiral toward a fixed center, and <code>M = ⌊t/π⌋</code> is the natural place to stop. See the <a href="./posts/spiral-toward-a-center/index.html">interactive figure</a>.</p>
-<p><strong>3 · The Only Special Value (2025 H1)</strong> <span class="status-badge">planned</span></p>
-<p>A stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series.</p>
-<p><strong>4 · Pre-tail and Tail (Sept–Oct 2025)</strong> <span class="status-badge">planned</span></p>
-<p>The cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros.</p>
-<p><strong>5 · Rigidity and Its Discontents (Dec 2025)</strong> <span class="status-badge">planned</span></p>
-<p>A deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma.</p>
-<p><strong>6 · Only σ = 1/2, Take Four (Feb 2026)</strong> <span class="status-badge">planned</span></p>
-<p>The tightest self-derived argument in the corpus, via the approximate functional equation — and a precise account of exactly which step is assumption rather than theorem.</p>
-<p><strong>7 · A Season of Reinvention (Mar–May 2026)</strong> <span class="status-badge">planned</span></p>
-<p>A stochastic functional equation, a Jensen-gap tipping point, and a pivot to classifying oscillatory arithmetic sums more generally — RH as one instance of a broader phenomenon.</p>
-<p><strong>8 · The Critical Line Path (Jun 2026 – present)</strong> <span class="status-badge done">posted</span></p>
-<p>A numerical match too good to be coincidence — and it wasn’t. See <a href="./posts/critical-line-path-identity/index.html">the writeup</a>.</p>
-<p><strong>9 · Where This Leaves Us</strong> <span class="status-badge">planned</span></p>
-<p>An honest accounting of what’s proved, what’s conjectural, and an open, specific invitation to readers who know their way around Euler–Maclaurin and Riemann–Siegel theory.</p>
+<section id="a-parity-coincidence" class="level2">
+<h2 class="anchored" data-anchor-id="a-parity-coincidence">A parity coincidence</h2>
+<p>The original series carries a sign, <span class="math inline">(-1)^{n+1}</span>, and that sign has to land somewhere once everything gets folded into cosines and sines. It turns out to land on parity: whether <span class="math inline">m</span> is odd or even at a given point on a ray determines — cleanly, mechanically, via whether <span class="math inline">f_1, f_2</span> are themselves odd or even — whether that cell’s contribution comes in as a <span class="math inline">\cos^2\theta</span> term or a <span class="math inline">\sin^2\theta</span> term. Walk one more step along the ray, from <span class="math inline">m</span> to <span class="math inline">m+1</span>, and the label <em>flips</em>.</p>
+<p>So a ray doesn’t alternate between two different phases — it alternates between two different <strong>labels on the same fixed phase</strong>, one step at a time: <span class="math inline">\cos^2\theta</span> at <span class="math inline">m</span>, <span class="math inline">\sin^2\theta</span> at <span class="math inline">m+1</span>, <span class="math inline">\cos^2\theta</span> at <span class="math inline">m+2</span>, and so on.</p>
 </section>
-<section id="standalone-notes" class="level2">
-<h2 class="anchored" data-anchor-id="standalone-notes">Standalone notes</h2>
-<p>A few pieces of this project stand on their own without the RH framing — a numerical regularity, a technique, a derivation. These get published independently of the chapter sequence as they’re finished.</p>
+<section id="the-convexity-payoff" class="level2">
+<h2 class="anchored" data-anchor-id="the-convexity-payoff">The convexity payoff</h2>
+<p>This is where it turns into an actual argument rather than bookkeeping. Since <span class="math inline">\cos^2\theta + \sin^2\theta = 1</span>, a consecutive pair of points on a ray — one labeled <span class="math inline">\cos^2\theta</span>, the other <span class="math inline">\sin^2\theta</span> — is <em>literally</em> a convex combination of two values of the function</p>
+<p><span class="math display">
+f(x) = \tfrac12\left(x^{-(1/2-u)} + x^{-(1/2+u)}\right),
+</span></p>
+<p>evaluated at <span class="math inline">x = m^2 f_1 f_2</span> and <span class="math inline">x = (m+1)^2 f_1 f_2</span>. And <span class="math inline">f</span> is convex on <span class="math inline">(0,\infty)</span> for any real <span class="math inline">u</span> — three lines of calculus confirm <span class="math inline">f''(x) &gt; 0</span>. Jensen’s inequality then says the weighted combination you actually have is bounded below by <span class="math inline">f</span> evaluated at the weighted average of the two <span class="math inline">x</span>-values. Do this for both the <span class="math inline">\cos^2\theta</span>-first and <span class="math inline">\sin^2\theta</span>-first pairings on the same pair of points, average the two resulting bounds, and apply Jensen a second time: everything collapses to a clean lower bound of the form <span class="math inline">\big(\text{a weighted average of } m^2 \text{ and } (m+1)^2\big)^{-1/2}</span> — exactly the value you’d get by setting <span class="math inline">u = 0</span> from the start.</p>
+</section>
+<section id="why-the-moon" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-moon">Why “the moon”</h2>
+<p>I called this the <em>moon</em> scenario, because of the shape of what’s pairing up: two complementary crescents — the <span class="math inline">\cos^2\theta</span> share of one point, the <span class="math inline">\sin^2\theta</span> share of the next — that only complete each other, into a full convex combination, when you look at both halves together. Neither half alone is the whole picture; you need the linked pair.</p>
+</section>
+<section id="where-it-actually-leads" class="level2">
+<h2 class="anchored" data-anchor-id="where-it-actually-leads">Where it actually leads</h2>
+<p>Chained all the way through the grid, this gives a real, general fact: certain sums built from <span class="math inline">|f_N(s)|^2</span> are bounded below by the value they’d take at <span class="math inline">u=0</span>, via nothing but Jensen’s inequality applied ray by ray. That’s a genuine result, not a numerical observation — and it was the first real technique of this project, eight months before the spiral picture in <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a> gave the same underlying question a very different geometric face.</p>
+<p>What it isn’t is a proof that the bound is ever <em>strict</em> — that the inequality can’t secretly be an equality at some <span class="math inline">u \ne 0</span>. My own notes from that week end without answering that, mid-equation, on an unfinished attempt to compare <span class="math inline">C(t,y,N)</span> against <span class="math inline">M(t,y,N)</span> term by term. I’m leaving that exactly as honest as it actually was: a real piece of leverage, and an open door I didn’t walk through before moving on to the next idea.</p>
+<hr>
+<p><em>Next: <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2 — Finding the Spiral</a>, December 2024.</em></p>
 
 
 </section>
