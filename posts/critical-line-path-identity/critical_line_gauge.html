@@ -1,0 +1,323 @@
+<title>Critical Line Gauge</title>
+<style>
+  :root {
+    --bg: #eef1f5; --surface: #ffffff; --surface-2: #f2f4f8; --border: #d6dce3;
+    --text: #141b24; --text-dim: #5c6779; --text-faint: #8b93a1;
+    --accent-lock: #0e8f7c; --accent-lock-soft: #0e8f7c22;
+    --accent-drift: #c15f28; --accent-drift-soft: #c15f2822;
+    --accent-theory: #4a6fa5;
+    --grid-line: #e3e7ed; --grid-line-strong: #cdd4dc;
+    --shadow: 0 1px 2px rgba(20, 27, 36, 0.06), 0 8px 24px rgba(20, 27, 36, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+      --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+      --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+      --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+      --accent-theory: #7fa6e8;
+      --grid-line: #1c242c; --grid-line-strong: #29333d;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+    --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+    --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+    --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+    --accent-theory: #7fa6e8;
+    --grid-line: #1c242c; --grid-line-strong: #29333d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  .display { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; }
+
+  .app { max-width: 900px; margin: 0 auto; padding: 1.75rem 1.25rem 2.25rem; }
+
+  header.nameplate { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.9rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
+  header.nameplate h1 { font-size: 1.4rem; margin: 0 0 0.2rem; font-weight: 600; }
+  header.nameplate p { margin: 0; color: var(--text-dim); font-size: 0.86rem; max-width: 48ch; }
+  header.nameplate .instrument-id { text-align: right; color: var(--text-faint); font-size: 0.68rem;
+    letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.5; }
+
+  .panel { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; }
+
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 0.9rem; }
+  @media (max-width: 560px) { .controls { grid-template-columns: 1fr; } }
+
+  .fader-readout { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+  .fader-readout .val { font-size: 0.98rem; }
+  .fader-readout .val .num { font-weight: 600; }
+  .rail-label { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 0.4rem; }
+
+  input[type="range"] { -webkit-appearance: none; width: 100%; height: 26px; background: transparent; margin: 0.2rem 0 0.1rem; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6px;
+    border-radius: 50%; background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  input[type="range"]::-moz-range-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  .fader-ticks { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 0.63rem; padding: 0 2px; }
+
+  .scope { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: var(--shadow); aspect-ratio: 1 / 1; overflow: hidden; }
+  .scope canvas { width: 100%; height: 100%; display: block; }
+  .legend { position: absolute; top: 0.65rem; left: 0.8rem; font-size: 0.7rem; display: flex; flex-direction: column; gap: 0.28rem; }
+  .legend .row { display: flex; align-items: center; gap: 0.4rem; }
+  .legend .swatch { width: 13px; height: 2.5px; }
+  .status-chip { position: absolute; top: 0.65rem; right: 0.8rem; font-size: 0.66rem; letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+    display: flex; align-items: center; gap: 0.35rem; }
+  .status-chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  .telemetry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 0.75rem; }
+  @media (max-width: 480px) { .telemetry { grid-template-columns: repeat(1, 1fr); } }
+  .telemetry .cell { background: var(--surface-2); padding: 0.55rem 0.7rem; }
+  .telemetry .cell .k { font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.12rem; }
+  .telemetry .cell .v { font-size: 0.92rem; }
+
+  .caption { color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0.8rem 0 0; }
+</style>
+
+<div class="app">
+  <header class="nameplate">
+    <div>
+      <h1 class="display">Critical Line Gauge</h1>
+      <p>g&prime;(u,t)/g(u,t), computed exactly, next to the closed-form prediction. Drag t and watch them converge.</p>
+    </div>
+    <div class="instrument-id mono">g(u,t) = f(&half;&minus;u+it)&middot;f(&half;+u+it)</div>
+  </header>
+
+  <div class="panel">
+    <div class="controls">
+      <div>
+        <p class="rail-label">Height t</p>
+        <div class="fader-readout"><span class="val display">t = <span class="num mono" id="t-readout"></span></span></div>
+        <input type="range" id="t-slider" min="0" max="1" step="0.002" value="0.45" aria-label="height t, log scale">
+        <div class="fader-ticks mono"><span>t=20</span><span>t=3000</span></div>
+      </div>
+      <div>
+        <p class="rail-label">Offset u</p>
+        <div class="fader-readout"><span class="val display">u = <span class="num mono" id="u-readout"></span></span></div>
+        <input type="range" id="u-slider" min="0.02" max="0.4" step="0.005" value="0.1" aria-label="offset u">
+        <div class="fader-ticks mono"><span>0.02</span><span>0.40</span></div>
+      </div>
+    </div>
+
+    <div class="scope">
+      <canvas id="plot" width="900" height="900"></canvas>
+      <div class="legend mono">
+        <div class="row"><span class="swatch" style="background: var(--accent-drift);"></span><span>g&prime;/g, exact</span></div>
+        <div class="row"><span class="swatch" style="background: var(--accent-theory);"></span><span>closed-form prediction</span></div>
+      </div>
+      <div class="status-chip mono" id="status-chip"><span class="dot" id="status-dot"></span><span id="status-text"></span></div>
+    </div>
+
+    <div class="telemetry mono">
+      <div class="cell"><div class="k">cosine similarity</div><div class="v" id="tel-cos"></div></div>
+      <div class="cell"><div class="k">|g&prime;/g|</div><div class="v" id="tel-mag1"></div></div>
+      <div class="cell"><div class="k">|prediction|</div><div class="v" id="tel-mag2"></div></div>
+    </div>
+
+    <p class="caption">Both vectors are the exact quantities from the notebook: f(s) is the real truncated sum, differentiated exactly; the prediction comes from &minus;&chi;&prime;(s&minus;)/&chi;(s&minus;) + 2&middot;Re[f<sub>&sigma;</sub>(s+)/f(s+)], using the true digamma function, not an approximation. As t grows the two arrows converge &mdash; that convergence rate is the approximate functional equation's own error, not a separate mystery.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var tSlider = document.getElementById("t-slider");
+  var uSlider = document.getElementById("u-slider");
+  var tReadout = document.getElementById("t-readout");
+  var uReadout = document.getElementById("u-readout");
+  var canvas = document.getElementById("plot");
+  var ctx = canvas.getContext("2d");
+  var statusDot = document.getElementById("status-dot");
+  var statusText = document.getElementById("status-text");
+  var telCos = document.getElementById("tel-cos");
+  var telMag1 = document.getElementById("tel-mag1");
+  var telMag2 = document.getElementById("tel-mag2");
+
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  // ---- complex helpers: numbers as [re, im] ----
+  function cadd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
+  function csub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+  function cmul(a, b) { return [a[0]*b[0] - a[1]*b[1], a[0]*b[1] + a[1]*b[0]]; }
+  function cdiv(a, b) { var d = b[0]*b[0] + b[1]*b[1]; return [(a[0]*b[0]+a[1]*b[1])/d, (a[1]*b[0]-a[0]*b[1])/d]; }
+  function cscale(a, k) { return [a[0]*k, a[1]*k]; }
+  function cre(a) { return a[0]; }
+
+  function npow(n, s) {
+    // n^{-s} for real n>0, complex s
+    var lg = Math.log(n);
+    var mag = Math.exp(-s[0] * lg);
+    var ang = -s[1] * lg;
+    return [mag * Math.cos(ang), mag * Math.sin(ang)];
+  }
+
+  function cdigamma(zr, zi) {
+    var re = zr, im = zi;
+    var sumRe = 0, sumIm = 0;
+    while (re < 10) {
+      var denom = re*re + im*im;
+      sumRe -= re/denom;
+      sumIm -= -im/denom;
+      re += 1;
+    }
+    var mag = Math.sqrt(re*re + im*im);
+    var ang = Math.atan2(im, re);
+    var lnZr = Math.log(mag), lnZi = ang;
+    var invZ = [re/(re*re+im*im), -im/(re*re+im*im)];
+    var invZ2 = cmul(invZ, invZ);
+    var invZ4 = cmul(invZ2, invZ2);
+    var invZ6 = cmul(invZ4, invZ2);
+    var resRe = lnZr - 0.5*invZ[0] - (1/12)*invZ2[0] + (1/120)*invZ4[0] - (1/252)*invZ6[0];
+    var resIm = lnZi - 0.5*invZ[1] - (1/12)*invZ2[1] + (1/120)*invZ4[1] - (1/252)*invZ6[1];
+    return [resRe + sumRe, resIm + sumIm];
+  }
+
+  function Mof(t) { return Math.max(1, Math.floor(t / Math.PI)); }
+
+  function f(s, t) {
+    var M = Mof(t);
+    var acc = [0, 0];
+    for (var n = 1; n <= M; n++) acc = cadd(acc, npow(n, s));
+    var endpoint = cscale(npow(M + 1, s), 0.5);
+    return cadd(acc, endpoint);
+  }
+
+  function fSigma(s, t) {
+    var M = Mof(t);
+    var acc = [0, 0];
+    for (var n = 1; n <= M; n++) acc = cadd(acc, cscale(npow(n, s), -Math.log(n)));
+    var endpoint = cscale(npow(M + 1, s), -0.5 * Math.log(M + 1));
+    return cadd(acc, endpoint);
+  }
+
+  function chiLogDerivative(s) {
+    // log(pi) - 0.5*psi((1-s)/2) - 0.5*psi(s/2)
+    var a = [(1 - s[0]) / 2, -s[1] / 2];
+    var b = [s[0] / 2, s[1] / 2];
+    var psiA = cdigamma(a[0], a[1]);
+    var psiB = cdigamma(b[0], b[1]);
+    var lnPi = Math.log(Math.PI);
+    return [lnPi - 0.5*psiA[0] - 0.5*psiB[0], -0.5*psiA[1] - 0.5*psiB[1]];
+  }
+
+  function render() {
+    var slider01 = parseFloat(tSlider.value);
+    var t = Math.exp(Math.log(20) + slider01 * (Math.log(3000) - Math.log(20)));
+    var u = parseFloat(uSlider.value);
+
+    tReadout.textContent = t.toFixed(1);
+    uReadout.textContent = u.toFixed(3);
+
+    var sMinus = [0.5 - u, t];
+    var sPlus = [0.5 + u, t];
+
+    var fm = f(sMinus, t), fp = f(sPlus, t);
+    var fsm = fSigma(sMinus, t), fsp = fSigma(sPlus, t);
+
+    var g = cmul(fm, fp);
+    var gPrime = cadd(cscale(cmul(fsm, fp), -1), cmul(fm, fsp));
+    var qActual = cdiv(gPrime, g);
+
+    var chiLD = chiLogDerivative(sMinus);
+    var ratio = cdiv(fsp, fp);
+    var qTheory = cadd(cscale(chiLD, -1), [2 * ratio[0], 0]);
+
+    var mag1 = Math.hypot(qActual[0], qActual[1]);
+    var mag2 = Math.hypot(qTheory[0], qTheory[1]);
+    var dot = qActual[0]*qTheory[0] + qActual[1]*qTheory[1];
+    var cosSim = dot / (mag1 * mag2);
+
+    telCos.textContent = cosSim.toFixed(8);
+    telMag1.textContent = mag1.toFixed(4);
+    telMag2.textContent = mag2.toFixed(4);
+
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+    var tight = cosSim > 0.9999;
+    statusDot.style.background = tight ? lockColor : driftColor;
+    statusText.textContent = tight ? "TIGHT MATCH" : "CONVERGING";
+    statusText.style.color = tight ? lockColor : driftColor;
+    document.getElementById("status-chip").style.borderColor = tight ? lockColor : driftColor;
+
+    draw(qActual, qTheory);
+  }
+
+  function draw(qActual, qTheory) {
+    var w = canvas.width, h = canvas.height;
+    var bg = cssVar("--surface");
+    var gridLine = cssVar("--grid-line");
+    var gridStrong = cssVar("--grid-line-strong");
+    var textFaint = cssVar("--text-faint");
+    var driftColor = cssVar("--accent-drift");
+    var theoryColor = cssVar("--accent-theory");
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    var maxAbs = Math.max(0.1, Math.abs(qActual[0]), Math.abs(qActual[1]), Math.abs(qTheory[0]), Math.abs(qTheory[1]));
+    var span = maxAbs * 2.4;
+    var scale = (w * 0.42) / span;
+    var cx = w / 2, cy = h / 2;
+
+    function toScreen(p) { return [cx + p[0] * scale, cy - p[1] * scale]; }
+
+    ctx.strokeStyle = gridLine;
+    ctx.lineWidth = 1;
+    for (var r = 1; r <= 4; r++) {
+      var rr = (span / 2) * (r / 4) * scale;
+      ctx.beginPath(); ctx.arc(cx, cy, rr, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath();
+    ctx.moveTo(0, cy); ctx.lineTo(w, cy);
+    ctx.moveTo(cx, 0); ctx.lineTo(cx, h);
+    ctx.stroke();
+
+    function arrow(to, color, widthPx) {
+      var a = toScreen([0, 0]), b = toScreen(to);
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.lineWidth = widthPx;
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+      var ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+      var headLen = 11;
+      ctx.beginPath();
+      ctx.moveTo(b[0], b[1]);
+      ctx.lineTo(b[0] - headLen * Math.cos(ang - Math.PI / 7), b[1] - headLen * Math.sin(ang - Math.PI / 7));
+      ctx.lineTo(b[0] - headLen * Math.cos(ang + Math.PI / 7), b[1] - headLen * Math.sin(ang + Math.PI / 7));
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // draw theory first (thicker, behind), then actual (thinner, in front) so both are visible when overlapping
+    arrow(qTheory, theoryColor, 5);
+    arrow(qActual, driftColor, 2.2);
+  }
+
+  tSlider.addEventListener("input", render);
+  uSlider.addEventListener("input", render);
+  window.addEventListener("resize", render);
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+  }
+
+  render();
+})();
+</script>

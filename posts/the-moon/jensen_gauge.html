@@ -1,0 +1,280 @@
+<title>Jensen Gauge</title>
+<style>
+  :root {
+    --bg: #eef1f5; --surface: #ffffff; --surface-2: #f2f4f8; --border: #d6dce3;
+    --text: #141b24; --text-dim: #5c6779; --text-faint: #8b93a1;
+    --accent-lock: #0e8f7c; --accent-lock-soft: #0e8f7c22;
+    --accent-drift: #c15f28; --accent-drift-soft: #c15f2822;
+    --grid-line: #e3e7ed; --grid-line-strong: #cdd4dc;
+    --shadow: 0 1px 2px rgba(20, 27, 36, 0.06), 0 8px 24px rgba(20, 27, 36, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+      --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+      --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+      --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+      --grid-line: #1c242c; --grid-line-strong: #29333d;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+    --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+    --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+    --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+    --grid-line: #1c242c; --grid-line-strong: #29333d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  .display { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; }
+
+  .app { max-width: 900px; margin: 0 auto; padding: 1.75rem 1.25rem 2.25rem; }
+
+  header.nameplate { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.9rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
+  header.nameplate h1 { font-size: 1.4rem; margin: 0 0 0.2rem; font-weight: 600; }
+  header.nameplate p { margin: 0; color: var(--text-dim); font-size: 0.86rem; max-width: 48ch; }
+  header.nameplate .instrument-id { text-align: right; color: var(--text-faint); font-size: 0.68rem;
+    letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.5; }
+
+  .panel { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; }
+
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 0.9rem; }
+  @media (max-width: 560px) { .controls { grid-template-columns: 1fr; } }
+
+  .fader-readout { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+  .fader-readout .val { font-size: 0.98rem; }
+  .fader-readout .val .num { font-weight: 600; }
+  .rail-label { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 0.4rem; }
+
+  input[type="range"] { -webkit-appearance: none; width: 100%; height: 26px; background: transparent; margin: 0.2rem 0 0.1rem; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6px;
+    border-radius: 50%; background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  input[type="range"]::-moz-range-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  .fader-ticks { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 0.63rem; padding: 0 2px; }
+
+  .scope { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: var(--shadow); aspect-ratio: 16 / 10; overflow: hidden; }
+  .scope canvas { width: 100%; height: 100%; display: block; }
+  .legend { position: absolute; top: 0.65rem; left: 0.8rem; font-size: 0.7rem; display: flex; flex-direction: column; gap: 0.28rem; }
+  .legend .row { display: flex; align-items: center; gap: 0.4rem; }
+  .legend .swatch { width: 13px; height: 2.5px; }
+  .legend .swatch.dot { width: 8px; height: 8px; border-radius: 50%; }
+  .status-chip { position: absolute; top: 0.65rem; right: 0.8rem; font-size: 0.66rem; letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+    display: flex; align-items: center; gap: 0.35rem; }
+  .status-chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  .telemetry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 0.75rem; }
+  @media (max-width: 480px) { .telemetry { grid-template-columns: repeat(1, 1fr); } }
+  .telemetry .cell { background: var(--surface-2); padding: 0.55rem 0.7rem; }
+  .telemetry .cell .k { font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.12rem; }
+  .telemetry .cell .v { font-size: 0.92rem; }
+
+  .caption { color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0.8rem 0 0; }
+</style>
+
+<div class="app">
+  <header class="nameplate">
+    <div>
+      <h1 class="display">Jensen Gauge</h1>
+      <p>The move at the heart of Chapter 1: a weighted average of two points on a convex curve never falls below the curve at the weighted-average position.</p>
+    </div>
+    <div class="instrument-id mono">f(x) = &half;(x<sup>&minus;(&half;&minus;u)</sup>+x<sup>&minus;(&half;+u)</sup>)</div>
+  </header>
+
+  <div class="panel">
+    <div class="controls">
+      <div>
+        <p class="rail-label">Mixing weight &lambda; (&asymp; cos&sup2;&theta;)</p>
+        <div class="fader-readout"><span class="val display">&lambda; = <span class="num mono" id="lambda-readout"></span></span></div>
+        <input type="range" id="lambda-slider" min="0" max="1" step="0.01" value="0.5" aria-label="mixing weight lambda">
+        <div class="fader-ticks mono"><span>all of x&#8321;</span><span>all of x&#8322;</span></div>
+      </div>
+      <div>
+        <p class="rail-label">Curve shape u</p>
+        <div class="fader-readout"><span class="val display">u = <span class="num mono" id="u-readout"></span></span></div>
+        <input type="range" id="u-slider" min="0" max="0.45" step="0.01" value="0.2" aria-label="offset u shaping the curve">
+        <div class="fader-ticks mono"><span>0.00</span><span>0.45</span></div>
+      </div>
+    </div>
+
+    <div class="scope">
+      <canvas id="plot" width="1200" height="750"></canvas>
+      <div class="legend mono">
+        <div class="row"><span class="swatch" style="background: var(--text-dim);"></span><span>f(x), convex</span></div>
+        <div class="row"><span class="swatch dot" style="background: var(--accent-drift);"></span><span>weighted average of f(x&#8321;), f(x&#8322;)</span></div>
+        <div class="row"><span class="swatch dot" style="background: var(--accent-lock);"></span><span>f at weighted average of x&#8321;, x&#8322;</span></div>
+      </div>
+      <div class="status-chip mono" id="status-chip"><span class="dot" id="status-dot"></span><span id="status-text"></span></div>
+    </div>
+
+    <div class="telemetry mono">
+      <div class="cell"><div class="k">weighted avg of f</div><div class="v" id="tel-lhs"></div></div>
+      <div class="cell"><div class="k">f of weighted avg</div><div class="v" id="tel-rhs"></div></div>
+      <div class="cell"><div class="k">jensen gap</div><div class="v" id="tel-gap"></div></div>
+    </div>
+
+    <p class="caption">x&#8321;=4 and x&#8322;=9 stand in for m&sup2;f&#8321;f&#8322; and (m+1)&sup2;f&#8321;f&#8322; &mdash; two consecutive points on one ray of Chapter 1's grid. The alternating sign trick means one of them arrives weighted by cos&sup2;&theta;, the other by sin&sup2;&theta; &mdash; here abstracted to a single free weight &lambda;. The gap between the amber and teal dots never goes negative, for any &lambda; or any u: that's Jensen's inequality doing real work, on every ray, everywhere in the grid.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var lambdaSlider = document.getElementById("lambda-slider");
+  var uSlider = document.getElementById("u-slider");
+  var lambdaReadout = document.getElementById("lambda-readout");
+  var uReadout = document.getElementById("u-readout");
+  var canvas = document.getElementById("plot");
+  var ctx = canvas.getContext("2d");
+  var statusDot = document.getElementById("status-dot");
+  var statusText = document.getElementById("status-text");
+  var telLhs = document.getElementById("tel-lhs");
+  var telRhs = document.getElementById("tel-rhs");
+  var telGap = document.getElementById("tel-gap");
+
+  var X1 = 4, X2 = 9;
+
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function f(x, u) {
+    return 0.5 * (Math.pow(x, -(0.5 - u)) + Math.pow(x, -(0.5 + u)));
+  }
+
+  function render() {
+    var lambda = parseFloat(lambdaSlider.value);
+    var u = parseFloat(uSlider.value);
+    lambdaReadout.textContent = lambda.toFixed(2);
+    uReadout.textContent = u.toFixed(2);
+
+    var lhs = lambda * f(X1, u) + (1 - lambda) * f(X2, u);
+    var xAvg = lambda * X1 + (1 - lambda) * X2;
+    var rhs = f(xAvg, u);
+    var gap = lhs - rhs;
+
+    telLhs.textContent = lhs.toFixed(4);
+    telRhs.textContent = rhs.toFixed(4);
+    telGap.textContent = gap.toFixed(4);
+
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+    var ok = gap >= -1e-9;
+    statusDot.style.background = ok ? lockColor : driftColor;
+    statusText.textContent = ok ? "GAP ≥ 0" : "VIOLATED";
+    statusText.style.color = ok ? lockColor : driftColor;
+    document.getElementById("status-chip").style.borderColor = ok ? lockColor : driftColor;
+
+    draw(u, lambda, xAvg, lhs, rhs);
+  }
+
+  function draw(u, lambda, xAvg, lhs, rhs) {
+    var w = canvas.width, h = canvas.height;
+    var bg = cssVar("--surface");
+    var gridLine = cssVar("--grid-line");
+    var gridStrong = cssVar("--grid-line-strong");
+    var textFaint = cssVar("--text-faint");
+    var textDim = cssVar("--text-dim");
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    var padL = 55, padR = 25, padT = 25, padB = 45;
+    var plotW = w - padL - padR, plotH = h - padT - padB;
+
+    var xMin = 2, xMax = 11;
+    var yMax = f(xMin, u) * 1.1;
+    var yMin = 0;
+
+    function xForX(x) { return padL + (x - xMin) / (xMax - xMin) * plotW; }
+    function yForY(y) { return padT + (1 - (y - yMin) / (yMax - yMin)) * plotH; }
+
+    ctx.strokeStyle = gridLine;
+    ctx.lineWidth = 1;
+    for (var gx = 0; gx <= 9; gx++) {
+      var xx = padL + plotW * (gx / 9);
+      ctx.beginPath(); ctx.moveTo(xx, padT); ctx.lineTo(xx, padT + plotH); ctx.stroke();
+    }
+    for (var gy = 0; gy <= 5; gy++) {
+      var yy = padT + plotH * (gy / 5);
+      ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(padL + plotW, yy); ctx.stroke();
+    }
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + plotH); ctx.lineTo(padL + plotW, padT + plotH);
+    ctx.stroke();
+
+    // curve
+    ctx.strokeStyle = textDim;
+    ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    for (var i = 0; i <= 150; i++) {
+      var x = xMin + (xMax - xMin) * (i / 150);
+      var y = f(x, u);
+      var sx = xForX(x), sy = yForY(y);
+      if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+    }
+    ctx.stroke();
+
+    // chord between (X1,f(X1)) and (X2,f(X2))
+    var p1 = [xForX(X1), yForY(f(X1, u))];
+    var p2 = [xForX(X2), yForY(f(X2, u))];
+    ctx.strokeStyle = textFaint;
+    ctx.setLineDash([3, 4]);
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // endpoint markers
+    ctx.fillStyle = textFaint;
+    [p1, p2].forEach(function (p) { ctx.beginPath(); ctx.arc(p[0], p[1], 4, 0, Math.PI * 2); ctx.fill(); });
+
+    // vertical connector between lhs (on chord) and rhs (on curve) at x = xAvg
+    var xAvgScreen = xForX(xAvg);
+    var lhsScreen = yForY(lhs);
+    var rhsScreen = yForY(rhs);
+    ctx.strokeStyle = textFaint;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(xAvgScreen, lhsScreen); ctx.lineTo(xAvgScreen, rhsScreen); ctx.stroke();
+
+    // lhs marker (amber, on chord)
+    ctx.fillStyle = driftColor;
+    ctx.beginPath(); ctx.arc(xAvgScreen, lhsScreen, 7, 0, Math.PI * 2); ctx.fill();
+
+    // rhs marker (teal, on curve)
+    ctx.fillStyle = lockColor;
+    ctx.beginPath(); ctx.arc(xAvgScreen, rhsScreen, 7, 0, Math.PI * 2); ctx.fill();
+
+    ctx.fillStyle = textFaint;
+    ctx.font = "11px ui-monospace, monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("x", padL + plotW / 2, h - 10);
+  }
+
+  lambdaSlider.addEventListener("input", render);
+  uSlider.addEventListener("input", render);
+  window.addEventListener("resize", render);
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+  }
+
+  render();
+})();
+</script>

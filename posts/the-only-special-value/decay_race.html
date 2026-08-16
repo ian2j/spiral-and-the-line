@@ -1,0 +1,267 @@
+<title>Decay Race</title>
+<style>
+  :root {
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --surface-2: #f2f4f8;
+    --border: #d6dce3;
+    --text: #141b24;
+    --text-dim: #5c6779;
+    --text-faint: #8b93a1;
+    --accent-lock: #0e8f7c;
+    --accent-lock-soft: #0e8f7c22;
+    --accent-drift: #c15f28;
+    --accent-drift-soft: #c15f2822;
+    --grid-line: #e3e7ed;
+    --grid-line-strong: #cdd4dc;
+    --shadow: 0 1px 2px rgba(20, 27, 36, 0.06), 0 8px 24px rgba(20, 27, 36, 0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+      --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+      --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+      --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+      --grid-line: #1c242c; --grid-line-strong: #29333d;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+    --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+    --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+    --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+    --grid-line: #1c242c; --grid-line-strong: #29333d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  .display { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; }
+
+  .app { max-width: 900px; margin: 0 auto; padding: 1.75rem 1.25rem 2.25rem; }
+
+  header.nameplate {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.9rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+  }
+  header.nameplate h1 { font-size: 1.4rem; margin: 0 0 0.2rem; font-weight: 600; letter-spacing: 0.01em; }
+  header.nameplate p { margin: 0; color: var(--text-dim); font-size: 0.88rem; max-width: 46ch; }
+  header.nameplate .instrument-id { text-align: right; color: var(--text-faint); font-size: 0.72rem;
+    letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.6; }
+
+  .panel { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; }
+
+  .fader-block { margin-bottom: 1rem; }
+  .fader-readout { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+  .fader-readout .sigma { font-size: 1.05rem; }
+  .fader-readout .sigma .num { font-weight: 600; }
+  .rail-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 0.5rem; }
+
+  input[type="range"] { -webkit-appearance: none; width: 100%; height: 26px; background: transparent; margin: 0.2rem 0 0.1rem; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6px;
+    border-radius: 50%; background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  input[type="range"]::-moz-range-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+
+  .fader-ticks { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 0.66rem; padding: 0 2px; }
+
+  .scope { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: var(--shadow); aspect-ratio: 16 / 10; overflow: hidden; margin-top: 1rem; }
+  .scope canvas { width: 100%; height: 100%; display: block; }
+
+  .status-chip { position: absolute; top: 0.7rem; right: 0.85rem; font-size: 0.68rem; letter-spacing: 0.06em;
+    padding: 0.22rem 0.55rem; border-radius: 999px; border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.4rem; background: var(--surface); }
+  .status-chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  .legend { position: absolute; top: 0.7rem; left: 0.85rem; font-size: 0.72rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .legend .row { display: flex; align-items: center; gap: 0.4rem; }
+  .legend .swatch { width: 14px; height: 2px; }
+
+  .telemetry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 0.75rem; }
+  .telemetry .cell { background: var(--surface-2); padding: 0.55rem 0.7rem; }
+  .telemetry .cell .k { font-size: 0.63rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.15rem; }
+  .telemetry .cell .v { font-size: 0.95rem; }
+
+  .caption { color: var(--text-dim); font-size: 0.86rem; line-height: 1.5; margin: 0.8rem 0 0; }
+</style>
+
+<div class="app">
+  <header class="nameplate">
+    <div>
+      <h1 class="display">Decay Race</h1>
+      <p>Two asymptotic rates, plotted on a log&ndash;log scale. Watch for the one value of &sigma; where their slopes match.</p>
+    </div>
+    <div class="instrument-id mono">endpoint: N^(&sigma;&minus;1)<br>saddle: N^(&minus;1/2)</div>
+  </header>
+
+  <div class="panel">
+    <div class="fader-block">
+      <p class="rail-label">&sigma;</p>
+      <div class="fader-readout">
+        <span class="sigma display">&sigma; = <span class="num mono" id="sigma-readout"></span></span>
+      </div>
+      <input type="range" id="sigma-slider" min="0.05" max="0.95" step="0.005" value="0.3" aria-label="sigma, the real part">
+      <div class="fader-ticks mono"><span>0.05</span><span>critical value: 0.5</span><span>0.95</span></div>
+    </div>
+
+    <div class="scope">
+      <canvas id="plot" width="1200" height="750"></canvas>
+      <div class="legend mono">
+        <div class="row"><span class="swatch" id="sw-endpoint" style="background: var(--accent-drift);"></span><span>endpoint, slope &sigma;&minus;1</span></div>
+        <div class="row"><span class="swatch" style="background: var(--text-dim);"></span><span>saddle, slope &minus;1/2 (fixed)</span></div>
+      </div>
+      <div class="status-chip mono" id="status-chip"><span class="dot" id="status-dot"></span><span id="status-text"></span></div>
+    </div>
+
+    <div class="telemetry mono">
+      <div class="cell"><div class="k">endpoint slope</div><div class="v" id="tel-slope1"></div></div>
+      <div class="cell"><div class="k">saddle slope</div><div class="v" id="tel-slope2"></div></div>
+      <div class="cell"><div class="k">difference</div><div class="v" id="tel-diff"></div></div>
+    </div>
+
+    <p class="caption">Both curves are drawn from the same starting point purely to compare <strong>slope</strong> &mdash; how fast each decays, not their actual relative size (the true coefficients in front of each term aren't claimed here). Two straight lines on a log&ndash;log plot have the same order exactly when they're parallel. That happens once, at &sigma; = 1/2.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var slider = document.getElementById("sigma-slider");
+  var sigmaReadout = document.getElementById("sigma-readout");
+  var canvas = document.getElementById("plot");
+  var ctx = canvas.getContext("2d");
+  var statusDot = document.getElementById("status-dot");
+  var statusText = document.getElementById("status-text");
+  var telSlope1 = document.getElementById("tel-slope1");
+  var telSlope2 = document.getElementById("tel-slope2");
+  var telDiff = document.getElementById("tel-diff");
+  var swEndpoint = document.getElementById("sw-endpoint");
+
+  function cssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  var N_MIN = 1, N_MAX = 1e6;
+  var logNmin = Math.log10(N_MIN), logNmax = Math.log10(N_MAX);
+
+  function render() {
+    var sigma = parseFloat(slider.value);
+    sigmaReadout.textContent = sigma.toFixed(3);
+
+    var slope1 = sigma - 1;
+    var slope2 = -0.5;
+    var diff = Math.abs(slope1 - slope2);
+    var matched = diff < 0.01;
+
+    telSlope1.textContent = slope1.toFixed(3);
+    telSlope2.textContent = slope2.toFixed(3);
+    telDiff.textContent = diff.toFixed(3);
+
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+    swEndpoint.style.background = matched ? lockColor : driftColor;
+    statusDot.style.background = matched ? lockColor : driftColor;
+    statusText.textContent = matched ? "SAME ORDER" : "DIFFERENT ORDER";
+    statusText.style.color = matched ? lockColor : driftColor;
+    document.getElementById("status-chip").style.borderColor = matched ? lockColor : driftColor;
+
+    draw(slope1, slope2, matched);
+  }
+
+  function draw(slope1, slope2, matched) {
+    var w = canvas.width, h = canvas.height;
+    var bg = cssVar("--surface");
+    var gridLine = cssVar("--grid-line");
+    var gridStrong = cssVar("--grid-line-strong");
+    var textFaint = cssVar("--text-faint");
+    var textDim = cssVar("--text-dim");
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    var padL = 70, padR = 30, padT = 30, padB = 55;
+    var plotW = w - padL - padR, plotH = h - padT - padB;
+
+    // y range: log10(value), value = N^slope, N in [1, 1e6], slope in [-1, -0.05ish .. ]
+    // value at N=1e6 for slope in [-1,-0.5]-ish range: 10^(6*slope)
+    var yMin = -6.2, yMax = 0.2;
+
+    function xForLogN(logN) { return padL + (logN - logNmin) / (logNmax - logNmin) * plotW; }
+    function yForLogV(logV) { return padT + (yMax - logV) / (yMax - yMin) * plotH; }
+
+    // grid
+    ctx.strokeStyle = gridLine;
+    ctx.lineWidth = 1;
+    for (var gx = 0; gx <= 6; gx++) {
+      var xx = xForLogN(gx);
+      ctx.beginPath(); ctx.moveTo(xx, padT); ctx.lineTo(xx, padT + plotH); ctx.stroke();
+    }
+    for (var gy = -6; gy <= 0; gy++) {
+      var yy = yForLogV(gy);
+      ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(padL + plotW, yy); ctx.stroke();
+    }
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + plotH); ctx.lineTo(padL + plotW, padT + plotH);
+    ctx.stroke();
+
+    // axis labels
+    ctx.fillStyle = textFaint;
+    ctx.font = "11px ui-monospace, monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("N (log scale)", padL + plotW / 2, h - 12);
+    ctx.save();
+    ctx.translate(16, padT + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("magnitude (log scale)", 0, 0);
+    ctx.restore();
+
+    for (var gx2 = 0; gx2 <= 6; gx2 += 2) {
+      ctx.fillStyle = textFaint;
+      ctx.textAlign = "center";
+      ctx.fillText("10^" + gx2, xForLogN(gx2), padT + plotH + 18);
+    }
+
+    function drawLine(slope, color) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      for (var i = 0; i <= 100; i++) {
+        var logN = logNmin + (logNmax - logNmin) * (i / 100);
+        var logV = slope * logN; // value = N^slope, log10(value) = slope*log10(N)
+        var x = xForLogN(logN);
+        var y = yForLogV(Math.max(yMin, Math.min(yMax, logV)));
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    drawLine(slope2, textDim);
+    drawLine(slope1, matched ? lockColor : driftColor);
+  }
+
+  slider.addEventListener("input", render);
+  window.addEventListener("resize", render);
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+  }
+
+  render();
+})();
+</script>

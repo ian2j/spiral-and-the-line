@@ -1,11 +1,12 @@
 ---
-title: "Spiral Toward a Center"
-description: "An interactive figure for Chapter 2: watch a truncated zeta sum wind toward a fixed point — and watch it miss, the moment you leave the critical line."
+title: "Chapter 2: Finding the Spiral"
+description: "December 2024. Truncated zeta sums don't converge — they spiral toward a fixed center. A closed form for exactly where, and an interactive figure to watch it happen."
 date: 2026-08-16
-categories: [interactive, spiral geometry]
+categories: [chapter, spiral geometry, 2024]
+order: 2
 ---
 
-*This is the flagship figure for Chapter 2, "Finding the Spiral" — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this. Previous: [Chapter 1 — The Moon](../the-moon/index.qmd).*
+*Previous: [Chapter 1 — The Moon](../the-moon/index.qmd).*
 
 ## The picture
 
@@ -15,21 +16,39 @@ $$
 S_k(s) = \sum_{n=1}^{k} n^{-s}, \qquad k = 1, 2, 3, \dots
 $$
 
-don't converge as $k \to \infty$ — but plotted in the complex plane, they don't wander randomly either. They spiral: each new term rotates the running total by a bit more than the last (the phase of $n^{-s}$ is $-t \log n$, so consecutive terms rotate relative to each other by a shrinking angle), and the whole path winds in toward a fixed center.
+don't converge as $k \to \infty$ — but plotted in the complex plane, they don't wander randomly either. They spiral: each new term rotates the running total by a bit more than the last (the phase of $n^{-s}$ is $-t \log n$, so consecutive terms rotate relative to each other by a shrinking angle), and the whole path winds in toward a fixed center. By December 2024 I had a name for this — the spiral picture — and enough of a feel for it to know it was worth pinning down exactly, not just admiring.
 
-$M = \lfloor t/\pi \rfloor$ turns out to be a natural place to stop — it's close to the stationary point of that phase function — which is why the truncation
+## Pinning it down
+
+Treat the real and imaginary parts of the partial sum as right-rule Riemann sum approximations to integrals, $I_\Re(N) = \int_0^N x^{-\sigma}\cos(-t\log x)\,dx$ and $I_\Im(N)$ likewise with $\sin$. Integration by parts on both, then a little algebra with
+
+$$
+\alpha = \frac{1}{\sqrt{t^2+(1-\sigma)^2}}, \qquad \omega = \cos^{-1}\!\left(\frac{1-\sigma}{\sqrt{t^2+(1-\sigma)^2}}\right),
+$$
+
+collapses them to a closed form:
+
+$$
+I_\Re(N) = \alpha N^{1-\sigma}\cos(-t\log N + \omega), \qquad I_\Im(N) = \alpha N^{1-\sigma}\sin(-t\log N + \omega).
+$$
+
+That's exactly a spiral — $\Sigma(N) = I_\Re(N) + iI_\Im(N)$ traces a curve centered at the origin with radius $\alpha N^{1-\sigma}$, shrinking as $N$ grows for any $\sigma > 1$ and just barely failing to shrink at $\sigma = 1$, which is the boundary where $\zeta$'s defining series itself stops converging. The picture isn't a metaphor; it's a literal consequence of integrating an oscillating power function.
+
+## Where the real center is
+
+$\Sigma(N)$ is an approximation to the partial sum, not the partial sum itself, so define the difference $\mu_1^N(s) = \zeta_1^N(s) - \Sigma(N)$ and its limit $\mu(s) = \lim_{N\to\infty}\mu_1^N(s)$. This $\mu(s)$ — not the origin — is the *actual* center the true partial sums spiral around; $\Sigma(N)$ only nails the shape and radius of the spiral, not quite where it's centered. Getting a good, finite, computable estimate of $\mu(s)$ turns out to matter a great deal later — it's the seed of the pre-tail construction in [Chapter 4](../pre-tail-and-tail/index.qmd) — but the qualitative picture is already the whole point of this chapter: $M = \lfloor t/\pi \rfloor$, close to where the phase function's stationary point sits, is a natural place to stop and read off where that center is, which is exactly why the truncation
 
 $$
 f(s) = \sum_{n=1}^{M} n^{-s} + \tfrac12 (M+1)^{-s}
 $$
 
-that recurs throughout this project uses exactly that cutoff.
+that recurs throughout the rest of this project uses that specific cutoff.
 
-The interesting question is *where* the center sits. At a real, known zero of $\zeta$ — one of the actual heights $t$ where $\zeta(\tfrac12 + it) = 0$ — and exactly on the critical line, the center is the origin. Nudge $\sigma$ away from $\tfrac12$, height held fixed, and the same spiral winds toward some other point entirely, not zero.
+The question that makes this more than a curiosity: *where* does the center sit? At a real, known zero of $\zeta$ — one of the actual heights $t$ where $\zeta(\tfrac12+it)=0$ — and exactly on the critical line, the center is the origin. Nudge $\sigma$ away from $\tfrac12$, height held fixed, and the same spiral winds toward some other point entirely, not zero.
 
 ## Try it
 
-Pick a known zero from the list, then drag the $\sigma$-offset fader off the critical line and watch the final point (the colored dot) leave the origin.
+Pick a known zero from the list below, then drag the $\sigma$-offset fader off the critical line and watch the final point (the colored dot) leave the origin.
 
 ```{=html}
 <iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>

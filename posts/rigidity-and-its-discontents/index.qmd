@@ -3,6 +3,7 @@ title: "Chapter 5: Rigidity and Its Discontents"
 description: "December 2025. A theorem I'd be genuinely happy to put my name on — with the word 'conditional' doing a lot of work in that sentence."
 date: 2026-08-16
 categories: [chapter, conditional-result, 2025]
+order: 5
 ---
 
 December 2025 opened with a smaller result first: a companion argument showing that a certain sign — an orientation, really, of one vector relative to another as you move along the critical line through a zero gap — obeys a clean first-order ODE, $\alpha'(y) = \tfrac{\theta'(y)}{2}\alpha(y)$, whose solution $\alpha(y) = K e^{\theta(y)/2}$ can only change sign where $\alpha$ itself passes through zero. Translated out of the differential-equations language: that orientation is *locked in* everywhere except at an actual zero of the function, or at one specific singular height where the machinery itself breaks down. It's a real rigidity statement — nothing spontaneous is allowed to happen — but it's about a sign, not a location, and it doesn't by itself say anything about whether an off-line zero exists in the first place.
@@ -54,6 +55,14 @@ for some fixed constant $c_0 > 0$ and all sufficiently large $t$ in the gap. Tha
 > **Conditional.** Fix a height $t$ strictly between two consecutive nontrivial zeros on the critical line, and suppose there exists $c_0 > 0$ such that the transverse curvature satisfies $k(t) \ge c_0\log^2 t$ for all sufficiently large $t$ in that gap. Then there exists $\delta > 0$ such that $F(\sigma, t) \ne 0$ for all $|\sigma - \tfrac12| \le \delta/\log t$.
 
 The width of the guaranteed zero-free strip, $1/\log t$, isn't an artifact of sloppy bookkeeping — it falls out naturally from balancing the quadratic term against the quartic remainder. The mechanism is entirely geometric (a curvature condition on an energy function), not arithmetic, and at no point does the argument assume anything about zeros existing or not existing off the line. It's a real implication, cleanly stated, resting on exactly one unverified hypothesis.
+
+## Try it
+
+Dial the curvature ratio below 1 and the guaranteed zero-free region vanishes entirely — not shrinks, *vanishes*. That threshold is the whole hypothesis.
+
+```{=html}
+<iframe src="rigidity_gauge.html" style="width:100%; aspect-ratio: 4/3.4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
 
 ## What it does and doesn't do
 

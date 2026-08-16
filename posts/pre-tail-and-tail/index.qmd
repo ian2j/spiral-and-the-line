@@ -3,6 +3,7 @@ title: "Chapter 4: Pre-tail and Tail"
 description: "September–October 2025. Where M = ⌊t/π⌋ stops being a convenient cutoff and becomes a genuine stationary point — and a closed-form tail estimate gets checked against 100,000 real zeros."
 date: 2026-08-16
 categories: [chapter, stationary-phase, spiral, 2025]
+order: 4
 ---
 
 By the fall of 2025, two pieces from earlier chapters were sitting next to each other without quite touching: the spiral picture from [Chapter 2](../spiral-toward-a-center/index.qmd), where partial sums of $\zeta(s)$ wind toward a fixed center, and the endpoint-vs-saddle deformation trick from [Chapter 3](../the-only-special-value/index.qmd), which manufactures a genuine stationary point out of a boundary-only integral by adding a quadratic term to the phase and analytically continuing it away again. This chapter is where those two pieces actually fused — and where $M = \lfloor t/\pi \rfloor$, the truncation length used everywhere from here on, stopped being a number I'd noticed worked well and became a number I could explain.
@@ -44,6 +45,14 @@ $$
 $$
 
 The pre-tail sum, at a real zero, should point in almost exactly the opposite direction from the tail's closed form, with almost exactly the same magnitude, $2^{-1/2}$.
+
+## Try it
+
+Pick a known zero and watch the two vectors, drawn tip to tail. Nudge $\sigma$ off the critical line and watch the cancellation break.
+
+```{=html}
+<iframe src="pretail_tail_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
 
 ## Checking it against 100,000 real zeros
 

@@ -1,0 +1,336 @@
+<title>Pre-tail / Tail Gauge</title>
+<style>
+  :root {
+    --bg: #eef1f5; --surface: #ffffff; --surface-2: #f2f4f8; --border: #d6dce3;
+    --text: #141b24; --text-dim: #5c6779; --text-faint: #8b93a1;
+    --accent-lock: #0e8f7c; --accent-lock-soft: #0e8f7c22;
+    --accent-drift: #c15f28; --accent-drift-soft: #c15f2822;
+    --accent-tail: #4a6fa5;
+    --grid-line: #e3e7ed; --grid-line-strong: #cdd4dc;
+    --shadow: 0 1px 2px rgba(20, 27, 36, 0.06), 0 8px 24px rgba(20, 27, 36, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+      --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+      --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+      --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+      --accent-tail: #7fa6e8;
+      --grid-line: #1c242c; --grid-line-strong: #29333d;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+    --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+    --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+    --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+    --accent-tail: #7fa6e8;
+    --grid-line: #1c242c; --grid-line-strong: #29333d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  .display { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; }
+
+  .app { max-width: 1000px; margin: 0 auto; padding: 1.75rem 1.25rem 2.25rem; }
+
+  header.nameplate { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.9rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
+  header.nameplate h1 { font-size: 1.4rem; margin: 0 0 0.2rem; font-weight: 600; }
+  header.nameplate p { margin: 0; color: var(--text-dim); font-size: 0.86rem; max-width: 46ch; }
+  header.nameplate .instrument-id { text-align: right; color: var(--text-faint); font-size: 0.7rem;
+    letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.55; }
+
+  .rig { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 1rem; }
+  @media (max-width: 680px) { .rig { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; }
+  .rail { display: flex; flex-direction: column; gap: 0.9rem; padding: 0.9rem; }
+  .rail-label { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 0.45rem; }
+
+  .zero-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; max-height: 240px; overflow-y: auto; }
+  .zero-list button { width: 100%; display: flex; justify-content: space-between; gap: 0.5rem; background: transparent;
+    border: 1px solid transparent; border-radius: 4px; padding: 0.35rem 0.5rem; cursor: pointer; color: var(--text-dim); font-size: 0.78rem; text-align: left; }
+  .zero-list button .tval { margin-left: auto; }
+  .zero-list button:hover { border-color: var(--border); color: var(--text); }
+  .zero-list button[aria-pressed="true"] { background: var(--accent-lock-soft); border-color: var(--accent-lock); color: var(--text); }
+
+  .fader-block { border-top: 1px solid var(--border); padding-top: 0.7rem; }
+  .fader-readout { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+  .fader-readout .sigma { font-size: 0.98rem; }
+  .fader-readout .sigma .num { font-weight: 600; }
+  input[type="range"] { -webkit-appearance: none; width: 100%; height: 26px; background: transparent; margin: 0.2rem 0 0.1rem; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6px;
+    border-radius: 50%; background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  input[type="range"]::-moz-range-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  .fader-ticks { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 0.63rem; padding: 0 2px; }
+  .reset-btn { margin-top: 0.6rem; width: 100%; background: var(--surface); border: 1px solid var(--border);
+    color: var(--text-dim); border-radius: 4px; padding: 0.4rem 0.5rem; font-size: 0.74rem; cursor: pointer; }
+  .reset-btn:hover { color: var(--text); border-color: var(--accent-lock); }
+
+  .viewport-col { display: flex; flex-direction: column; gap: 0.7rem; }
+  .scope { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: var(--shadow); aspect-ratio: 1 / 1; overflow: hidden; }
+  .scope canvas { width: 100%; height: 100%; display: block; }
+  .legend { position: absolute; top: 0.65rem; left: 0.8rem; font-size: 0.7rem; display: flex; flex-direction: column; gap: 0.28rem; }
+  .legend .row { display: flex; align-items: center; gap: 0.4rem; }
+  .legend .swatch { width: 13px; height: 2.5px; }
+  .status-chip { position: absolute; top: 0.65rem; right: 0.8rem; font-size: 0.66rem; letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+    display: flex; align-items: center; gap: 0.35rem; }
+  .status-chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  .telemetry { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  @media (max-width: 520px) { .telemetry { grid-template-columns: repeat(2, 1fr); } }
+  .telemetry .cell { background: var(--surface-2); padding: 0.5rem 0.65rem; }
+  .telemetry .cell .k { font-size: 0.6rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.12rem; }
+  .telemetry .cell .v { font-size: 0.9rem; }
+
+  .caption { color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0.2rem 0 0; }
+</style>
+
+<div class="app">
+  <header class="nameplate">
+    <div>
+      <h1 class="display">Pre-tail / Tail Gauge</h1>
+      <p>Two vectors, placed tip to tail. At a real zero on the critical line, they almost cancel.</p>
+    </div>
+    <div class="instrument-id mono">&eta;<sub>M</sub>(s), pre-tail<br>T(s) &asymp; 2<sup>&minus;1/2</sup>(t/&pi;)<sup>1/2&minus;&sigma;</sup>e<sup>i&phi;</sup></div>
+  </header>
+
+  <div class="rig">
+    <div class="panel rail">
+      <div>
+        <p class="rail-label">Known zero</p>
+        <ul class="zero-list" id="zero-list" role="listbox" aria-label="Select a known nontrivial zero of zeta"></ul>
+      </div>
+      <div class="fader-block">
+        <p class="rail-label">&sigma; offset</p>
+        <div class="fader-readout"><span class="sigma display">&sigma; = <span class="num mono" id="sigma-readout"></span></span></div>
+        <input type="range" id="u-slider" min="-0.3" max="0.3" step="0.005" value="0" aria-label="Offset from the critical line">
+        <div class="fader-ticks mono"><span>0.20</span><span>critical line</span><span>0.80</span></div>
+        <button class="reset-btn" id="reset-btn">Return to critical line</button>
+      </div>
+    </div>
+
+    <div class="viewport-col">
+      <div class="scope">
+        <canvas id="plot" width="900" height="900"></canvas>
+        <div class="legend mono">
+          <div class="row"><span class="swatch" style="background: var(--accent-drift);"></span><span>&eta;<sub>M</sub>(s), pre-tail</span></div>
+          <div class="row"><span class="swatch" style="background: var(--accent-tail);"></span><span>T(s), tail estimate</span></div>
+        </div>
+        <div class="status-chip mono" id="status-chip"><span class="dot" id="status-dot"></span><span id="status-text"></span></div>
+      </div>
+      <div class="telemetry mono">
+        <div class="cell"><div class="k">|&eta;<sub>M</sub>(s)|</div><div class="v" id="tel-p"></div></div>
+        <div class="cell"><div class="k">|T(s)|</div><div class="v" id="tel-t"></div></div>
+        <div class="cell"><div class="k">angle between</div><div class="v" id="tel-angle"></div></div>
+        <div class="cell"><div class="k">|P+T|</div><div class="v" id="tel-sum"></div></div>
+      </div>
+      <p class="caption">&eta;<sub>M</sub>(s) is computed directly from the real partial sum of &eta; up to M = &lfloor;t/&pi;&rfloor; terms. T(s) is the closed-form Fresnel estimate from Chapter 3's stationary-phase machinery. Drawn tip to tail: if they were exact opposites, the second arrow would land back on the origin. On the critical line, at a real zero, it very nearly does &mdash; and |T(s)| sits at almost exactly 1/&radic;2, the value the formula predicts for &sigma;=1/2 regardless of height.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ZEROS = [
+    14.134725, 21.022040, 25.010858, 30.424876, 32.935062,
+    37.586178, 40.918719, 43.327073, 48.005151, 49.773832,
+    52.970321, 56.446248, 59.347044, 60.831779, 65.112544
+  ];
+
+  var state = { zeroIdx: 5, u: 0 };
+
+  var zeroListEl = document.getElementById("zero-list");
+  var uSlider = document.getElementById("u-slider");
+  var sigmaReadout = document.getElementById("sigma-readout");
+  var resetBtn = document.getElementById("reset-btn");
+  var canvas = document.getElementById("plot");
+  var ctx = canvas.getContext("2d");
+  var statusDot = document.getElementById("status-dot");
+  var statusText = document.getElementById("status-text");
+  var telP = document.getElementById("tel-p");
+  var telT = document.getElementById("tel-t");
+  var telAngle = document.getElementById("tel-angle");
+  var telSum = document.getElementById("tel-sum");
+
+  ZEROS.forEach(function (t, i) {
+    var li = document.createElement("li");
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.setAttribute("role", "option");
+    btn.setAttribute("aria-pressed", i === state.zeroIdx ? "true" : "false");
+    btn.innerHTML = '<span class="mono">&rho;<sub>' + (i + 1) + "</sub></span>" +
+      '<span class="mono tval">t=' + t.toFixed(2) + "</span>";
+    btn.addEventListener("click", function () {
+      state.zeroIdx = i;
+      Array.prototype.forEach.call(zeroListEl.children, function (node, j) {
+        node.firstChild.setAttribute("aria-pressed", j === i ? "true" : "false");
+      });
+      render();
+    });
+    li.appendChild(btn);
+    zeroListEl.appendChild(li);
+  });
+
+  uSlider.addEventListener("input", function () { state.u = parseFloat(uSlider.value); render(); });
+  resetBtn.addEventListener("click", function () { state.u = 0; uSlider.value = "0"; render(); });
+
+  function cpow(n, sigma, t) {
+    var mag = Math.pow(n, -sigma);
+    var ang = -t * Math.log(n);
+    return [mag * Math.cos(ang), mag * Math.sin(ang)];
+  }
+
+  function computeP(sigma, t) {
+    var M = Math.max(1, Math.floor(t / Math.PI));
+    var re = 0, im = 0;
+    for (var n = 1; n <= M; n++) {
+      var term = cpow(n, sigma, t);
+      var sign = (n % 2 === 1) ? 1 : -1; // (-1)^{n+1}
+      re += sign * term[0];
+      im += sign * term[1];
+    }
+    return { re: re, im: im, M: M };
+  }
+
+  function computeT(sigma, t) {
+    var mag = Math.pow(2, -0.5) * Math.pow(t / Math.PI, 0.5 - sigma);
+    var phase = 5 * Math.PI / 4 - t * Math.log(t / Math.PI) + t;
+    return { re: mag * Math.cos(phase), im: mag * Math.sin(phase), mag: mag };
+  }
+
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function render() {
+    var t = ZEROS[state.zeroIdx];
+    var sigma = 0.5 + state.u;
+    sigmaReadout.textContent = sigma.toFixed(3);
+
+    var P = computeP(sigma, t);
+    var T = computeT(sigma, t);
+
+    var Pmag = Math.hypot(P.re, P.im);
+    var Tmag = Math.hypot(T.re, T.im);
+    var sumRe = P.re + T.re, sumIm = P.im + T.im;
+    var sumMag = Math.hypot(sumRe, sumIm);
+
+    var dot = P.re * T.re + P.im * T.im;
+    var cosAngle = dot / (Pmag * Tmag);
+    var angleDeg = Math.acos(Math.max(-1, Math.min(1, cosAngle))) * 180 / Math.PI;
+
+    telP.textContent = Pmag.toFixed(4);
+    telT.textContent = Tmag.toFixed(4);
+    telAngle.textContent = angleDeg.toFixed(1) + "°";
+    telSum.textContent = sumMag.toFixed(4);
+
+    var nearlyOpposite = angleDeg > 165 && sumMag < 0.15;
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+    statusDot.style.background = nearlyOpposite ? lockColor : driftColor;
+    statusText.textContent = nearlyOpposite ? "NEAR CANCELLATION" : "NO CANCELLATION";
+    statusText.style.color = nearlyOpposite ? lockColor : driftColor;
+    document.getElementById("status-chip").style.borderColor = nearlyOpposite ? lockColor : driftColor;
+
+    draw(P, T, sumRe, sumIm);
+  }
+
+  function draw(P, T, sumRe, sumIm) {
+    var w = canvas.width, h = canvas.height;
+    var bg = cssVar("--surface");
+    var gridLine = cssVar("--grid-line");
+    var gridStrong = cssVar("--grid-line-strong");
+    var textFaint = cssVar("--text-faint");
+    var textMain = cssVar("--text");
+    var driftColor = cssVar("--accent-drift");
+    var tailColor = cssVar("--accent-tail");
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    var pts = [[0, 0], [P.re, P.im], [sumRe, sumIm]];
+    var maxAbs = 0.05;
+    pts.forEach(function (p) { maxAbs = Math.max(maxAbs, Math.abs(p[0]), Math.abs(p[1])); });
+    var span = maxAbs * 2.5;
+    var scale = (w * 0.42) / span;
+    var cx = w / 2, cy = h / 2;
+
+    function toScreen(p) { return [cx + p[0] * scale, cy - p[1] * scale]; }
+
+    // grid
+    ctx.strokeStyle = gridLine;
+    ctx.lineWidth = 1;
+    for (var r = 1; r <= 4; r++) {
+      var rr = (span / 2) * (r / 4) * scale;
+      ctx.beginPath(); ctx.arc(cx, cy, rr, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath();
+    ctx.moveTo(0, cy); ctx.lineTo(w, cy);
+    ctx.moveTo(cx, 0); ctx.lineTo(cx, h);
+    ctx.stroke();
+
+    function arrow(from, to, color) {
+      var a = toScreen(from), b = toScreen(to);
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.lineWidth = 2.4;
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+      var ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+      var headLen = 10;
+      ctx.beginPath();
+      ctx.moveTo(b[0], b[1]);
+      ctx.lineTo(b[0] - headLen * Math.cos(ang - Math.PI / 7), b[1] - headLen * Math.sin(ang - Math.PI / 7));
+      ctx.lineTo(b[0] - headLen * Math.cos(ang + Math.PI / 7), b[1] - headLen * Math.sin(ang + Math.PI / 7));
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    arrow([0, 0], [P.re, P.im], driftColor);
+    arrow([P.re, P.im], [P.re + T.re, P.im + T.im], tailColor);
+
+    // final landing marker
+    var landing = toScreen([sumRe, sumIm]);
+    ctx.fillStyle = textMain;
+    ctx.beginPath(); ctx.arc(landing[0], landing[1], 5, 0, Math.PI * 2); ctx.fill();
+
+    // origin reticle
+    var origin = toScreen([0, 0]);
+    ctx.strokeStyle = textFaint;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(origin[0], origin[1], 8, 0, Math.PI * 2);
+    ctx.moveTo(origin[0] - 12, origin[1]); ctx.lineTo(origin[0] + 12, origin[1]);
+    ctx.moveTo(origin[0], origin[1] - 12); ctx.lineTo(origin[0], origin[1] + 12);
+    ctx.stroke();
+  }
+
+  ZEROS.forEach(function (_, i) {
+    if (i === state.zeroIdx) zeroListEl.children[i].firstChild.setAttribute("aria-pressed", "true");
+  });
+
+  window.addEventListener("resize", render);
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+  }
+
+  render();
+})();
+</script>

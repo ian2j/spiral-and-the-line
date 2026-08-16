@@ -3,6 +3,7 @@ title: "Why the Critical-Line-Path Identity Isn't a Coincidence"
 description: "A numerical match with cosine similarity 0.9999999773 looked like it needed an explanation. It turns out to be an exact algebraic consequence of three ingredients — two of them trivial."
 date: 2026-08-16
 categories: [technical note, functional equation]
+order: 8.5
 ---
 
 *This note is the technical spine of Chapter 8, "The Critical Line Path." It works out something the original notebook found but didn't explain: a near-perfect numerical match that turns out to be exact, modulo one classical, boundable error term.*
@@ -28,6 +29,14 @@ $$
 $$
 
 where $\chi(s) = \pi^{s-1/2}\,\Gamma\!\left(\frac{1-s}{2}\right)/\Gamma\!\left(\frac{s}{2}\right)$ is the usual functional-equation factor for $\zeta$. The match is excellent, and gets *better* as $t$ grows — cosine similarity between $g'/g$ and $\theta$ of 0.999359 at $t=20$, 0.9999969 at $t=100$, 0.99999998 at $t=500$. The notebook doesn't explain why. The fact that agreement improves with $t$ is a clue worth chasing rather than just admiring.
+
+### Try it
+
+Both quantities below are computed exactly — no shortcuts, real digamma function and all. Drag $t$ from small to large and watch the two arrows converge.
+
+```{=html}
+<iframe src="critical_line_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
 
 ## The derivation
 

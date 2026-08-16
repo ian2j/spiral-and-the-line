@@ -1,8 +1,9 @@
 ---
-title: "Prologue: Why This, Why Alone, Why With an LLM"
-description: "Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what six years of trying to make a dent in it, the last three alongside an LLM, has actually looked like."
+title: "Chapter 0: Prologue"
+description: "Why this, why alone, why with an LLM. What the Riemann Hypothesis is, in one paragraph — and what six years of trying to make a dent in it, the last three alongside an LLM, has actually looked like."
 date: 2026-08-16
 categories: [chapter, prologue]
+order: 0
 ---
 
 In April of 2025 I was deep in a conversation with an LLM, working through what looked like a real argument. The setup: a certain quantity $f_N(t)$ decays like $N^{2t-2}$ almost everywhere, but at two special points it decays much faster — $O(N^{-2})$ instead. If $f_N$ is monotonic between those two points for large $N$, a squeeze argument forces the *entire interval* between them down to that same fast decay rate. And since the generic behavior only matches that rate at an isolated point, the interval has no choice but to collapse — the two special points have to coincide.
@@ -18,6 +19,12 @@ I'm telling you this story first because it's the most honest way I know to desc
 ## What the Riemann Hypothesis actually says
 
 Take the Riemann zeta function, $\zeta(s) = \sum_{n=1}^{\infty} n^{-s}$, extended (via analytic continuation) to all complex $s$ except $s=1$. It has infinitely many "trivial" zeros at the negative even integers, and infinitely many more "nontrivial" zeros scattered through the strip $0 < \mathrm{Re}(s) < 1$. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line $\mathrm{Re}(s) = \tfrac12$, the *critical line*. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions. It's been open since 1859. It's one of the seven Clay Millennium Problems, and the only one from Hilbert's original 1900 list that's still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.
+
+Here's what that actually looks like, computed directly rather than taken on faith. Pick a known zero and watch $|\eta(\sigma+it)|$ dive toward zero exactly at $\sigma=\tfrac12$; pick a height with nothing special about it and watch that dip simply not happen.
+
+```{=html}
+<iframe src="zero_finder.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
 
 I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is six years of genuinely trying — the last three of them documented closely enough to write this series from — across roughly six different angles, with a trail of what worked, what didn't, and — a few times — something that stood on its own regardless of whether the big question ever closes.
 

@@ -1,0 +1,282 @@
+<title>Rigidity Gauge</title>
+<style>
+  :root {
+    --bg: #eef1f5; --surface: #ffffff; --surface-2: #f2f4f8; --border: #d6dce3;
+    --text: #141b24; --text-dim: #5c6779; --text-faint: #8b93a1;
+    --accent-lock: #0e8f7c; --accent-lock-soft: #0e8f7c22;
+    --accent-drift: #c15f28; --accent-drift-soft: #c15f2822;
+    --grid-line: #e3e7ed; --grid-line-strong: #cdd4dc;
+    --shadow: 0 1px 2px rgba(20, 27, 36, 0.06), 0 8px 24px rgba(20, 27, 36, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+      --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+      --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+      --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+      --grid-line: #1c242c; --grid-line-strong: #29333d;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+    --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+    --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+    --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+    --grid-line: #1c242c; --grid-line-strong: #29333d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  .display { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; }
+
+  .app { max-width: 900px; margin: 0 auto; padding: 1.75rem 1.25rem 2.25rem; }
+
+  header.nameplate { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.9rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
+  header.nameplate h1 { font-size: 1.4rem; margin: 0 0 0.2rem; font-weight: 600; }
+  header.nameplate p { margin: 0; color: var(--text-dim); font-size: 0.86rem; max-width: 48ch; }
+  header.nameplate .instrument-id { text-align: right; color: var(--text-faint); font-size: 0.68rem;
+    letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.5; }
+
+  .panel { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; }
+
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 0.9rem; }
+  @media (max-width: 560px) { .controls { grid-template-columns: 1fr; } }
+
+  .fader-readout { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+  .fader-readout .val { font-size: 0.98rem; }
+  .fader-readout .val .num { font-weight: 600; }
+  .rail-label { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 0.4rem; }
+
+  input[type="range"] { -webkit-appearance: none; width: 100%; height: 26px; background: transparent; margin: 0.2rem 0 0.1rem; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6px;
+    border-radius: 50%; background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  input[type="range"]::-moz-range-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  .fader-ticks { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 0.63rem; padding: 0 2px; }
+
+  .scope { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: var(--shadow); aspect-ratio: 16 / 9; overflow: hidden; }
+  .scope canvas { width: 100%; height: 100%; display: block; }
+  .status-chip { position: absolute; top: 0.7rem; right: 0.85rem; font-size: 0.68rem; letter-spacing: 0.06em;
+    padding: 0.22rem 0.55rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+    display: flex; align-items: center; gap: 0.4rem; }
+  .status-chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .scope-caption { position: absolute; top: 0.7rem; left: 0.85rem; font-size: 0.66rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--text-faint); }
+
+  .telemetry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 0.75rem; }
+  .telemetry .cell { background: var(--surface-2); padding: 0.55rem 0.7rem; }
+  .telemetry .cell .k { font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.12rem; }
+  .telemetry .cell .v { font-size: 0.92rem; }
+
+  .caption { color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0.8rem 0 0; }
+</style>
+
+<div class="app">
+  <header class="nameplate">
+    <div>
+      <h1 class="display">Rigidity Gauge</h1>
+      <p>Illustrative, not computed from real &zeta; data: an explorable version of the Transverse Rigidity Theorem's mechanics.</p>
+    </div>
+    <div class="instrument-id mono">S(u)/|F|&sup2; &ge; 1 + &frac12;k(t)u&sup2; &minus; Cu&#8308;log&#8308;t</div>
+  </header>
+
+  <div class="panel">
+    <div class="controls">
+      <div>
+        <p class="rail-label">Height (log t)</p>
+        <div class="fader-readout"><span class="val display">log t = <span class="num mono" id="L-readout"></span></span></div>
+        <input type="range" id="L-slider" min="1" max="12" step="0.1" value="5" aria-label="log of the height t">
+        <div class="fader-ticks mono"><span>small t</span><span>large t</span></div>
+      </div>
+      <div>
+        <p class="rail-label">Curvature vs. hypothesis</p>
+        <div class="fader-readout"><span class="val display">k(t) / c<sub>0</sub>log&sup2;t = <span class="num mono" id="ratio-readout"></span></span></div>
+        <input type="range" id="ratio-slider" min="0" max="2.5" step="0.02" value="0.8" aria-label="ratio of actual curvature to the hypothesis threshold">
+        <div class="fader-ticks mono"><span>below threshold</span><span>above threshold</span></div>
+      </div>
+    </div>
+
+    <div class="scope">
+      <canvas id="plot" width="1200" height="675"></canvas>
+      <div class="scope-caption mono" id="scope-caption"></div>
+      <div class="status-chip mono" id="status-chip"><span class="dot" id="status-dot"></span><span id="status-text"></span></div>
+    </div>
+
+    <div class="telemetry mono">
+      <div class="cell"><div class="k">k(t)</div><div class="v" id="tel-k"></div></div>
+      <div class="cell"><div class="k">threshold c&#8320;log&sup2;t</div><div class="v" id="tel-thresh"></div></div>
+      <div class="cell"><div class="k">zero-free half-width &delta;/log t</div><div class="v" id="tel-width"></div></div>
+    </div>
+
+    <p class="caption">The curve is S(u)/|F(&frac12;,t)|&sup2; &minus; 1, the normalized energy above baseline. Where it's positive (teal), the theorem guarantees F(&sigma;,t) &ne; 0. That region only exists at all when the curvature ratio is above 1 &mdash; below it, the quartic remainder overwhelms the quadratic gain everywhere, and the argument gives no zero-free zone. c&#8320; and C are both set to 1 here for legibility; only the shape and the threshold crossing are the point.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var Lslider = document.getElementById("L-slider");
+  var ratioSlider = document.getElementById("ratio-slider");
+  var Lreadout = document.getElementById("L-readout");
+  var ratioReadout = document.getElementById("ratio-readout");
+  var canvas = document.getElementById("plot");
+  var ctx = canvas.getContext("2d");
+  var statusDot = document.getElementById("status-dot");
+  var statusText = document.getElementById("status-text");
+  var scopeCaption = document.getElementById("scope-caption");
+  var telK = document.getElementById("tel-k");
+  var telThresh = document.getElementById("tel-thresh");
+  var telWidth = document.getElementById("tel-width");
+
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function render() {
+    var L = parseFloat(Lslider.value);   // log(t)
+    var ratio = parseFloat(ratioSlider.value);
+
+    Lreadout.textContent = L.toFixed(2);
+    ratioReadout.textContent = ratio.toFixed(2);
+
+    var threshold = L * L;      // c0 = 1
+    var k = ratio * threshold;
+    var C = 1;
+
+    telK.textContent = k.toFixed(2);
+    telThresh.textContent = threshold.toFixed(2);
+
+    // g(u) = 0.5*k*u^2 - C*u^4*L^4  (the part of S/|F|^2 above 1)
+    // positive root: u^2 = k / (2*C*L^4)  => width = sqrt(k/(2*C*L^4))
+    var holds = ratio >= 1;
+    var width = holds ? Math.sqrt(k / (2 * C * Math.pow(L, 4))) : 0;
+    telWidth.textContent = holds ? width.toFixed(4) : "n/a";
+
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+    statusDot.style.background = holds ? lockColor : driftColor;
+    statusText.textContent = holds ? "HYPOTHESIS HOLDS" : "HYPOTHESIS FAILS";
+    statusText.style.color = holds ? lockColor : driftColor;
+    document.getElementById("status-chip").style.borderColor = holds ? lockColor : driftColor;
+
+    scopeCaption.textContent = holds ? "zero-free strip exists" : "no guarantee from this argument";
+
+    draw(k, C, L, width, holds);
+  }
+
+  function draw(k, C, L, width, holds) {
+    var w = canvas.width, h = canvas.height;
+    var bg = cssVar("--surface");
+    var gridLine = cssVar("--grid-line");
+    var gridStrong = cssVar("--grid-line-strong");
+    var textFaint = cssVar("--text-faint");
+    var textMain = cssVar("--text");
+    var lockColor = cssVar("--accent-lock");
+    var lockSoft = cssVar("--accent-lock-soft");
+    var driftColor = cssVar("--accent-drift");
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    var padL = 60, padR = 30, padT = 25, padB = 45;
+    var plotW = w - padL - padR, plotH = h - padT - padB;
+
+    // u-range: scale so the interesting behavior is visible
+    var uMax = width > 0 ? width * 2.2 : Math.pow(k / (2 * C), 0.5) / Math.pow(L, 2) * 3 + 0.02;
+    uMax = Math.max(uMax, 0.02);
+
+    function g(u) { return 0.5 * k * u * u - C * Math.pow(u, 4) * Math.pow(L, 4); }
+
+    // find y range
+    var yMax = g(0);
+    for (var i = 0; i <= 200; i++) {
+      var u = -uMax + (2 * uMax) * (i / 200);
+      yMax = Math.max(yMax, g(u));
+    }
+    var yMin = -yMax * 0.6;
+    yMax = yMax * 1.15;
+    if (yMax - yMin < 1e-9) { yMax = 1; yMin = -1; }
+
+    function xForU(u) { return padL + (u + uMax) / (2 * uMax) * plotW; }
+    function yForG(gv) { return padT + (yMax - gv) / (yMax - yMin) * plotH; }
+
+    // grid
+    ctx.strokeStyle = gridLine;
+    ctx.lineWidth = 1;
+    for (var gx = 0; gx <= 8; gx++) {
+      var xx = padL + plotW * (gx / 8);
+      ctx.beginPath(); ctx.moveTo(xx, padT); ctx.lineTo(xx, padT + plotH); ctx.stroke();
+    }
+    for (var gy = 0; gy <= 6; gy++) {
+      var yy = padT + plotH * (gy / 6);
+      ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(padL + plotW, yy); ctx.stroke();
+    }
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + plotH); ctx.lineTo(padL + plotW, padT + plotH);
+    ctx.stroke();
+
+    // zero line
+    var zeroY = yForG(0);
+    ctx.strokeStyle = textFaint;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(padL, zeroY); ctx.lineTo(padL + plotW, zeroY); ctx.stroke();
+
+    // shaded zero-free region
+    if (holds && width > 0) {
+      var x1 = xForU(-width), x2 = xForU(width);
+      ctx.fillStyle = lockSoft;
+      ctx.fillRect(x1, padT, x2 - x1, plotH);
+    }
+
+    // curve
+    ctx.strokeStyle = holds ? lockColor : driftColor;
+    ctx.lineWidth = 2.4;
+    ctx.beginPath();
+    for (var j = 0; j <= 200; j++) {
+      var uu = -uMax + (2 * uMax) * (j / 200);
+      var gv = g(uu);
+      var x = xForU(uu), y = yForG(gv);
+      if (j === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // u=0 axis
+    var zeroX = xForU(0);
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath(); ctx.moveTo(zeroX, padT); ctx.lineTo(zeroX, padT + plotH); ctx.stroke();
+
+    ctx.fillStyle = textFaint;
+    ctx.font = "11px ui-monospace, monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("u (offset from critical line)", padL + plotW / 2, h - 12);
+    ctx.save();
+    ctx.translate(16, padT + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("S(u)/|F|² − 1", 0, 0);
+    ctx.restore();
+  }
+
+  Lslider.addEventListener("input", render);
+  ratioSlider.addEventListener("input", render);
+  window.addEventListener("resize", render);
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+  }
+
+  render();
+})();
+</script>

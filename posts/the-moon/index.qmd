@@ -3,6 +3,7 @@ title: "Chapter 1: The Moon"
 description: "Late 2023. The first real technique of this project — a grid of rays, a parity trick, and a convexity argument that pushed toward the critical line without quite closing the case."
 date: 2026-08-16
 categories: [chapter, jensen, 2023]
+order: 1
 ---
 
 *A note on notation before we start: the earliest files in this project use $t$ for the offset from the critical line and $y$ for the height — the reverse of the convention I've used ever since and will use for the rest of this series. I've translated the original 2023 notes into the later convention below: $t$ is the height, $u$ is the offset, $s = \tfrac12 + u + it$.*
@@ -38,6 +39,14 @@ f(x) = \tfrac12\left(x^{-(1/2-u)} + x^{-(1/2+u)}\right),
 $$
 
 evaluated at $x = m^2 f_1 f_2$ and $x = (m+1)^2 f_1 f_2$. And $f$ is convex on $(0,\infty)$ for any real $u$ — three lines of calculus confirm $f''(x) > 0$. Jensen's inequality then says the weighted combination you actually have is bounded below by $f$ evaluated at the weighted average of the two $x$-values. Do this for both the $\cos^2\theta$-first and $\sin^2\theta$-first pairings on the same pair of points, average the two resulting bounds, and apply Jensen a second time: everything collapses to a clean lower bound of the form $\big(\text{a weighted average of } m^2 \text{ and } (m+1)^2\big)^{-1/2}$ — exactly the value you'd get by setting $u = 0$ from the start.
+
+### Try it
+
+Drag the mixing weight and watch the amber dot (the weighted average you actually have) stay level with or above the teal dot (the curve at the weighted-average position) — for every weight, every curve shape.
+
+```{=html}
+<iframe src="jensen_gauge.html" style="width:100%; aspect-ratio: 16/12; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
 
 ## Why "the moon"
 

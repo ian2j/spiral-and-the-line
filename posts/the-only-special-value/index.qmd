@@ -3,6 +3,7 @@ title: "Chapter 3: The Only Special Value"
 description: "Spring 2025. Two independent asymptotic mechanisms — an endpoint term and a stationary-phase term — that decay at different rates almost everywhere, and at exactly the same rate only at one point."
 date: 2026-08-16
 categories: [chapter, stationary-phase, 2025]
+order: 3
 ---
 
 I told the ending of one thread from this period already, in the [Prologue](../prologue/index.qmd): the argument that tried to force a zero-free interval around any hypothetical off-line zero by squeezing it between two points of "enhanced decay," using monotonicity. That argument had a real gap even after I fixed the exponent error — the monotonicity it depended on was only ever "emergent for large $N$," never actually proven, and when I pushed on that directly, the honest answer I got back amounted to *restrict your attention to the range where it's true and call the argument valid there*. That's not nothing, but it's not a proof either.
@@ -42,6 +43,14 @@ So there are two independent asymptotic contributions in play: an **endpoint ter
 $$
 t - 1 = -\tfrac12 \iff t = \tfrac12.
 $$
+
+## Try it
+
+Drag $\sigma$ and watch the two slopes on a log–log plot. They're only ever parallel — the same order — at one place.
+
+```{=html}
+<iframe src="decay_race.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
 
 Only at $t=\tfrac12$ do the two mechanisms land at exactly the same order, $N^{-1/2}$, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there's nothing of the right size for it to cancel against.
 
