@@ -6,14 +6,14 @@
       version="2.0">
 <channel>
 <title>The Spiral and the Line</title>
-<link>https://your-domain-goes-here.example.com/</link>
-<atom:link href="https://your-domain-goes-here.example.com/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://ian2j.github.io/spiral-and-the-line/</link>
+<atom:link href="https://ian2j.github.io/spiral-and-the-line/index.xml" rel="self" type="application/rss+xml"/>
 <description>A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included.</description>
 <generator>quarto-1.10.18</generator>
 <lastBuildDate>Sat, 15 Aug 2026 15:00:00 GMT</lastBuildDate>
 <item>
   <title>Why the Critical-Line-Path Identity Isn’t a Coincidence</title>
-  <link>https://your-domain-goes-here.example.com/posts/critical-line-path-identity/</link>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/critical-line-path-identity/</link>
   <description><![CDATA[ 
 
 
@@ -102,12 +102,12 @@
  ]]></description>
   <category>technical note</category>
   <category>functional equation</category>
-  <guid>https://your-domain-goes-here.example.com/posts/critical-line-path-identity/</guid>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/critical-line-path-identity/</guid>
   <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Spiral Toward a Center</title>
-  <link>https://your-domain-goes-here.example.com/posts/spiral-toward-a-center/</link>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/spiral-toward-a-center/</link>
   <description><![CDATA[ 
 
 
@@ -138,7 +138,7 @@
  ]]></description>
   <category>interactive</category>
   <category>spiral geometry</category>
-  <guid>https://your-domain-goes-here.example.com/posts/spiral-toward-a-center/</guid>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/spiral-toward-a-center/</guid>
   <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
 </item>
 </channel>

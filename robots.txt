@@ -1,1 +1,1 @@
-Sitemap: https://your-domain-goes-here.example.com/sitemap.xml
+Sitemap: https://ian2j.github.io/spiral-and-the-line/sitemap.xml
