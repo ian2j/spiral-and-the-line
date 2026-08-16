@@ -2,10 +2,13 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/the-only-special-value/index.html",
+      "/posts/rigidity-and-its-discontents/index.html",
       "/posts/critical-line-path-identity/index.html",
       "/posts/spiral-toward-a-center/index.html",
       "/posts/the-moon/index.html",
-      "/posts/prologue/index.html"
+      "/posts/prologue/index.html",
+      "/posts/pre-tail-and-tail/index.html"
     ]
   }
 ]

@@ -12,6 +12,114 @@
 <generator>quarto-1.10.18</generator>
 <lastBuildDate>Sat, 15 Aug 2026 15:00:00 GMT</lastBuildDate>
 <item>
+  <title>Chapter 3: The Only Special Value</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/the-only-special-value/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>I told the ending of one thread from this period already, in the <a href="../../posts/prologue/index.html">Prologue</a>: the argument that tried to force a zero-free interval around any hypothetical off-line zero by squeezing it between two points of “enhanced decay,” using monotonicity. That argument had a real gap even after I fixed the exponent error — the monotonicity it depended on was only ever “emergent for large <img src="https://latex.codecogs.com/png.latex?N">,” never actually proven, and when I pushed on that directly, the honest answer I got back amounted to <em>restrict your attention to the range where it’s true and call the argument valid there</em>. That’s not nothing, but it’s not a proof either.</p>
+<p>A few days later I started over, with no preconceptions, on a differently-shaped version of the same question. This chapter is that attempt — and it’s the first time in this project that “why <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%20%5Ctfrac12"> specifically” gets a clean, self-contained answer, even though, as you’ll see, it’s an answer to a narrower question than it sounds like at first.</p>
+<section id="two-ways-for-a-partial-sum-to-decay" class="level2">
+<h2 class="anchored" data-anchor-id="two-ways-for-a-partial-sum-to-decay">Two ways for a partial sum to decay</h2>
+<p>Start with a rescaled partial sum built from the alternating series,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS_N%20=%20N%5E%7Ba-1%7D%20A_N(a),%20%5Cqquad%20A_N(a)%20=%20%5Csum_%7Bn=1%7D%5EN%20(-1)%5En%20n%5E%7B-a%7D,%20%5Cqquad%20a%20=%20t%20+%20iy,%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?t"> plays the role of the offset from <img src="https://latex.codecogs.com/png.latex?1"> that this chapter cares about (translated to the rest of the series’ notation, <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%20t">) and <img src="https://latex.codecogs.com/png.latex?y"> is the height. There’s a generic story and a special one.</p>
+<p><strong>Generically</strong>, <img src="https://latex.codecogs.com/png.latex?A_N(a)"> converges to <img src="https://latex.codecogs.com/png.latex?%5Ceta(a)"> with error <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-%5CRe(a)%7D)">, so <img src="https://latex.codecogs.com/png.latex?S_N%20=%20N%5E%7Ba-1%7D%5Ceta(a)%20+%20O(N%5E%7B-1%7D)"> — every correction term is an <em>integer</em> power of <img src="https://latex.codecogs.com/png.latex?N">. If <img src="https://latex.codecogs.com/png.latex?%5Ceta(a)=0"> happens to hold, the leading term vanishes and the next one, still an integer power, takes over: <img src="https://latex.codecogs.com/png.latex?S_N%20%5Csim%20-%5Ctfrac12(-1)%5EN%20N%5E%7B-1%7D">. Nothing about this story ever produces a half-integer power of <img src="https://latex.codecogs.com/png.latex?N">. That mechanism, whatever it is, has to come from somewhere else.</p>
+</section>
+<section id="where-the-half-integer-powers-actually-come-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-half-integer-powers-actually-come-from">Where the half-integer powers actually come from</h2>
+<p>Approximate the discrete alternating sum by a continuous oscillatory integral, <img src="https://latex.codecogs.com/png.latex?%5Cint_0%5E1%20x%5E%7B-a%7D%20e%5E%7BiN%5Cpi%20x%7D%5C,dx">. The exponent here is <em>linear</em> in <img src="https://latex.codecogs.com/png.latex?x"> — it has no interior stationary point on <img src="https://latex.codecogs.com/png.latex?%5B0,1%5D">, only a contribution from the boundary at <img src="https://latex.codecogs.com/png.latex?x=0">. The uniform asymptotic expansion of the incomplete gamma function that governs an integral like this naturally produces a ladder in powers of <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7BN%7D">: <img src="https://latex.codecogs.com/png.latex?N%5E%7B-a%7D,%20N%5E%7B-a-%5Cfrac12%7D,%20N%5E%7B-a-1%7D,%20%5Cdots"> — but only when the relevant parameter genuinely scales like <img src="https://latex.codecogs.com/png.latex?%5Csqrt%20N">, which a fixed, boundary-only phase doesn’t obviously give you. So the half-integer ladder is <em>real</em>, but it isn’t obviously <em>available</em> to this problem as stated.</p>
+<p>The way to make it available — and this is the actual trick — is to temporarily deform the problem into one that has an honest interior saddle, then take the deformation away:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ag(%5Calpha)%20=%20%5Cint_0%5E1%20x%5E%7B-t-iy%7D%5Cexp%5Cbigl(-iN%5B%5Calpha%20x%5E2%20-%20%5Cpi%20x%5D%5Cbigr)%5C,dx.%0A"></p>
+<p>At <img src="https://latex.codecogs.com/png.latex?%5Calpha%20=%200"> this is exactly the original boundary-only integral. For any <img src="https://latex.codecogs.com/png.latex?%5Calpha%20%3E%200">, the phase <img src="https://latex.codecogs.com/png.latex?%5Cphi(x)%20=%20%5Calpha%20x%5E2%20-%20%5Cpi%20x"> has a genuine, non-degenerate stationary point at <img src="https://latex.codecogs.com/png.latex?x_0%20=%20%5Cpi/(2%5Calpha)">, and the standard stationary-phase method applies cleanly, giving <img src="https://latex.codecogs.com/png.latex?g(%5Calpha)%20=%20O(N%5E%7B-1/2%7D)"> with corrections in the honest half-integer ladder <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D,%20N%5E%7B-3/2%7D,%20%5Cdots"></p>
+<p><img src="https://latex.codecogs.com/png.latex?g(%5Calpha)"> turns out to be an entire function of <img src="https://latex.codecogs.com/png.latex?%5Calpha">, and the stationary-phase expansion holds uniformly on compact sets in <img src="https://latex.codecogs.com/png.latex?%5Calpha"> — which means the coefficients of that expansion, as functions of <img src="https://latex.codecogs.com/png.latex?%5Calpha">, extend holomorphically right down through <img src="https://latex.codecogs.com/png.latex?%5Calpha%20=%200">, even though the saddle point itself has long since drifted out of <img src="https://latex.codecogs.com/png.latex?%5B0,1%5D"> by then. Set <img src="https://latex.codecogs.com/png.latex?%5Calpha%20=%200"> term by term in an expansion that was only <em>derived</em> for <img src="https://latex.codecogs.com/png.latex?%5Calpha%20%3E%200">, and the half-integer ladder survives the trip. That’s the justification for treating <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D"> as a real, available decay rate even in the purely boundary-driven original problem — not asserted, derived, from a problem that visibly has it.</p>
+</section>
+<section id="the-comparison-that-matters" class="level2">
+<h2 class="anchored" data-anchor-id="the-comparison-that-matters">The comparison that matters</h2>
+<p>So there are two independent asymptotic contributions in play: an <strong>endpoint term</strong>, decaying like <img src="https://latex.codecogs.com/png.latex?N%5E%7Bt-1%7D">, and a <strong>stationary-phase term</strong>, decaying like <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D">, smuggled in by the deformation argument above. Whichever one decays slower dominates, and a smaller term can only cancel against something of its own size — you can’t cancel an <img src="https://latex.codecogs.com/png.latex?O(N%5E%7Bt-1%7D)"> piece against an <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-1/2%7D)"> piece if one is genuinely larger, not without a coefficient that blows up with <img src="https://latex.codecogs.com/png.latex?N">, which doesn’t happen here.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0At%20-%201%20=%20-%5Ctfrac12%20%5Ciff%20t%20=%20%5Ctfrac12.%0A"></p>
+<p>Only at <img src="https://latex.codecogs.com/png.latex?t=%5Ctfrac12"> do the two mechanisms land at exactly the same order, <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D">, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there’s nothing of the right size for it to cancel against.</p>
+</section>
+<section id="what-this-does-and-doesnt-show" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-does-and-doesnt-show">What this does and doesn’t show</h2>
+<p>This is a real, self-contained argument, and it’s cleaner than anything in <a href="../../posts/the-moon/index.html">Chapter 1</a> — no monotonicity assumption doing quiet work in the background. But look closely at what it actually proves: it shows <img src="https://latex.codecogs.com/png.latex?t=%5Ctfrac12"> is the <em>only</em> point where these two particular mechanisms are <em>the same order</em> — a necessary condition for them to cancel, not a proof that they do. Nothing here rules out a completely different mechanism producing a zero somewhere else, and nothing here shows the coefficients in front of these two <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D"> terms are ever actually equal and opposite at <img src="https://latex.codecogs.com/png.latex?t=%5Ctfrac12">, only that they’re allowed to be.</p>
+<p>It’s an honest, useful narrowing — the search space for “why the critical line” shrinks to one specific arithmetic coincidence of orders — but it’s not the whole argument. That gap between <em>the only place cancellation is possible</em> and <em>cancellation actually happens</em> is, in one disguise or another, exactly the gap this whole project keeps running into. It shows up again, worse, in <a href="../../posts/critical-line-path-identity/index.html">Chapter 8</a> too.</p>
+<p>One more thing worth flagging for later: the deformation trick here — adding a quadratic term to a phase to manufacture a saddle, then continuing back to the undeformed problem — isn’t a one-off. The same move resurfaces, independently rediscovered, in the pre-tail/tail machinery of <a href="../../posts/pre-tail-and-tail/index.html">Chapter 4</a> five months later, and again in 2026. I didn’t plan that continuity; it just kept being the right tool.</p>
+<hr>
+<p><em>Next: <a href="../../posts/pre-tail-and-tail/index.html">Chapter 4 — Pre-tail and Tail</a>, September–October 2025.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>stationary-phase</category>
+  <category>2025</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/the-only-special-value/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Chapter 5: Rigidity and Its Discontents</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/rigidity-and-its-discontents/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>December 2025 opened with a smaller result first: a companion argument showing that a certain sign — an orientation, really, of one vector relative to another as you move along the critical line through a zero gap — obeys a clean first-order ODE, <img src="https://latex.codecogs.com/png.latex?%5Calpha'(y)%20=%20%5Ctfrac%7B%5Ctheta'(y)%7D%7B2%7D%5Calpha(y)">, whose solution <img src="https://latex.codecogs.com/png.latex?%5Calpha(y)%20=%20K%20e%5E%7B%5Ctheta(y)/2%7D"> can only change sign where <img src="https://latex.codecogs.com/png.latex?%5Calpha"> itself passes through zero. Translated out of the differential-equations language: that orientation is <em>locked in</em> everywhere except at an actual zero of the function, or at one specific singular height where the machinery itself breaks down. It’s a real rigidity statement — nothing spontaneous is allowed to happen — but it’s about a sign, not a location, and it doesn’t by itself say anything about whether an off-line zero exists in the first place.</p>
+<p>The bigger result that month reframes the whole project’s central question in the cleanest form it’s had yet, and I want to walk through it in full, because — unusually for this series — I don’t need to hedge the derivation itself. What I need to hedge is the one hypothesis it all rests on.</p>
+<section id="the-symmetrized-energy" class="level2">
+<h2 class="anchored" data-anchor-id="the-symmetrized-energy">The symmetrized energy</h2>
+<p>Fix a height <img src="https://latex.codecogs.com/png.latex?t"> sitting strictly inside a gap between two consecutive zeros on the critical line, and let <img src="https://latex.codecogs.com/png.latex?F(%5Csigma,%20t)"> stand for <img src="https://latex.codecogs.com/png.latex?%5Czeta"> (or its truncated approximation from earlier chapters) restricted to that height, varying only <img src="https://latex.codecogs.com/png.latex?%5Csigma">. Define <img src="https://latex.codecogs.com/png.latex?A(u)%20=%20F(%5Ctfrac12+u,%20t)"> — the function’s behavior as you step off the critical line by <img src="https://latex.codecogs.com/png.latex?u"> — and then symmetrize it:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS(u)%20=%20%5Ctfrac12%5Cleft(%7CA(u)%7C%5E2%20+%20%7CA(-u)%7C%5E2%5Cright).%0A"></p>
+<p>This one substitution is what makes everything downstream exact rather than approximate. <img src="https://latex.codecogs.com/png.latex?S(u)"> is <em>even in <img src="https://latex.codecogs.com/png.latex?u"></em> by construction, no argument required — which means <img src="https://latex.codecogs.com/png.latex?S'(0)%20=%200"> and every odd derivative vanishes at the origin automatically. Its Taylor expansion has no odd terms to worry about at all:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS(u)%20=%20S(0)%20+%20%5Ctfrac12%20S''(0)%5C,u%5E2%20+%20%5Ctfrac%7B1%7D%7B24%7DS%5E%7B(4)%7D(%5Cxi)%5C,u%5E4,%20%5Cqquad%20%5Cxi%20%5Ctext%7B%20between%20%7D%200%20%5Ctext%7B%20and%20%7D%20u.%0A"></p>
+</section>
+<section id="the-transverse-curvature" class="level2">
+<h2 class="anchored" data-anchor-id="the-transverse-curvature">The transverse curvature</h2>
+<p>The quadratic coefficient works out exactly, with no approximation:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS''(0)%20=%202%5Cleft%7C%5Cpartial_%5Csigma%20F(%5Ctfrac12,%20t)%5Cright%7C%5E2%20+%202%5C,%5Cmathrm%7BRe%7D%5C!%5Cleft(%5Cpartial_%5Csigma%5E2%20F(%5Ctfrac12,%20t)%5C,%5Coverline%7BF(%5Ctfrac12,%20t)%7D%5Cright).%0A"></p>
+<p>Divide by <img src="https://latex.codecogs.com/png.latex?%7CF(%5Ctfrac12,t)%7C%5E2"> and call the result <img src="https://latex.codecogs.com/png.latex?k(t)">, the <strong>transverse curvature</strong> — literally how sharply the energy curves upward as you step away from the critical line at height <img src="https://latex.codecogs.com/png.latex?t">. The quartic remainder is bounded, honestly and without cleverness, purely from how derivatives of <img src="https://latex.codecogs.com/png.latex?F"> grow: <img src="https://latex.codecogs.com/png.latex?%7CS%5E%7B(4)%7D(%5Cxi)%7C%20%5Cle%20C%5Clog%5E4%20t%5C,%7CF(%5Ctfrac12,t)%7C%5E2"> for <img src="https://latex.codecogs.com/png.latex?u"> in a suitably small range. Put the two together and divide through:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BS(u)%7D%7B%7CF(%5Ctfrac12,t)%7C%5E2%7D%20%5C;%5Cge%5C;%201%20+%20%5Ctfrac12%20k(t)%5C,u%5E2%20-%20C%20u%5E4%20%5Clog%5E4%20t.%0A"></p>
+<p>Nothing hidden, nothing vanishing mysteriously — every piece of this traces back to an explicit computation.</p>
+</section>
+<section id="what-it-would-take-to-get-a-zero-free-strip" class="level2">
+<h2 class="anchored" data-anchor-id="what-it-would-take-to-get-a-zero-free-strip">What it would take to get a zero-free strip</h2>
+<p>The right-hand side is positive — meaning <img src="https://latex.codecogs.com/png.latex?F"> can’t vanish there — exactly when <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12%20k(t)%20u%5E2%20%3E%20Cu%5E4%5Clog%5E4%20t">. Choosing <img src="https://latex.codecogs.com/png.latex?u%20=%20c/%5Clog%20t"> turns that into a single, clean condition on <img src="https://latex.codecogs.com/png.latex?k(t)"> alone:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ak(t)%20%5C;%5Cge%5C;%20c_0%20%5Clog%5E2%20t%0A"></p>
+<p>for some fixed constant <img src="https://latex.codecogs.com/png.latex?c_0%20%3E%200"> and all sufficiently large <img src="https://latex.codecogs.com/png.latex?t"> in the gap. That’s the entire hypothesis. Not precise asymptotics, not a bound on every derivative, not RH itself assumed anywhere in the derivation — one lower bound, on one quantity, that’s directly computable from <img src="https://latex.codecogs.com/png.latex?F"> and its first two <img src="https://latex.codecogs.com/png.latex?%5Csigma">-derivatives at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%20%5Ctfrac12">.</p>
+</section>
+<section id="the-transverse-rigidity-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="the-transverse-rigidity-theorem">The Transverse Rigidity Theorem</h2>
+<blockquote class="blockquote">
+<p><strong>Conditional.</strong> Fix a height <img src="https://latex.codecogs.com/png.latex?t"> strictly between two consecutive nontrivial zeros on the critical line, and suppose there exists <img src="https://latex.codecogs.com/png.latex?c_0%20%3E%200"> such that the transverse curvature satisfies <img src="https://latex.codecogs.com/png.latex?k(t)%20%5Cge%20c_0%5Clog%5E2%20t"> for all sufficiently large <img src="https://latex.codecogs.com/png.latex?t"> in that gap. Then there exists <img src="https://latex.codecogs.com/png.latex?%5Cdelta%20%3E%200"> such that <img src="https://latex.codecogs.com/png.latex?F(%5Csigma,%20t)%20%5Cne%200"> for all <img src="https://latex.codecogs.com/png.latex?%7C%5Csigma%20-%20%5Ctfrac12%7C%20%5Cle%20%5Cdelta/%5Clog%20t">.</p>
+</blockquote>
+<p>The width of the guaranteed zero-free strip, <img src="https://latex.codecogs.com/png.latex?1/%5Clog%20t">, isn’t an artifact of sloppy bookkeeping — it falls out naturally from balancing the quadratic term against the quartic remainder. The mechanism is entirely geometric (a curvature condition on an energy function), not arithmetic, and at no point does the argument assume anything about zeros existing or not existing off the line. It’s a real implication, cleanly stated, resting on exactly one unverified hypothesis.</p>
+</section>
+<section id="what-it-does-and-doesnt-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-it-does-and-doesnt-do">What it does and doesn’t do</h2>
+<p>I want to be as direct as I was when I first wrote this down: <strong>this does not prove the Riemann Hypothesis.</strong> <img src="https://latex.codecogs.com/png.latex?k(t)%20%5Cge%20c_0%5Clog%5E2%20t"> is exactly as open a question as RH itself, restated in different clothing — I haven’t shown it holds, only shown what would follow if it did, and that the numerics (after smoothing) look consistent with it. But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> — is not nothing. It’s the sharpest form the “why can’t zeros drift off the line” question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.</p>
+<p>I haven’t verified it. Nobody has, as far as I know. But I know now precisely what I’d need.</p>
+<hr>
+<p><em>Next: Chapter 6 — Only σ=1/2, Take Four, February 2026. Not yet posted — see the <a href="../../about.html">roadmap</a> for what’s still coming.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>conditional-result</category>
+  <category>2025</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/rigidity-and-its-discontents/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Why the Critical-Line-Path Identity Isn’t a Coincidence</title>
   <link>https://ian2j.github.io/spiral-and-the-line/posts/critical-line-path-identity/</link>
   <description><![CDATA[ 
@@ -131,6 +239,8 @@
 <p>Pick a known zero from the list, then drag the <img src="https://latex.codecogs.com/png.latex?%5Csigma">-offset fader off the critical line and watch the final point (the colored dot) leave the origin.</p>
 <iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>Each point along the path is a running total of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D">; the color goes from muted to full as <img src="https://latex.codecogs.com/png.latex?n"> runs from <img src="https://latex.codecogs.com/png.latex?1"> to the displayed cutoff. The path is drawn a few multiples past <img src="https://latex.codecogs.com/png.latex?M"> purely so the winding is legible to the eye — the small diamond marks where <img src="https://latex.codecogs.com/png.latex?f(s)"> is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, so “locked” at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%200.5"> isn’t a simulation — it’s the real function, doing the real thing.</p>
+<hr>
+<p><em>Next: <a href="../../posts/the-only-special-value/index.html">Chapter 3 — The Only Special Value</a>, spring 2025.</em></p>
 
 
 </section>
@@ -241,6 +351,57 @@
   <category>chapter</category>
   <category>prologue</category>
   <guid>https://ian2j.github.io/spiral-and-the-line/posts/prologue/</guid>
+  <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Chapter 4: Pre-tail and Tail</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/pre-tail-and-tail/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>By the fall of 2025, two pieces from earlier chapters were sitting next to each other without quite touching: the spiral picture from <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a>, where partial sums of <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)"> wind toward a fixed center, and the endpoint-vs-saddle deformation trick from <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>, which manufactures a genuine stationary point out of a boundary-only integral by adding a quadratic term to the phase and analytically continuing it away again. This chapter is where those two pieces actually fused — and where <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor">, the truncation length used everywhere from here on, stopped being a number I’d noticed worked well and became a number I could explain.</p>
+<section id="why-lfloor-tpi-rfloor-precisely" class="level2">
+<h2 class="anchored" data-anchor-id="why-lfloor-tpi-rfloor-precisely">Why <img src="https://latex.codecogs.com/png.latex?%5Clfloor%20t/%5Cpi%20%5Crfloor">, precisely</h2>
+<p>Look at a single term of the alternating series at height <img src="https://latex.codecogs.com/png.latex?t">: <img src="https://latex.codecogs.com/png.latex?(-1)%5E%7Bn+1%7D%20n%5E%7B-%5Csigma-it%7D">. Its phase, as a function of <img src="https://latex.codecogs.com/png.latex?n">, is <img src="https://latex.codecogs.com/png.latex?%5Cphi(n)%20=%20t%5Clog%20n%20-%20%5Cpi%20n"> (the <img src="https://latex.codecogs.com/png.latex?%5Cpi%20n"> comes from folding the alternating sign into the exponential, the same move <a href="../../posts/the-moon/index.html">Chapter 1</a> made with cosines and sines). This phase has a genuine stationary point — no deformation required this time — exactly where <img src="https://latex.codecogs.com/png.latex?%5Cphi'(n)%20=%20t/n%20-%20%5Cpi%20=%200">, which is <img src="https://latex.codecogs.com/png.latex?n%20=%20t/%5Cpi">. There’s no trick here, no <img src="https://latex.codecogs.com/png.latex?%5Calpha%20%5Cto%200"> limit: this stationary point is really there, sitting inside the sum, for every height <img src="https://latex.codecogs.com/png.latex?t">. If you’re going to split a partial sum into “the part before something interesting happens” and “the part after,” this is the honest place to make the cut.</p>
+</section>
+<section id="the-split" class="level2">
+<h2 class="anchored" data-anchor-id="the-split">The split</h2>
+<p>Define the finite <strong>pre-tail</strong> — a partial sum of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, run out just past that stationary point, with a half-weighted final term for good measure:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(s)%20=%20%5Czeta_M(s)%20+%20%5Ctfrac12%20(M+1)%5E%7B-s%7D,%20%5Cqquad%20M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor.%0A"></p>
+<p>(This is the same object that reappears, unchanged, as <img src="https://latex.codecogs.com/png.latex?f(s)"> in <a href="../../posts/critical-line-path-identity/index.html">Chapter 8</a> — I hadn’t settled on final notation yet in 2025, but the definition never moved again after this.) Partial sums of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> spiral toward a fixed center as more terms are added, and <img src="https://latex.codecogs.com/png.latex?P(s)"> turns out to be a genuinely good approximation to that center — because <img src="https://latex.codecogs.com/png.latex?n%20=%20t/%5Cpi"> is close to where consecutive terms’ magnitudes are comparable and their phases point in nearly opposite directions, which is exactly the point where a spiral’s trajectory is closest to having already settled.</p>
+<p>The <strong>tail</strong> is everything after <img src="https://latex.codecogs.com/png.latex?M">: <img src="https://latex.codecogs.com/png.latex?T(s)%20=%20%5Ceta_N(s)%20-%20%5Ceta_M(s)">, for the alternating series this time, and it’s where <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>’s machinery earns its keep. Treated as a Fresnel-type integral around that same stationary point, the tail collapses to a closed form:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AT(s)%20%5C;%5Capprox%5C;%202%5E%7B-1/2%7D%5Cleft(%5Cfrac%7Bt%7D%7B%5Cpi%7D%5Cright)%5E%7B%5Cfrac12%20-%20%5Csigma%7D%20%5Cexp%5C!%5Cleft(i%5Cleft%5B%5Cfrac%7B5%5Cpi%7D%7B4%7D%20-%20t%5Clog%5Cfrac%7Bt%7D%7B%5Cpi%7D%20+%20t%5Cright%5D%5Cright).%0A"></p>
+<p>Notice what happens to the magnitude at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%20%5Ctfrac12"> specifically: the exponent <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12%20-%20%5Csigma"> vanishes, and <img src="https://latex.codecogs.com/png.latex?%5Cleft(t/%5Cpi%5Cright)%5E0%20=%201"> for every height <img src="https://latex.codecogs.com/png.latex?t">. The tail’s magnitude collapses to exactly <img src="https://latex.codecogs.com/png.latex?2%5E%7B-1/2%7D"> — a single universal constant, independent of where on the critical line you are. Off the critical line, that magnitude drifts with <img src="https://latex.codecogs.com/png.latex?t">; on it, it doesn’t.</p>
+</section>
+<section id="what-this-predicts-at-a-zero" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-predicts-at-a-zero">What this predicts at a zero</h2>
+<p>The eta and zeta functions are related by <img src="https://latex.codecogs.com/png.latex?%5Ceta(s)%20=%20(1-2%5E%7B1-s%7D)%5Czeta(s)">, and the same relation holds, approximately, between their pre-tail approximations. Combine that with the split above:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_M(s)%20=%20%5Ceta_N(s)%20-%20T(s)%20=%20(1-2%5E%7B1-s%7D)P(s)%20-%20T(s).%0A"></p>
+<p>If <img src="https://latex.codecogs.com/png.latex?s"> is a genuine zero — so that both the true spiral center and its finite approximation <img src="https://latex.codecogs.com/png.latex?P(s)"> vanish — this collapses to a clean prediction:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_M(s)%20%5C;%5Capprox%5C;%20-T(s).%0A"></p>
+<p>The pre-tail sum, at a real zero, should point in almost exactly the opposite direction from the tail’s closed form, with almost exactly the same magnitude, <img src="https://latex.codecogs.com/png.latex?2%5E%7B-1/2%7D">.</p>
+</section>
+<section id="checking-it-against-100000-real-zeros" class="level2">
+<h2 class="anchored" data-anchor-id="checking-it-against-100000-real-zeros">Checking it against 100,000 real zeros</h2>
+<p>This is a concrete, falsifiable claim about actual known numbers, so I checked it against actual known numbers: the first 100,000 nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, all of them verified to sit on the critical line. In every case, the pre-tail sum <img src="https://latex.codecogs.com/png.latex?%5Ceta_M(s)"> and the tail estimate <img src="https://latex.codecogs.com/png.latex?T(s)"> come out pointing in nearly opposite directions, with modulus close to <img src="https://latex.codecogs.com/png.latex?1/%5Csqrt2">, exactly as predicted.</p>
+<p>I want to be as precise about this as I was at the time: <em>“I have no way of currently proving rigorously that this is always the case for all non-trivial zeros of the Riemann zeta function.”</em> This is a strong, clean, checkable numerical regularity — a hundred thousand data points is not nothing — but it is numerics, not a proof, and I want to keep those two things visibly separate rather than let the size of the check do the work a derivation should.</p>
+<p>Whatever happens to the rest of this project, I think this result stands on its own: a closed-form prediction about the geometry of truncated zeta and eta sums near real zeros, derived from first principles, checked at scale, and still — as far as I know — unexplained by anything deeper than “the numbers do this.”</p>
+<hr>
+<p><em>Next: <a href="../../posts/rigidity-and-its-discontents/index.html">Chapter 5 — Rigidity and Its Discontents</a>, December 2025.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>stationary-phase</category>
+  <category>spiral</category>
+  <category>2025</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/pre-tail-and-tail/</guid>
   <pubDate>Sat, 15 Aug 2026 15:00:00 GMT</pubDate>
 </item>
 </channel>

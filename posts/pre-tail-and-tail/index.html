@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-08-16">
+<meta name="description" content="September–October 2025. Where M = ⌊t/π⌋ stops being a convenient cutoff and becomes a genuine stationary point — and a closed-form tail estimate gets checked against 100,000 real zeros.">
 
-<title>The Spiral and the Line</title>
+<title>Chapter 4: Pre-tail and Tail – The Spiral and the Line</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,29 +31,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b471638a93ca0bb9f949d767bf091def.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b471638a93ca0bb9f949d767bf091def.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,35 +79,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -153,12 +124,12 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="The Spiral and the Line" href="index.xml" data-external="1"><meta property="og:title" content="The Spiral and the Line">
-<meta property="og:description" content="A field notebook on the Riemann zeta function">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Chapter 4: Pre-tail and Tail – The Spiral and the Line">
+<meta property="og:description" content="September–October 2025. Where M = ⌊t/π⌋ stops being a convenient cutoff and becomes a genuine stationary point — and a closed-form tail estimate gets checked against 100,000 real zeros.">
 <meta property="og:site_name" content="The Spiral and the Line">
-<meta name="twitter:title" content="The Spiral and the Line">
-<meta name="twitter:description" content="A field notebook on the Riemann zeta function">
+<meta name="twitter:title" content="Chapter 4: Pre-tail and Tail – The Spiral and the Line">
+<meta name="twitter:description" content="September–October 2025. Where M = ⌊t/π⌋ stops being a convenient cutoff and becomes a genuine stationary point — and a closed-form tail estimate gets checked against 100,000 real zeros.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -331,7 +302,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">The Spiral and the Line</span>
     </a>
   </div>
@@ -342,11 +313,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About &amp; Roadmap</span></a>
   </li>  
 </ul>
@@ -367,257 +338,102 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">The Spiral and the Line</h1>
-            <p class="subtitle lead">A field notebook on the Riemann zeta function</p>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Chapter 4: Pre-tail and Tail</h1>
+                  <div>
+        <div class="description">
+          September–October 2025. Where M = ⌊t/π⌋ stops being a convenient cutoff and becomes a genuine stationary point — and a closed-form tail estimate gets checked against 100,000 real zeros.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">chapter</div>
+                <div class="quarto-category">stationary-phase</div>
+                <div class="quarto-category">spiral</div>
+                <div class="quarto-category">2025</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 16, 2026</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="MjAyMw==">2023 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="MjAyNQ==">2025 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Y2hhcHRlcg==">chapter <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Y29uZGl0aW9uYWwtcmVzdWx0">conditional-result <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZnVuY3Rpb25hbCUyMGVxdWF0aW9u">functional equation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW50ZXJhY3RpdmU=">interactive <span class="quarto-category-count">(1)</span></div><div class="category" data-category="amVuc2Vu">jensen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvbG9ndWU=">prologue <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3BpcmFs">spiral <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3BpcmFsJTIwZ2VvbWV0cnk=">spiral geometry <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlvbmFyeS1waGFzZQ==">stationary-phase <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dGVjaG5pY2FsJTIwbm90ZQ==">technical note <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-lfloor-tpi-rfloor-precisely" id="toc-why-lfloor-tpi-rfloor-precisely" class="nav-link active" data-scroll-target="#why-lfloor-tpi-rfloor-precisely">Why <span class="math inline">\lfloor t/\pi \rfloor</span>, precisely</a></li>
+  <li><a href="#the-split" id="toc-the-split" class="nav-link" data-scroll-target="#the-split">The split</a></li>
+  <li><a href="#what-this-predicts-at-a-zero" id="toc-what-this-predicts-at-a-zero" class="nav-link" data-scroll-target="#what-this-predicts-at-a-zero">What this predicts at a zero</a></li>
+  <li><a href="#checking-it-against-100000-real-zeros" id="toc-checking-it-against-100000-real-zeros" class="nav-link" data-scroll-target="#checking-it-against-100000-real-zeros">Checking it against 100,000 real zeros</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
 
+<p>By the fall of 2025, two pieces from earlier chapters were sitting next to each other without quite touching: the spiral picture from <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a>, where partial sums of <span class="math inline">\zeta(s)</span> wind toward a fixed center, and the endpoint-vs-saddle deformation trick from <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>, which manufactures a genuine stationary point out of a boundary-only integral by adding a quadratic term to the phase and analytically continuing it away again. This chapter is where those two pieces actually fused — and where <span class="math inline">M = \lfloor t/\pi \rfloor</span>, the truncation length used everywhere from here on, stopped being a number I’d noticed worked well and became a number I could explain.</p>
+<section id="why-lfloor-tpi-rfloor-precisely" class="level2">
+<h2 class="anchored" data-anchor-id="why-lfloor-tpi-rfloor-precisely">Why <span class="math inline">\lfloor t/\pi \rfloor</span>, precisely</h2>
+<p>Look at a single term of the alternating series at height <span class="math inline">t</span>: <span class="math inline">(-1)^{n+1} n^{-\sigma-it}</span>. Its phase, as a function of <span class="math inline">n</span>, is <span class="math inline">\phi(n) = t\log n - \pi n</span> (the <span class="math inline">\pi n</span> comes from folding the alternating sign into the exponential, the same move <a href="../../posts/the-moon/index.html">Chapter 1</a> made with cosines and sines). This phase has a genuine stationary point — no deformation required this time — exactly where <span class="math inline">\phi'(n) = t/n - \pi = 0</span>, which is <span class="math inline">n = t/\pi</span>. There’s no trick here, no <span class="math inline">\alpha \to 0</span> limit: this stationary point is really there, sitting inside the sum, for every height <span class="math inline">t</span>. If you’re going to split a partial sum into “the part before something interesting happens” and “the part after,” this is the honest place to make the cut.</p>
+</section>
+<section id="the-split" class="level2">
+<h2 class="anchored" data-anchor-id="the-split">The split</h2>
+<p>Define the finite <strong>pre-tail</strong> — a partial sum of <span class="math inline">\zeta</span>, run out just past that stationary point, with a half-weighted final term for good measure:</p>
+<p><span class="math display">
+P(s) = \zeta_M(s) + \tfrac12 (M+1)^{-s}, \qquad M = \lfloor t/\pi \rfloor.
+</span></p>
+<p>(This is the same object that reappears, unchanged, as <span class="math inline">f(s)</span> in <a href="../../posts/critical-line-path-identity/index.html">Chapter 8</a> — I hadn’t settled on final notation yet in 2025, but the definition never moved again after this.) Partial sums of <span class="math inline">\zeta</span> spiral toward a fixed center as more terms are added, and <span class="math inline">P(s)</span> turns out to be a genuinely good approximation to that center — because <span class="math inline">n = t/\pi</span> is close to where consecutive terms’ magnitudes are comparable and their phases point in nearly opposite directions, which is exactly the point where a spiral’s trajectory is closest to having already settled.</p>
+<p>The <strong>tail</strong> is everything after <span class="math inline">M</span>: <span class="math inline">T(s) = \eta_N(s) - \eta_M(s)</span>, for the alternating series this time, and it’s where <a href="../../posts/the-only-special-value/index.html">Chapter 3</a>’s machinery earns its keep. Treated as a Fresnel-type integral around that same stationary point, the tail collapses to a closed form:</p>
+<p><span class="math display">
+T(s) \;\approx\; 2^{-1/2}\left(\frac{t}{\pi}\right)^{\frac12 - \sigma} \exp\!\left(i\left[\frac{5\pi}{4} - t\log\frac{t}{\pi} + t\right]\right).
+</span></p>
+<p>Notice what happens to the magnitude at <span class="math inline">\sigma = \tfrac12</span> specifically: the exponent <span class="math inline">\tfrac12 - \sigma</span> vanishes, and <span class="math inline">\left(t/\pi\right)^0 = 1</span> for every height <span class="math inline">t</span>. The tail’s magnitude collapses to exactly <span class="math inline">2^{-1/2}</span> — a single universal constant, independent of where on the critical line you are. Off the critical line, that magnitude drifts with <span class="math inline">t</span>; on it, it doesn’t.</p>
+</section>
+<section id="what-this-predicts-at-a-zero" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-predicts-at-a-zero">What this predicts at a zero</h2>
+<p>The eta and zeta functions are related by <span class="math inline">\eta(s) = (1-2^{1-s})\zeta(s)</span>, and the same relation holds, approximately, between their pre-tail approximations. Combine that with the split above:</p>
+<p><span class="math display">
+\eta_M(s) = \eta_N(s) - T(s) = (1-2^{1-s})P(s) - T(s).
+</span></p>
+<p>If <span class="math inline">s</span> is a genuine zero — so that both the true spiral center and its finite approximation <span class="math inline">P(s)</span> vanish — this collapses to a clean prediction:</p>
+<p><span class="math display">
+\eta_M(s) \;\approx\; -T(s).
+</span></p>
+<p>The pre-tail sum, at a real zero, should point in almost exactly the opposite direction from the tail’s closed form, with almost exactly the same magnitude, <span class="math inline">2^{-1/2}</span>.</p>
+</section>
+<section id="checking-it-against-100000-real-zeros" class="level2">
+<h2 class="anchored" data-anchor-id="checking-it-against-100000-real-zeros">Checking it against 100,000 real zeros</h2>
+<p>This is a concrete, falsifiable claim about actual known numbers, so I checked it against actual known numbers: the first 100,000 nontrivial zeros of <span class="math inline">\zeta</span>, all of them verified to sit on the critical line. In every case, the pre-tail sum <span class="math inline">\eta_M(s)</span> and the tail estimate <span class="math inline">T(s)</span> come out pointing in nearly opposite directions, with modulus close to <span class="math inline">1/\sqrt2</span>, exactly as predicted.</p>
+<p>I want to be as precise about this as I was at the time: <em>“I have no way of currently proving rigorously that this is always the case for all non-trivial zeros of the Riemann zeta function.”</em> This is a strong, clean, checkable numerical regularity — a hundred thousand data points is not nothing — but it is numerics, not a proof, and I want to keep those two things visibly separate rather than let the size of the check do the work a derivation should.</p>
+<p>Whatever happens to the rest of this project, I think this result stands on its own: a closed-form prediction about the geometry of truncated zeta and eta sums near real zeros, derived from first principles, checked at scale, and still — as far as I know — unexplained by anything deeper than “the numbers do this.”</p>
+<hr>
+<p><em>Next: <a href="../../posts/rigidity-and-its-discontents/index.html">Chapter 5 — Rigidity and Its Discontents</a>, December 2025.</em></p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Y2hhcHRlciUyQ3N0YXRpb25hcnktcGhhc2UlMkMyMDI1" data-listing-date-sort="1786806000000" data-listing-file-modified-sort="1786904292409" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="986">
-<div class="thumbnail"><a href="./posts/the-only-special-value/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/the-only-special-value/index.html" class="no-external">Chapter 3: The Only Special Value</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2hhcHRlcg=='); return false;">chapter</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlvbmFyeS1waGFzZQ=='); return false;">stationary-phase</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('MjAyNQ=='); return false;">2025</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/the-only-special-value/index.html" class="no-external">
-<p>Spring 2025. Two independent asymptotic mechanisms — an endpoint term and a stationary-phase term — that decay at different rates almost everywhere, and at exactly the same rate only at one point.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/the-only-special-value/index.html" class="no-external">
-<div class="listing-date">
-Aug 16, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Y2hhcHRlciUyQ2NvbmRpdGlvbmFsLXJlc3VsdCUyQzIwMjU=" data-listing-date-sort="1786806000000" data-listing-file-modified-sort="1786904544163" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
-<div class="thumbnail"><a href="./posts/rigidity-and-its-discontents/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/rigidity-and-its-discontents/index.html" class="no-external">Chapter 5: Rigidity and Its Discontents</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2hhcHRlcg=='); return false;">chapter</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29uZGl0aW9uYWwtcmVzdWx0'); return false;">conditional-result</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('MjAyNQ=='); return false;">2025</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/rigidity-and-its-discontents/index.html" class="no-external">
-<p>December 2025. A theorem I’d be genuinely happy to put my name on — with the word ‘conditional’ doing a lot of work in that sentence.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/rigidity-and-its-discontents/index.html" class="no-external">
-<div class="listing-date">
-Aug 16, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="dGVjaG5pY2FsJTIwbm90ZSUyQ2Z1bmN0aW9uYWwlMjBlcXVhdGlvbg==" data-listing-date-sort="1786806000000" data-listing-file-modified-sort="1786863604142" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="872">
-<div class="thumbnail"><a href="./posts/critical-line-path-identity/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/critical-line-path-identity/index.html" class="no-external">Why the Critical-Line-Path Identity Isn’t a Coincidence</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2FsJTIwbm90ZQ=='); return false;">technical note</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZnVuY3Rpb25hbCUyMGVxdWF0aW9u'); return false;">functional equation</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/critical-line-path-identity/index.html" class="no-external">
-<p>A numerical match with cosine similarity 0.9999999773 looked like it needed an explanation. It turns out to be an exact algebraic consequence of three ingredients — two of them trivial.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/critical-line-path-identity/index.html" class="no-external">
-<div class="listing-date">
-Aug 16, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="aW50ZXJhY3RpdmUlMkNzcGlyYWwlMjBnZW9tZXRyeQ==" data-listing-date-sort="1786806000000" data-listing-file-modified-sort="1786904309485" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="372">
-<div class="thumbnail"><a href="./posts/spiral-toward-a-center/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/spiral-toward-a-center/index.html" class="no-external">Spiral Toward a Center</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('aW50ZXJhY3RpdmU='); return false;">interactive</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3BpcmFsJTIwZ2VvbWV0cnk='); return false;">spiral geometry</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/spiral-toward-a-center/index.html" class="no-external">
-<p>An interactive figure for Chapter 2: watch a truncated zeta sum wind toward a fixed point — and watch it miss, the moment you leave the critical line.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/spiral-toward-a-center/index.html" class="no-external">
-<div class="listing-date">
-Aug 16, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Y2hhcHRlciUyQ2plbnNlbiUyQzIwMjM=" data-listing-date-sort="1786806000000" data-listing-file-modified-sort="1786904056352" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1052">
-<div class="thumbnail"><a href="./posts/the-moon/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/the-moon/index.html" class="no-external">Chapter 1: The Moon</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2hhcHRlcg=='); return false;">chapter</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('amVuc2Vu'); return false;">jensen</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('MjAyMw=='); return false;">2023</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/the-moon/index.html" class="no-external">
-<p>Late 2023. The first real technique of this project — a grid of rays, a parity trick, and a convexity argument that pushed toward the critical line without quite closing the case.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/the-moon/index.html" class="no-external">
-<div class="listing-date">
-Aug 16, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="Y2hhcHRlciUyQ3Byb2xvZ3Vl" data-listing-date-sort="1786806000000" data-listing-file-modified-sort="1786904030232" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1229">
-<div class="thumbnail"><a href="./posts/prologue/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/prologue/index.html" class="no-external">Prologue: Why This, Why Alone, Why With an LLM</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2hhcHRlcg=='); return false;">chapter</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvbG9ndWU='); return false;">prologue</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/prologue/index.html" class="no-external">
-<p>Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what six years of trying to make a dent in it, the last three alongside an LLM, has actually looked like.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/prologue/index.html" class="no-external">
-<div class="listing-date">
-Aug 16, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="Y2hhcHRlciUyQ3N0YXRpb25hcnktcGhhc2UlMkNzcGlyYWwlMkMyMDI1" data-listing-date-sort="1786806000000" data-listing-file-modified-sort="1786904407990" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="787">
-<div class="thumbnail"><a href="./posts/pre-tail-and-tail/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/pre-tail-and-tail/index.html" class="no-external">Chapter 4: Pre-tail and Tail</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2hhcHRlcg=='); return false;">chapter</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlvbmFyeS1waGFzZQ=='); return false;">stationary-phase</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3BpcmFs'); return false;">spiral</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('MjAyNQ=='); return false;">2025</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/pre-tail-and-tail/index.html" class="no-external">
-<p>September–October 2025. Where M = ⌊t/π⌋ stops being a convenient cutoff and becomes a genuine stationary point — and a closed-form tail estimate gets checked against 100,000 real zeros.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/pre-tail-and-tail/index.html" class="no-external">
-<div class="listing-date">
-Aug 16, 2026
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
