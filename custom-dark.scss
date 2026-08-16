@@ -1,5 +1,9 @@
 /*-- scss:defaults --*/
 
+// See custom.scss for why this is disabled: Bootstrap's own native
+// dark-mode system conflicts with Quarto's bundle-swap light/dark toggle.
+$enable-dark-mode: false;
+
 $primary: #4fe0c6;
 $body-bg: #0a0e13;
 $body-color: #e7ebf0;

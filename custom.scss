@@ -1,5 +1,15 @@
 /*-- scss:defaults --*/
 
+// Quarto swaps between two whole compiled bundles (this file and
+// custom-dark.scss) for light/dark already. Bootstrap 5.3 also ships its
+// own independent native dark-mode system, activated by a
+// [data-bs-theme="dark"] attribute — left enabled, it generates a second,
+// conflicting dark override block inside *each* bundle (using stock
+// Bootstrap colors mixed with mis-derived values from these overrides),
+// which is what produced unreadable low-contrast text. Disable it so
+// Quarto's bundle-swap is the only mechanism in play.
+$enable-dark-mode: false;
+
 $primary: #0e8f7c;
 $body-bg: #ffffff;
 $body-color: #141b24;

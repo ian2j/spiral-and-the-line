@@ -5,7 +5,7 @@ project:
 website:
   title: "The Spiral and the Line"
   description: "A field notebook on the Riemann zeta function — three years of independent research, written up honestly, dead ends included."
-  site-url: "https://your-domain-goes-here.example.com"
+  site-url: "https://ian2j.github.io/spiral-and-the-line/"
   navbar:
     left:
       - href: index.qmd
@@ -14,7 +14,7 @@ website:
         text: About & Roadmap
     right:
       - icon: github
-        href: https://github.com/
+        href: https://github.com/ian2j/spiral-and-the-line
   page-footer:
     left: "The Spiral and the Line"
     right: "Built with Quarto."
