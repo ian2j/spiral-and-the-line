@@ -20,13 +20,13 @@ Readers comfortable with complex analysis and Dirichlet series. Specialist knowl
 
 The series follows the actual chronology of the research rather than a tidied-up logical order. Each entry below will link to its post as it's written.
 
-**0 · Prologue — why this, why alone, why with an LLM** <span class="status-badge">planned</span>
+**0 · Prologue — why this, why alone, why with an LLM** <span class="status-badge done">posted</span>
 
-What the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice.
+What the Riemann Hypothesis is, why this project started, and what three years of human/LLM collaboration on a single hard problem has actually looked like in practice. [Read it](posts/prologue/index.qmd).
 
-**1 · The Moon (late 2023)** <span class="status-badge">planned</span>
+**1 · The Moon (late 2023)** <span class="status-badge done">posted</span>
 
-The origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier.
+The origin: phase functions of alternating sums, Jensen-convexity pairing, and a double-sum decomposition by the parity of a prime-factorization multiplier. [Read it](posts/the-moon/index.qmd).
 
 **2 · Finding the Spiral (Dec 2024)** <span class="status-badge done">posted</span>
 

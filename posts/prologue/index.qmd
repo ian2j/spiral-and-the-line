@@ -1,0 +1,38 @@
+---
+title: "Prologue: Why This, Why Alone, Why With an LLM"
+description: "Chapter 0. What the Riemann Hypothesis is, in one paragraph — and what three years of trying to make a dent in it with an LLM at my side has actually looked like."
+date: 2026-08-16
+categories: [chapter, prologue]
+---
+
+In April of 2025 I was deep in a conversation with an LLM, working through what looked like a real argument. The setup: a certain quantity $f_N(t)$ decays like $N^{2t-2}$ almost everywhere, but at two special points it decays much faster — $O(N^{-2})$ instead. If $f_N$ is monotonic between those two points for large $N$, a squeeze argument forces the *entire interval* between them down to that same fast decay rate. And since the generic behavior only matches that rate at an isolated point, the interval has no choice but to collapse — the two special points have to coincide.
+
+It was a nice argument. It was also wrong in one specific place, and I caught it:
+
+> *"I think your logic and reasoning mostly makes sense but I do notice one thing that is clearly wrong that you keep saying — you note that the generic decay rate of $N^{2t-2}$ is not $-2$ except when $t=.5$. This is demonstrably false because the generic decay rate when $t=.5$ is $N^{-1}$. In fact... if we were to allow $t=0$ then we would have that the generic decay rate for $t=0$ is $N^{-2}$."*
+
+The LLM had the mechanism right and one exponent wrong. Fixing it didn't weaken the argument — it strengthened it, by closing off an edge case where the "generic" and "enhanced" decay rates could have coincided somewhere in the middle of the interval instead of only at an endpoint. We rebuilt the proof from there.
+
+I'm telling you this story first because it's the most honest way I know to describe what this project actually is: not "I asked an AI to solve the Riemann Hypothesis," and not "I proved it myself and used a chatbot as a calculator," but three years of a genuine back-and-forth, where the LLM does things I can't — hold enormous amounts of mathematical machinery in working memory, draft a rigorous-looking proof in seconds, try ten reformulations in an afternoon — and I do things it doesn't reliably do on its own, chiefly: notice when a specific claim is wrong, insist on numerical verification, and refuse to let "this looks right" stand in for "this is proven."
+
+## What the Riemann Hypothesis actually says
+
+Take the Riemann zeta function, $\zeta(s) = \sum_{n=1}^{\infty} n^{-s}$, extended (via analytic continuation) to all complex $s$ except $s=1$. It has infinitely many "trivial" zeros at the negative even integers, and infinitely many more "nontrivial" zeros scattered through the strip $0 < \mathrm{Re}(s) < 1$. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line $\mathrm{Re}(s) = \tfrac12$, the *critical line*. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions. It's been open since 1859. It's one of the seven Clay Millennium Problems, and the only one from Hilbert's original 1900 list that's still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.
+
+I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is three years of genuinely trying, from six different angles, with a documented trail of what worked, what didn't, and — a few times — something that stood on its own regardless of whether the big question ever closes.
+
+## Why this, specifically
+
+<!-- IAN: this is the one section I can't honestly write for you — the actual pull toward this problem, what got you started in 2023, what keeps you coming back. Everything above and below is grounded in what's actually in three years of notes; this paragraph should be replaced with the real answer. -->
+
+*[A paragraph on what drew me to this problem specifically, and what kept me at it for three years, belongs here.]*
+
+## Why with an LLM
+
+What I can describe precisely, because it's all on the record: the shape of the collaboration changed as the tools did, but the division of labor has stayed remarkably consistent since the beginning. I bring the numerical intuition — decades of looking at these functions means I usually have a rough sense of *where* something interesting should be happening before I can say *why*. I insist on checking claims against real numbers: against the first 100,000 known nontrivial zeros, in one case. I catch the specific error, the way I did in April 2025, and a handful of other times across the notes this series draws from. The LLM brings breadth I don't have — it can reach for a stationary-phase argument, a Poisson summation identity, or a result from a subfield I've never worked in, and draft it out fully formed in the time it takes me to describe the problem.
+
+Neither of us gets there alone. That's not a hedge — it's the actual finding of three years of trying. The chapters that follow are the record of it: six reformulations of the same underlying obstruction, most of them dead ends, a couple of them real.
+
+---
+
+*Next: [Chapter 1 — The Moon](../the-moon/index.qmd), where this all started in late 2023.*

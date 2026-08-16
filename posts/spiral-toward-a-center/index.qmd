@@ -5,7 +5,7 @@ date: 2026-08-16
 categories: [interactive, spiral geometry]
 ---
 
-*This is the flagship figure for Chapter 2, "Finding the Spiral" — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this.*
+*This is the flagship figure for Chapter 2, "Finding the Spiral" — posted ahead of the full chapter essay because the picture makes the point before the prose does. The chapter text will grow around this. Previous: [Chapter 1 — The Moon](../the-moon/index.qmd).*
 
 ## The picture
 
