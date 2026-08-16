@@ -402,7 +402,7 @@ window.Quarto = {
 <p>Take the Riemann zeta function, <span class="math inline">\zeta(s) = \sum_{n=1}^{\infty} n^{-s}</span>, extended (via analytic continuation) to all complex <span class="math inline">s</span> except <span class="math inline">s=1</span>. It has infinitely many “trivial” zeros at the negative even integers, and infinitely many more “nontrivial” zeros scattered through the strip <span class="math inline">0 &lt; \mathrm{Re}(s) &lt; 1</span>. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line <span class="math inline">\mathrm{Re}(s) = \tfrac12</span>, the <em>critical line</em>. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions.</p>
 <p>It’s been open since 1859. It’s one of the seven Clay Millennium Problems, and the only one from Hilbert’s original 1900 list that’s still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.</p>
 <p>Here’s what that actually looks like, computed directly rather than taken on faith. Pick a known zero and watch <span class="math inline">|\eta(\sigma+it)|</span> dive toward zero exactly at <span class="math inline">\sigma=\tfrac12</span>; pick a height with nothing special about it and watch that dip simply not happen.</p>
-<iframe src="zero_finder.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="zero_finder.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is six years of genuinely trying — the last three of them documented closely enough to write this series from — across roughly six different angles, with a trail of what worked, what didn’t, and — a few times — something that stood on its own regardless of whether the big question ever closes.</p>
 </section>
 <section id="why-this-specifically" class="level2">
@@ -425,18 +425,6 @@ window.Quarto = {
 </section>
 
 </main> <!-- /main -->
-<script>
-window.addEventListener("message", function (e) {
-  if (!e.data || e.data.type !== "viz-resize") return;
-  var frames = document.getElementsByTagName("iframe");
-  for (var i = 0; i < frames.length; i++) {
-    if (frames[i].contentWindow === e.source) {
-      frames[i].style.height = (e.data.height + 6) + "px";
-      break;
-    }
-  }
-});
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

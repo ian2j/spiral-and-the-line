@@ -371,18 +371,6 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
-<script>
-window.addEventListener("message", function (e) {
-  if (!e.data || e.data.type !== "viz-resize") return;
-  var frames = document.getElementsByTagName("iframe");
-  for (var i = 0; i < frames.length; i++) {
-    if (frames[i].contentWindow === e.source) {
-      frames[i].style.height = (e.data.height + 6) + "px";
-      break;
-    }
-  }
-});
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

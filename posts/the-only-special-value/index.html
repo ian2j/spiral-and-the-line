@@ -423,7 +423,7 @@ g(\alpha) = \int_0^1 x^{-\sigma-it}\exp\bigl(-iN[\alpha x^2 - \pi x]\bigr)\,dx.
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Drag <span class="math inline">\sigma</span> and watch the two slopes on a log–log plot. They’re only ever parallel — the same order — at one place.</p>
-<iframe src="decay_race.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="decay_race.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>Only at <span class="math inline">\sigma=\tfrac12</span> do the two mechanisms land at exactly the same order, <span class="math inline">N^{-1/2}</span>, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there’s nothing of the right size for it to cancel against.</p>
 </section>
 <section id="what-this-does-and-doesnt-show" class="level2">
@@ -438,18 +438,6 @@ g(\alpha) = \int_0^1 x^{-\sigma-it}\exp\bigl(-iN[\alpha x^2 - \pi x]\bigr)\,dx.
 </section>
 
 </main> <!-- /main -->
-<script>
-window.addEventListener("message", function (e) {
-  if (!e.data || e.data.type !== "viz-resize") return;
-  var frames = document.getElementsByTagName("iframe");
-  for (var i = 0; i < frames.length; i++) {
-    if (frames[i].contentWindow === e.source) {
-      frames[i].style.height = (e.data.height + 6) + "px";
-      break;
-    }
-  }
-});
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

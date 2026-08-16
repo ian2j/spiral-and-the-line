@@ -34,7 +34,7 @@
 <p>Take the Riemann zeta function, <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)%20=%20%5Csum_%7Bn=1%7D%5E%7B%5Cinfty%7D%20n%5E%7B-s%7D">, extended (via analytic continuation) to all complex <img src="https://latex.codecogs.com/png.latex?s"> except <img src="https://latex.codecogs.com/png.latex?s=1">. It has infinitely many “trivial” zeros at the negative even integers, and infinitely many more “nontrivial” zeros scattered through the strip <img src="https://latex.codecogs.com/png.latex?0%20%3C%20%5Cmathrm%7BRe%7D(s)%20%3C%201">. Every nontrivial zero ever computed — tens of billions of them — sits exactly on the line <img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BRe%7D(s)%20=%20%5Ctfrac12">, the <em>critical line</em>. The Riemann Hypothesis is the conjecture that all of them do, always, with no exceptions.</p>
 <p>It’s been open since 1859. It’s one of the seven Clay Millennium Problems, and the only one from Hilbert’s original 1900 list that’s still unsolved. An enormous amount of modern number theory — the distribution of primes, chief among it — is built on results that assume RH is true, or that would sharpen dramatically if someone ever proved it.</p>
 <p>Here’s what that actually looks like, computed directly rather than taken on faith. Pick a known zero and watch <img src="https://latex.codecogs.com/png.latex?%7C%5Ceta(%5Csigma+it)%7C"> dive toward zero exactly at <img src="https://latex.codecogs.com/png.latex?%5Csigma=%5Ctfrac12">; pick a height with nothing special about it and watch that dip simply not happen.</p>
-<iframe src="zero_finder.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="zero_finder.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is six years of genuinely trying — the last three of them documented closely enough to write this series from — across roughly six different angles, with a trail of what worked, what didn’t, and — a few times — something that stood on its own regardless of whether the big question ever closes.</p>
 </section>
 <section id="why-this-specifically" class="level2">
@@ -101,7 +101,7 @@
 <section id="try-it" class="level3">
 <h3 class="anchored" data-anchor-id="try-it">Try it</h3>
 <p>Drag the mixing weight and watch the amber dot (the weighted average you actually have) stay level with or above the teal dot (the curve at the weighted-average position) — for every weight, every curve shape.</p>
-<iframe src="jensen_gauge.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="jensen_gauge.html" style="width:100%; aspect-ratio: 16/12; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 </section>
 </section>
 <section id="why-the-moon" class="level2">
@@ -161,7 +161,7 @@
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Pick a known zero from the list below, then drag the <img src="https://latex.codecogs.com/png.latex?%5Csigma">-offset fader off the critical line and watch the final point (the colored dot) leave the origin.</p>
-<iframe src="spiral_gauge.html" style="width:100%; height:950px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>Each point along the path is a running total of <img src="https://latex.codecogs.com/png.latex?n%5E%7B-s%7D">; the color goes from muted to full as <img src="https://latex.codecogs.com/png.latex?n"> runs from <img src="https://latex.codecogs.com/png.latex?1"> to the displayed cutoff. The path is drawn a few multiples past <img src="https://latex.codecogs.com/png.latex?M"> purely so the winding is legible to the eye — the small diamond marks where <img src="https://latex.codecogs.com/png.latex?f(s)"> is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, so “locked” at <img src="https://latex.codecogs.com/png.latex?%5Csigma%20=%200.5"> isn’t a simulation — it’s the real function, doing the real thing.</p>
 <hr>
 <p><em>Next: <a href="../../posts/the-only-special-value/index.html">Chapter 3 — The Only Special Value</a>, spring 2025.</em></p>
@@ -211,7 +211,7 @@
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Drag <img src="https://latex.codecogs.com/png.latex?%5Csigma"> and watch the two slopes on a log–log plot. They’re only ever parallel — the same order — at one place.</p>
-<iframe src="decay_race.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="decay_race.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>Only at <img src="https://latex.codecogs.com/png.latex?%5Csigma=%5Ctfrac12"> do the two mechanisms land at exactly the same order, <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1/2%7D">, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there’s nothing of the right size for it to cancel against.</p>
 </section>
 <section id="what-this-does-and-doesnt-show" class="level2">
@@ -267,7 +267,7 @@
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Pick a known zero and watch the two vectors, drawn tip to tail. Nudge <img src="https://latex.codecogs.com/png.latex?%5Csigma"> off the critical line and watch the cancellation break.</p>
-<iframe src="pretail_tail_gauge.html" style="width:100%; height:950px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="pretail_tail_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 </section>
 <section id="checking-it-against-100000-real-zeros" class="level2">
 <h2 class="anchored" data-anchor-id="checking-it-against-100000-real-zeros">Checking it against 100,000 real zeros</h2>
@@ -332,7 +332,7 @@
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Dial the curvature ratio below 1 and the guaranteed zero-free region vanishes entirely — not shrinks, <em>vanishes</em>. That threshold is the whole hypothesis.</p>
-<iframe src="rigidity_gauge.html" style="width:100%; height:780px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="rigidity_gauge.html" style="width:100%; aspect-ratio: 4/3.4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 </section>
 <section id="what-it-does-and-doesnt-do" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-does-and-doesnt-do">What it does and doesn’t do</h2>
@@ -375,7 +375,7 @@
 <section id="try-it" class="level3">
 <h3 class="anchored" data-anchor-id="try-it">Try it</h3>
 <p>Both quantities below are computed exactly — no shortcuts, real digamma function and all. Drag <img src="https://latex.codecogs.com/png.latex?t"> from small to large and watch the two arrows converge.</p>
-<iframe src="critical_line_gauge.html" style="width:100%; height:950px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="critical_line_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 </section>
 </section>
 <section id="the-derivation" class="level2">

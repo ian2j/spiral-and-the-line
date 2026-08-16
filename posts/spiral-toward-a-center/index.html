@@ -425,7 +425,7 @@ f(s) = \sum_{n=1}^{M} n^{-s} + \tfrac12 (M+1)^{-s}
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Pick a known zero from the list below, then drag the <span class="math inline">\sigma</span>-offset fader off the critical line and watch the final point (the colored dot) leave the origin.</p>
-<iframe src="spiral_gauge.html" style="width:100%; height:950px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="spiral_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 <p>Each point along the path is a running total of <span class="math inline">n^{-s}</span>; the color goes from muted to full as <span class="math inline">n</span> runs from <span class="math inline">1</span> to the displayed cutoff. The path is drawn a few multiples past <span class="math inline">M</span> purely so the winding is legible to the eye — the small diamond marks where <span class="math inline">f(s)</span> is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of <span class="math inline">\zeta</span>, so “locked” at <span class="math inline">\sigma = 0.5</span> isn’t a simulation — it’s the real function, doing the real thing.</p>
 <hr>
 <p><em>Next: <a href="../../posts/the-only-special-value/index.html">Chapter 3 — The Only Special Value</a>, spring 2025.</em></p>
@@ -434,18 +434,6 @@ f(s) = \sum_{n=1}^{M} n^{-s} + \tfrac12 (M+1)^{-s}
 </section>
 
 </main> <!-- /main -->
-<script>
-window.addEventListener("message", function (e) {
-  if (!e.data || e.data.type !== "viz-resize") return;
-  var frames = document.getElementsByTagName("iframe");
-  for (var i = 0; i < frames.length; i++) {
-    if (frames[i].contentWindow === e.source) {
-      frames[i].style.height = (e.data.height + 6) + "px";
-      break;
-    }
-  }
-});
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
