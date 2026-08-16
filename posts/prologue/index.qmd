@@ -27,7 +27,7 @@ It's been open since 1859. It's one of the seven Clay Millennium Problems, and t
 Here's what that actually looks like, computed directly rather than taken on faith. Pick a known zero and watch $|\eta(\sigma+it)|$ dive toward zero exactly at $\sigma=\tfrac12$; pick a height with nothing special about it and watch that dip simply not happen.
 
 ```{=html}
-<iframe src="zero_finder.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="zero_finder.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 ```
 
 I am not going to prove it in this series. I want to say that on page one rather than let it hang in the air: the odds of an independent researcher resolving a problem this hard, that has resisted the best mathematicians alive for over 150 years, are close enough to zero that pretending otherwise would be dishonest. What I have instead is six years of genuinely trying — the last three of them documented closely enough to write this series from — across roughly six different angles, with a trail of what worked, what didn't, and — a few times — something that stood on its own regardless of whether the big question ever closes.

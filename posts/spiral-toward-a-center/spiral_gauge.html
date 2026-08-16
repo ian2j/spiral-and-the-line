@@ -718,12 +718,5 @@
   }
 
   render();
-function reportHeight() {
-    if (window.parent === window) return;
-    window.parent.postMessage({ type: "viz-resize", height: document.documentElement.scrollHeight }, "*");
-  }
-  window.addEventListener("load", reportHeight);
-  window.addEventListener("resize", reportHeight);
-  setInterval(reportHeight, 400);
 })();
 </script>
