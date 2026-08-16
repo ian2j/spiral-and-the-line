@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-945edce93b5c6f0e2a813500b82f9ab5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-fdcd69b536eaa11a783b51b3f769e174.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-945edce93b5c6f0e2a813500b82f9ab5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -398,9 +398,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="two-ways-for-a-partial-sum-to-decay">Two ways for a partial sum to decay</h2>
 <p>Start with a rescaled partial sum built from the alternating series,</p>
 <p><span class="math display">
-S_N = N^{a-1} A_N(a), \qquad A_N(a) = \sum_{n=1}^N (-1)^n n^{-a}, \qquad a = t + iy,
+S_N = N^{a-1} A_N(a), \qquad A_N(a) = \sum_{n=1}^N (-1)^n n^{-a}, \qquad a = \sigma + it,
 </span></p>
-<p>where <span class="math inline">t</span> plays the role of the offset from <span class="math inline">1</span> that this chapter cares about (translated to the rest of the series’ notation, <span class="math inline">\sigma = t</span>) and <span class="math inline">y</span> is the height. There’s a generic story and a special one.</p>
+<p>where <span class="math inline">\sigma</span> is the real part and <span class="math inline">t</span> the height, as everywhere else in this series. There’s a generic story and a special one.</p>
 <p><strong>Generically</strong>, <span class="math inline">A_N(a)</span> converges to <span class="math inline">\eta(a)</span> with error <span class="math inline">O(N^{-\Re(a)})</span>, so <span class="math inline">S_N = N^{a-1}\eta(a) + O(N^{-1})</span> — every correction term is an <em>integer</em> power of <span class="math inline">N</span>. If <span class="math inline">\eta(a)=0</span> happens to hold, the leading term vanishes and the next one, still an integer power, takes over: <span class="math inline">S_N \sim -\tfrac12(-1)^N N^{-1}</span>. Nothing about this story ever produces a half-integer power of <span class="math inline">N</span>. That mechanism, whatever it is, has to come from somewhere else.</p>
 </section>
 <section id="where-the-half-integer-powers-actually-come-from" class="level2">
@@ -408,27 +408,27 @@ S_N = N^{a-1} A_N(a), \qquad A_N(a) = \sum_{n=1}^N (-1)^n n^{-a}, \qquad a = t +
 <p>Approximate the discrete alternating sum by a continuous oscillatory integral, <span class="math inline">\int_0^1 x^{-a} e^{iN\pi x}\,dx</span>. The exponent here is <em>linear</em> in <span class="math inline">x</span> — it has no interior stationary point on <span class="math inline">[0,1]</span>, only a contribution from the boundary at <span class="math inline">x=0</span>. The uniform asymptotic expansion of the incomplete gamma function that governs an integral like this naturally produces a ladder in powers of <span class="math inline">\sqrt{N}</span>: <span class="math inline">N^{-a}, N^{-a-\frac12}, N^{-a-1}, \dots</span> — but only when the relevant parameter genuinely scales like <span class="math inline">\sqrt N</span>, which a fixed, boundary-only phase doesn’t obviously give you. So the half-integer ladder is <em>real</em>, but it isn’t obviously <em>available</em> to this problem as stated.</p>
 <p>The way to make it available — and this is the actual trick — is to temporarily deform the problem into one that has an honest interior saddle, then take the deformation away:</p>
 <p><span class="math display">
-g(\alpha) = \int_0^1 x^{-t-iy}\exp\bigl(-iN[\alpha x^2 - \pi x]\bigr)\,dx.
+g(\alpha) = \int_0^1 x^{-\sigma-it}\exp\bigl(-iN[\alpha x^2 - \pi x]\bigr)\,dx.
 </span></p>
 <p>At <span class="math inline">\alpha = 0</span> this is exactly the original boundary-only integral. For any <span class="math inline">\alpha &gt; 0</span>, the phase <span class="math inline">\phi(x) = \alpha x^2 - \pi x</span> has a genuine, non-degenerate stationary point at <span class="math inline">x_0 = \pi/(2\alpha)</span>, and the standard stationary-phase method applies cleanly, giving <span class="math inline">g(\alpha) = O(N^{-1/2})</span> with corrections in the honest half-integer ladder <span class="math inline">N^{-1/2}, N^{-3/2}, \dots</span></p>
 <p><span class="math inline">g(\alpha)</span> turns out to be an entire function of <span class="math inline">\alpha</span>, and the stationary-phase expansion holds uniformly on compact sets in <span class="math inline">\alpha</span> — which means the coefficients of that expansion, as functions of <span class="math inline">\alpha</span>, extend holomorphically right down through <span class="math inline">\alpha = 0</span>, even though the saddle point itself has long since drifted out of <span class="math inline">[0,1]</span> by then. Set <span class="math inline">\alpha = 0</span> term by term in an expansion that was only <em>derived</em> for <span class="math inline">\alpha &gt; 0</span>, and the half-integer ladder survives the trip. That’s the justification for treating <span class="math inline">N^{-1/2}</span> as a real, available decay rate even in the purely boundary-driven original problem — not asserted, derived, from a problem that visibly has it.</p>
 </section>
 <section id="the-comparison-that-matters" class="level2">
 <h2 class="anchored" data-anchor-id="the-comparison-that-matters">The comparison that matters</h2>
-<p>So there are two independent asymptotic contributions in play: an <strong>endpoint term</strong>, decaying like <span class="math inline">N^{t-1}</span>, and a <strong>stationary-phase term</strong>, decaying like <span class="math inline">N^{-1/2}</span>, smuggled in by the deformation argument above. Whichever one decays slower dominates, and a smaller term can only cancel against something of its own size — you can’t cancel an <span class="math inline">O(N^{t-1})</span> piece against an <span class="math inline">O(N^{-1/2})</span> piece if one is genuinely larger, not without a coefficient that blows up with <span class="math inline">N</span>, which doesn’t happen here.</p>
+<p>So there are two independent asymptotic contributions in play: an <strong>endpoint term</strong>, decaying like <span class="math inline">N^{\sigma-1}</span>, and a <strong>stationary-phase term</strong>, decaying like <span class="math inline">N^{-1/2}</span>, smuggled in by the deformation argument above. Whichever one decays slower dominates, and a smaller term can only cancel against something of its own size — you can’t cancel an <span class="math inline">O(N^{\sigma-1})</span> piece against an <span class="math inline">O(N^{-1/2})</span> piece if one is genuinely larger, not without a coefficient that blows up with <span class="math inline">N</span>, which doesn’t happen here.</p>
 <p><span class="math display">
-t - 1 = -\tfrac12 \iff t = \tfrac12.
+\sigma - 1 = -\tfrac12 \iff \sigma = \tfrac12.
 </span></p>
 </section>
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Drag <span class="math inline">\sigma</span> and watch the two slopes on a log–log plot. They’re only ever parallel — the same order — at one place.</p>
-<iframe src="decay_race.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
-<p>Only at <span class="math inline">t=\tfrac12</span> do the two mechanisms land at exactly the same order, <span class="math inline">N^{-1/2}</span>, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there’s nothing of the right size for it to cancel against.</p>
+<iframe src="decay_race.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<p>Only at <span class="math inline">\sigma=\tfrac12</span> do the two mechanisms land at exactly the same order, <span class="math inline">N^{-1/2}</span>, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there’s nothing of the right size for it to cancel against.</p>
 </section>
 <section id="what-this-does-and-doesnt-show" class="level2">
 <h2 class="anchored" data-anchor-id="what-this-does-and-doesnt-show">What this does and doesn’t show</h2>
-<p>This is a real, self-contained argument, and it’s cleaner than anything in <a href="../../posts/the-moon/index.html">Chapter 1</a> — no monotonicity assumption doing quiet work in the background. But look closely at what it actually proves: it shows <span class="math inline">t=\tfrac12</span> is the <em>only</em> point where these two particular mechanisms are <em>the same order</em> — a necessary condition for them to cancel, not a proof that they do. Nothing here rules out a completely different mechanism producing a zero somewhere else, and nothing here shows the coefficients in front of these two <span class="math inline">N^{-1/2}</span> terms are ever actually equal and opposite at <span class="math inline">t=\tfrac12</span>, only that they’re allowed to be.</p>
+<p>This is a real, self-contained argument, and it’s cleaner than anything in <a href="../../posts/the-moon/index.html">Chapter 1</a> — no monotonicity assumption doing quiet work in the background. But look closely at what it actually proves: it shows <span class="math inline">\sigma=\tfrac12</span> is the <em>only</em> point where these two particular mechanisms are <em>the same order</em> — a necessary condition for them to cancel, not a proof that they do. Nothing here rules out a completely different mechanism producing a zero somewhere else, and nothing here shows the coefficients in front of these two <span class="math inline">N^{-1/2}</span> terms are ever actually equal and opposite at <span class="math inline">\sigma=\tfrac12</span>, only that they’re allowed to be.</p>
 <p>It’s an honest, useful narrowing — the search space for “why the critical line” shrinks to one specific arithmetic coincidence of orders — but it’s not the whole argument. That gap between <em>the only place cancellation is possible</em> and <em>cancellation actually happens</em> is, in one disguise or another, exactly the gap this whole project keeps running into. It shows up again, worse, in <a href="../../posts/critical-line-path-identity/index.html">Chapter 8</a> too.</p>
 <p>One more thing worth flagging for later: the deformation trick here — adding a quadratic term to a phase to manufacture a saddle, then continuing back to the undeformed problem — isn’t a one-off. The same move resurfaces, independently rediscovered, in the pre-tail/tail machinery of <a href="../../posts/pre-tail-and-tail/index.html">Chapter 4</a> five months later, and again in 2026. I didn’t plan that continuity; it just kept being the right tool.</p>
 <hr>
@@ -438,6 +438,18 @@ t - 1 = -\tfrac12 \iff t = \tfrac12.
 </section>
 
 </main> <!-- /main -->
+<script>
+window.addEventListener("message", function (e) {
+  if (!e.data || e.data.type !== "viz-resize") return;
+  var frames = document.getElementsByTagName("iframe");
+  for (var i = 0; i < frames.length; i++) {
+    if (frames[i].contentWindow === e.source) {
+      frames[i].style.height = (e.data.height + 6) + "px";
+      break;
+    }
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

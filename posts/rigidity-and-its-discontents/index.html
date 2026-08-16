@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-b259b66ffeb156a90c05b554a428fc98.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-fb0162ede4f8dc9698d6d5ff5cbf2a75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-dc04d582078103ba2590f0b8952ac285.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-945edce93b5c6f0e2a813500b82f9ab5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-fdcd69b536eaa11a783b51b3f769e174.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-945edce93b5c6f0e2a813500b82f9ab5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -393,7 +393,8 @@ window.Quarto = {
 
 
 
-<p>December 2025 opened with a smaller result first: a companion argument showing that a certain sign — an orientation, really, of one vector relative to another as you move along the critical line through a zero gap — obeys a clean first-order ODE, <span class="math inline">\alpha'(y) = \tfrac{\theta'(y)}{2}\alpha(y)</span>, whose solution <span class="math inline">\alpha(y) = K e^{\theta(y)/2}</span> can only change sign where <span class="math inline">\alpha</span> itself passes through zero. Translated out of the differential-equations language: that orientation is <em>locked in</em> everywhere except at an actual zero of the function, or at one specific singular height where the machinery itself breaks down. It’s a real rigidity statement — nothing spontaneous is allowed to happen — but it’s about a sign, not a location, and it doesn’t by itself say anything about whether an off-line zero exists in the first place.</p>
+<p>December 2025 opened with a smaller result first: a companion argument showing that a certain sign — an orientation, really, of one vector relative to another as you move along the critical line through a zero gap — obeys a clean first-order ODE, <span class="math inline">\alpha'(y) = \tfrac{\theta'(y)}{2}\alpha(y)</span>, whose solution <span class="math inline">\alpha(y) = K e^{\theta(y)/2}</span> can only change sign where <span class="math inline">\alpha</span> itself passes through zero.</p>
+<p>Translated out of the differential-equations language: that orientation is <em>locked in</em> everywhere except at an actual zero of the function, or at one specific singular height where the machinery itself breaks down. It’s a real rigidity statement — nothing spontaneous is allowed to happen — but it’s about a sign, not a location, and it doesn’t by itself say anything about whether an off-line zero exists in the first place.</p>
 <p>The bigger result that month reframes the whole project’s central question in the cleanest form it’s had yet, and I want to walk through it in full, because — unusually for this series — I don’t need to hedge the derivation itself. What I need to hedge is the one hypothesis it all rests on.</p>
 <section id="the-symmetrized-energy" class="level2">
 <h2 class="anchored" data-anchor-id="the-symmetrized-energy">The symmetrized energy</h2>
@@ -436,11 +437,12 @@ k(t) \;\ge\; c_0 \log^2 t
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <p>Dial the curvature ratio below 1 and the guaranteed zero-free region vanishes entirely — not shrinks, <em>vanishes</em>. That threshold is the whole hypothesis.</p>
-<iframe src="rigidity_gauge.html" style="width:100%; aspect-ratio: 4/3.4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="rigidity_gauge.html" style="width:100%; height:780px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 </section>
 <section id="what-it-does-and-doesnt-do" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-does-and-doesnt-do">What it does and doesn’t do</h2>
-<p>I want to be as direct as I was when I first wrote this down: <strong>this does not prove the Riemann Hypothesis.</strong> <span class="math inline">k(t) \ge c_0\log^2 t</span> is exactly as open a question as RH itself, restated in different clothing — I haven’t shown it holds, only shown what would follow if it did, and that the numerics (after smoothing) look consistent with it. But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of <span class="math inline">\zeta</span> — is not nothing. It’s the sharpest form the “why can’t zeros drift off the line” question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.</p>
+<p>I want to be as direct as I was when I first wrote this down: <strong>this does not prove the Riemann Hypothesis.</strong> <span class="math inline">k(t) \ge c_0\log^2 t</span> is exactly as open a question as RH itself, restated in different clothing — I haven’t shown it holds, only shown what would follow if it did, and that the numerics (after smoothing) look consistent with it.</p>
+<p>But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of <span class="math inline">\zeta</span> — is not nothing. It’s the sharpest form the “why can’t zeros drift off the line” question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.</p>
 <p>I haven’t verified it. Nobody has, as far as I know. But I know now precisely what I’d need.</p>
 <hr>
 <p><em>Next: Chapter 6 — Only σ=1/2, Take Four, February 2026. Not yet posted — see the <a href="../../about.html">roadmap</a> for what’s still coming.</em></p>
@@ -449,6 +451,18 @@ k(t) \;\ge\; c_0 \log^2 t
 </section>
 
 </main> <!-- /main -->
+<script>
+window.addEventListener("message", function (e) {
+  if (!e.data || e.data.type !== "viz-resize") return;
+  var frames = document.getElementsByTagName("iframe");
+  for (var i = 0; i < frames.length; i++) {
+    if (frames[i].contentWindow === e.source) {
+      frames[i].style.height = (e.data.height + 6) + "px";
+      break;
+    }
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
