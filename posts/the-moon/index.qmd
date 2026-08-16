@@ -10,7 +10,9 @@ order: 1
 
 ## Three years of groundwork first
 
-This wasn't the first thing I tried. By late 2023 I'd already spent three years on this problem — most of it building up the machinery to even state a solution attempt cleanly, in a document I called, only half-jokingly, *Primal Pilgrimage*: number sets, basic geometry and trigonometry, Cauchy products, Cesàro summation, all rebuilt from scratch as scaffolding, ending in a "My Solution" section I could never quite finish writing. One early skeleton of that solution gets as far as *"establish the doubling ratio... establish the order... conclude that $t=1/2$ is the only value that permits $\zeta(s)=0$"* — three section headers in a row with nothing underneath them. I want that on the record too, because it's true to how this actually went: long stretches of building tools before the first technique that actually produced a real inequality. The Moon, below, is that first technique.
+This wasn't the first thing I tried. By late 2023 I'd already spent three years on this problem — most of it building up the machinery to even state a solution attempt cleanly, in a document I called, only half-jokingly, *Primal Pilgrimage*: number sets, basic geometry and trigonometry, Cauchy products, Cesàro summation, all rebuilt from scratch as scaffolding, ending in a "My Solution" section I could never quite finish writing.
+
+One early skeleton of that solution gets as far as *"establish the doubling ratio... establish the order... conclude that $t=1/2$ is the only value that permits $\zeta(s)=0$"* — three section headers in a row with nothing underneath them. I want that on the record too, because it's true to how this actually went: long stretches of building tools before the first technique that actually produced a real inequality. The Moon, below, is that first technique.
 
 ## The question
 
@@ -45,7 +47,7 @@ evaluated at $x = m^2 f_1 f_2$ and $x = (m+1)^2 f_1 f_2$. And $f$ is convex on $
 Drag the mixing weight and watch the amber dot (the weighted average you actually have) stay level with or above the teal dot (the curve at the weighted-average position) — for every weight, every curve shape.
 
 ```{=html}
-<iframe src="jensen_gauge.html" style="width:100%; aspect-ratio: 16/12; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="jensen_gauge.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 ```
 
 ## Why "the moon"

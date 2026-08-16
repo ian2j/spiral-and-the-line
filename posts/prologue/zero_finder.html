@@ -295,5 +295,12 @@
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
   }
+function reportHeight() {
+    if (window.parent === window) return;
+    window.parent.postMessage({ type: "viz-resize", height: document.documentElement.scrollHeight }, "*");
+  }
+  window.addEventListener("load", reportHeight);
+  window.addEventListener("resize", reportHeight);
+  setInterval(reportHeight, 400);
 })();
 </script>

@@ -29,6 +29,7 @@ format:
     css: styles.css
     html-math-method: katex
     toc: true
+    include-after-body: iframe-autosize.html
     grid:
       body-width: 780px
 

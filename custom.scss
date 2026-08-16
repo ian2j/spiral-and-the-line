@@ -48,6 +48,13 @@ h1, h2, h3 {
   text-wrap: balance;
 }
 
+// Avoid a lone word stranded on a paragraph's last line. Supported in
+// current Chrome/Edge/Safari TP; browsers without it just ignore this
+// and fall back to normal wrapping, so it's a safe progressive addition.
+p, li, blockquote {
+  text-wrap: pretty;
+}
+
 .quarto-title-banner {
   border-bottom: 1px solid #d6dce3;
 }

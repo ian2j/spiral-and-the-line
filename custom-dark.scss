@@ -36,6 +36,10 @@ h1, h2, h3 {
   text-wrap: balance;
 }
 
+p, li, blockquote {
+  text-wrap: pretty;
+}
+
 .quarto-title-banner {
   border-bottom: 1px solid #2a3540;
 }

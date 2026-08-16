@@ -6,7 +6,9 @@ categories: [chapter, conditional-result, 2025]
 order: 5
 ---
 
-December 2025 opened with a smaller result first: a companion argument showing that a certain sign — an orientation, really, of one vector relative to another as you move along the critical line through a zero gap — obeys a clean first-order ODE, $\alpha'(y) = \tfrac{\theta'(y)}{2}\alpha(y)$, whose solution $\alpha(y) = K e^{\theta(y)/2}$ can only change sign where $\alpha$ itself passes through zero. Translated out of the differential-equations language: that orientation is *locked in* everywhere except at an actual zero of the function, or at one specific singular height where the machinery itself breaks down. It's a real rigidity statement — nothing spontaneous is allowed to happen — but it's about a sign, not a location, and it doesn't by itself say anything about whether an off-line zero exists in the first place.
+December 2025 opened with a smaller result first: a companion argument showing that a certain sign — an orientation, really, of one vector relative to another as you move along the critical line through a zero gap — obeys a clean first-order ODE, $\alpha'(y) = \tfrac{\theta'(y)}{2}\alpha(y)$, whose solution $\alpha(y) = K e^{\theta(y)/2}$ can only change sign where $\alpha$ itself passes through zero.
+
+Translated out of the differential-equations language: that orientation is *locked in* everywhere except at an actual zero of the function, or at one specific singular height where the machinery itself breaks down. It's a real rigidity statement — nothing spontaneous is allowed to happen — but it's about a sign, not a location, and it doesn't by itself say anything about whether an off-line zero exists in the first place.
 
 The bigger result that month reframes the whole project's central question in the cleanest form it's had yet, and I want to walk through it in full, because — unusually for this series — I don't need to hedge the derivation itself. What I need to hedge is the one hypothesis it all rests on.
 
@@ -61,12 +63,14 @@ The width of the guaranteed zero-free strip, $1/\log t$, isn't an artifact of sl
 Dial the curvature ratio below 1 and the guaranteed zero-free region vanishes entirely — not shrinks, *vanishes*. That threshold is the whole hypothesis.
 
 ```{=html}
-<iframe src="rigidity_gauge.html" style="width:100%; aspect-ratio: 4/3.4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="rigidity_gauge.html" style="width:100%; height:780px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 ```
 
 ## What it does and doesn't do
 
-I want to be as direct as I was when I first wrote this down: **this does not prove the Riemann Hypothesis.** $k(t) \ge c_0\log^2 t$ is exactly as open a question as RH itself, restated in different clothing — I haven't shown it holds, only shown what would follow if it did, and that the numerics (after smoothing) look consistent with it. But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of $\zeta$ — is not nothing. It's the sharpest form the "why can't zeros drift off the line" question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.
+I want to be as direct as I was when I first wrote this down: **this does not prove the Riemann Hypothesis.** $k(t) \ge c_0\log^2 t$ is exactly as open a question as RH itself, restated in different clothing — I haven't shown it holds, only shown what would follow if it did, and that the numerics (after smoothing) look consistent with it.
+
+But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of $\zeta$ — is not nothing. It's the sharpest form the "why can't zeros drift off the line" question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.
 
 I haven't verified it. Nobody has, as far as I know. But I know now precisely what I'd need.
 

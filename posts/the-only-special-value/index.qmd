@@ -15,10 +15,10 @@ A few days later I started over, with no preconceptions, on a differently-shaped
 Start with a rescaled partial sum built from the alternating series,
 
 $$
-S_N = N^{a-1} A_N(a), \qquad A_N(a) = \sum_{n=1}^N (-1)^n n^{-a}, \qquad a = t + iy,
+S_N = N^{a-1} A_N(a), \qquad A_N(a) = \sum_{n=1}^N (-1)^n n^{-a}, \qquad a = \sigma + it,
 $$
 
-where $t$ plays the role of the offset from $1$ that this chapter cares about (translated to the rest of the series' notation, $\sigma = t$) and $y$ is the height. There's a generic story and a special one.
+where $\sigma$ is the real part and $t$ the height, as everywhere else in this series. There's a generic story and a special one.
 
 **Generically**, $A_N(a)$ converges to $\eta(a)$ with error $O(N^{-\Re(a)})$, so $S_N = N^{a-1}\eta(a) + O(N^{-1})$ — every correction term is an *integer* power of $N$. If $\eta(a)=0$ happens to hold, the leading term vanishes and the next one, still an integer power, takes over: $S_N \sim -\tfrac12(-1)^N N^{-1}$. Nothing about this story ever produces a half-integer power of $N$. That mechanism, whatever it is, has to come from somewhere else.
 
@@ -29,7 +29,7 @@ Approximate the discrete alternating sum by a continuous oscillatory integral, $
 The way to make it available — and this is the actual trick — is to temporarily deform the problem into one that has an honest interior saddle, then take the deformation away:
 
 $$
-g(\alpha) = \int_0^1 x^{-t-iy}\exp\bigl(-iN[\alpha x^2 - \pi x]\bigr)\,dx.
+g(\alpha) = \int_0^1 x^{-\sigma-it}\exp\bigl(-iN[\alpha x^2 - \pi x]\bigr)\,dx.
 $$
 
 At $\alpha = 0$ this is exactly the original boundary-only integral. For any $\alpha > 0$, the phase $\phi(x) = \alpha x^2 - \pi x$ has a genuine, non-degenerate stationary point at $x_0 = \pi/(2\alpha)$, and the standard stationary-phase method applies cleanly, giving $g(\alpha) = O(N^{-1/2})$ with corrections in the honest half-integer ladder $N^{-1/2}, N^{-3/2}, \dots$
@@ -38,10 +38,10 @@ $g(\alpha)$ turns out to be an entire function of $\alpha$, and the stationary-p
 
 ## The comparison that matters
 
-So there are two independent asymptotic contributions in play: an **endpoint term**, decaying like $N^{t-1}$, and a **stationary-phase term**, decaying like $N^{-1/2}$, smuggled in by the deformation argument above. Whichever one decays slower dominates, and a smaller term can only cancel against something of its own size — you can't cancel an $O(N^{t-1})$ piece against an $O(N^{-1/2})$ piece if one is genuinely larger, not without a coefficient that blows up with $N$, which doesn't happen here.
+So there are two independent asymptotic contributions in play: an **endpoint term**, decaying like $N^{\sigma-1}$, and a **stationary-phase term**, decaying like $N^{-1/2}$, smuggled in by the deformation argument above. Whichever one decays slower dominates, and a smaller term can only cancel against something of its own size — you can't cancel an $O(N^{\sigma-1})$ piece against an $O(N^{-1/2})$ piece if one is genuinely larger, not without a coefficient that blows up with $N$, which doesn't happen here.
 
 $$
-t - 1 = -\tfrac12 \iff t = \tfrac12.
+\sigma - 1 = -\tfrac12 \iff \sigma = \tfrac12.
 $$
 
 ## Try it
@@ -49,14 +49,14 @@ $$
 Drag $\sigma$ and watch the two slopes on a log–log plot. They're only ever parallel — the same order — at one place.
 
 ```{=html}
-<iframe src="decay_race.html" style="width:100%; aspect-ratio: 16/11; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="decay_race.html" style="width:100%; height:820px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 ```
 
-Only at $t=\tfrac12$ do the two mechanisms land at exactly the same order, $N^{-1/2}$, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there's nothing of the right size for it to cancel against.
+Only at $\sigma=\tfrac12$ do the two mechanisms land at exactly the same order, $N^{-1/2}$, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there's nothing of the right size for it to cancel against.
 
 ## What this does and doesn't show
 
-This is a real, self-contained argument, and it's cleaner than anything in [Chapter 1](../the-moon/index.qmd) — no monotonicity assumption doing quiet work in the background. But look closely at what it actually proves: it shows $t=\tfrac12$ is the *only* point where these two particular mechanisms are *the same order* — a necessary condition for them to cancel, not a proof that they do. Nothing here rules out a completely different mechanism producing a zero somewhere else, and nothing here shows the coefficients in front of these two $N^{-1/2}$ terms are ever actually equal and opposite at $t=\tfrac12$, only that they're allowed to be.
+This is a real, self-contained argument, and it's cleaner than anything in [Chapter 1](../the-moon/index.qmd) — no monotonicity assumption doing quiet work in the background. But look closely at what it actually proves: it shows $\sigma=\tfrac12$ is the *only* point where these two particular mechanisms are *the same order* — a necessary condition for them to cancel, not a proof that they do. Nothing here rules out a completely different mechanism producing a zero somewhere else, and nothing here shows the coefficients in front of these two $N^{-1/2}$ terms are ever actually equal and opposite at $\sigma=\tfrac12$, only that they're allowed to be.
 
 It's an honest, useful narrowing — the search space for "why the critical line" shrinks to one specific arithmetic coincidence of orders — but it's not the whole argument. That gap between *the only place cancellation is possible* and *cancellation actually happens* is, in one disguise or another, exactly the gap this whole project keeps running into. It shows up again, worse, in [Chapter 8](../critical-line-path-identity/index.qmd) too.
 

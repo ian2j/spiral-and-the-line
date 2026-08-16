@@ -35,7 +35,7 @@ where $\chi(s) = \pi^{s-1/2}\,\Gamma\!\left(\frac{1-s}{2}\right)/\Gamma\!\left(\
 Both quantities below are computed exactly — no shortcuts, real digamma function and all. Drag $t$ from small to large and watch the two arrows converge.
 
 ```{=html}
-<iframe src="critical_line_gauge.html" style="width:100%; aspect-ratio: 3/4; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+<iframe src="critical_line_gauge.html" style="width:100%; height:950px; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
 ```
 
 ## The derivation
@@ -110,6 +110,8 @@ $$
 f(s) - \chi(s)\, f(1-s), \qquad M = \lfloor t/\pi \rfloor.
 $$
 
-This is the same species of estimate that underlies the Riemann–Siegel formula and Euler–Maclaurin-based approximate functional equations for $\zeta$, which *are* rigorously established in the literature for various truncation schemes — though the specific scheme used throughout this project ($M \sim t/\pi$, long compared to the classical "balanced" choice $N \sim \sqrt{t/2\pi}$) doesn't appear to be a standard textbook case, so the bound would need deriving for this scheme specifically. That's real work, but of a fundamentally different character than the gap in Chapter 6: it's a quantitative asymptotic estimate about an explicit finite sum, not a claim that would resolve the Riemann Hypothesis if true. It's worth doing carefully, both because it completes this identity rigorously and because the same estimate is very likely the missing ingredient in several other chapters' hand-waved "the error term is small" steps.
+This is the same species of estimate that underlies the Riemann–Siegel formula and Euler–Maclaurin-based approximate functional equations for $\zeta$, which *are* rigorously established in the literature for various truncation schemes — though the specific scheme used throughout this project ($M \sim t/\pi$, long compared to the classical "balanced" choice $N \sim \sqrt{t/2\pi}$) doesn't appear to be a standard textbook case, so the bound would need deriving for this scheme specifically.
+
+That's real work, but of a fundamentally different character than the gap in Chapter 6: it's a quantitative asymptotic estimate about an explicit finite sum, not a claim that would resolve the Riemann Hypothesis if true. It's worth doing carefully, both because it completes this identity rigorously and because the same estimate is very likely the missing ingredient in several other chapters' hand-waved "the error term is small" steps.
 
 **Next step:** derive the Euler–Maclaurin expansion of $f(s) - \chi(s) f(1-s)$ for $M = \lfloor t/\pi \rfloor$ directly — Poisson summation on the finite sum is the standard route — and extract an explicit power of $t$ for the error. That single derivation would upgrade this chapter's headline result from "verified numerically, explained structurally" to "proved, with an explicit error bound."
