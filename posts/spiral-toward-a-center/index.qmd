@@ -36,3 +36,7 @@ Pick a known zero from the list, then drag the $\sigma$-offset fader off the cri
 ```
 
 Each point along the path is a running total of $n^{-s}$; the color goes from muted to full as $n$ runs from $1$ to the displayed cutoff. The path is drawn a few multiples past $M$ purely so the winding is legible to the eye — the small diamond marks where $f(s)$ is actually evaluated. The fifteen preset heights are the first fifteen known nontrivial zeros of $\zeta$, so "locked" at $\sigma = 0.5$ isn't a simulation — it's the real function, doing the real thing.
+
+---
+
+*Next: [Chapter 3 — The Only Special Value](../the-only-special-value/index.qmd), spring 2025.*

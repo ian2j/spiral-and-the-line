@@ -1,0 +1,58 @@
+---
+title: "Chapter 3: The Only Special Value"
+description: "Spring 2025. Two independent asymptotic mechanisms — an endpoint term and a stationary-phase term — that decay at different rates almost everywhere, and at exactly the same rate only at one point."
+date: 2026-08-16
+categories: [chapter, stationary-phase, 2025]
+---
+
+I told the ending of one thread from this period already, in the [Prologue](../prologue/index.qmd): the argument that tried to force a zero-free interval around any hypothetical off-line zero by squeezing it between two points of "enhanced decay," using monotonicity. That argument had a real gap even after I fixed the exponent error — the monotonicity it depended on was only ever "emergent for large $N$," never actually proven, and when I pushed on that directly, the honest answer I got back amounted to *restrict your attention to the range where it's true and call the argument valid there*. That's not nothing, but it's not a proof either.
+
+A few days later I started over, with no preconceptions, on a differently-shaped version of the same question. This chapter is that attempt — and it's the first time in this project that "why $\sigma = \tfrac12$ specifically" gets a clean, self-contained answer, even though, as you'll see, it's an answer to a narrower question than it sounds like at first.
+
+## Two ways for a partial sum to decay
+
+Start with a rescaled partial sum built from the alternating series,
+
+$$
+S_N = N^{a-1} A_N(a), \qquad A_N(a) = \sum_{n=1}^N (-1)^n n^{-a}, \qquad a = t + iy,
+$$
+
+where $t$ plays the role of the offset from $1$ that this chapter cares about (translated to the rest of the series' notation, $\sigma = t$) and $y$ is the height. There's a generic story and a special one.
+
+**Generically**, $A_N(a)$ converges to $\eta(a)$ with error $O(N^{-\Re(a)})$, so $S_N = N^{a-1}\eta(a) + O(N^{-1})$ — every correction term is an *integer* power of $N$. If $\eta(a)=0$ happens to hold, the leading term vanishes and the next one, still an integer power, takes over: $S_N \sim -\tfrac12(-1)^N N^{-1}$. Nothing about this story ever produces a half-integer power of $N$. That mechanism, whatever it is, has to come from somewhere else.
+
+## Where the half-integer powers actually come from
+
+Approximate the discrete alternating sum by a continuous oscillatory integral, $\int_0^1 x^{-a} e^{iN\pi x}\,dx$. The exponent here is *linear* in $x$ — it has no interior stationary point on $[0,1]$, only a contribution from the boundary at $x=0$. The uniform asymptotic expansion of the incomplete gamma function that governs an integral like this naturally produces a ladder in powers of $\sqrt{N}$: $N^{-a}, N^{-a-\frac12}, N^{-a-1}, \dots$ — but only when the relevant parameter genuinely scales like $\sqrt N$, which a fixed, boundary-only phase doesn't obviously give you. So the half-integer ladder is *real*, but it isn't obviously *available* to this problem as stated.
+
+The way to make it available — and this is the actual trick — is to temporarily deform the problem into one that has an honest interior saddle, then take the deformation away:
+
+$$
+g(\alpha) = \int_0^1 x^{-t-iy}\exp\bigl(-iN[\alpha x^2 - \pi x]\bigr)\,dx.
+$$
+
+At $\alpha = 0$ this is exactly the original boundary-only integral. For any $\alpha > 0$, the phase $\phi(x) = \alpha x^2 - \pi x$ has a genuine, non-degenerate stationary point at $x_0 = \pi/(2\alpha)$, and the standard stationary-phase method applies cleanly, giving $g(\alpha) = O(N^{-1/2})$ with corrections in the honest half-integer ladder $N^{-1/2}, N^{-3/2}, \dots$
+
+$g(\alpha)$ turns out to be an entire function of $\alpha$, and the stationary-phase expansion holds uniformly on compact sets in $\alpha$ — which means the coefficients of that expansion, as functions of $\alpha$, extend holomorphically right down through $\alpha = 0$, even though the saddle point itself has long since drifted out of $[0,1]$ by then. Set $\alpha = 0$ term by term in an expansion that was only *derived* for $\alpha > 0$, and the half-integer ladder survives the trip. That's the justification for treating $N^{-1/2}$ as a real, available decay rate even in the purely boundary-driven original problem — not asserted, derived, from a problem that visibly has it.
+
+## The comparison that matters
+
+So there are two independent asymptotic contributions in play: an **endpoint term**, decaying like $N^{t-1}$, and a **stationary-phase term**, decaying like $N^{-1/2}$, smuggled in by the deformation argument above. Whichever one decays slower dominates, and a smaller term can only cancel against something of its own size — you can't cancel an $O(N^{t-1})$ piece against an $O(N^{-1/2})$ piece if one is genuinely larger, not without a coefficient that blows up with $N$, which doesn't happen here.
+
+$$
+t - 1 = -\tfrac12 \iff t = \tfrac12.
+$$
+
+Only at $t=\tfrac12$ do the two mechanisms land at exactly the same order, $N^{-1/2}$, and only then is mutual cancellation between them even arithmetically possible. Everywhere else, one term strictly dominates the other, and there's nothing of the right size for it to cancel against.
+
+## What this does and doesn't show
+
+This is a real, self-contained argument, and it's cleaner than anything in [Chapter 1](../the-moon/index.qmd) — no monotonicity assumption doing quiet work in the background. But look closely at what it actually proves: it shows $t=\tfrac12$ is the *only* point where these two particular mechanisms are *the same order* — a necessary condition for them to cancel, not a proof that they do. Nothing here rules out a completely different mechanism producing a zero somewhere else, and nothing here shows the coefficients in front of these two $N^{-1/2}$ terms are ever actually equal and opposite at $t=\tfrac12$, only that they're allowed to be.
+
+It's an honest, useful narrowing — the search space for "why the critical line" shrinks to one specific arithmetic coincidence of orders — but it's not the whole argument. That gap between *the only place cancellation is possible* and *cancellation actually happens* is, in one disguise or another, exactly the gap this whole project keeps running into. It shows up again, worse, in [Chapter 8](../critical-line-path-identity/index.qmd) too.
+
+One more thing worth flagging for later: the deformation trick here — adding a quadratic term to a phase to manufacture a saddle, then continuing back to the undeformed problem — isn't a one-off. The same move resurfaces, independently rediscovered, in the pre-tail/tail machinery of [Chapter 4](../pre-tail-and-tail/index.qmd) five months later, and again in 2026. I didn't plan that continuity; it just kept being the right tool.
+
+---
+
+*Next: [Chapter 4 — Pre-tail and Tail](../pre-tail-and-tail/index.qmd), September–October 2025.*

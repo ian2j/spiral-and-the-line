@@ -1,0 +1,66 @@
+---
+title: "Chapter 5: Rigidity and Its Discontents"
+description: "December 2025. A theorem I'd be genuinely happy to put my name on — with the word 'conditional' doing a lot of work in that sentence."
+date: 2026-08-16
+categories: [chapter, conditional-result, 2025]
+---
+
+December 2025 opened with a smaller result first: a companion argument showing that a certain sign — an orientation, really, of one vector relative to another as you move along the critical line through a zero gap — obeys a clean first-order ODE, $\alpha'(y) = \tfrac{\theta'(y)}{2}\alpha(y)$, whose solution $\alpha(y) = K e^{\theta(y)/2}$ can only change sign where $\alpha$ itself passes through zero. Translated out of the differential-equations language: that orientation is *locked in* everywhere except at an actual zero of the function, or at one specific singular height where the machinery itself breaks down. It's a real rigidity statement — nothing spontaneous is allowed to happen — but it's about a sign, not a location, and it doesn't by itself say anything about whether an off-line zero exists in the first place.
+
+The bigger result that month reframes the whole project's central question in the cleanest form it's had yet, and I want to walk through it in full, because — unusually for this series — I don't need to hedge the derivation itself. What I need to hedge is the one hypothesis it all rests on.
+
+## The symmetrized energy
+
+Fix a height $t$ sitting strictly inside a gap between two consecutive zeros on the critical line, and let $F(\sigma, t)$ stand for $\zeta$ (or its truncated approximation from earlier chapters) restricted to that height, varying only $\sigma$. Define $A(u) = F(\tfrac12+u, t)$ — the function's behavior as you step off the critical line by $u$ — and then symmetrize it:
+
+$$
+S(u) = \tfrac12\left(|A(u)|^2 + |A(-u)|^2\right).
+$$
+
+This one substitution is what makes everything downstream exact rather than approximate. $S(u)$ is *even in $u$* by construction, no argument required — which means $S'(0) = 0$ and every odd derivative vanishes at the origin automatically. Its Taylor expansion has no odd terms to worry about at all:
+
+$$
+S(u) = S(0) + \tfrac12 S''(0)\,u^2 + \tfrac{1}{24}S^{(4)}(\xi)\,u^4, \qquad \xi \text{ between } 0 \text{ and } u.
+$$
+
+## The transverse curvature
+
+The quadratic coefficient works out exactly, with no approximation:
+
+$$
+S''(0) = 2\left|\partial_\sigma F(\tfrac12, t)\right|^2 + 2\,\mathrm{Re}\!\left(\partial_\sigma^2 F(\tfrac12, t)\,\overline{F(\tfrac12, t)}\right).
+$$
+
+Divide by $|F(\tfrac12,t)|^2$ and call the result $k(t)$, the **transverse curvature** — literally how sharply the energy curves upward as you step away from the critical line at height $t$. The quartic remainder is bounded, honestly and without cleverness, purely from how derivatives of $F$ grow: $|S^{(4)}(\xi)| \le C\log^4 t\,|F(\tfrac12,t)|^2$ for $u$ in a suitably small range. Put the two together and divide through:
+
+$$
+\frac{S(u)}{|F(\tfrac12,t)|^2} \;\ge\; 1 + \tfrac12 k(t)\,u^2 - C u^4 \log^4 t.
+$$
+
+Nothing hidden, nothing vanishing mysteriously — every piece of this traces back to an explicit computation.
+
+## What it would take to get a zero-free strip
+
+The right-hand side is positive — meaning $F$ can't vanish there — exactly when $\tfrac12 k(t) u^2 > Cu^4\log^4 t$. Choosing $u = c/\log t$ turns that into a single, clean condition on $k(t)$ alone:
+
+$$
+k(t) \;\ge\; c_0 \log^2 t
+$$
+
+for some fixed constant $c_0 > 0$ and all sufficiently large $t$ in the gap. That's the entire hypothesis. Not precise asymptotics, not a bound on every derivative, not RH itself assumed anywhere in the derivation — one lower bound, on one quantity, that's directly computable from $F$ and its first two $\sigma$-derivatives at $\sigma = \tfrac12$.
+
+## The Transverse Rigidity Theorem
+
+> **Conditional.** Fix a height $t$ strictly between two consecutive nontrivial zeros on the critical line, and suppose there exists $c_0 > 0$ such that the transverse curvature satisfies $k(t) \ge c_0\log^2 t$ for all sufficiently large $t$ in that gap. Then there exists $\delta > 0$ such that $F(\sigma, t) \ne 0$ for all $|\sigma - \tfrac12| \le \delta/\log t$.
+
+The width of the guaranteed zero-free strip, $1/\log t$, isn't an artifact of sloppy bookkeeping — it falls out naturally from balancing the quadratic term against the quartic remainder. The mechanism is entirely geometric (a curvature condition on an energy function), not arithmetic, and at no point does the argument assume anything about zeros existing or not existing off the line. It's a real implication, cleanly stated, resting on exactly one unverified hypothesis.
+
+## What it does and doesn't do
+
+I want to be as direct as I was when I first wrote this down: **this does not prove the Riemann Hypothesis.** $k(t) \ge c_0\log^2 t$ is exactly as open a question as RH itself, restated in different clothing — I haven't shown it holds, only shown what would follow if it did, and that the numerics (after smoothing) look consistent with it. But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of $\zeta$ — is not nothing. It's the sharpest form the "why can't zeros drift off the line" question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.
+
+I haven't verified it. Nobody has, as far as I know. But I know now precisely what I'd need.
+
+---
+
+*Next: Chapter 6 — Only σ=1/2, Take Four, February 2026. Not yet posted — see the [roadmap](../../about.qmd) for what's still coming.*

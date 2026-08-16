@@ -1,0 +1,58 @@
+---
+title: "Chapter 4: Pre-tail and Tail"
+description: "September–October 2025. Where M = ⌊t/π⌋ stops being a convenient cutoff and becomes a genuine stationary point — and a closed-form tail estimate gets checked against 100,000 real zeros."
+date: 2026-08-16
+categories: [chapter, stationary-phase, spiral, 2025]
+---
+
+By the fall of 2025, two pieces from earlier chapters were sitting next to each other without quite touching: the spiral picture from [Chapter 2](../spiral-toward-a-center/index.qmd), where partial sums of $\zeta(s)$ wind toward a fixed center, and the endpoint-vs-saddle deformation trick from [Chapter 3](../the-only-special-value/index.qmd), which manufactures a genuine stationary point out of a boundary-only integral by adding a quadratic term to the phase and analytically continuing it away again. This chapter is where those two pieces actually fused — and where $M = \lfloor t/\pi \rfloor$, the truncation length used everywhere from here on, stopped being a number I'd noticed worked well and became a number I could explain.
+
+## Why $\lfloor t/\pi \rfloor$, precisely
+
+Look at a single term of the alternating series at height $t$: $(-1)^{n+1} n^{-\sigma-it}$. Its phase, as a function of $n$, is $\phi(n) = t\log n - \pi n$ (the $\pi n$ comes from folding the alternating sign into the exponential, the same move [Chapter 1](../the-moon/index.qmd) made with cosines and sines). This phase has a genuine stationary point — no deformation required this time — exactly where $\phi'(n) = t/n - \pi = 0$, which is $n = t/\pi$. There's no trick here, no $\alpha \to 0$ limit: this stationary point is really there, sitting inside the sum, for every height $t$. If you're going to split a partial sum into "the part before something interesting happens" and "the part after," this is the honest place to make the cut.
+
+## The split
+
+Define the finite **pre-tail** — a partial sum of $\zeta$, run out just past that stationary point, with a half-weighted final term for good measure:
+
+$$
+P(s) = \zeta_M(s) + \tfrac12 (M+1)^{-s}, \qquad M = \lfloor t/\pi \rfloor.
+$$
+
+(This is the same object that reappears, unchanged, as $f(s)$ in [Chapter 8](../critical-line-path-identity/index.qmd) — I hadn't settled on final notation yet in 2025, but the definition never moved again after this.) Partial sums of $\zeta$ spiral toward a fixed center as more terms are added, and $P(s)$ turns out to be a genuinely good approximation to that center — because $n = t/\pi$ is close to where consecutive terms' magnitudes are comparable and their phases point in nearly opposite directions, which is exactly the point where a spiral's trajectory is closest to having already settled.
+
+The **tail** is everything after $M$: $T(s) = \eta_N(s) - \eta_M(s)$, for the alternating series this time, and it's where [Chapter 3](../the-only-special-value/index.qmd)'s machinery earns its keep. Treated as a Fresnel-type integral around that same stationary point, the tail collapses to a closed form:
+
+$$
+T(s) \;\approx\; 2^{-1/2}\left(\frac{t}{\pi}\right)^{\frac12 - \sigma} \exp\!\left(i\left[\frac{5\pi}{4} - t\log\frac{t}{\pi} + t\right]\right).
+$$
+
+Notice what happens to the magnitude at $\sigma = \tfrac12$ specifically: the exponent $\tfrac12 - \sigma$ vanishes, and $\left(t/\pi\right)^0 = 1$ for every height $t$. The tail's magnitude collapses to exactly $2^{-1/2}$ — a single universal constant, independent of where on the critical line you are. Off the critical line, that magnitude drifts with $t$; on it, it doesn't.
+
+## What this predicts at a zero
+
+The eta and zeta functions are related by $\eta(s) = (1-2^{1-s})\zeta(s)$, and the same relation holds, approximately, between their pre-tail approximations. Combine that with the split above:
+
+$$
+\eta_M(s) = \eta_N(s) - T(s) = (1-2^{1-s})P(s) - T(s).
+$$
+
+If $s$ is a genuine zero — so that both the true spiral center and its finite approximation $P(s)$ vanish — this collapses to a clean prediction:
+
+$$
+\eta_M(s) \;\approx\; -T(s).
+$$
+
+The pre-tail sum, at a real zero, should point in almost exactly the opposite direction from the tail's closed form, with almost exactly the same magnitude, $2^{-1/2}$.
+
+## Checking it against 100,000 real zeros
+
+This is a concrete, falsifiable claim about actual known numbers, so I checked it against actual known numbers: the first 100,000 nontrivial zeros of $\zeta$, all of them verified to sit on the critical line. In every case, the pre-tail sum $\eta_M(s)$ and the tail estimate $T(s)$ come out pointing in nearly opposite directions, with modulus close to $1/\sqrt2$, exactly as predicted.
+
+I want to be as precise about this as I was at the time: *"I have no way of currently proving rigorously that this is always the case for all non-trivial zeros of the Riemann zeta function."* This is a strong, clean, checkable numerical regularity — a hundred thousand data points is not nothing — but it is numerics, not a proof, and I want to keep those two things visibly separate rather than let the size of the check do the work a derivation should.
+
+Whatever happens to the rest of this project, I think this result stands on its own: a closed-form prediction about the geometry of truncated zeta and eta sums near real zeros, derived from first principles, checked at scale, and still — as far as I know — unexplained by anything deeper than "the numbers do this."
+
+---
+
+*Next: [Chapter 5 — Rigidity and Its Discontents](../rigidity-and-its-discontents/index.qmd), December 2025.*

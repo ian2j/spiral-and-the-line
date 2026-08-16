@@ -32,17 +32,17 @@ The origin: phase functions of alternating sums, Jensen-convexity pairing, and a
 
 Where the project's visual language is born — truncated zeta sums spiral toward a fixed center, and `M = ⌊t/π⌋` is the natural place to stop. See the [interactive figure](posts/spiral-toward-a-center/index.qmd).
 
-**3 · The Only Special Value (2025 H1)** <span class="status-badge">planned</span>
+**3 · The Only Special Value (2025 H1)** <span class="status-badge done">posted</span>
 
-A stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series.
+A stationary-phase argument for why σ = 1/2 is the unique point where two asymptotic mechanisms collide — and the first honest naming of the gap that recurs for the rest of the series. [Read it](posts/the-only-special-value/index.qmd).
 
-**4 · Pre-tail and Tail (Sept–Oct 2025)** <span class="status-badge">planned</span>
+**4 · Pre-tail and Tail (Sept–Oct 2025)** <span class="status-badge done">posted</span>
 
-The cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros.
+The cleanest empirical result in the whole project: pre-tail and tail vectors pointing in nearly opposite directions, magnitude 1/√2, checked against 100,000 real nontrivial zeros. [Read it](posts/pre-tail-and-tail/index.qmd).
 
-**5 · Rigidity and Its Discontents (Dec 2025)** <span class="status-badge">planned</span>
+**5 · Rigidity and Its Discontents (Dec 2025)** <span class="status-badge done">posted</span>
 
-A deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma.
+A deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma. [Read it](posts/rigidity-and-its-discontents/index.qmd).
 
 **6 · Only σ = 1/2, Take Four (Feb 2026)** <span class="status-badge">planned</span>
 
