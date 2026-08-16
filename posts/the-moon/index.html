@@ -376,7 +376,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">The question</a></li>
+  <li><a href="#three-years-of-groundwork-first" id="toc-three-years-of-groundwork-first" class="nav-link active" data-scroll-target="#three-years-of-groundwork-first">Three years of groundwork first</a></li>
+  <li><a href="#the-question" id="toc-the-question" class="nav-link" data-scroll-target="#the-question">The question</a></li>
   <li><a href="#rays-in-a-grid" id="toc-rays-in-a-grid" class="nav-link" data-scroll-target="#rays-in-a-grid">Rays in a grid</a></li>
   <li><a href="#a-parity-coincidence" id="toc-a-parity-coincidence" class="nav-link" data-scroll-target="#a-parity-coincidence">A parity coincidence</a></li>
   <li><a href="#the-convexity-payoff" id="toc-the-convexity-payoff" class="nav-link" data-scroll-target="#the-convexity-payoff">The convexity payoff</a></li>
@@ -394,6 +395,10 @@ window.Quarto = {
 
 
 <p><em>A note on notation before we start: the earliest files in this project use <span class="math inline">t</span> for the offset from the critical line and <span class="math inline">y</span> for the height — the reverse of the convention I’ve used ever since and will use for the rest of this series. I’ve translated the original 2023 notes into the later convention below: <span class="math inline">t</span> is the height, <span class="math inline">u</span> is the offset, <span class="math inline">s = \tfrac12 + u + it</span>.</em></p>
+<section id="three-years-of-groundwork-first" class="level2">
+<h2 class="anchored" data-anchor-id="three-years-of-groundwork-first">Three years of groundwork first</h2>
+<p>This wasn’t the first thing I tried. By late 2023 I’d already spent three years on this problem — most of it building up the machinery to even state a solution attempt cleanly, in a document I called, only half-jokingly, <em>Primal Pilgrimage</em>: number sets, basic geometry and trigonometry, Cauchy products, Cesàro summation, all rebuilt from scratch as scaffolding, ending in a “My Solution” section I could never quite finish writing. One early skeleton of that solution gets as far as <em>“establish the doubling ratio… establish the order… conclude that <span class="math inline">t=1/2</span> is the only value that permits <span class="math inline">\zeta(s)=0</span>”</em> — three section headers in a row with nothing underneath them. I want that on the record too, because it’s true to how this actually went: long stretches of building tools before the first technique that actually produced a real inequality. The Moon, below, is that first technique.</p>
+</section>
 <section id="the-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-question">The question</h2>
 <p>Take a partial sum of the alternating zeta series, <span class="math inline">f_N(s) = \sum_{n=1}^N (-1)^{n+1} n^{-s}</span>, and look at its squared modulus, <span class="math inline">|f_N(s)|^2</span>. Multiply the sum out against itself — every term against every other term — and you get a double sum, a <em>Cauchy product</em>, with one entry for every pair of indices. Group those entries by which term of the original series they came from, and you get something with a very specific structure: a <strong>grid</strong>, indexed by <span class="math inline">(l, n)</span> with <span class="math inline">1 \le l \le n</span>, where each cell corresponds to the product <span class="math inline">l \cdot (n-l+1)</span>.</p>
