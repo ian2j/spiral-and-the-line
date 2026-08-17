@@ -1,0 +1,227 @@
+<title>Real-Zero Curvature Gauge</title>
+<style>
+  :root {
+    --bg: #eef1f5; --surface: #ffffff; --surface-2: #f2f4f8; --border: #d6dce3;
+    --text: #141b24; --text-dim: #5c6779; --text-faint: #8b93a1;
+    --accent-lock: #0e8f7c; --accent-lock-soft: #0e8f7c22;
+    --accent-drift: #c15f28; --accent-drift-soft: #c15f2822;
+    --grid-line: #e3e7ed; --grid-line-strong: #cdd4dc;
+    --shadow: 0 1px 2px rgba(20, 27, 36, 0.06), 0 8px 24px rgba(20, 27, 36, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+      --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+      --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+      --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+      --grid-line: #1c242c; --grid-line-strong: #29333d;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e13; --surface: #10151b; --surface-2: #171e26; --border: #2a3540;
+    --text: #e7ebf0; --text-dim: #90a0b2; --text-faint: #5c6a7a;
+    --accent-lock: #4fe0c6; --accent-lock-soft: #4fe0c626;
+    --accent-drift: #eda36e; --accent-drift-soft: #eda36e26;
+    --grid-line: #1c242c; --grid-line-strong: #29333d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  .display { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; }
+  .app { max-width: 900px; margin: 0 auto; padding: 1.75rem 1.25rem 2.25rem; }
+  header.nameplate { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--border); padding-bottom: 0.9rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
+  header.nameplate h1 { font-size: 1.4rem; margin: 0 0 0.2rem; font-weight: 600; }
+  header.nameplate p { margin: 0; color: var(--text-dim); font-size: 0.86rem; max-width: 48ch; }
+  header.nameplate .instrument-id { text-align: right; color: var(--text-faint); font-size: 0.68rem;
+    letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.5; }
+  .panel { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; }
+  .rail-label { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 0.4rem; }
+  .fader-readout { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+  .fader-readout .val { font-size: 0.98rem; }
+  .fader-readout .val .num { font-weight: 600; }
+  input[type="range"] { -webkit-appearance: none; width: 100%; height: 26px; background: transparent; margin: 0.2rem 0 0.6rem; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6px;
+    border-radius: 50%; background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  input[type="range"]::-moz-range-track { height: 4px;
+    background: linear-gradient(to right, var(--border), var(--grid-line-strong), var(--border)); border-radius: 2px; }
+  input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent-lock); cursor: pointer; }
+  .fader-ticks { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 0.63rem; padding: 0 2px; }
+  .scope { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: var(--shadow); aspect-ratio: 16 / 8; overflow: hidden; margin-top: 0.6rem; }
+  .scope canvas { width: 100%; height: 100%; display: block; }
+  .status-chip { position: absolute; top: 0.7rem; right: 0.85rem; font-size: 0.68rem; letter-spacing: 0.06em;
+    padding: 0.22rem 0.55rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+    display: flex; align-items: center; gap: 0.4rem; }
+  .status-chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .telemetry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 0.75rem; }
+  .telemetry .cell { background: var(--surface-2); padding: 0.55rem 0.7rem; }
+  .telemetry .cell .k { font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.12rem; }
+  .telemetry .cell .v { font-size: 0.92rem; }
+  .caption { color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0.8rem 0 0; }
+</style>
+
+<div class="app">
+  <header class="nameplate">
+    <div>
+      <h1 class="display">Real-Zero Curvature Gauge</h1>
+      <p>Computed from real &zeta; data: k(t) at the midpoint between five actual pairs of consecutive nontrivial zeros (mpmath.zetazero).</p>
+    </div>
+    <div class="instrument-id mono">k(t) = 2Re[L'(&frac12;+it)] + 4Re[L(&frac12;+it)]&sup2;</div>
+  </header>
+
+  <div class="panel">
+    <p class="rail-label">Pick a zero gap</p>
+    <div class="fader-readout"><span class="val display">n = <span class="num mono" id="n-readout"></span>&nbsp;&nbsp;t<sub>mid</sub> &asymp; <span class="num mono" id="t-readout"></span></span></div>
+    <input type="range" id="pt-slider" min="0" max="4" step="1" value="0" aria-label="which zero gap">
+    <div class="fader-ticks mono"><span>n=1 (t&asymp;18)</span><span>n=2000 (t&asymp;2516)</span></div>
+
+    <div class="scope">
+      <canvas id="plot" width="1200" height="600"></canvas>
+      <div class="status-chip mono" id="status-chip"><span class="dot" id="status-dot"></span><span id="status-text"></span></div>
+    </div>
+
+    <div class="telemetry mono">
+      <div class="cell"><div class="k">local gap</div><div class="v" id="tel-gap"></div></div>
+      <div class="cell"><div class="k">mean-gap prediction</div><div class="v" id="tel-mean"></div></div>
+      <div class="cell"><div class="k">k(t) / log&sup2;t</div><div class="v" id="tel-ratio"></div></div>
+    </div>
+
+    <p class="caption">Bars: k(t)/log&sup2;t at each of the five sampled gaps, real zeros only. The selected gap is highlighted. None of the five — including n=500, the widest local gap relative to its mean-spacing prediction in this sample — dips toward zero the way it would need to if a symmetric off-line cancellation (Take Four's missing step) were quietly possible nearby. That's the numerical face of the pair-correlation-adjacent wall this chapter names.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var DATA = [
+    {n:1,    t:17.6,   gap:6.89, mean:6.11, k:1.51,  ratio:0.18},
+    {n:20,   t:78.2,   gap:2.19, mean:2.49, k:10.40, ratio:0.55},
+    {n:100,  t:237.1,  gap:1.25, mean:1.73, k:24.67, ratio:0.83},
+    {n:500,  t:812.0,  gap:1.59, mean:1.29, k:32.31, ratio:0.72},
+    {n:2000, t:2515.9, gap:1.28, mean:1.05, k:49.56, ratio:0.81}
+  ];
+
+  var slider = document.getElementById("pt-slider");
+  var nReadout = document.getElementById("n-readout");
+  var tReadout = document.getElementById("t-readout");
+  var canvas = document.getElementById("plot");
+  var ctx = canvas.getContext("2d");
+  var statusDot = document.getElementById("status-dot");
+  var statusText = document.getElementById("status-text");
+  var telGap = document.getElementById("tel-gap");
+  var telMean = document.getElementById("tel-mean");
+  var telRatio = document.getElementById("tel-ratio");
+
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function render() {
+    var idx = parseInt(slider.value, 10);
+    var d = DATA[idx];
+    nReadout.textContent = d.n;
+    tReadout.textContent = d.t.toFixed(1);
+    telGap.textContent = d.gap.toFixed(2);
+    telMean.textContent = d.mean.toFixed(2);
+    telRatio.textContent = d.ratio.toFixed(2);
+
+    var wide = d.gap > d.mean * 1.15;
+    var narrow = d.gap < d.mean * 0.85;
+    var lockColor = cssVar("--accent-lock");
+    var driftColor = cssVar("--accent-drift");
+    statusDot.style.background = wide ? driftColor : lockColor;
+    statusText.textContent = wide ? "WIDER THAN TYPICAL GAP" : (narrow ? "NARROWER THAN TYPICAL GAP" : "TYPICAL GAP");
+    statusText.style.color = wide ? driftColor : lockColor;
+    document.getElementById("status-chip").style.borderColor = wide ? driftColor : lockColor;
+
+    draw(idx);
+  }
+
+  function draw(selectedIdx) {
+    var w = canvas.width, h = canvas.height;
+    var bg = cssVar("--surface");
+    var gridLine = cssVar("--grid-line");
+    var gridStrong = cssVar("--grid-line-strong");
+    var textFaint = cssVar("--text-faint");
+    var textMain = cssVar("--text");
+    var lockColor = cssVar("--accent-lock");
+    var lockSoft = cssVar("--accent-lock-soft");
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    var padL = 60, padR = 30, padT = 25, padB = 55;
+    var plotW = w - padL - padR, plotH = h - padT - padB;
+    var maxRatio = 1.0;
+
+    // grid
+    ctx.strokeStyle = gridLine;
+    ctx.lineWidth = 1;
+    for (var gy = 0; gy <= 5; gy++) {
+      var yy = padT + plotH * (gy / 5);
+      ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(padL + plotW, yy); ctx.stroke();
+    }
+    ctx.strokeStyle = gridStrong;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + plotH); ctx.lineTo(padL + plotW, padT + plotH);
+    ctx.stroke();
+
+    // y-axis labels
+    ctx.fillStyle = textFaint;
+    ctx.font = "11px ui-monospace, monospace";
+    ctx.textAlign = "right";
+    for (var gy2 = 0; gy2 <= 5; gy2++) {
+      var val = maxRatio * (1 - gy2 / 5);
+      var yy2 = padT + plotH * (gy2 / 5);
+      ctx.fillText(val.toFixed(1), padL - 8, yy2 + 4);
+    }
+
+    // bars
+    var n = DATA.length;
+    var slotW = plotW / n;
+    var barW = slotW * 0.5;
+    for (var i = 0; i < n; i++) {
+      var d = DATA[i];
+      var cx = padL + slotW * (i + 0.5);
+      var barH = (d.ratio / maxRatio) * plotH;
+      var y0 = padT + plotH - barH;
+      ctx.fillStyle = (i === selectedIdx) ? lockColor : gridStrong;
+      ctx.fillRect(cx - barW / 2, y0, barW, barH);
+
+      ctx.fillStyle = (i === selectedIdx) ? textMain : textFaint;
+      ctx.textAlign = "center";
+      ctx.font = (i === selectedIdx) ? "bold 12px ui-monospace, monospace" : "11px ui-monospace, monospace";
+      ctx.fillText(d.ratio.toFixed(2), cx, y0 - 8);
+      ctx.font = "10px ui-monospace, monospace";
+      ctx.fillStyle = textFaint;
+      ctx.fillText("n=" + d.n, cx, padT + plotH + 18);
+      ctx.fillText("t≈" + Math.round(d.t), cx, padT + plotH + 32);
+    }
+
+    ctx.fillStyle = textFaint;
+    ctx.textAlign = "center";
+    ctx.font = "11px ui-monospace, monospace";
+    ctx.save();
+    ctx.translate(16, padT + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("k(t) / log²t", 0, 0);
+    ctx.restore();
+  }
+
+  slider.addEventListener("input", render);
+  window.addEventListener("resize", render);
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+  }
+  render();
+})();
+</script>

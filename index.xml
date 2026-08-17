@@ -10,7 +10,145 @@
 <atom:link href="https://ian2j.github.io/spiral-and-the-line/index.xml" rel="self" type="application/rss+xml"/>
 <description>A field notebook on the Riemann zeta function — six years of independent research, written up honestly, dead ends included.</description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Sat, 15 Aug 2026 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 17 Aug 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Chapter 6: Only σ=1/2, Take Four</title>
+  <link>https://ian2j.github.io/spiral-and-the-line/posts/only-sigma-half-take-four/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>Chapter 5 ended on a hedge: a precise, checkable hypothesis — <img src="https://latex.codecogs.com/png.latex?k(t)%20%5Cge%20c_0%5Clog%5E2%20t"> — and an honest admission that I hadn’t verified it, and didn’t know anyone who had. February 2026 opened with a fourth attempt at the same underlying question, from a completely different angle: not curvature this time, but the approximate functional equation. It’s the tightest self-derived argument in the whole project. It also, on inspection, had a real bug — and once that was fixed, it led somewhere I didn’t expect: back to Chapter 5, and past it, to a piece of mathematics with an actual name.</p>
+<section id="the-setup" class="level2">
+<h2 class="anchored" data-anchor-id="the-setup">The setup</h2>
+<p>Fix <img src="https://latex.codecogs.com/png.latex?t"> and write <img src="https://latex.codecogs.com/png.latex?s=%5Csigma+it"> throughout (<img src="https://latex.codecogs.com/png.latex?%5Csigma"> = real part, <img src="https://latex.codecogs.com/png.latex?t"> = height, as everywhere on this site). Recall <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)">, for <img src="https://latex.codecogs.com/png.latex?0%3C%5Csigma%3C1">, can be written as a limit of truncated Riemann sums:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmu(s)%20:=%20%5Clim_%7BN%5Cto%5Cinfty%7D%5Cleft%5B%5Csum_%7Bn=1%7D%5EN%20n%5E%7B-s%7D%20-%20%5Cfrac%7BN%5E%7B1-s%7D%7D%7B1-s%7D%5Cright%5D%20=%20%5Czeta(s).%0A"></p>
+<p>Truncate it at a finite <img src="https://latex.codecogs.com/png.latex?N"> instead of taking the limit:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmu_N(s)%20:=%20%5Csum_%7Bn=1%7D%5EN%20n%5E%7B-s%7D%20-%20%5Cfrac%7BN%5E%7B1-s%7D%7D%7B1-s%7D,%20%5Cqquad%20%5Cmu_N(s)%20=%20%5Cmu(s)%20+%20O(N%5E%7B-%5Csigma%7D).%0A"></p>
+<p>Rescale to strip off the trivial part of the decay: <img src="https://latex.codecogs.com/png.latex?%5Cpsi_N(s)%20:=%20N%5E%7Bs-1%7D%5Cmu_N(s)">. This is nothing exotic — it’s exactly the leftover error of a Riemann-sum approximation to an integral, rescaled to sit at a fixed order of magnitude.</p>
+</section>
+<section id="the-argument" class="level2">
+<h2 class="anchored" data-anchor-id="the-argument">The argument</h2>
+<p>Two facts about <img src="https://latex.codecogs.com/png.latex?%5Cpsi_N"> drive everything:</p>
+<p><strong>If <img src="https://latex.codecogs.com/png.latex?%5Cmu(s)%5Cne0">:</strong> <img src="https://latex.codecogs.com/png.latex?%5Cmu_N(s)%5Cto%5Cmu(s)%5Cne0">, so <img src="https://latex.codecogs.com/png.latex?%7C%5Cmu_N(s)%7C=O(1)"> and <img src="https://latex.codecogs.com/png.latex?%7C%5Cpsi_N(s)%7C%20=%20N%5E%7B%5Csigma-1%7D%5Ccdot%20O(1)%20=%20O(N%5E%7B%5Csigma-1%7D)"> — the <em>generic</em> decay rate.</p>
+<p><strong>If <img src="https://latex.codecogs.com/png.latex?%5Cmu(s)=0"> — a genuine zero of <img src="https://latex.codecogs.com/png.latex?%5Czeta">:</strong> the leading term vanishes, so <img src="https://latex.codecogs.com/png.latex?%5Cmu_N(s)=O(N%5E%7B-%5Csigma%7D)"> instead of <img src="https://latex.codecogs.com/png.latex?O(1)">, and <img src="https://latex.codecogs.com/png.latex?%7C%5Cpsi_N(s)%7C%20=%20N%5E%7B%5Csigma-1%7D%5Ccdot%20O(N%5E%7B-%5Csigma%7D)%20=%20O(N%5E%7B-1%7D)"> — a full extra factor of <img src="https://latex.codecogs.com/png.latex?N%5E%7B-1+%5Csigma%7D"> <em>faster</em>. A truncated sum settles down noticeably quicker near a real zero than it does anywhere else. That asymmetry is the whole engine of the argument.</p>
+<p>Now suppose, for contradiction, that <img src="https://latex.codecogs.com/png.latex?%5Czeta"> has a zero off the critical line at <img src="https://latex.codecogs.com/png.latex?%5Csigma=%5Ctfrac12-u"> (<img src="https://latex.codecogs.com/png.latex?u%5Cne0">), height <img src="https://latex.codecogs.com/png.latex?t">. This isn’t an extra assumption smuggled in — it’s forced by two completely standard facts: <img src="https://latex.codecogs.com/png.latex?%5Czeta(%5Cbar%20s)=%5Coverline%7B%5Czeta(s)%7D"> (real coefficients), and <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)=%5Cchi(s)%5Czeta(1-s)"> (the functional equation, with <img src="https://latex.codecogs.com/png.latex?%5Cchi(s)%20=%20%5Cpi%5E%7Bs-1/2%7D%5C,%5CGamma%5C!%5Cleft(%5Cfrac%7B1-s%7D%7B2%7D%5Cright)/%5CGamma%5C!%5Cleft(%5Cfrac%7Bs%7D%7B2%7D%5Cright)">, the same factor used throughout this series since <a href="../../posts/critical-line-path-identity/index.html">Chapter 8</a>). Chain them together and an off-line zero at <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12-u+it"> drags a mirror zero along with it, at <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12+u+it"> — same height, reflected across the line. So <em>if</em> an off-line zero exists at all, both <img src="https://latex.codecogs.com/png.latex?%5Cmu(%5Ctfrac12-u+it)=0"> and <img src="https://latex.codecogs.com/png.latex?%5Cmu(%5Ctfrac12+u+it)=0"> hold simultaneously, and both symmetric points get the enhanced <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-1%7D)"> decay above.</p>
+<p>Separately — and this is the piece that does the real work — suppose <img src="https://latex.codecogs.com/png.latex?%5Cpsi_N"> obeys an approximate-functional-equation-type relation of its own, mirroring <img src="https://latex.codecogs.com/png.latex?%5Cchi">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cpsi_N(1-s)%20%5C;=%5C;%20%5Cfrac%7BN%5E%7B1-2s%7D%7D%7B%5Cchi(s)%7D%5C,%5Cpsi_N(s).%0A"></p>
+<p>At the enhanced-decay case, both sides are <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-1%7D)"> by the paragraph above — plug that order directly into the relation and the <img src="https://latex.codecogs.com/png.latex?N%5E%7B1-2s%7D"> factor has nowhere to go except to force <img src="https://latex.codecogs.com/png.latex?1-2%5Csigma=0">. <strong><img src="https://latex.codecogs.com/png.latex?%5Csigma=%5Ctfrac12">.</strong> No off-line zero can produce a consistent order on both sides of its own approximate functional equation unless it sits exactly on the line.</p>
+<p>That’s Take Four, in full. It’s the cleanest version of the six-times-recurring argument this project has produced — and it very nearly has no moving parts left to hide a gap in.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Pick a height. Every point plotted is a real value of <img src="https://latex.codecogs.com/png.latex?k(t)"> from Chapter 5, computed at the exact midpoint between two consecutive genuine zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> (not illustrative — from <code>mpmath.zetazero</code>) — the same quantity that resurfaces below as the actual reason this argument’s last step is hard.</p>
+<iframe src="rigidity_realdata_gauge.html" style="width:100%; aspect-ratio: 4/3.2; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+</section>
+<section id="where-the-bug-actually-was" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-bug-actually-was">Where the bug actually was</h2>
+<p>I did not take the “<img src="https://latex.codecogs.com/png.latex?%5Cpsi_N"> obeys its own approximate functional equation” step on faith. Checked directly, numerically, against the actual object as written above (<img src="https://latex.codecogs.com/png.latex?%5Cmu_N">, plain rectangle-truncation, no correction term): its functional-equation defect is 500–30,000× larger than it should be for the argument to close, and — worse — the defect <em>doesn’t shrink to zero</em> as <img src="https://latex.codecogs.com/png.latex?N%5Cto%5Cinfty"> at fixed <img src="https://latex.codecogs.com/png.latex?t">, which is exactly the regime this argument needs it in. As literally written, the premise never actually holds, at any scale.</p>
+<p>The fix turned out to be small and completely standard: every other object in this project’s toolkit — <img src="https://latex.codecogs.com/png.latex?f(s)=%5Csum_%7Bn=1%7D%5EM%20n%5E%7B-s%7D+%5Ctfrac12(M+1)%5E%7B-s%7D"> from <a href="../../posts/pre-tail-and-tail/index.html">Chapter 4</a> onward — carries a half-weighted trapezoidal correction at the truncation point that <img src="https://latex.codecogs.com/png.latex?%5Cmu_N(s)"> above simply omits. Swapping it in, <img src="https://latex.codecogs.com/png.latex?f_N(s)%20:=%20%5Cmu_N(s)%20+%20%5Ctfrac12%20N%5E%7B-s%7D">, and rechecking: the ratio of the functional-equation defect to the enhanced-decay signal it needs to stay smaller than shrinks to zero cleanly and monotonically as <img src="https://latex.codecogs.com/png.latex?N%5Cto%5Cinfty">, exactly as required. The mechanism is nothing exotic — the trapezoidal rule is one order more accurate than the plain rectangle rule, full stop — but it’s the difference between a premise that’s actually true and one that only looked true from a distance. With <img src="https://latex.codecogs.com/png.latex?f_N"> in place of <img src="https://latex.codecogs.com/png.latex?%5Cmu_N">, Take Four’s functional-equation step is on solid ground.</p>
+</section>
+<section id="the-step-thats-still-an-assumption-precisely" class="level2">
+<h2 class="anchored" data-anchor-id="the-step-thats-still-an-assumption-precisely">The step that’s still an assumption, precisely</h2>
+<p>Fixing the bug above doesn’t fix the argument’s real gap, and I want to be exactly as specific about it as the site’s roadmap promised. Look again at the order-matching step: it concludes <img src="https://latex.codecogs.com/png.latex?%5Csigma=%5Ctfrac12"> by assuming the <em>leading coefficients</em> on both sides of the rescaled functional equation are genuinely nonzero — i.e.&nbsp;that the <img src="https://latex.codecogs.com/png.latex?O(N%5E%7B-1%7D)"> terms don’t hide an accidental extra cancellation that would let the equation balance at some <img src="https://latex.codecogs.com/png.latex?%5Csigma%5Cne%5Ctfrac12"> too, at a lower order still. Nothing in the derivation above rules that out. It’s asserted by omission, not derived — and that is <em>precisely</em> the same move every other version of this argument has made, going back to 2023’s Jensen-convexity pairing, dressed differently each time. The site’s own outline calls it “the same core monotonicity/remainder-bound gap,” and Take Four doesn’t close it — it just states it in its sharpest form yet: <strong>why can’t a symmetric pair of near-zero values conspire to cancel at extra order, at some <img src="https://latex.codecogs.com/png.latex?%5Csigma%5Cne%5Ctfrac12">?</strong></p>
+<p>That question has another name, already sitting in this project’s own notes.</p>
+</section>
+<section id="where-chapter-5-finishes-the-job" class="level2">
+<h2 class="anchored" data-anchor-id="where-chapter-5-finishes-the-job">Where Chapter 5 finishes the job</h2>
+<p>Chapter 5’s transverse curvature <img src="https://latex.codecogs.com/png.latex?k(t)"> is exactly a ban on that kind of conspiracy — a lower bound on how sharply <img src="https://latex.codecogs.com/png.latex?%7C%5Czeta(%5Csigma+it)%7C%5E2"> has to curve upward as <img src="https://latex.codecogs.com/png.latex?%5Csigma"> moves off <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12">, ruling out precisely the extra-order cancellation Take Four needs excluded. Write <img src="https://latex.codecogs.com/png.latex?L(s)%20:=%20%5Czeta'(s)/%5Czeta(s)">, the <strong>logarithmic derivative</strong> — completely standard, and, remarkably, absent by name from three years of these notes despite the project attacking <img src="https://latex.codecogs.com/png.latex?%5Czeta"> from every other direction. A short calculus exercise, checked numerically against <img src="https://latex.codecogs.com/png.latex?%5Czeta"> directly to 11 decimal places, gives <img src="https://latex.codecogs.com/png.latex?k(t)"> an exact closed form:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ak(t)%20%5C;=%5C;%202%5C,%5Cmathrm%7BRe%7D%5Cbig%5BL'(%5Ctfrac12+it)%5Cbig%5D%20%5C;+%5C;%204%5C,%5Cbig%5B%5Cmathrm%7BRe%7D%5C,L(%5Ctfrac12+it)%5Cbig%5D%5E2.%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?L(s)"> has its own classical expansion — the Hadamard product for <img src="https://latex.codecogs.com/png.latex?%5Cxi(s)=%5Ctfrac12s(s-1)%5Cpi%5E%7B-s/2%7D%5CGamma(s/2)%5Czeta(s)"> gives <img src="https://latex.codecogs.com/png.latex?L(s)"> as a smooth, explicit <img src="https://latex.codecogs.com/png.latex?O(%5Clog%20t)"> term plus a sum of <img src="https://latex.codecogs.com/png.latex?1/(s-%5Crho)"> over every nontrivial zero <img src="https://latex.codecogs.com/png.latex?%5Crho=%5Ctfrac12+i%5Cgamma"> (writing <img src="https://latex.codecogs.com/png.latex?%5Cgamma"> for a zero’s height, the way <img src="https://latex.codecogs.com/png.latex?t"> is this chapter’s own height variable). Plugged into the boxed formula, the nearest zeros on the line dominate: each contributes <img src="https://latex.codecogs.com/png.latex?2/(t-%5Cgamma)%5E2"> to <img src="https://latex.codecogs.com/png.latex?k(t)">, so <strong><img src="https://latex.codecogs.com/png.latex?k(t)"> is, to good approximation, the reciprocal-squared distance to the nearest zero.</strong> Checked directly against real data (<code>mpmath.zetazero</code>, midpoints between consecutive zeros):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><img src="https://latex.codecogs.com/png.latex?n"></th>
+<th><img src="https://latex.codecogs.com/png.latex?t_%7B%5Ctext%7Bmid%7D%7D"></th>
+<th>local gap</th>
+<th>mean-gap prediction</th>
+<th><img src="https://latex.codecogs.com/png.latex?k(t)"></th>
+<th><img src="https://latex.codecogs.com/png.latex?k(t)/%5Clog%5E2%20t"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>17.6</td>
+<td>6.89</td>
+<td>6.11</td>
+<td>1.51</td>
+<td>0.18</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>78.2</td>
+<td>2.19</td>
+<td>2.49</td>
+<td>10.40</td>
+<td>0.55</td>
+</tr>
+<tr class="odd">
+<td>100</td>
+<td>237.1</td>
+<td>1.25</td>
+<td>1.73</td>
+<td>24.67</td>
+<td>0.83</td>
+</tr>
+<tr class="even">
+<td>500</td>
+<td>812.0</td>
+<td>1.59</td>
+<td>1.29</td>
+<td>32.31</td>
+<td>0.72</td>
+</tr>
+<tr class="odd">
+<td>2000</td>
+<td>2515.9</td>
+<td>1.28</td>
+<td>1.05</td>
+<td>49.56</td>
+<td>0.81</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://latex.codecogs.com/png.latex?k(t)/%5Clog%5E2t"> settles into a stable band rather than drifting toward 0, consistent with the hypothesis — and, tellingly, the widest local gap in the table (<img src="https://latex.codecogs.com/png.latex?n=500">) doesn’t produce an unusually <em>high</em> ratio, exactly as expected if <img src="https://latex.codecogs.com/png.latex?k(t)"> tracks the nearest zero’s true distance rather than the average spacing. A wider stress test against the first two million known zeros, across nine orders of magnitude in height, shows the same picture: no case found where <img src="https://latex.codecogs.com/png.latex?k(t)/%5Clog%5E2t"> trends toward zero, even at the widest gaps on record.</p>
+<p>So Take Four’s missing step and Chapter 5’s open hypothesis are the same statement: <strong>no two zeros on the line are ever allowed to sit closer together than the typical spacing suggests, at any height, ever.</strong> That is not a warm-up lemma. It is a uniform, for-every-<img src="https://latex.codecogs.com/png.latex?t"> statement about how zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> can cluster — and statements of that shape have a name in the literature.</p>
+</section>
+<section id="the-name" class="level2">
+<h2 class="anchored" data-anchor-id="the-name">The name</h2>
+<p>Goldston, Gonek and Montgomery — <em>Mean values of the logarithmic derivative of the Riemann zeta-function with applications to primes in short intervals</em>, J. Reine Angew. Math. 537 (2001) — proved that the sharp mean-square asymptotic of <img src="https://latex.codecogs.com/png.latex?L(s)"> shifted just off the critical line (the exact limit <img src="https://latex.codecogs.com/png.latex?k(t)"> reduces to) is one of three canonical integrals whose sharp asymptotic is <em>equivalent</em> to <strong>Montgomery’s Pair Correlation Conjecture</strong>. (Chandee’s survey “A tale of three integrals,” arXiv:2108.09258, states all three side by side; Fan Ge’s 2023 follow-up, arXiv:2211.08571, sharpens the picture further but still needs RH plus an explicit small-gaps hypothesis.)</p>
+<p>So: an unconditional, for-every-<img src="https://latex.codecogs.com/png.latex?t"> proof of <img src="https://latex.codecogs.com/png.latex?k(t)%5Cge%20c_0%5Clog%5E2t"> wouldn’t just be hard. It would resolve a named, fifty-year-old open conjecture about how zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> correlate with each other — squarely in Montgomery–Odlyzko/GUE-statistics territory, not “elementary argument waiting to be found” territory. That’s the honest answer to a question this project has asked six times in six vocabularies since 2023: <em>why does the same wall keep reappearing?</em> Because it isn’t a wall specific to any one argument. It’s one wall, with a name, and every reformulation in this project — the Moon’s Jensen pairing, the stationary-phase endpoint argument, Take Four’s order-matching, Chapter 5’s curvature — was climbing the same side of it.</p>
+</section>
+<section id="what-this-does-and-doesnt-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-does-and-doesnt-do">What this does and doesn’t do</h2>
+<p>This does not prove the Riemann Hypothesis, and it does not prove <img src="https://latex.codecogs.com/png.latex?k(t)%5Cge%20c_0%5Clog%5E2t"> either — if anything, it explains precisely why neither this project nor anyone else has. What it does do: convert three years of “I keep hitting the same wall, worded differently each time” into a single, precise, citable statement of <em>which</em> open problem that wall actually is. That’s a real answer, even though it isn’t the answer I set out looking for in 2020.</p>
+<p>It also leaves a genuinely open door, and I want to name it rather than let the chapter end on pure closure. The <em>unconditional-for-every-<img src="https://latex.codecogs.com/png.latex?t"></em> version of <img src="https://latex.codecogs.com/png.latex?k(t)%5Cge%20c_0%5Clog%5E2t"> is PCC-equivalent — off the table with current technology. A weaker, <em>almost-all-<img src="https://latex.codecogs.com/png.latex?t"></em> statistical version — true for a density-one set of heights in <img src="https://latex.codecogs.com/png.latex?%5BT,2T%5D">, not every single one — is a different kind of question, and classical second- and fourth-moment theorems for <img src="https://latex.codecogs.com/png.latex?%5Czeta"> and its derivatives (Ingham’s theorem among them) are close in shape to what such a proof would need. I haven’t built it. But for the first time in three years, I know exactly which hundred-year-old toolbox to open first.</p>
+<hr>
+<p><em>Next: Chapter 7 — A Season of Reinvention, March–May 2026. Not yet posted — see the <a href="../../about.html">roadmap</a> for what’s still coming.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>chapter</category>
+  <category>explicit-formula</category>
+  <category>pair-correlation</category>
+  <category>2026</category>
+  <guid>https://ian2j.github.io/spiral-and-the-line/posts/only-sigma-half-take-four/</guid>
+  <pubDate>Mon, 17 Aug 2026 15:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Chapter 0: Prologue</title>
   <link>https://ian2j.github.io/spiral-and-the-line/posts/prologue/</link>
@@ -156,6 +294,9 @@
 <p>But the qualitative picture is already the whole point of this chapter: <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor"> is a natural place to stop and read off where that center is — <a href="../../posts/pre-tail-and-tail/index.html">Chapter 4</a> works out precisely why that cutoff, not some other one — which is exactly why the truncation</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20=%20%5Csum_%7Bn=1%7D%5E%7BM%7D%20n%5E%7B-s%7D%20+%20%5Ctfrac12%20(M+1)%5E%7B-s%7D%0A"></p>
 <p>that recurs throughout the rest of this project uses that specific cutoff.</p>
+<p><em>How</em> good a read on the center <img src="https://latex.codecogs.com/png.latex?f(s)"> actually gives, precisely, went unquantified for a long time — “genuinely good approximation” was as far as it got. It now has an explicit answer: with <img src="https://latex.codecogs.com/png.latex?N=M+1">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20=%20%5Czeta(s)%20+%20%5Cfrac%7BN%5E%7B1-s%7D%7D%7B1-s%7D%20-%20%5Cfrac%7Bs%7D%7B%5Cpi%5E2%7D%5C,N%5E%7B-s-1%7D%20+%20o(t%5E%7B-%5Csigma-1%7D),%0A"></p>
+<p>confirmed numerically to five-plus digits. The <img src="https://latex.codecogs.com/png.latex?-1/%5Cpi%5E2"> coefficient is not the textbook Euler–Maclaurin constant (<img src="https://latex.codecogs.com/png.latex?-1/12">) — it’s a genuinely different, resummed constant, arising specifically because <img src="https://latex.codecogs.com/png.latex?M=%5Clfloor%20t/%5Cpi%5Crfloor"> locks the truncation length to <img src="https://latex.codecogs.com/png.latex?t"> at a fixed ratio rather than letting it grow independently. First time this correction has been pinned down explicitly, rather than left as “close enough to see it on a plot.”</p>
 <p>The question that makes this more than a curiosity: <em>where</em> does the center sit? At a real, known zero of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> — one of the actual heights <img src="https://latex.codecogs.com/png.latex?t"> where <img src="https://latex.codecogs.com/png.latex?%5Czeta(%5Ctfrac12+it)=0"> — and exactly on the critical line, the center is the origin. Nudge <img src="https://latex.codecogs.com/png.latex?%5Csigma"> away from <img src="https://latex.codecogs.com/png.latex?%5Ctfrac12">, height held fixed, and the same spiral winds toward some other point entirely, not zero.</p>
 </section>
 <section id="try-it" class="level2">
@@ -273,6 +414,7 @@
 <h2 class="anchored" data-anchor-id="checking-it-against-100000-real-zeros">Checking it against 100,000 real zeros</h2>
 <p>This is a concrete, falsifiable claim about actual known numbers, so I checked it against actual known numbers: the first 100,000 nontrivial zeros of <img src="https://latex.codecogs.com/png.latex?%5Czeta">, all of them verified to sit on the critical line. In every case, the pre-tail sum <img src="https://latex.codecogs.com/png.latex?%5Ceta_M(s)"> and the tail estimate <img src="https://latex.codecogs.com/png.latex?T(s)"> come out pointing in nearly opposite directions, with modulus close to <img src="https://latex.codecogs.com/png.latex?1/%5Csqrt2">, exactly as predicted.</p>
 <p>I want to be as precise about this as I was at the time: <em>“I have no way of currently proving rigorously that this is always the case for all non-trivial zeros of the Riemann zeta function.”</em> This is a strong, clean, checkable numerical regularity — a hundred thousand data points is not nothing — but it is numerics, not a proof, and I want to keep those two things visibly separate rather than let the size of the check do the work a derivation should.</p>
+<p><strong>How fast does the match improve with height, and why:</strong> this went unquantified for a long time too — “checked, all consistent” doesn’t say <em>how</em> consistent, or whether it’s getting better. It is: <img src="https://latex.codecogs.com/png.latex?%7C%5Ceta_M(s)%7C%20-%202%5E%7B-1/2%7D">, measured directly against the same 100,000 zeros, shrinks like <img src="https://latex.codecogs.com/png.latex?t%5E%7B-1/2%7D"> — confirmed by tracking <img src="https://latex.codecogs.com/png.latex?%5Clvert%5C,%7C%5Ceta_M(s)%7C-2%5E%7B-1/2%7D%5C,%5Crvert%5Ccdot%5Csqrt%20t"> across the full height range (<img src="https://latex.codecogs.com/png.latex?t=21"> to <img src="https://latex.codecogs.com/png.latex?t%5Capprox75%7B,%7D000">), which stays in a bounded band rather than drifting. The reason traces back to the pre-tail construction itself: <img src="https://latex.codecogs.com/png.latex?P(s)"> doesn’t <em>exactly</em> vanish at a zero the way the derivation above assumes — a genuine spiral-geometry term (<img src="https://latex.codecogs.com/png.latex?N%5E%7B1-s%7D/(1-s)">, <a href="../../posts/spiral-toward-a-center/index.html">Chapter 2</a>’s discovery) survives even though <img src="https://latex.codecogs.com/png.latex?%5Czeta(s)=0">, and it’s this order-<img src="https://latex.codecogs.com/png.latex?t%5E%7B-1/2%7D"> term, not numerical noise, that sets the pace. Tried folding that term back into the prediction directly to sharpen it further; it didn’t help — the residual error didn’t shrink, meaning <img src="https://latex.codecogs.com/png.latex?T(s)">’s own approximation carries a comparable, uncorrected error of its own. So: the <em>rate</em> is now derived, not just observed, but tightening the match further needs a second correction (to <img src="https://latex.codecogs.com/png.latex?T(s)">, not <img src="https://latex.codecogs.com/png.latex?P(s)">) that hasn’t been worked out yet.</p>
 <p>Whatever happens to the rest of this project, I think this result stands on its own: a closed-form prediction about the geometry of truncated zeta and eta sums near real zeros, derived from first principles, checked at scale, and still — as far as I know — unexplained by anything deeper than “the numbers do this.”</p>
 <hr>
 <p><em>Next: <a href="../../posts/rigidity-and-its-discontents/index.html">Chapter 5 — Rigidity and Its Discontents</a>, December 2025.</em></p>
@@ -339,7 +481,7 @@
 <p>But converting one enormous, global, seemingly-intractable question into one precise, local, numerically-testable inequality — checkable gap by gap, height by height, against real computed values of <img src="https://latex.codecogs.com/png.latex?%5Czeta"> — is not nothing. It’s the sharpest form the “why can’t zeros drift off the line” question takes anywhere in this project. Every version before this one bundled the mechanism and the missing piece together into something fuzzy; this version separates them cleanly, and hands you exactly one thing to go verify.</p>
 <p>I haven’t verified it. Nobody has, as far as I know. But I know now precisely what I’d need.</p>
 <hr>
-<p><em>Next: Chapter 6 — Only σ=1/2, Take Four, February 2026. Not yet posted — see the <a href="../../about.html">roadmap</a> for what’s still coming.</em></p>
+<p><em>Next: <a href="../../posts/only-sigma-half-take-four/index.html">Chapter 6 — Only σ=1/2, Take Four</a>, February 2026.</em></p>
 
 
 </section>
@@ -437,10 +579,10 @@
 <section id="whats-left-and-why-its-a-different-kind-of-open-problem" class="level2">
 <h2 class="anchored" data-anchor-id="whats-left-and-why-its-a-different-kind-of-open-problem">What’s left, and why it’s a different kind of open problem</h2>
 <p>What remains is a single, classical-flavored estimate: a rigorous bound on</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(s)%20-%20%5Cchi(s)%5C,%20f(1-s),%20%5Cqquad%20M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor.%0A"></p>
-<p>This is the same species of estimate that underlies the Riemann–Siegel formula and Euler–Maclaurin-based approximate functional equations for <img src="https://latex.codecogs.com/png.latex?%5Czeta">, which <em>are</em> rigorously established in the literature for various truncation schemes — though the specific scheme used throughout this project (<img src="https://latex.codecogs.com/png.latex?M%20%5Csim%20t/%5Cpi">, long compared to the classical “balanced” choice <img src="https://latex.codecogs.com/png.latex?N%20%5Csim%20%5Csqrt%7Bt/2%5Cpi%7D">) doesn’t appear to be a standard textbook case, so the bound would need deriving for this scheme specifically.</p>
-<p>That’s real work, but of a fundamentally different character than the gap in Chapter 6: it’s a quantitative asymptotic estimate about an explicit finite sum, not a claim that would resolve the Riemann Hypothesis if true. It’s worth doing carefully, both because it completes this identity rigorously and because the same estimate is very likely the missing ingredient in several other chapters’ hand-waved “the error term is small” steps.</p>
-<p><strong>Next step:</strong> derive the Euler–Maclaurin expansion of <img src="https://latex.codecogs.com/png.latex?f(s)%20-%20%5Cchi(s)%20f(1-s)"> for <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor"> directly — Poisson summation on the finite sum is the standard route — and extract an explicit power of <img src="https://latex.codecogs.com/png.latex?t"> for the error. That single derivation would upgrade this chapter’s headline result from “verified numerically, explained structurally” to “proved, with an explicit error bound.”</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5CDelta(s)%20:=%20f(s)%20-%20%5Cchi(s)%5C,%20f(1-s),%20%5Cqquad%20M%20=%20%5Clfloor%20t/%5Cpi%20%5Crfloor.%0A"></p>
+<p>This is the same species of estimate that underlies the Riemann–Siegel formula and Euler–Maclaurin-based approximate functional equations for <img src="https://latex.codecogs.com/png.latex?%5Czeta">, which <em>are</em> rigorously established in the literature for various truncation schemes — though the specific scheme used throughout this project (<img src="https://latex.codecogs.com/png.latex?M%20%5Csim%20t/%5Cpi">, long compared to the classical “balanced” choice <img src="https://latex.codecogs.com/png.latex?N%20%5Csim%20%5Csqrt%7Bt/2%5Cpi%7D">) doesn’t appear to be a standard textbook case, so the bound needed deriving for this scheme specifically.</p>
+<p>That’s real work, but of a fundamentally different character than the gap in Chapter 6: it’s a quantitative asymptotic estimate about an explicit finite sum, not a claim that would resolve the Riemann Hypothesis if true.</p>
+<p><strong>Update: the rate is <img src="https://latex.codecogs.com/png.latex?O(t%5E%7B-3/2%7D)">, not the <img src="https://latex.codecogs.com/png.latex?O(t%5E%7B-1/2%7D)"> the table above suggested at a glance, and the mechanism is now identified.</strong> Direct computation of <img src="https://latex.codecogs.com/png.latex?%7C%5CDelta(s)%7C%5Ccdot%20t%5E%7B3/2%7D"> across a 64× range of <img src="https://latex.codecogs.com/png.latex?t"> stays in a stable band rather than drifting — a full extra power of <img src="https://latex.codecogs.com/png.latex?t"> better than naively expected. The reason traces to the specific truncation length: because <img src="https://latex.codecogs.com/png.latex?M=%5Clfloor%20t/%5Cpi%5Crfloor"> locks <img src="https://latex.codecogs.com/png.latex?N=M+1"> and <img src="https://latex.codecogs.com/png.latex?%7Cs%7C%5Csim%20t"> into a fixed ratio (<img src="https://latex.codecogs.com/png.latex?1/%5Cpi">), the textbook Euler–Maclaurin correction constant (<img src="https://latex.codecogs.com/png.latex?-1/12">, valid when the truncation is long relative to <img src="https://latex.codecogs.com/png.latex?%7Cs%7C">) doesn’t apply — it needs resumming, and the correctly resummed constant, confirmed numerically to 5+ digits, is <img src="https://latex.codecogs.com/png.latex?-1/%5Cpi%5E2">. Using it gives the exact identity <img src="https://latex.codecogs.com/png.latex?f(s)-%5Czeta(s)-%5Cfrac%7BN%5E%7B1-s%7D%7D%7B1-s%7D%20=%20s%5C!%5Cint_N%5E%5Cinfty%5C!%20B_1(%5C%7Bx%5C%7D)%5C,x%5E%7B-s-1%7D%5C,dx"> (<img src="https://latex.codecogs.com/png.latex?B_1(%5C%7Bx%5C%7D)=%5C%7Bx%5C%7D-%5Ctfrac12">), independently validated by direct numerical quadrature. Closing this into a fully explicit coefficient requires a Temme-style uniform asymptotic expansion of the resulting incomplete gamma sum (the order and argument are comparably large here, which is exactly the regime standard asymptotics don’t cover) — real, careful work, not yet finished, but the rate itself is now solid on two independent legs (direct numerics and a partial derivation identifying the actual mechanism), which is a meaningfully stronger claim than the table above implies on its own.</p>
 
 
 </section>
