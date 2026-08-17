@@ -44,9 +44,9 @@ The cleanest empirical result in the whole project: pre-tail and tail vectors po
 
 A deliberately conditional theorem, and what it means to publish a real result that depends on an unproven lemma. [Read it](posts/rigidity-and-its-discontents/index.qmd).
 
-**6 · Only σ = 1/2, Take Four (Feb 2026)** <span class="status-badge">planned</span>
+**6 · Only σ = 1/2, Take Four (Feb 2026)** <span class="status-badge done">posted</span>
 
-The tightest self-derived argument in the corpus, via the approximate functional equation — and a precise account of exactly which step is assumption rather than theorem.
+The tightest self-derived argument in the corpus, via the approximate functional equation — a real bug found and fixed, and a precise account of exactly which step is assumption rather than theorem. That step turns out to be the same one Chapter 5 named, and it finally gets a citation: adjacent to Montgomery's Pair Correlation Conjecture. [Read it](posts/only-sigma-half-take-four/index.qmd).
 
 **7 · A Season of Reinvention (Mar–May 2026)** <span class="status-badge">planned</span>
 

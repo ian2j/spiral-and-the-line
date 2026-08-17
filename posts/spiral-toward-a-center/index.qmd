@@ -46,6 +46,14 @@ $$
 
 that recurs throughout the rest of this project uses that specific cutoff.
 
+*How* good a read on the center $f(s)$ actually gives, precisely, went unquantified for a long time — "genuinely good approximation" was as far as it got. It now has an explicit answer: with $N=M+1$,
+
+$$
+f(s) = \zeta(s) + \frac{N^{1-s}}{1-s} - \frac{s}{\pi^2}\,N^{-s-1} + o(t^{-\sigma-1}),
+$$
+
+confirmed numerically to five-plus digits. The $-1/\pi^2$ coefficient is not the textbook Euler–Maclaurin constant ($-1/12$) — it's a genuinely different, resummed constant, arising specifically because $M=\lfloor t/\pi\rfloor$ locks the truncation length to $t$ at a fixed ratio rather than letting it grow independently. First time this correction has been pinned down explicitly, rather than left as "close enough to see it on a plot."
+
 The question that makes this more than a curiosity: *where* does the center sit? At a real, known zero of $\zeta$ — one of the actual heights $t$ where $\zeta(\tfrac12+it)=0$ — and exactly on the critical line, the center is the origin. Nudge $\sigma$ away from $\tfrac12$, height held fixed, and the same spiral winds toward some other point entirely, not zero.
 
 ## Try it

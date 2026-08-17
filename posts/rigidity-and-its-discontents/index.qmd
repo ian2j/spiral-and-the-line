@@ -74,4 +74,4 @@ I haven't verified it. Nobody has, as far as I know. But I know now precisely wh
 
 ---
 
-*Next: Chapter 6 — Only σ=1/2, Take Four, February 2026. Not yet posted — see the [roadmap](../../about.qmd) for what's still coming.*
+*Next: [Chapter 6 — Only σ=1/2, Take Four](../only-sigma-half-take-four/index.qmd), February 2026.*

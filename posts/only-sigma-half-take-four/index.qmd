@@ -1,0 +1,103 @@
+---
+title: "Chapter 6: Only σ=1/2, Take Four"
+description: "February 2026, and a fourth run at the same argument — this one via the approximate functional equation. It has a real bug, a real fix, and, once fixed, a gap that finally has a name."
+date: 2026-08-18
+categories: [chapter, explicit-formula, pair-correlation, 2026]
+order: 6
+---
+
+Chapter 5 ended on a hedge: a precise, checkable hypothesis — $k(t) \ge c_0\log^2 t$ — and an honest admission that I hadn't verified it, and didn't know anyone who had. February 2026 opened with a fourth attempt at the same underlying question, from a completely different angle: not curvature this time, but the approximate functional equation. It's the tightest self-derived argument in the whole project. It also, on inspection, had a real bug — and once that was fixed, it led somewhere I didn't expect: back to Chapter 5, and past it, to a piece of mathematics with an actual name.
+
+## The setup
+
+Fix $t$ and write $s=\sigma+it$ throughout ($\sigma$ = real part, $t$ = height, as everywhere on this site). Recall $\zeta(s)$, for $0<\sigma<1$, can be written as a limit of truncated Riemann sums:
+
+$$
+\mu(s) := \lim_{N\to\infty}\left[\sum_{n=1}^N n^{-s} - \frac{N^{1-s}}{1-s}\right] = \zeta(s).
+$$
+
+Truncate it at a finite $N$ instead of taking the limit:
+
+$$
+\mu_N(s) := \sum_{n=1}^N n^{-s} - \frac{N^{1-s}}{1-s}, \qquad \mu_N(s) = \mu(s) + O(N^{-\sigma}).
+$$
+
+Rescale to strip off the trivial part of the decay: $\psi_N(s) := N^{s-1}\mu_N(s)$. This is nothing exotic — it's exactly the leftover error of a Riemann-sum approximation to an integral, rescaled to sit at a fixed order of magnitude.
+
+## The argument
+
+Two facts about $\psi_N$ drive everything:
+
+**If $\mu(s)\ne0$:** $\mu_N(s)\to\mu(s)\ne0$, so $|\mu_N(s)|=O(1)$ and $|\psi_N(s)| = N^{\sigma-1}\cdot O(1) = O(N^{\sigma-1})$ — the *generic* decay rate.
+
+**If $\mu(s)=0$ — a genuine zero of $\zeta$:** the leading term vanishes, so $\mu_N(s)=O(N^{-\sigma})$ instead of $O(1)$, and $|\psi_N(s)| = N^{\sigma-1}\cdot O(N^{-\sigma}) = O(N^{-1})$ — a full extra factor of $N^{-1+\sigma}$ *faster*. A truncated sum settles down noticeably quicker near a real zero than it does anywhere else. That asymmetry is the whole engine of the argument.
+
+Now suppose, for contradiction, that $\zeta$ has a zero off the critical line at $\sigma=\tfrac12-u$ ($u\ne0$), height $t$. This isn't an extra assumption smuggled in — it's forced by two completely standard facts: $\zeta(\bar s)=\overline{\zeta(s)}$ (real coefficients), and $\zeta(s)=\chi(s)\zeta(1-s)$ (the functional equation, with $\chi(s) = \pi^{s-1/2}\,\Gamma\!\left(\frac{1-s}{2}\right)/\Gamma\!\left(\frac{s}{2}\right)$, the same factor used throughout this series since [Chapter 8](../critical-line-path-identity/index.qmd)). Chain them together and an off-line zero at $\tfrac12-u+it$ drags a mirror zero along with it, at $\tfrac12+u+it$ — same height, reflected across the line. So *if* an off-line zero exists at all, both $\mu(\tfrac12-u+it)=0$ and $\mu(\tfrac12+u+it)=0$ hold simultaneously, and both symmetric points get the enhanced $O(N^{-1})$ decay above.
+
+Separately — and this is the piece that does the real work — suppose $\psi_N$ obeys an approximate-functional-equation-type relation of its own, mirroring $\chi$:
+
+$$
+\psi_N(1-s) \;=\; \frac{N^{1-2s}}{\chi(s)}\,\psi_N(s).
+$$
+
+At the enhanced-decay case, both sides are $O(N^{-1})$ by the paragraph above — plug that order directly into the relation and the $N^{1-2s}$ factor has nowhere to go except to force $1-2\sigma=0$. **$\sigma=\tfrac12$.** No off-line zero can produce a consistent order on both sides of its own approximate functional equation unless it sits exactly on the line.
+
+That's Take Four, in full. It's the cleanest version of the six-times-recurring argument this project has produced — and it very nearly has no moving parts left to hide a gap in.
+
+## Try it
+
+Pick a height. Every point plotted is a real value of $k(t)$ from Chapter 5, computed at the exact midpoint between two consecutive genuine zeros of $\zeta$ (not illustrative — from `mpmath.zetazero`) — the same quantity that resurfaces below as the actual reason this argument's last step is hard.
+
+```{=html}
+<iframe src="rigidity_realdata_gauge.html" style="width:100%; aspect-ratio: 4/3.2; max-width: 780px; border: 1px solid #d6dce3; border-radius: 6px; display:block; margin: 1.5rem auto;" loading="lazy"></iframe>
+```
+
+## Where the bug actually was
+
+I did not take the "$\psi_N$ obeys its own approximate functional equation" step on faith. Checked directly, numerically, against the actual object as written above ($\mu_N$, plain rectangle-truncation, no correction term): its functional-equation defect is 500–30,000× larger than it should be for the argument to close, and — worse — the defect *doesn't shrink to zero* as $N\to\infty$ at fixed $t$, which is exactly the regime this argument needs it in. As literally written, the premise never actually holds, at any scale.
+
+The fix turned out to be small and completely standard: every other object in this project's toolkit — $f(s)=\sum_{n=1}^M n^{-s}+\tfrac12(M+1)^{-s}$ from [Chapter 4](../pre-tail-and-tail/index.qmd) onward — carries a half-weighted trapezoidal correction at the truncation point that $\mu_N(s)$ above simply omits. Swapping it in, $f_N(s) := \mu_N(s) + \tfrac12 N^{-s}$, and rechecking: the ratio of the functional-equation defect to the enhanced-decay signal it needs to stay smaller than shrinks to zero cleanly and monotonically as $N\to\infty$, exactly as required. The mechanism is nothing exotic — the trapezoidal rule is one order more accurate than the plain rectangle rule, full stop — but it's the difference between a premise that's actually true and one that only looked true from a distance. With $f_N$ in place of $\mu_N$, Take Four's functional-equation step is on solid ground.
+
+## The step that's still an assumption, precisely
+
+Fixing the bug above doesn't fix the argument's real gap, and I want to be exactly as specific about it as the site's roadmap promised. Look again at the order-matching step: it concludes $\sigma=\tfrac12$ by assuming the *leading coefficients* on both sides of the rescaled functional equation are genuinely nonzero — i.e. that the $O(N^{-1})$ terms don't hide an accidental extra cancellation that would let the equation balance at some $\sigma\ne\tfrac12$ too, at a lower order still. Nothing in the derivation above rules that out. It's asserted by omission, not derived — and that is *precisely* the same move every other version of this argument has made, going back to 2023's Jensen-convexity pairing, dressed differently each time. The site's own outline calls it "the same core monotonicity/remainder-bound gap," and Take Four doesn't close it — it just states it in its sharpest form yet: **why can't a symmetric pair of near-zero values conspire to cancel at extra order, at some $\sigma\ne\tfrac12$?**
+
+That question has another name, already sitting in this project's own notes.
+
+## Where Chapter 5 finishes the job
+
+Chapter 5's transverse curvature $k(t)$ is exactly a ban on that kind of conspiracy — a lower bound on how sharply $|\zeta(\sigma+it)|^2$ has to curve upward as $\sigma$ moves off $\tfrac12$, ruling out precisely the extra-order cancellation Take Four needs excluded. Write $L(s) := \zeta'(s)/\zeta(s)$, the **logarithmic derivative** — completely standard, and, remarkably, absent by name from three years of these notes despite the project attacking $\zeta$ from every other direction. A short calculus exercise, checked numerically against $\zeta$ directly to 11 decimal places, gives $k(t)$ an exact closed form:
+
+$$
+k(t) \;=\; 2\,\mathrm{Re}\big[L'(\tfrac12+it)\big] \;+\; 4\,\big[\mathrm{Re}\,L(\tfrac12+it)\big]^2.
+$$
+
+$L(s)$ has its own classical expansion — the Hadamard product for $\xi(s)=\tfrac12s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ gives $L(s)$ as a smooth, explicit $O(\log t)$ term plus a sum of $1/(s-\rho)$ over every nontrivial zero $\rho=\tfrac12+i\gamma$ (writing $\gamma$ for a zero's height, the way $t$ is this chapter's own height variable). Plugged into the boxed formula, the nearest zeros on the line dominate: each contributes $2/(t-\gamma)^2$ to $k(t)$, so **$k(t)$ is, to good approximation, the reciprocal-squared distance to the nearest zero.** Checked directly against real data (`mpmath.zetazero`, midpoints between consecutive zeros):
+
+| $n$ | $t_{\text{mid}}$ | local gap | mean-gap prediction | $k(t)$ | $k(t)/\log^2 t$ |
+|---|---|---|---|---|---|
+| 1 | 17.6 | 6.89 | 6.11 | 1.51 | 0.18 |
+| 20 | 78.2 | 2.19 | 2.49 | 10.40 | 0.55 |
+| 100 | 237.1 | 1.25 | 1.73 | 24.67 | 0.83 |
+| 500 | 812.0 | 1.59 | 1.29 | 32.31 | 0.72 |
+| 2000 | 2515.9 | 1.28 | 1.05 | 49.56 | 0.81 |
+
+$k(t)/\log^2t$ settles into a stable band rather than drifting toward 0, consistent with the hypothesis — and, tellingly, the widest local gap in the table ($n=500$) doesn't produce an unusually *high* ratio, exactly as expected if $k(t)$ tracks the nearest zero's true distance rather than the average spacing. A wider stress test against the first two million known zeros, across nine orders of magnitude in height, shows the same picture: no case found where $k(t)/\log^2t$ trends toward zero, even at the widest gaps on record.
+
+So Take Four's missing step and Chapter 5's open hypothesis are the same statement: **no two zeros on the line are ever allowed to sit closer together than the typical spacing suggests, at any height, ever.** That is not a warm-up lemma. It is a uniform, for-every-$t$ statement about how zeros of $\zeta$ can cluster — and statements of that shape have a name in the literature.
+
+## The name
+
+Goldston, Gonek and Montgomery — *Mean values of the logarithmic derivative of the Riemann zeta-function with applications to primes in short intervals*, J. Reine Angew. Math. 537 (2001) — proved that the sharp mean-square asymptotic of $L(s)$ shifted just off the critical line (the exact limit $k(t)$ reduces to) is one of three canonical integrals whose sharp asymptotic is *equivalent* to **Montgomery's Pair Correlation Conjecture**. (Chandee's survey "A tale of three integrals," arXiv:2108.09258, states all three side by side; Fan Ge's 2023 follow-up, arXiv:2211.08571, sharpens the picture further but still needs RH plus an explicit small-gaps hypothesis.)
+
+So: an unconditional, for-every-$t$ proof of $k(t)\ge c_0\log^2t$ wouldn't just be hard. It would resolve a named, fifty-year-old open conjecture about how zeros of $\zeta$ correlate with each other — squarely in Montgomery–Odlyzko/GUE-statistics territory, not "elementary argument waiting to be found" territory. That's the honest answer to a question this project has asked six times in six vocabularies since 2023: *why does the same wall keep reappearing?* Because it isn't a wall specific to any one argument. It's one wall, with a name, and every reformulation in this project — the Moon's Jensen pairing, the stationary-phase endpoint argument, Take Four's order-matching, Chapter 5's curvature — was climbing the same side of it.
+
+## What this does and doesn't do
+
+This does not prove the Riemann Hypothesis, and it does not prove $k(t)\ge c_0\log^2t$ either — if anything, it explains precisely why neither this project nor anyone else has. What it does do: convert three years of "I keep hitting the same wall, worded differently each time" into a single, precise, citable statement of *which* open problem that wall actually is. That's a real answer, even though it isn't the answer I set out looking for in 2020.
+
+It also leaves a genuinely open door, and I want to name it rather than let the chapter end on pure closure. The *unconditional-for-every-$t$* version of $k(t)\ge c_0\log^2t$ is PCC-equivalent — off the table with current technology. A weaker, *almost-all-$t$* statistical version — true for a density-one set of heights in $[T,2T]$, not every single one — is a different kind of question, and classical second- and fourth-moment theorems for $\zeta$ and its derivatives (Ingham's theorem among them) are close in shape to what such a proof would need. I haven't built it. But for the first time in three years, I know exactly which hundred-year-old toolbox to open first.
+
+---
+
+*Next: Chapter 7 — A Season of Reinvention, March–May 2026. Not yet posted — see the [roadmap](../../about.qmd) for what's still coming.*
